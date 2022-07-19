@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "501313424921",
+    "project_id": "primus-318b7",
+    "storage_bucket": "primus-318b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501313424921:android:0f8ac0c507c2fd1e006488",
+        "android_client_info": {
+          "package_name": "com.primus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501313424921-9o933un4s9oc71eddt7gpg9593jqe0sb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCetz4JzNEuZG31lBQ7zJSIbVGMOgL_YZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501313424921-9o933un4s9oc71eddt7gpg9593jqe0sb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501313424921:android:554c08d01141ad0e006488",
+        "android_client_info": {
+          "package_name": "com.primus.primus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501313424921-9o933un4s9oc71eddt7gpg9593jqe0sb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCetz4JzNEuZG31lBQ7zJSIbVGMOgL_YZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501313424921-9o933un4s9oc71eddt7gpg9593jqe0sb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
