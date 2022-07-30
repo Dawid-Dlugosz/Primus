@@ -3,6 +3,7 @@ import 'package:primus/view_models/home_view_model.dart';
 import 'package:primus/widgets/loadin_widget.dart';
 import 'package:provider/provider.dart';
 
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 

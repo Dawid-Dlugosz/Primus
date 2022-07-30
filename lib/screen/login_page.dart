@@ -4,6 +4,7 @@ import 'package:primus/screen/sign_up_page.dart';
 import 'package:primus/view_models/login_view_model.dart';
 import 'package:primus/view_models/sign_up_view_model.dart';
 import 'package:primus/widgets/loadin_widget.dart';
+import 'package:primus/view_models/login_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -97,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               )
             : const LoadingWidget();
-      },
+       },
     );
   }
 }
