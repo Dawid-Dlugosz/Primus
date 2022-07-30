@@ -1,0 +1,21 @@
+{
+    "helloWorld": "Witaj Świecie!",
+    "loading": "Ładowanie",
+    "error": "Ooops, Wystąpił błąd",
+    "mailHint": "e-mail@domena.pl",
+    "labelMail": "E-mail",
+    "labelPassword": "Hasło",
+    "signIn": "Logowanie",
+    "signUp": "Rejestracja",
+    "mailError": "Podaj poprawny adres e-mail",
+    "passwordError": "Podaj hasło",
+    "mailError": "Podaj poprawny e-mail",
+    "passwordError": "Wprowadź hasło",
+    "invalidEmail": "Nieprawidłowy e-mail",
+    "userDisabled": "Użytkownik dezaktywowany",
+    "userNotFount": "Nie znaleziono użytkownika",
+    "wrongPassword": "Błędne hasło",
+    "emailAlreadyExist": "Taki e-mail już istnieje",
+    "invalidCredential": "Nieprawidłowe dane",
+    "weakPassword": "Hasło jest za słabe"
+}

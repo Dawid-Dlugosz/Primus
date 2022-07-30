@@ -1,0 +1,19 @@
+{
+    "helloWorld": "Hello World!",
+    "loading": "Loading",
+    "error": "Ooops, Error occured",
+    "mailHint": "mail@example.com",
+    "labelMail": "Mail",
+    "labelPassword": "Password",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "mailError": "Enter valid mail",
+    "passwordError": "Enter password",
+    "invalidEmail": "Invalid email",
+    "userDisabled": "User disabled",
+    "userNotFount": "User not found",
+    "wrongPassword": "Wrong password",
+    "emailAlreadyExist": "Email already exist",
+    "invalidCredential": "Invalid credential",
+    "weakPassword": "Weak password"
+}
