@@ -17,5 +17,8 @@
     "wrongPassword": "Błędne hasło",
     "emailAlreadyExist": "Taki e-mail już istnieje",
     "invalidCredential": "Nieprawidłowe dane",
-    "weakPassword": "Hasło jest za słabe"
+    "weakPassword": "Hasło jest za słabe",
+    "labelName": "Nazwa użytkownika",
+    "nickNameError": "Podaj nazwę użytkownika",
+    "nicknameBusy": "Nazwa użytkownika jest zajęta"
 }

@@ -5,25 +5,31 @@ import 'package:flutter/material.dart';
 import 'package:primus/utils/firebase_auth_error.dart';
 
 class LoginViewModel extends ChangeNotifier {
-  LoginViewModel(this.context) {}
+  LoginViewModel(this.context);
 
   final BuildContext context;
 
   bool showPassword = false;
-
+  bool loading = false;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController mailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   void signIn() async {
     try {
+      loading = true;
+      notifyListeners();
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: mailController.text.trim(), password: passwordController.text);
+      loading = false;
+      notifyListeners();
     } on FirebaseAuthException catch (e) {
       showSnackBar(e.code);
+      loading = false;
+      notifyListeners();
     }
   }
 
-  void setShowPassowrd() {
+  void setShowPassword() {
     showPassword = !showPassword;
     notifyListeners();
   }

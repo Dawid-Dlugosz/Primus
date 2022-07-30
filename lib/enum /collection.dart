@@ -1,0 +1,3 @@
+enum FirebaseCollection {
+  nickname,
+}
