@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/screen/home_page.dart';
 import 'package:primus/screen/login_page.dart';
+import 'package:primus/view_models/home_view_model.dart';
 import 'package:primus/view_models/login_view_model.dart';
 import 'package:primus/widgets/error_widget.dart';
 import 'package:primus/widgets/loadin_widget.dart';
@@ -32,7 +33,10 @@ class _StartPageState extends State<StartPage> {
             return const CustomErrorWidget();
           }
           if (snapshot.hasData) {
-            return const HomePage();
+            return ChangeNotifierProvider<HomeViewModel>(
+              create: (context) => HomeViewModel(context),
+              child: const HomePage(),
+            );
           }
           return ChangeNotifierProvider<LoginViewModel>(
             create: (context) => LoginViewModel(context),

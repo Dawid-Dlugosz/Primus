@@ -15,5 +15,8 @@
     "wrongPassword": "Wrong password",
     "emailAlreadyExist": "Email already exist",
     "invalidCredential": "Invalid credential",
-    "weakPassword": "Weak password"
+    "weakPassword": "Weak password",
+    "labelName": "Nickname",
+    "nickNameError": "Enter nickname",
+    "nicknameBusy": "Nickname is busy"
 }
