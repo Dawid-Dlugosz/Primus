@@ -20,5 +20,14 @@
     "weakPassword": "Hasło jest za słabe",
     "labelName": "Nazwa użytkownika",
     "nickNameError": "Podaj nazwę użytkownika",
-    "nicknameBusy": "Nazwa użytkownika jest zajęta"
+    "nicknameBusy": "Nazwa użytkownika jest zajęta",
+    "createFlashcards": "Utwórz fiszki",
+    "createUnit": "Utwórz rozdział",
+    "createClass": "Utwórz klasę",
+    "flashcards": "Fiszki",
+    "flashcardsName": "Nazwa fiszek",
+    "flashcardsNameError": "Podaj nazwę fiszek",
+    "wordHint": "Podaj słowo",
+    "definitionHint": "Podaj definicję",
+    "flashcardNameBusy": "Stowrzyłeś już fiszkę o takiej nazwie"
 }

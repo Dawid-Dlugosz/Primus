@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:primus/view_models/home_view_model.dart';
-import 'package:primus/widgets/loadin_widget.dart';
+import 'package:primus/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,7 +22,9 @@ class _HomePageState extends State<HomePage> {
               ),
               body: Container(),
               floatingActionButton: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  viewModel.showBottomDialog();
+                },
                 child: const Icon(Icons.add),
               ),
             )

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             Locale('en', ''),
             Locale('pl', ''),
           ],
-          home: const StartPage(),
+          home: StartPage(),
         ),
       ),
     );

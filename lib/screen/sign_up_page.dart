@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/view_models/sign_up_view_model.dart';
-import 'package:primus/widgets/loadin_widget.dart';
+import 'package:primus/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {

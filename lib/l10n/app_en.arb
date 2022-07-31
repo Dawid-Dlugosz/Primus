@@ -18,5 +18,14 @@
     "weakPassword": "Weak password",
     "labelName": "Nickname",
     "nickNameError": "Enter nickname",
-    "nicknameBusy": "Nickname is busy"
+    "nicknameBusy": "Nickname is busy",
+    "createFlashcards": "Create flashcards",
+    "createUnit": "Create unit",
+    "createClass": "Create class",
+    "flashcards": "Flashcards",
+    "flashcardsName": "Flashcards name",
+    "flashcardsNameError": "Enter flashcards name",
+    "wordHint": "Enter word",
+    "definitionHint": "Enter definition",
+    "flashcardNameBusy": "You have already created a card with that name"
 }

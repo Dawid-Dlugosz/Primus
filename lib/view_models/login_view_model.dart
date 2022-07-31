@@ -2,10 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/utils/firebase_auth_error.dart';
+import 'package:primus/utils/popup.dart';
 
 class LoginViewModel extends ChangeNotifier {
-
   LoginViewModel(this.context);
 
   final BuildContext context;
@@ -25,7 +24,7 @@ class LoginViewModel extends ChangeNotifier {
       loading = false;
       notifyListeners();
     } on FirebaseAuthException catch (e) {
-      showSnackBar(e.code);
+      showSnackBar(e.code, context);
       loading = false;
       notifyListeners();
     }
@@ -34,10 +33,5 @@ class LoginViewModel extends ChangeNotifier {
   void setShowPassword() {
     showPassword = !showPassword;
     notifyListeners();
-  }
-
-  void showSnackBar(String errorCode) {
-    var snackBar = SnackBar(content: Text(errorCodeToText(errorCode, context)));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
