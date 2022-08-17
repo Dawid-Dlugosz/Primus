@@ -44,8 +44,6 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
               onPressed: () {
                 if (viewModel.formKey.currentState!.validate()) {
                   viewModel.createFlashcardSet();
-                } else {
-                  viewModel.checkName();
                 }
               },
               child: Icon(Icons.save),
@@ -74,6 +72,19 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.flashcardsNameError;
+                        }
+                      },
+                    ),
+                    TextFormField(
+                      controller: viewModel.languageController,
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.flashcardsLanguage,
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.language),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppLocalizations.of(context)!.flashcardLanguageError;
                         }
                       },
                     ),

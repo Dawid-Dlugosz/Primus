@@ -24,7 +24,7 @@ class LoginViewModel extends ChangeNotifier {
       loading = false;
       notifyListeners();
     } on FirebaseAuthException catch (e) {
-      showSnackBar(e.code, context);
+      showSnackBarError(e.code, context);
       loading = false;
       notifyListeners();
     }

@@ -38,11 +38,11 @@ class SignUpViewModel extends ChangeNotifier {
         ),
       );
     } on FirebaseAuthException catch (e) {
-      showSnackBar(e.code, context);
+      showSnackBarError(e.code, context);
       loading = false;
       notifyListeners();
     } on BusyNickname {
-      showSnackBar(nicknameBusy, context);
+      showSnackBarError(nicknameBusy, context);
       loading = false;
       notifyListeners();
     }

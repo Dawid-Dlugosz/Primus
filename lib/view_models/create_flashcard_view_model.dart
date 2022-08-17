@@ -1,11 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/enum/collection.dart';
 import 'package:primus/exception/flashcard_name_busy.dart';
 import 'package:primus/model/flashcard.dart';
+import 'package:primus/model/flashcard_set.dart';
+import 'package:primus/model/word.dart';
+import 'package:primus/utils/firebase_error.dart';
+import 'package:primus/utils/firestoreNames.dart';
 import 'package:primus/utils/language_provider.dart';
+import 'package:primus/utils/popup.dart';
 import 'package:primus/widgets/create_flashcard_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +25,7 @@ class FlashcardViewModel extends ChangeNotifier {
   final BuildContext context;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController languageController = TextEditingController();
 
   bool loading = false;
 
@@ -26,21 +33,57 @@ class FlashcardViewModel extends ChangeNotifier {
   List<TextEditingController> definitionControllers = [];
   List<TextFormField> wordFields = [];
   List<TextFormField> definitionFields = [];
+  /// Flashcard list from firestore
+  List<Flashcard> flashcardList = [];
 
-  late List<CreateFlashcardWidget> flashcards;
+  late List<CreateFlashcardWidget> flashcardsWidget;
   late AppLocalizations appLocalizations;
-  late CollectionReference docs;
+  late CollectionReference flashcardCollection;
+  late CollectionReference flashcardNamesCollection;
   late String uid;
 
   _init() async {
     loading = true;
     notifyListeners();
-    var locale = Provider.of<LanguageProvider>(context, listen: false).currentLocale;
-    docs = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name);
+    var locale =
+        Provider.of<LanguageProvider>(context, listen: false).currentLocale;
+    flashcardCollection = FirebaseFirestore.instance
+        .collection(FirebaseCollection.flashcards.name);
+    flashcardNamesCollection = FirebaseFirestore.instance
+        .collection(FirebaseCollection.flashcardsNames.name);
     uid = FirebaseAuth.instance.currentUser!.uid;
     appLocalizations = await AppLocalizations.delegate.load(locale);
+    _initFields();
+    _initListFlashcard();
     loading = false;
     notifyListeners();
+  }
+
+  void _initFields() {
+    flashcardCollection.doc(uid).get().then((document){
+      if((document.data() as Map<String, dynamic>).isEmpty){
+        _createFields();
+      }
+    });
+  }
+
+  void _initListFlashcard(){
+    flashcardCollection.doc(uid).get().then((document) {
+      var value = document.data() as Map<String, dynamic>;
+      var helpValue = value[flashcardString] as List;
+      if(helpValue.isNotEmpty){
+        for (var element in helpValue) {
+          flashcardList.add(Flashcard.fromJson(element));
+        }
+      }
+    });
+  }
+
+  void _createFields(){
+    Map<String, dynamic> json = {};
+    json[flashcardString] = [];
+    json[uidString] = uid;
+    flashcardCollection.doc(uid).set(json);
   }
 
   void generateTextField() {
@@ -90,35 +133,57 @@ class FlashcardViewModel extends ChangeNotifier {
     loading = true;
     notifyListeners();
 
-    //TODO CHECK NAME SET OF FLASHCART EXIST
     try {
-      await checkName();
-    } catch (e) {
+      await _checkFlashCardName();
+    } on FlashCardNameBusy {
       loading = false;
       notifyListeners();
+      showSnackBarError(flashcardNameBusy, context);
     }
-    // Add timestamp to set of flashcards
-    Map<String, dynamic> json = {};
-    json['timestamp'] = DateTime.now().millisecondsSinceEpoch;
-    docs.doc(uid).set(json);
+    catch (e,s) {
+      if (kDebugMode) {
+        print('administrator error: $e}');
+        print('administrator stacktrace: $s}');
+      }
+      loading = false;
+      notifyListeners();
+      showSnackBarError(flashcardNameBusy, context);
+      return;
+    }
 
-    // Add every single flashcard to set of flashcards
-    for (int i = 0; i < wordFields.length; i++) {
-      var json = Flashcard(wordControllers[i].text, definitionControllers[i].text).toJson();
-      docs.doc(uid).collection(nameController.text).add(json);
+
+    List<Word> words = [];
+    for(int i = 0; i < wordFields.length; i++){
+      words.add(Word(word: wordControllers[i].text, definition: definitionControllers[i].text));
     }
+
+    flashcardList.add(Flashcard(languageSet: languageController.text, nameSet: nameController.text, words: words, timeStamp: DateTime.now().millisecondsSinceEpoch));
+    flashcardCollection.doc(uid).update({flashcardString: flashcardList.map((e) => e.toJson()).toList()});
+
     loading = false;
     notifyListeners();
 
-    //TODO RETRUN TO HOME PAGE WITH SUCCES INFO IN SNACK BAR
+    Navigator.pop(context);
+    showSnackBar(AppLocalizations.of(context)!.flashcardCreate, context);
   }
 
-  Future<void> checkName() async {
-    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.nickname.name).doc(uid).get();
-    var collection = await document.reference.collection(nameController.text).get();
+  Future<void> _checkFlashCardName() async {
+    var document = await flashcardCollection
+        .doc(uid)
+        .get();
 
-    if (collection.size != 0) {
-      throw FlashCardNameBusy();
+    var value = document.data() as Map<String, dynamic>;
+
+    if(value.isEmpty){
+      return;
     }
+
+    FlashCardSet flashcard = FlashCardSet.fromJson(value);
+
+    flashcard.flashcards.forEach((element) {
+      if(element.nameSet == nameController.text){
+        throw FlashCardNameBusy();
+      }
+    });
   }
 }

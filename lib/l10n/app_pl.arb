@@ -29,5 +29,9 @@
     "flashcardsNameError": "Podaj nazwę fiszek",
     "wordHint": "Podaj słowo",
     "definitionHint": "Podaj definicję",
-    "flashcardNameBusy": "Stowrzyłeś już fiszkę o takiej nazwie"
+    "flashcardNameBusy": "Stowrzyłeś już fiszkę o takiej nazwie",
+    "flashcardCreate": "Fiszki zostały stworzone",
+    "flashcardListEmpty": "Musisz dodać conajmniej jedą fiszkę",
+    "flashcardLanguageError": "Podaj język",
+    "flashcardsLanguage": "Wprowadź języ"
 }
