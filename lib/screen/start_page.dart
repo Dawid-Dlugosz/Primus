@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/screen/home_page.dart';
+import 'package:primus/screen/home/home_page.dart';
 import 'package:primus/screen/login_page.dart';
 import 'package:primus/view_models/home_view_model.dart';
 import 'package:primus/view_models/login_view_model.dart';

@@ -51,5 +51,17 @@
                    "example": "10"
                }
            }
+        },
+    "sets": "Sets",
+    "showMore": "Show more",
+    "lastUpdate": "Last update: {date}",
+    "@lastUpdate": {
+        "description": "last update",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "22-08-2022"
+            }
         }
+    },
 }

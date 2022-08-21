@@ -52,14 +52,16 @@
                }
            }
         },
-    "flashCardLastUpdate": "Words count: {count}",
-        "@flashCardWordsCount": {
-           "description": "flashcard name",
-           "placeholders": {
-               "count": {
-                   "type": "int",
-                   "example": "10"
-               }
-           }
+    "sets": "Sets",
+    "showMore": "Pokaż więcej",
+    "lastUpdate": "Ostatnia aktualizacja: {date}",
+    "@lastUpdate": {
+        "description": "last update",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "22-08-2022"
+            }
         }
+    }
 }

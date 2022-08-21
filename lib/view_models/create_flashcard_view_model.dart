@@ -99,6 +99,7 @@ class FlashcardViewModel extends ChangeNotifier {
         if (value == null || value.isEmpty) {
           return appLocalizations.flashcardsNameError;
         }
+        return null;
       },
     );
 
@@ -111,6 +112,7 @@ class FlashcardViewModel extends ChangeNotifier {
         if (value == null || value.isEmpty) {
           return appLocalizations.flashcardsNameError;
         }
+        return null;
       },
     );
 
@@ -180,10 +182,10 @@ class FlashcardViewModel extends ChangeNotifier {
 
     FlashCardSet flashcard = FlashCardSet.fromJson(value);
 
-    flashcard.flashcards.forEach((element) {
+    for (var element in flashcard.flashcards) {
       if(element.nameSet == nameController.text){
         throw FlashCardNameBusy();
       }
-    });
+    }
   }
 }

@@ -45,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.mailError;
                         }
+                        return null;
                       },
                     ),
                     TextFormField(
@@ -62,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.passwordError;
                         }
+                        return null;
                       },
                     ),
                     Row(

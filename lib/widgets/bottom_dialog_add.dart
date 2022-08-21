@@ -23,17 +23,17 @@ class _BottomDialogAddState extends State<BottomDialogAdd> {
               context: context,
               builder: (context) => ChangeNotifierProvider(
                 create: (context) => FlashcardViewModel(context),
-                child: CreateFlashcardPage(),
+                child: const CreateFlashcardPage(),
               ),
             );
           },
           child: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.copy_rounded,
                 size: 20,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(AppLocalizations.of(context)!.createFlashcards),
             ],
           ),
@@ -42,11 +42,11 @@ class _BottomDialogAddState extends State<BottomDialogAdd> {
           onPressed: () {},
           child: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.folder_copy,
                 size: 20,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(AppLocalizations.of(context)!.createUnit),
             ],
           ),
@@ -55,11 +55,11 @@ class _BottomDialogAddState extends State<BottomDialogAdd> {
           onPressed: () {},
           child: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.group,
                 size: 20,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(AppLocalizations.of(context)!.createClass),
             ],
           ),

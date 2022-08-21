@@ -9,11 +9,11 @@ class Flashcard {
   final int timeStamp;
   final List<Word> words;
 
-  factory Flashcard.fromJson(Map<String, dynamic> json){
-    return Flashcard(languageSet: json[languageSetString], nameSet: json[nameSetString], words: (json[wordsString] as List<dynamic>).map((e) => Word.fromJson(e)).toList(), timeStamp: DateTime.now().millisecondsSinceEpoch);
+  factory Flashcard.fromJson(Map<String, dynamic> json) {
+    return Flashcard(languageSet: json[languageSetString], nameSet: json[nameSetString], words: (json[wordsString] as List<dynamic>).map((e) => Word.fromJson(e)).toList(), timeStamp: json[timeStampString]);
   }
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
     json[languageSetString] = languageSet;
     json[nameSetString] = nameSet;

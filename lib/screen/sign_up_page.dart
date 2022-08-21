@@ -36,13 +36,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: viewModel.nameController,
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.labelName,
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.drive_file_rename_outline),
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.drive_file_rename_outline),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.nickNameError;
                         }
+                        return null;
                       },
                     ),
                     TextFormField(
@@ -50,13 +51,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       decoration: InputDecoration(
                         hintText: AppLocalizations.of(context)!.mailHint,
                         labelText: AppLocalizations.of(context)!.labelMail,
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.mail),
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.mail),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.mailError;
                         }
+                        return null;
                       },
                     ),
                     TextFormField(
@@ -74,6 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.passwordError;
                         }
+                        return null;
                       },
                     ),
                     Row(

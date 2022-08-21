@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/model/flashcard_set.dart';
+import 'package:primus/screen/home/flashcard_list_home.dart';
 import 'package:primus/view_models/home_view_model.dart';
-import 'package:primus/widgets/card_flashcard.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -21,13 +21,28 @@ class _HomePageState extends State<HomePage> {
           ? Scaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: false,
-                title: Text('Primus'),
+                title: const Text('Primus'),
               ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  viewModel.showBottomDialog();
-                },
-                child: const Icon(Icons.add),
+              floatingActionButton: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  FloatingActionButton(
+                    onPressed: () {
+                      // TODO ZROBIĆ PRZENOSZENIE DO WYSZUKIWARKI
+                      viewModel.navigateToSearch();
+                    },
+                    child: const Icon(Icons.search_rounded),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {
+                      viewModel.showBottomDialog();
+                    },
+                    child: const Icon(Icons.add),
+                  ),
+                ],
               ),
               body: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -38,12 +53,9 @@ class _HomePageState extends State<HomePage> {
                       var value = snapshot.data!.data() as Map<String, dynamic>;
                       FlashCardSet flashCardSet = FlashCardSet.fromJson(value);
                       var flashcardList = flashCardSet.flashcards;
-                      flashcardList.sort((a, b) => b.timeStamp - a.timeStamp);
-                      return ListView.builder(
-                        itemCount: flashcardList.take(3).length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CardFlashcard();
-                        },
+                      flashcardList.sort((b, a) => a.timeStamp.compareTo(b.timeStamp));
+                      return FlashcardListHome(
+                        flashcards: flashcardList,
                       );
                     }
                     return Container();

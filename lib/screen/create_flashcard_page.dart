@@ -47,14 +47,14 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
                   viewModel.createFlashcardSet();
                 }
               },
-              child: Icon(Icons.save),
+              child: const Icon(Icons.save),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             FloatingActionButton(
               onPressed: () {
                 viewModel.generateTextField();
               },
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
             ),
           ],
         ),
@@ -74,6 +74,7 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.flashcardsNameError;
                         }
+                        return null;
                       },
                     ),
                     TextFormField(
@@ -87,6 +88,7 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.flashcardLanguageError;
                         }
+                        return null;
                       },
                     ),
                     Expanded(
@@ -106,7 +108,7 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
                   ],
                 ),
               )
-            : LoadingWidget(),
+            : const LoadingWidget(),
       );
     });
   }
