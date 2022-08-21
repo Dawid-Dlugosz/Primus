@@ -13,26 +13,27 @@ class CreateFlashcardPage extends StatefulWidget {
 }
 
 class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
-  late FlashcardViewModel fVIewModel;
+  late FlashcardViewModel model;
 
   @override
   void dispose() {
     super.dispose();
-    for (var element in fVIewModel.definitionControllers) {
+    for (var element in model.definitionControllers) {
       element.dispose();
     }
 
-    for (var element in fVIewModel.wordControllers) {
+    for (var element in model.wordControllers) {
       element.dispose();
     }
 
-    fVIewModel.nameController.dispose();
+    model.nameController.dispose();
+    model.languageController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<FlashcardViewModel>(builder: (_, viewModel, __) {
-      fVIewModel = viewModel;
+      model = viewModel;
       return Scaffold(
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.flashcards),

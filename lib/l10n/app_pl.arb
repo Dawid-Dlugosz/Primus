@@ -9,8 +9,6 @@
     "signUp": "Rejestracja",
     "mailError": "Podaj poprawny adres e-mail",
     "passwordError": "Podaj hasło",
-    "mailError": "Podaj poprawny e-mail",
-    "passwordError": "Wprowadź hasło",
     "invalidEmail": "Nieprawidłowy e-mail",
     "userDisabled": "Użytkownik dezaktywowany",
     "userNotFount": "Nie znaleziono użytkownika",
@@ -33,5 +31,35 @@
     "flashcardCreate": "Fiszki zostały stworzone",
     "flashcardListEmpty": "Musisz dodać conajmniej jedą fiszkę",
     "flashcardLanguageError": "Podaj język",
-    "flashcardsLanguage": "Wprowadź języ"
+    "flashcardsLanguage": "Wprowadź języ",
+    "nameFlashcardSet": "Nazwa zestawu fiszek: {name}",
+        "@nameFlashcardSet": {
+           "description": "Nazwa zestawu fiszek",
+           "placeholders": {
+               "name": {
+                   "type": "String",
+                   "example": "example"
+               }
+           }
+        },
+    "flashCardWordsCount": "Liczba słów: {count}",
+        "@flashCardWordsCount": {
+           "description": "flashcard name",
+           "placeholders": {
+               "count": {
+                   "type": "int",
+                   "example": "10"
+               }
+           }
+        },
+    "flashCardLastUpdate": "Words count: {count}",
+        "@flashCardWordsCount": {
+           "description": "flashcard name",
+           "placeholders": {
+               "count": {
+                   "type": "int",
+                   "example": "10"
+               }
+           }
+        }
 }
