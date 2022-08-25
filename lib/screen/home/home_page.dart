@@ -27,8 +27,8 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   FloatingActionButton(
+                    heroTag: 'seach',
                     onPressed: () {
-                      // TODO ZROBIĆ PRZENOSZENIE DO WYSZUKIWARKI
                       viewModel.navigateToSearch();
                     },
                     child: const Icon(Icons.search_rounded),
@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
                     height: 20,
                   ),
                   FloatingActionButton(
+                    heroTag: 'add',
                     onPressed: () {
                       viewModel.showBottomDialog();
                     },
