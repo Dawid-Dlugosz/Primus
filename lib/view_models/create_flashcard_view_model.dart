@@ -33,6 +33,7 @@ class FlashcardViewModel extends ChangeNotifier {
   List<TextEditingController> definitionControllers = [];
   List<TextFormField> wordFields = [];
   List<TextFormField> definitionFields = [];
+
   /// Flashcard list from firestore
   List<Flashcard> flashcardList = [];
 
@@ -45,12 +46,9 @@ class FlashcardViewModel extends ChangeNotifier {
   _init() async {
     loading = true;
     notifyListeners();
-    var locale =
-        Provider.of<LanguageProvider>(context, listen: false).currentLocale;
-    flashcardCollection = FirebaseFirestore.instance
-        .collection(FirebaseCollection.flashcards.name);
-    flashcardNamesCollection = FirebaseFirestore.instance
-        .collection(FirebaseCollection.flashcardsNames.name);
+    var locale = Provider.of<LanguageProvider>(context, listen: false).currentLocale;
+    flashcardCollection = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name);
+    flashcardNamesCollection = FirebaseFirestore.instance.collection(FirebaseCollection.flashcardsNames.name);
     uid = FirebaseAuth.instance.currentUser!.uid;
     appLocalizations = await AppLocalizations.delegate.load(locale);
     _initFields();
@@ -60,18 +58,18 @@ class FlashcardViewModel extends ChangeNotifier {
   }
 
   void _initFields() {
-    flashcardCollection.doc(uid).get().then((document){
-      if((document.data() as Map<String, dynamic>).isEmpty){
+    flashcardCollection.doc(uid).get().then((document) {
+      if ((document.data() as Map<String, dynamic>).isEmpty) {
         _createFields();
       }
     });
   }
 
-  void _initListFlashcard(){
+  void _initListFlashcard() {
     flashcardCollection.doc(uid).get().then((document) {
       var value = document.data() as Map<String, dynamic>;
       var helpValue = value[flashcardString] as List;
-      if(helpValue.isNotEmpty){
+      if (helpValue.isNotEmpty) {
         for (var element in helpValue) {
           flashcardList.add(Flashcard.fromJson(element));
         }
@@ -79,7 +77,7 @@ class FlashcardViewModel extends ChangeNotifier {
     });
   }
 
-  void _createFields(){
+  void _createFields() {
     Map<String, dynamic> json = {};
     json[flashcardString] = [];
     json[uidString] = uid;
@@ -141,8 +139,7 @@ class FlashcardViewModel extends ChangeNotifier {
       loading = false;
       notifyListeners();
       showSnackBarError(flashcardNameBusy, context);
-    }
-    catch (e,s) {
+    } catch (e, s) {
       if (kDebugMode) {
         print('administrator error: $e}');
         print('administrator stacktrace: $s}');
@@ -153,9 +150,8 @@ class FlashcardViewModel extends ChangeNotifier {
       return;
     }
 
-
     List<Word> words = [];
-    for(int i = 0; i < wordFields.length; i++){
+    for (int i = 0; i < wordFields.length; i++) {
       words.add(Word(word: wordControllers[i].text, definition: definitionControllers[i].text));
     }
 
@@ -170,20 +166,18 @@ class FlashcardViewModel extends ChangeNotifier {
   }
 
   Future<void> _checkFlashCardName() async {
-    var document = await flashcardCollection
-        .doc(uid)
-        .get();
+    var document = await flashcardCollection.doc(uid).get();
 
     var value = document.data() as Map<String, dynamic>;
 
-    if(value.isEmpty){
+    if (value.isEmpty) {
       return;
     }
 
     FlashCardSet flashcard = FlashCardSet.fromJson(value);
 
     for (var element in flashcard.flashcards) {
-      if(element.nameSet == nameController.text){
+      if (element.nameSet == nameController.text) {
         throw FlashCardNameBusy();
       }
     }

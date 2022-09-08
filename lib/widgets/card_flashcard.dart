@@ -15,7 +15,7 @@ class _CardFlashcardState extends State<CardFlashcard> {
   var flashcardName = '';
   var wordsCount = 0;
   var date = '';
-
+s
   @override
   void initState() {
     flashcardName = widget.flashcard.nameSet;
