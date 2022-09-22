@@ -15,50 +15,30 @@ class SeachViewModel extends ChangeNotifier {
   TextEditingController textEditingController = TextEditingController();
   bool loading = false;
 
-  late Stream<QuerySnapshot<Map<String, dynamic>>> documents;
-  late CollectionReference<Map<String, dynamic>> dd;
+  late Stream<QuerySnapshot<Map<String, dynamic>>> snapshot;
+  late CollectionReference<Map<String, dynamic>> document;
   late String uid;
+  late Stream<DocumentSnapshot<Map<String, dynamic>>> x;
 
+  var name = '';
   List<Flashcard> flashcards = [];
   void _init() async {
     loading = true;
     notifyListeners();
-
-    textEditingController.addListener(() {
-      searchFlashcard();
-    });
-
-    documents = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name).snapshots();
-    dd = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name);
+    snapshot = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name).snapshots();
     uid = FirebaseAuth.instance.currentUser!.uid;
     loading = false;
     notifyListeners();
   }
 
-  void searchFlashcard() {
-    print("dawdaw");
-    dd.get().then((value) {
-      for (var element in value.docs) {
-        // print("adaawd");
-        // var x = value.docs;
-        var flashcardSet = FlashCardSet.fromJson(element.data());
-        if (flashcardSet.uid != uid) {
-          flashcards = flashcardSet.flashcards.where((element) => element.nameSet.contains(textEditingController.text)).toList();
-        }
-        print("uid: ${flashcardSet.uid}");
-
-        // x.forEach((element) {
-        // print('dadaw ${element.data() as Map<String, dynamic>}');
-        // });
-        // print("dd: ${element['flashcard']}");
-
-        // print("adadaw :${x}");
-        // x.forEach((element) {
-        //   element.flashcards.forEach((element) {
-
-        //   });
-        // });
+  List<Flashcard> searchFlashcard(List flashcardJson, String nameSet) {
+    var list = <Flashcard>[];
+    for (var element in flashcardJson) {
+      var helpElement = element[nameSetString].toString().toLowerCase();
+      if (helpElement.startsWith(textEditingController.text.toLowerCase())) {
+        list.add(Flashcard.fromJson(element));
       }
-    });
+    }
+    return list;
   }
 }

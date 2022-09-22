@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/enum/collection.dart';
-import 'package:primus/screen/search.dart';
+import 'package:primus/screen/search/search.dart';
 import 'package:primus/view_models/search_view_model.dart';
 import 'package:primus/widgets/bottom_dialog_add.dart';
 import 'package:provider/provider.dart';

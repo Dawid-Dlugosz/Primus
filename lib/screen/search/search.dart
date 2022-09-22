@@ -1,0 +1,78 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:primus/enum/collection.dart';
+import 'package:primus/model/flashcard.dart';
+import 'package:primus/model/flashcard_set.dart';
+import 'package:primus/screen/search/list_search.dart';
+import 'package:primus/utils/firestoreNames.dart';
+import 'package:primus/view_models/search_view_model.dart';
+import 'package:primus/widgets/card_flashcard.dart';
+import 'package:primus/widgets/error_widget.dart';
+import 'package:primus/widgets/loading_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class Search extends StatefulWidget {
+  const Search({Key? key}) : super(key: key);
+
+  @override
+  State<Search> createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
+  late SeachViewModel model;
+
+  @override
+  void dispose() {
+    model.textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<SeachViewModel>(builder: (_, viewModel, __) {
+      model = viewModel;
+      String nameSet = '';
+      if (!viewModel.loading) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            title: Text('Searcher'),
+          ),
+          body: Column(
+            children: [
+              TextField(
+                onChanged: (value) {
+                  setState(() {
+                    nameSet = value;
+                  });
+                },
+                controller: viewModel.textEditingController,
+                onEditingComplete: () {},
+                decoration: InputDecoration.collapsed(
+                  hintText: AppLocalizations.of(context)!.flashcardsName,
+                  border: const OutlineInputBorder(),
+                ),
+              ),
+              StreamBuilder<QuerySnapshot>(
+                stream: viewModel.snapshot,
+                builder: (context, snapshots) {
+                  if (snapshots.connectionState == ConnectionState.waiting) {
+                    return const LoadingWidget();
+                  }
+                  if (snapshots.hasData) {
+                    return ListSearch(snapshots, nameSet);
+                  }
+                  return const CustomErrorWidget();
+                },
+              ),
+            ],
+          ),
+        );
+      } else {
+        return const LoadingWidget();
+      }
+    });
+  }
+}
