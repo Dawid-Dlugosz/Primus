@@ -18,5 +18,50 @@
     "weakPassword": "Weak password",
     "labelName": "Nickname",
     "nickNameError": "Enter nickname",
-    "nicknameBusy": "Nickname is busy"
+    "nicknameBusy": "Nickname is busy",
+    "createFlashcards": "Create flashcards",
+    "createUnit": "Create unit",
+    "createClass": "Create class",
+    "flashcards": "Flashcards",
+    "flashcardsName": "Flashcards name",
+    "flashcardsNameError": "Enter flashcards name",
+    "wordHint": "Enter word",
+    "definitionHint": "Enter definition",
+    "flashcardNameBusy": "You have already created a card with that name",
+    "flashcardCreate": "Flashcard created",
+    "flashcardListEmpty": "You must add at least one card",
+    "flashcardLanguageError": "Enter language",
+    "flashcardsLanguage": "Input language",
+    "nameFlashcardSet": "Flashcard set name: {name}",
+        "@nameFlashcardSet": {
+           "description": "flashcard name",
+           "placeholders": {
+               "name": {
+                   "type": "String",
+                   "example": "example"
+               }
+           }
+        },
+    "flashCardWordsCount": "Words count: {count}",
+        "@flashCardWordsCount": {
+           "description": "flashcard name",
+           "placeholders": {
+               "count": {
+                   "type": "int",
+                   "example": "10"
+               }
+           }
+        },
+    "sets": "Sets",
+    "showMore": "Show more",
+    "lastUpdate": "Last update: {date}",
+    "@lastUpdate": {
+        "description": "last update",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "22-08-2022"
+            }
+        }
+    }
 }

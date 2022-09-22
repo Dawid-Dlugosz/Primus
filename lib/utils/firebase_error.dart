@@ -10,6 +10,7 @@ const emailAlreadyExist2 = 'account-exists-with-different-credential';
 const invalidCredential = 'invalid-credential';
 const weakPassword = 'weak-password';
 const nicknameBusy = 'nickname-busy';
+const flashcardNameBusy = 'flashcard-name-busy';
 
 String errorCodeToText(String errorCode, BuildContext context) {
   switch (errorCode) {
@@ -30,6 +31,8 @@ String errorCodeToText(String errorCode, BuildContext context) {
       return AppLocalizations.of(context)!.weakPassword;
     case nicknameBusy:
       return AppLocalizations.of(context)!.nicknameBusy;
+    case flashcardNameBusy:
+      return AppLocalizations.of(context)!.flashcardNameBusy;
     default:
       return AppLocalizations.of(context)!.invalidCredential;
   }

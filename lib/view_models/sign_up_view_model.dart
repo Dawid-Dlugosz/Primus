@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/enum%20/collection.dart';
+import 'package:primus/enum/collection.dart';
 import 'package:primus/exception/busy_nickname.dart';
 import 'package:primus/screen/start_page.dart';
-import 'package:primus/utils/firebase_auth_error.dart';
+import 'package:primus/utils/firebase_error.dart';
+import 'package:primus/utils/popup.dart';
 
 class SignUpViewModel extends ChangeNotifier {
   SignUpViewModel(this.context);
@@ -38,11 +38,11 @@ class SignUpViewModel extends ChangeNotifier {
         ),
       );
     } on FirebaseAuthException catch (e) {
-      showSnackBar(e.code);
+      showSnackBarError(e.code, context);
       loading = false;
       notifyListeners();
     } on BusyNickname {
-      showSnackBar(nicknameBusy);
+      showSnackBarError(nicknameBusy, context);
       loading = false;
       notifyListeners();
     }
@@ -51,11 +51,6 @@ class SignUpViewModel extends ChangeNotifier {
   void setShowPassword() {
     showPassword = !showPassword;
     notifyListeners();
-  }
-
-  void showSnackBar(String errorCode) {
-    var snackBar = SnackBar(content: Text(errorCodeToText(errorCode, context)));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   Future<void> checkNickName() async {

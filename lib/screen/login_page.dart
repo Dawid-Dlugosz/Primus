@@ -3,8 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/screen/sign_up_page.dart';
 import 'package:primus/view_models/login_view_model.dart';
 import 'package:primus/view_models/sign_up_view_model.dart';
-import 'package:primus/widgets/loadin_widget.dart';
-import 'package:primus/view_models/login_view_model.dart';
+import 'package:primus/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -46,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.mailError;
                         }
+                        return null;
                       },
                     ),
                     TextFormField(
@@ -63,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (value == null || value.isEmpty) {
                           return AppLocalizations.of(context)!.passwordError;
                         }
+                        return null;
                       },
                     ),
                     Row(
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               )
             : const LoadingWidget();
-       },
+      },
     );
   }
 }
