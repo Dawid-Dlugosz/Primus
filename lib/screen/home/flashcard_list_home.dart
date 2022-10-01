@@ -4,8 +4,10 @@ import 'package:primus/model/flashcard.dart';
 import 'package:primus/widgets/card_flashcard.dart';
 
 class FlashcardListHome extends StatefulWidget {
-  const FlashcardListHome({required this.flashcards, Key? key}) : super(key: key);
+  const FlashcardListHome({required this.flashcards, required this.uid, Key? key}) : super(key: key);
+
   final List<Flashcard> flashcards;
+  final String uid;
 
   @override
   State<FlashcardListHome> createState() => _FlashcardListStateHome();
@@ -25,6 +27,7 @@ class _FlashcardListStateHome extends State<FlashcardListHome> {
           itemBuilder: (context, index) {
             return CardFlashcard(
               flashcard: widget.flashcards[index],
+              uid: widget.uid,
             );
           },
         ),

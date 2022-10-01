@@ -30,7 +30,14 @@ class _ListSearchState extends State<ListSearch> {
             var listFlashcard = viewModel.searchFlashcard(data[flashcardString], widget.nameSet);
             return Column(
               children: [
-                ...listFlashcard.map((value) => CardFlashcard(flashcard: value)).toList(),
+                ...listFlashcard
+                    .map(
+                      (value) => CardFlashcard(
+                        flashcard: value,
+                        uid: data[uidString],
+                      ),
+                    )
+                    .toList(),
               ],
             );
           }

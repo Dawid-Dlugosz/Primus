@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
                       flashcardList.sort((b, a) => a.timeStamp.compareTo(b.timeStamp));
                       return FlashcardListHome(
                         flashcards: flashcardList,
+                        uid: viewModel.uid,
                       );
                     }
                     return Container();

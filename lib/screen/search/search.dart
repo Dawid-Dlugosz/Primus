@@ -38,7 +38,7 @@ class _SearchState extends State<Search> {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            title: Text('Searcher'),
+            title: Text('Searcher'), // TODO MAKE TRANSALTION
           ),
           body: Column(
             children: [

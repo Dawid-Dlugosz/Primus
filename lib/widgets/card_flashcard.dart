@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:primus/model/flashcard.dart';
+import 'package:primus/screen/flashcard_main_learn/flashcard_main.dart';
+import 'package:primus/view_models/flashcard_learn_view_model.dart';
+import 'package:provider/provider.dart';
 
 class CardFlashcard extends StatefulWidget {
-  const CardFlashcard({required this.flashcard, Key? key}) : super(key: key);
+  const CardFlashcard({required this.flashcard, required this.uid, Key? key}) : super(key: key);
 
   final Flashcard flashcard;
+  final String uid;
   @override
   State<CardFlashcard> createState() => _CardFlashcardState();
 }
@@ -29,7 +33,17 @@ class _CardFlashcardState extends State<CardFlashcard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {},
+      onTap: () => {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+              create: (context) => FlashcardLearnViewModel(flashcard: widget.flashcard, uid: widget.uid),
+              child: const FlashCardMain(),
+            ),
+          ),
+        )
+      },
       child: SizedBox(
         width: double.infinity,
         height: 100,
