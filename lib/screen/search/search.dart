@@ -5,7 +5,7 @@ import 'package:primus/enum/collection.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/screen/search/list_search.dart';
-import 'package:primus/utils/firestoreNames.dart';
+
 import 'package:primus/view_models/search_view_model.dart';
 import 'package:primus/widgets/card_flashcard.dart';
 import 'package:primus/widgets/error_widget.dart';

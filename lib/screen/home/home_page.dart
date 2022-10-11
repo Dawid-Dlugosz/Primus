@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/screen/home/flashcard_list_home.dart';
 import 'package:primus/view_models/home_view_model.dart';
+import 'package:primus/widgets/error_widget.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -50,8 +51,12 @@ class _HomePageState extends State<HomePage> {
                 child: StreamBuilder<DocumentSnapshot<Object?>>(
                   stream: viewModel.document,
                   builder: (context, snapshot) {
-                    if (snapshot.hasData) {
+                    if (snapshot.hasData && snapshot.data != null) {
                       var value = snapshot.data!.data() as Map<String, dynamic>;
+                      if (value.isEmpty) {
+                        // TODO EMPTY SCREEN
+                        return Container();
+                      }
                       FlashCardSet flashCardSet = FlashCardSet.fromJson(value);
                       var flashcardList = flashCardSet.flashcards;
                       flashcardList.sort((b, a) => a.timeStamp.compareTo(b.timeStamp));
@@ -60,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                         uid: viewModel.uid,
                       );
                     }
-                    return Container();
+                    return CustomErrorWidget();
                   },
                 ),
               ),

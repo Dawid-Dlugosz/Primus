@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:primus/enum/collection.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/flashcard_set.dart';
-import 'package:primus/utils/firestoreNames.dart';
 
 class SeachViewModel extends ChangeNotifier {
   SeachViewModel() {
@@ -16,11 +15,11 @@ class SeachViewModel extends ChangeNotifier {
   bool loading = false;
 
   late Stream<QuerySnapshot<Map<String, dynamic>>> snapshot;
-  late CollectionReference<Map<String, dynamic>> document;
   late String uid;
   late Stream<DocumentSnapshot<Map<String, dynamic>>> x;
 
   var name = '';
+
   List<Flashcard> flashcards = [];
   void _init() async {
     loading = true;
@@ -34,7 +33,7 @@ class SeachViewModel extends ChangeNotifier {
   List<Flashcard> searchFlashcard(List flashcardJson, String nameSet) {
     var list = <Flashcard>[];
     for (var element in flashcardJson) {
-      var helpElement = element[nameSetString].toString().toLowerCase();
+      var helpElement = element['nameSet'].toString().toLowerCase();
       if (helpElement.startsWith(textEditingController.text.toLowerCase())) {
         list.add(Flashcard.fromJson(element));
       }

@@ -24,87 +24,89 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<SignUpViewModel>(builder: (_, viewModel, __) {
-        sViewModel = viewModel;
-        return !viewModel.loading
-            ? Form(
-                key: viewModel.formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: viewModel.nameController,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.labelName,
-                        border: const OutlineInputBorder(),
-                        prefixIcon: const Icon(Icons.drive_file_rename_outline),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context)!.nickNameError;
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: viewModel.mailController,
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.mailHint,
-                        labelText: AppLocalizations.of(context)!.labelMail,
-                        border: const OutlineInputBorder(),
-                        prefixIcon: const Icon(Icons.mail),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context)!.mailError;
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      controller: viewModel.passwordController,
-                      obscureText: !viewModel.showPassword,
-                      decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!.labelPassword,
+    return SafeArea(
+      child: Scaffold(
+        body: Consumer<SignUpViewModel>(builder: (_, viewModel, __) {
+          sViewModel = viewModel;
+          return !viewModel.loading
+              ? Form(
+                  key: viewModel.formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: viewModel.nameController,
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.labelName,
                           border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(Icons.key),
-                          suffixIcon: IconButton(
-                            icon: Icon(viewModel.showPassword ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
-                            onPressed: viewModel.setShowPassword,
-                          )),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context)!.passwordError;
-                        }
-                        return null;
-                      },
-                    ),
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text(AppLocalizations.of(context)!.signIn),
+                          prefixIcon: const Icon(Icons.drive_file_rename_outline),
                         ),
-                        const SizedBox(
-                          width: 20,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return AppLocalizations.of(context)!.nickNameError;
+                          }
+                          return null;
+                        },
+                      ),
+                      TextFormField(
+                        controller: viewModel.mailController,
+                        decoration: InputDecoration(
+                          hintText: AppLocalizations.of(context)!.mailHint,
+                          labelText: AppLocalizations.of(context)!.labelMail,
+                          border: const OutlineInputBorder(),
+                          prefixIcon: const Icon(Icons.mail),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (viewModel.formKey.currentState!.validate()) {
-                              viewModel.signUp();
-                            }
-                          },
-                          child: Text(AppLocalizations.of(context)!.signUp),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              )
-            : const LoadingWidget();
-      }),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return AppLocalizations.of(context)!.mailError;
+                          }
+                          return null;
+                        },
+                      ),
+                      TextFormField(
+                        controller: viewModel.passwordController,
+                        obscureText: !viewModel.showPassword,
+                        decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)!.labelPassword,
+                            border: const OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.key),
+                            suffixIcon: IconButton(
+                              icon: Icon(viewModel.showPassword ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
+                              onPressed: viewModel.setShowPassword,
+                            )),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return AppLocalizations.of(context)!.passwordError;
+                          }
+                          return null;
+                        },
+                      ),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(AppLocalizations.of(context)!.signIn),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (viewModel.formKey.currentState!.validate()) {
+                                viewModel.signUp();
+                              }
+                            },
+                            child: Text(AppLocalizations.of(context)!.signUp),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              : const LoadingWidget();
+        }),
+      ),
     );
   }
 }

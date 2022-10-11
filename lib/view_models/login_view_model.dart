@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/utils/popup.dart';
 
+// TODO przerobic nickaname w firebase na jeden dokument ktory zweira liste mapy {uid: uid, nickname: nickanme}
 class LoginViewModel extends ChangeNotifier {
   LoginViewModel(this.context);
 

@@ -9,7 +9,6 @@ import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/model/word.dart';
 import 'package:primus/utils/firebase_error.dart';
-import 'package:primus/utils/firestoreNames.dart';
 import 'package:primus/utils/language_provider.dart';
 import 'package:primus/utils/popup.dart';
 import 'package:primus/widgets/create_flashcard_widget.dart';
@@ -40,7 +39,7 @@ class FlashcardViewModel extends ChangeNotifier {
   late List<CreateFlashcardWidget> flashcardsWidget;
   late AppLocalizations appLocalizations;
   late CollectionReference flashcardCollection;
-  late CollectionReference flashcardNamesCollection;
+
   late String uid;
 
   _init() async {
@@ -48,7 +47,6 @@ class FlashcardViewModel extends ChangeNotifier {
     notifyListeners();
     var locale = Provider.of<LanguageProvider>(context, listen: false).currentLocale;
     flashcardCollection = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name);
-    flashcardNamesCollection = FirebaseFirestore.instance.collection(FirebaseCollection.flashcardsNames.name);
     uid = FirebaseAuth.instance.currentUser!.uid;
     appLocalizations = await AppLocalizations.delegate.load(locale);
     _initFields();
@@ -68,7 +66,7 @@ class FlashcardViewModel extends ChangeNotifier {
   void _initListFlashcard() {
     flashcardCollection.doc(uid).get().then((document) {
       var value = document.data() as Map<String, dynamic>;
-      var helpValue = value[flashcardString] as List;
+      var helpValue = value['flashcard'] as List;
       if (helpValue.isNotEmpty) {
         for (var element in helpValue) {
           flashcardList.add(Flashcard.fromJson(element));
@@ -79,8 +77,8 @@ class FlashcardViewModel extends ChangeNotifier {
 
   void _createFields() {
     Map<String, dynamic> json = {};
-    json[flashcardString] = [];
-    json[uidString] = uid;
+    json['flashcard'] = [];
+    json['uid'] = uid;
     flashcardCollection.doc(uid).set(json);
   }
 
@@ -156,7 +154,7 @@ class FlashcardViewModel extends ChangeNotifier {
     }
 
     flashcardList.add(Flashcard(languageSet: languageController.text, nameSet: nameController.text, words: words, timeStamp: DateTime.now().millisecondsSinceEpoch));
-    flashcardCollection.doc(uid).update({flashcardString: flashcardList.map((e) => e.toJson()).toList()});
+    flashcardCollection.doc(uid).update({'flashcard': flashcardList.map((e) => e.toJson()).toList()});
 
     loading = false;
     notifyListeners();

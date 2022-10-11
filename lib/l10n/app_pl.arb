@@ -63,5 +63,29 @@
                 "example": "22-08-2022"
             }
         }
-    }
+    },
+    "definition": "Definicja",
+    "language": "Język: {lang}",
+    "@language": {
+        "description": "Language",
+        "placeholders": {
+            "lang": {
+                "type": "String",
+                "example": "English"
+            }
+        }
+    },
+    "author": "Autor: {author}",
+    "@author": {
+        "description": "Author",
+        "placeholders": {
+            "author": {
+                "type": "String",
+                "example": "Dawid"
+            }
+        }
+    },
+    "learnedWord": "Poznane słowa",
+    "unknowWord": "Nieznane słowa",
+    "swiperEmpty": "Wygląda na to, że nic tu nie ma, musisz nauczyć się paru słówek ;)"
 }
