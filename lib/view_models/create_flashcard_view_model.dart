@@ -150,7 +150,7 @@ class FlashcardViewModel extends ChangeNotifier {
 
     List<Word> words = [];
     for (int i = 0; i < wordFields.length; i++) {
-      words.add(Word(word: wordControllers[i].text, definition: definitionControllers[i].text));
+      words.add(Word(word: wordControllers[i].text, definition: definitionControllers[i].text, learModes: initalLearnMethod));
     }
 
     flashcardList.add(Flashcard(languageSet: languageController.text, nameSet: nameController.text, words: words, timeStamp: DateTime.now().millisecondsSinceEpoch));

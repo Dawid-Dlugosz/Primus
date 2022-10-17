@@ -87,5 +87,7 @@
     },
     "learnedWord": "Poznane słowa",
     "unknowWord": "Nieznane słowa",
-    "swiperEmpty": "Wygląda na to, że nic tu nie ma, musisz nauczyć się paru słówek ;)"
+    "swiperEmpty": "Wygląda na to, że nic tu nie ma, musisz nauczyć się paru słówek ;)",
+    "test": "Test",
+    "spelling": "Pisownia"
 }

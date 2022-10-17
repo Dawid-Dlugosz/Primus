@@ -87,5 +87,7 @@
     },
     "learnedWord": "Learned words",
     "unknowWord": "UnknowWord words",
-    "swiperEmpty": "It looks like there's nothing here, you need to learn a few words ;)"
+    "swiperEmpty": "It looks like there's nothing here, you need to learn a few words ;)",
+    "test": "Test",
+    "spelling": "Spelling"
 }

@@ -3,6 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:primus/view_models/flashcard_learn_view_model.dart';
 import 'package:primus/widgets/author_widget.dart';
 import 'package:primus/widgets/flip_card/flip_flashcard.dart';
+import 'package:primus/widgets/go_to_learn.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:primus/widgets/swiper_tinder/swiper_empty.dart';
 import 'package:primus/widgets/swiper_tinder/swiper_tinder.dart';
@@ -61,25 +62,36 @@ class _FlashCardMainState extends State<FlashCardMain> {
                           ),
                         ),
                       ),
-                      // TODO CZEMU SIĘ NIE SCROLUJE?
                       Expanded(
                         child: ListView(
                           physics: const AlwaysScrollableScrollPhysics(),
                           children: [
-                            Container(
-                              height: 400,
-                              width: double.infinity,
-                              color: Colors.red,
+                            GoToLearn(
+                              iconData: Icons.copy_rounded,
+                              text: AppLocalizations.of(context)!.flashcards,
+                              learnMode: () {
+                                //TODO GO TO FLASHCARD LEARN
+                              },
                             ),
-                            Container(
-                              height: 200,
-                              width: double.infinity,
-                              color: Colors.red,
+                            const SizedBox(
+                              height: 10,
                             ),
-                            Container(
-                              height: 200,
-                              width: double.infinity,
-                              color: Colors.red,
+                            GoToLearn(
+                              iconData: Icons.ballot_outlined,
+                              text: AppLocalizations.of(context)!.test,
+                              learnMode: () {
+                                //TODO GO TO TEST LEARN
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            GoToLearn(
+                              iconData: Icons.spellcheck_outlined,
+                              text: AppLocalizations.of(context)!.spelling,
+                              learnMode: () {
+                                //TODO GO TO WRITE MODE
+                              },
                             )
                           ],
                         ),
