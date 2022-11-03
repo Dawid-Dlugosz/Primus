@@ -42,7 +42,11 @@ dependencies:
   cloud_firestore: ^3.4.2
   font_awesome_flutter: ^10.2.1
   flutter_swiper: ^1.1.6
-
+  # flutter_tinder_swipe: ^0.0.4
+  flutter_tinder_swipe:
+    git: 
+      url: https://github.com/PeakyCode/flutter_tinder_swipe
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter

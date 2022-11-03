@@ -49,8 +49,8 @@ class FlashcardViewModel extends ChangeNotifier {
     flashcardCollection = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name);
     uid = FirebaseAuth.instance.currentUser!.uid;
     appLocalizations = await AppLocalizations.delegate.load(locale);
-    _initFields();
-    _initListFlashcard();
+    // _initFields();
+    // _initListFlashcard();
     loading = false;
     notifyListeners();
   }
@@ -166,11 +166,11 @@ class FlashcardViewModel extends ChangeNotifier {
   Future<void> _checkFlashCardName() async {
     var document = await flashcardCollection.doc(uid).get();
 
-    var value = document.data() as Map<String, dynamic>;
-
-    if (value.isEmpty) {
+    if (document.data() == null) {
       return;
     }
+
+    var value = document.data() as Map<String, dynamic>;
 
     FlashCardSet flashcard = FlashCardSet.fromJson(value);
 

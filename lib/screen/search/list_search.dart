@@ -28,6 +28,7 @@ class _ListSearchState extends State<ListSearch> {
           var data = widget.snapshots.data!.docs[index].data() as Map<String, dynamic>;
           if (data['uid'] != viewModel.uid) {
             var listFlashcard = viewModel.searchFlashcard(data['flashcard'], widget.nameSet);
+
             return Column(
               children: [
                 ...listFlashcard
@@ -40,10 +41,9 @@ class _ListSearchState extends State<ListSearch> {
                     .toList(),
               ],
             );
+          } else {
+            return Container();
           }
-          if (data.isEmpty) {}
-          // TODO EMPTY SCREEN WIDGET
-          return Container();
         },
       ),
     );

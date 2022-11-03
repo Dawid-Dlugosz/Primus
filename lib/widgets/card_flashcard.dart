@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/screen/flashcard_main_learn/flashcard_main.dart';
-import 'package:primus/view_models/flashcard_learn_view_model.dart';
+import 'package:primus/view_models/flashcard_main_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CardFlashcard extends StatefulWidget {
@@ -38,7 +38,7 @@ class _CardFlashcardState extends State<CardFlashcard> {
           context,
           MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider(
-              create: (context) => FlashcardLearnViewModel(flashcard: widget.flashcard, uid: widget.uid),
+              create: (context) => FlashcardMainViewModel(uid: widget.uid, setName: widget.flashcard.nameSet),
               child: const FlashCardMain(),
             ),
           ),

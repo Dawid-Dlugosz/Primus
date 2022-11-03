@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:primus/model/flashcard.dart';
+import 'package:primus/screen/flashcard_main_learn/flashcard_learn.dart';
 import 'package:primus/view_models/flashcard_learn_view_model.dart';
+import 'package:primus/view_models/flashcard_main_view_model.dart';
 import 'package:primus/widgets/author_widget.dart';
 import 'package:primus/widgets/flip_card/flip_flashcard.dart';
 import 'package:primus/widgets/go_to_learn.dart';
@@ -20,12 +23,12 @@ class FlashCardMain extends StatefulWidget {
 class _FlashCardMainState extends State<FlashCardMain> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<FlashcardLearnViewModel>(
+    return Consumer<FlashcardMainViewModel>(
       builder: ((context, viewModel, child) {
         return viewModel.loaded
             ? Scaffold(
                 appBar: AppBar(
-                  title: Text(viewModel.flashcard.nameSet),
+                  title: Text(viewModel.setName),
                 ),
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -51,10 +54,10 @@ class _FlashCardMainState extends State<FlashCardMain> {
                               ),
                               Expanded(
                                 child: TabBarView(
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   children: [
-                                    viewModel.allKnowWords.isNotEmpty ? SwiperTinder(words: viewModel.allKnowWords) : const SwiperEmpty(),
-                                    viewModel.allUnknowWords.isNotEmpty ? SwiperTinder(words: viewModel.allUnknowWords) : const SwiperEmpty(),
+                                    viewModel.allKnowWords.isNotEmpty ? SwiperTinder(words: viewModel.allKnowWords, language: viewModel.language) : const SwiperEmpty(),
+                                    viewModel.allUnknowWords.isNotEmpty ? SwiperTinder(words: viewModel.allUnknowWords, language: viewModel.language) : const SwiperEmpty(),
                                   ],
                                 ),
                               ),
@@ -70,7 +73,19 @@ class _FlashCardMainState extends State<FlashCardMain> {
                               iconData: Icons.copy_rounded,
                               text: AppLocalizations.of(context)!.flashcards,
                               learnMode: () {
-                                //TODO GO TO FLASHCARD LEARN
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangeNotifierProvider(
+                                      create: (context) => FlashcardLearnViewModel(uid: viewModel.uid, setName: viewModel.setName),
+                                      child: const FlashcardLearn(),
+                                    ),
+                                  ),
+                                ).then((value) async {
+                                  // var x = value as Flashcard;
+                                  // print(x.languageSet);
+                                  await viewModel.updateFlashcard(value);
+                                });
                               },
                             ),
                             const SizedBox(

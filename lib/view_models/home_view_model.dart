@@ -18,6 +18,8 @@ class HomeViewModel extends ChangeNotifier {
 
   void _init() async {
     uid = FirebaseAuth.instance.currentUser!.uid;
+
+    FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name).doc(uid).set({});
     document = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name).doc(uid).snapshots();
   }
 

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:primus/model/unknowWord.dart';
 import 'package:primus/model/word.dart';
+import 'package:primus/widgets/flip_card/flip_flashcard.dart';
 
 class SwiperTinder extends StatefulWidget {
-  const SwiperTinder({required this.words, Key? key}) : super(key: key);
+  const SwiperTinder({required this.words, required this.language, Key? key}) : super(key: key);
 
-  final List<UnknowWord> words;
+  final List<Word> words;
+  final String language;
   @override
   State<SwiperTinder> createState() => _SwiperTinderState();
 }
@@ -27,7 +28,7 @@ class _SwiperTinderState extends State<SwiperTinder> {
           itemWidth: MediaQuery.of(context).size.width,
           itemHeight: 200,
           itemBuilder: (context, index) {
-            return widget.words[index].widget;
+            return FLipFlashcard(word: widget.words[index].word, wordDefinition: widget.words[index].definition, language: widget.language);
           },
         ),
       ),

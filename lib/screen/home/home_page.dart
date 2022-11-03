@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/screen/home/flashcard_list_home.dart';
@@ -22,7 +23,16 @@ class _HomePageState extends State<HomePage> {
           ? Scaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: false,
-                title: const Text('Primus'),
+                title: Row(
+                  children: [
+                    Text('Primus'),
+                    IconButton(
+                        onPressed: () async {
+                          await FirebaseAuth.instance.signOut();
+                        },
+                        icon: Icon(Icons.gamepad_rounded))
+                  ],
+                ),
               ),
               floatingActionButton: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -51,11 +61,11 @@ class _HomePageState extends State<HomePage> {
                 child: StreamBuilder<DocumentSnapshot<Object?>>(
                   stream: viewModel.document,
                   builder: (context, snapshot) {
-                    if (snapshot.hasData && snapshot.data != null) {
+                    if (snapshot.hasData && snapshot.data != null && snapshot.data!.data() != null) {
                       var value = snapshot.data!.data() as Map<String, dynamic>;
                       if (value.isEmpty) {
-                        // TODO EMPTY SCREEN
-                        return Container();
+                        // TODO Zrobić empty widget
+                        return Text('Zrobić tak, żeby przy rejestracji konta odrazu tworzyć pusty dokument w flashcards, dotatkowo kiedy nie ma czego wyszukać w wyszukiwarce jakoś to obsłużyć');
                       }
                       FlashCardSet flashCardSet = FlashCardSet.fromJson(value);
                       var flashcardList = flashCardSet.flashcards;
@@ -65,7 +75,8 @@ class _HomePageState extends State<HomePage> {
                         uid: viewModel.uid,
                       );
                     }
-                    return CustomErrorWidget();
+
+                    return const CustomErrorWidget();
                   },
                 ),
               ),

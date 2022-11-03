@@ -55,15 +55,19 @@ class _SearchState extends State<Search> {
                   border: const OutlineInputBorder(),
                 ),
               ),
+
+              // TODO MAKE SEARCHER SCREEN
               StreamBuilder<QuerySnapshot>(
                 stream: viewModel.snapshot,
                 builder: (context, snapshots) {
                   if (snapshots.connectionState == ConnectionState.waiting) {
                     return const LoadingWidget();
                   }
-                  if (snapshots.hasData) {
+
+                  if (snapshots.hasData && snapshots.data != null && snapshots.data!.docs.isNotEmpty) {
                     return ListSearch(snapshots, nameSet);
                   }
+                  // TODO EMPTY WIDGET
                   return const CustomErrorWidget();
                 },
               ),

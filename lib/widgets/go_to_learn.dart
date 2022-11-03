@@ -32,7 +32,9 @@ class GoToLearn extends StatelessWidget {
           customBorder: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          onTap: () {},
+          onTap: () {
+            learnMode();
+          },
           child: ListTile(
             leading: Icon(iconData),
             title: Text(text),

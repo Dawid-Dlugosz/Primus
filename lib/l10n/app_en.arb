@@ -89,5 +89,6 @@
     "unknowWord": "UnknowWord words",
     "swiperEmpty": "It looks like there's nothing here, you need to learn a few words ;)",
     "test": "Test",
-    "spelling": "Spelling"
+    "spelling": "Spelling",
+    "learnModeFlashcard": "Learn Mode: Flashcards"
 }
