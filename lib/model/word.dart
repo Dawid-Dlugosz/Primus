@@ -5,27 +5,31 @@ const initalLearnMethod = <String, dynamic>{
 };
 
 class Word {
-  Word({required this.word, required this.definition, required this.learModes});
+  Word({required this.word, required this.definition, required this.id});
+
+  final String id;
   final String word;
   final String definition;
 
-  /// List of learned mode map example: {'spelling': false} map contain all learn method
-  /// and flag checks if the test is passed, if all method is set as true the word is considered known
-  final Map<String, dynamic> learModes;
-
   factory Word.fromJson(Map<String, dynamic> json) {
     return Word(
+      id: json['id'],
       word: json['word'],
       definition: json['definition'],
-      learModes: json['learModes'],
     );
   }
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
+    json['id'] = id;
     json['word'] = word;
     json['definition'] = definition;
-    json['learModes'] = learModes;
     return json;
   }
+
+  Word copyWith({String? id, String? word, String? definition}) => Word(
+        word: word ?? this.word,
+        definition: definition ?? this.definition,
+        id: id ?? this.id,
+      );
 }

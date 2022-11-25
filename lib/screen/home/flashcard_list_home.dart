@@ -27,7 +27,7 @@ class _FlashcardListStateHome extends State<FlashcardListHome> {
           itemBuilder: (context, index) {
             return CardFlashcard(
               flashcard: widget.flashcards[index],
-              uid: widget.uid,
+              // uid: widget.uid,
             );
           },
         ),

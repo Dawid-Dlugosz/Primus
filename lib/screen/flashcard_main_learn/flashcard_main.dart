@@ -28,29 +28,31 @@ class _FlashCardMainState extends State<FlashCardMain> {
         return viewModel.loaded
             ? Scaffold(
                 appBar: AppBar(
-                  title: Text(viewModel.setName),
+                  title: Text(viewModel.nameSet),
                 ),
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      viewModel.showAddWidget ? const AuthorWidget() : Container(),
                       Expanded(
                         child: DefaultTabController(
                           length: 2,
                           child: Column(
                             children: [
-                              TabBar(
-                                tabs: [
-                                  Tab(
-                                    text: AppLocalizations.of(context)!.learnedWord,
-                                  ),
-                                  Tab(
-                                    text: AppLocalizations.of(context)!.unknowWord,
-                                  ),
-                                ],
-                                indicatorSize: TabBarIndicatorSize.tab,
+                              Container(
+                                color: Colors.amber,
+                                child: TabBar(
+                                  tabs: [
+                                    Tab(
+                                      text: AppLocalizations.of(context)!.learnedWord,
+                                    ),
+                                    Tab(
+                                      text: AppLocalizations.of(context)!.unknowWord,
+                                    ),
+                                  ],
+                                  indicatorSize: TabBarIndicatorSize.tab,
+                                ),
                               ),
                               Expanded(
                                 child: TabBarView(
@@ -77,14 +79,15 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ChangeNotifierProvider(
-                                      create: (context) => FlashcardLearnViewModel(uid: viewModel.uid, setName: viewModel.setName),
+                                      create: (context) => FlashcardLearnViewModel(flascardId: viewModel.flascardId, context: context),
                                       child: const FlashcardLearn(),
                                     ),
                                   ),
                                 ).then((value) async {
                                   // var x = value as Flashcard;
-                                  // print(x.languageSet);
-                                  await viewModel.updateFlashcard(value);
+                                  print('tolearn flashcardid: ${value}');
+                                  // TODO ZROBIĆ UPDATE TOLEARN
+                                  // await viewModel.updateFlashcard(value);
                                 });
                               },
                             ),

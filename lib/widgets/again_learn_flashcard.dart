@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AgainLearnFlashcard extends StatelessWidget {
   const AgainLearnFlashcard({required this.again, Key? key}) : super(key: key);
 
-  final Function() again;
+  final VoidCallback again;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class AgainLearnFlashcard extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: again,
-          child: Text('Ucz się jeszce raz'),
+          child: Text('Ucz się jeszcze raz'),
         ),
       ],
     );

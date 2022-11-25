@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:primus/model/flashcard.dart';
 
 import 'package:primus/view_models/search_view_model.dart';
 import 'package:primus/widgets/card_flashcard.dart';
@@ -21,29 +22,16 @@ class _ListSearchState extends State<ListSearch> {
   Widget build(BuildContext context) {
     var viewModel = Provider.of<SeachViewModel>(context, listen: false);
 
+    viewModel.search(widget.snapshots.data!.docs, widget.nameSet);
+
     return Expanded(
       child: ListView.builder(
-        itemCount: widget.snapshots.data!.docs.length,
+        itemCount: viewModel.listFlashcard.length,
         itemBuilder: (context, index) {
-          var data = widget.snapshots.data!.docs[index].data() as Map<String, dynamic>;
-          if (data['uid'] != viewModel.uid) {
-            var listFlashcard = viewModel.searchFlashcard(data['flashcard'], widget.nameSet);
-
-            return Column(
-              children: [
-                ...listFlashcard
-                    .map(
-                      (value) => CardFlashcard(
-                        flashcard: value,
-                        uid: data['uid'],
-                      ),
-                    )
-                    .toList(),
-              ],
-            );
-          } else {
-            return Container();
-          }
+          return CardFlashcard(
+            flashcard: viewModel.listFlashcard[index]['flashcard'],
+            fromSearch: true,
+          );
         },
       ),
     );

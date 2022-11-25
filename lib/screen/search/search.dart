@@ -33,7 +33,6 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Consumer<SeachViewModel>(builder: (_, viewModel, __) {
       model = viewModel;
-      String nameSet = '';
       if (!viewModel.loading) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -45,11 +44,10 @@ class _SearchState extends State<Search> {
               TextField(
                 onChanged: (value) {
                   setState(() {
-                    nameSet = value;
+                    viewModel.name = value;
                   });
                 },
                 controller: viewModel.textEditingController,
-                onEditingComplete: () {},
                 decoration: InputDecoration.collapsed(
                   hintText: AppLocalizations.of(context)!.flashcardsName,
                   border: const OutlineInputBorder(),
@@ -57,20 +55,22 @@ class _SearchState extends State<Search> {
               ),
 
               // TODO MAKE SEARCHER SCREEN
-              StreamBuilder<QuerySnapshot>(
-                stream: viewModel.snapshot,
-                builder: (context, snapshots) {
-                  if (snapshots.connectionState == ConnectionState.waiting) {
-                    return const LoadingWidget();
-                  }
+              viewModel.name.isEmpty
+                  ? Text('Wyszukaj coś')
+                  : StreamBuilder<QuerySnapshot>(
+                      stream: viewModel.snapshot,
+                      builder: (context, snapshots) {
+                        if (snapshots.connectionState == ConnectionState.waiting) {
+                          return const LoadingWidget();
+                        }
 
-                  if (snapshots.hasData && snapshots.data != null && snapshots.data!.docs.isNotEmpty) {
-                    return ListSearch(snapshots, nameSet);
-                  }
-                  // TODO EMPTY WIDGET
-                  return const CustomErrorWidget();
-                },
-              ),
+                        if (snapshots.hasData && snapshots.data != null && snapshots.data!.docs.isNotEmpty) {
+                          return ListSearch(snapshots, viewModel.name);
+                        }
+                        // TODO EMPTY WIDGET
+                        return const CustomErrorWidget();
+                      },
+                    ),
             ],
           ),
         );

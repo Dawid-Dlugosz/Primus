@@ -90,5 +90,9 @@
     "swiperEmpty": "It looks like there's nothing here, you need to learn a few words ;)",
     "test": "Test",
     "spelling": "Spelling",
-    "learnModeFlashcard": "Learn Mode: Flashcards"
+    "learnModeFlashcard": "Learn Mode: Flashcards",
+    "copyFlashcard": "Are you sure you want to copy the set to yourself?",
+    "yes": "Yes",
+    "no": "No",
+    "copied": "You have already copied this set"
 }

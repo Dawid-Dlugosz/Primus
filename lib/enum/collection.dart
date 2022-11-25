@@ -1,4 +1,5 @@
 enum FirebaseCollection {
-  nickname,
+  users,
   flashcards,
+  flashcardSet,
 }

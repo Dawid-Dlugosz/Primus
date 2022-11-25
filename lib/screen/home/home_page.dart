@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:primus/model/flashcard.dart';
+import 'package:primus/model/user.dart' as myUser;
 import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/screen/home/flashcard_list_home.dart';
+import 'package:primus/utils/firebase_error.dart';
 import 'package:primus/view_models/home_view_model.dart';
+import 'package:primus/widgets/empty_widget.dart';
 import 'package:primus/widgets/error_widget.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
@@ -19,18 +23,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeViewModel>(builder: (_, viewModel, __) {
-      return !viewModel.loading
+      return viewModel.loaded
           ? Scaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 title: Row(
                   children: [
-                    Text('Primus'),
+                    const Text('Primus'),
                     IconButton(
-                        onPressed: () async {
-                          await FirebaseAuth.instance.signOut();
-                        },
-                        icon: Icon(Icons.gamepad_rounded))
+                      onPressed: () async {
+                        await FirebaseAuth.instance.signOut();
+                      },
+                      icon: Icon(Icons.gamepad_rounded),
+                    )
                   ],
                 ),
               ),
@@ -58,21 +63,31 @@ class _HomePageState extends State<HomePage> {
               ),
               body: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                child: StreamBuilder<DocumentSnapshot<Object?>>(
+                child: StreamBuilder<DocumentSnapshot>(
                   stream: viewModel.document,
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data != null && snapshot.data!.data() != null) {
                       var value = snapshot.data!.data() as Map<String, dynamic>;
-                      if (value.isEmpty) {
-                        // TODO Zrobić empty widget
-                        return Text('Zrobić tak, żeby przy rejestracji konta odrazu tworzyć pusty dokument w flashcards, dotatkowo kiedy nie ma czego wyszukać w wyszukiwarce jakoś to obsłużyć');
+                      if (value['ownFlashcard'] == null) {
+                        return const EmptyWidget();
                       }
-                      FlashCardSet flashCardSet = FlashCardSet.fromJson(value);
-                      var flashcardList = flashCardSet.flashcards;
-                      flashcardList.sort((b, a) => a.timeStamp.compareTo(b.timeStamp));
-                      return FlashcardListHome(
-                        flashcards: flashcardList,
-                        uid: viewModel.uid,
+
+                      myUser.User user = myUser.User.fromJson(value);
+
+                      return FutureBuilder<List<Flashcard>>(
+                        future: viewModel.getUserFlahscards(user.ownFlashcard),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const LoadingWidget();
+                          }
+                          if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
+                            return FlashcardListHome(
+                              flashcards: snapshot.data!,
+                              uid: viewModel.uid,
+                            );
+                          }
+                          return const EmptyWidget();
+                        },
                       );
                     }
 

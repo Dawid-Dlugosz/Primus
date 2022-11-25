@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:primus/dialog/copy_flashcard.dart';
 
 class AuthorWidget extends StatelessWidget {
-  const AuthorWidget({Key? key}) : super(key: key);
+  const AuthorWidget({required this.nickname, required this.add, Key? key}) : super(key: key);
 
+  final String nickname;
+  final VoidCallback add;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,14 +16,21 @@ class AuthorWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            AppLocalizations.of(context)!.author('Dawid'),
+            AppLocalizations.of(context)!.author(nickname),
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return CopyFlashcard(add: add);
+                },
+              );
+            },
             icon: const Icon(
               Icons.add,
               size: 40,

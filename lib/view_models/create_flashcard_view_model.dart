@@ -7,12 +7,14 @@ import 'package:primus/enum/collection.dart';
 import 'package:primus/exception/flashcard_name_busy.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/flashcard_set.dart';
+import 'package:primus/model/user.dart' as myUser;
 import 'package:primus/model/word.dart';
 import 'package:primus/utils/firebase_error.dart';
 import 'package:primus/utils/language_provider.dart';
 import 'package:primus/utils/popup.dart';
 import 'package:primus/widgets/create_flashcard_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class FlashcardViewModel extends ChangeNotifier {
   FlashcardViewModel(this.context) {
@@ -33,53 +35,26 @@ class FlashcardViewModel extends ChangeNotifier {
   List<TextFormField> wordFields = [];
   List<TextFormField> definitionFields = [];
 
-  /// Flashcard list from firestore
-  List<Flashcard> flashcardList = [];
-
   late List<CreateFlashcardWidget> flashcardsWidget;
   late AppLocalizations appLocalizations;
-  late CollectionReference flashcardCollection;
+  // late CollectionReference flashcardCollection;
 
   late String uid;
+  late myUser.User user;
 
   _init() async {
     loading = true;
     notifyListeners();
+
     var locale = Provider.of<LanguageProvider>(context, listen: false).currentLocale;
-    flashcardCollection = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name);
-    uid = FirebaseAuth.instance.currentUser!.uid;
     appLocalizations = await AppLocalizations.delegate.load(locale);
-    // _initFields();
-    // _initListFlashcard();
+
+    uid = FirebaseAuth.instance.currentUser!.uid;
+    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    user = myUser.User.fromJson(document.data()!);
+
     loading = false;
     notifyListeners();
-  }
-
-  void _initFields() {
-    flashcardCollection.doc(uid).get().then((document) {
-      if ((document.data() as Map<String, dynamic>).isEmpty) {
-        _createFields();
-      }
-    });
-  }
-
-  void _initListFlashcard() {
-    flashcardCollection.doc(uid).get().then((document) {
-      var value = document.data() as Map<String, dynamic>;
-      var helpValue = value['flashcard'] as List;
-      if (helpValue.isNotEmpty) {
-        for (var element in helpValue) {
-          flashcardList.add(Flashcard.fromJson(element));
-        }
-      }
-    });
-  }
-
-  void _createFields() {
-    Map<String, dynamic> json = {};
-    json['flashcard'] = [];
-    json['uid'] = uid;
-    flashcardCollection.doc(uid).set(json);
   }
 
   void generateTextField() {
@@ -127,55 +102,71 @@ class FlashcardViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void createFlashcardSet() async {
+  Future<void> createFlashcardSet() async {
     loading = true;
     notifyListeners();
 
     try {
       await _checkFlashCardName();
+      List<Word> words = [];
+      for (int i = 0; i < wordFields.length; i++) {
+        words.add(Word(
+          id: const Uuid().v4(),
+          word: wordControllers[i].text,
+          definition: definitionControllers[i].text,
+        ));
+      }
+      var flashcardId = const Uuid().v4();
+      var flascard = Flashcard(
+        id: flashcardId,
+        languageSet: languageController.text,
+        nameSet: nameController.text,
+        words: words,
+        timeStamp: DateTime.now().millisecondsSinceEpoch,
+      );
+
+      var flashCardSet = FlashCardSet(flashcard: flascard, owner: user.uid);
+
+      await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(flashcardId).set(flashCardSet.toJson());
+
+      var document = 'flashcardSet/$flashcardId';
+
+      if (user.ownFlashcard == null) {
+        user = user.copyWith(ownFlashcard: [document]);
+        await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(user.uid).update({'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
+      } else {
+        var newOwnFlashcard = user.ownFlashcard;
+        newOwnFlashcard!.add(document);
+
+        user = user.copyWith(ownFlashcard: newOwnFlashcard);
+        await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(user.uid).update({'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
+      }
+      Navigator.pop(context);
+      showSnackBar(AppLocalizations.of(context)!.flashcardCreate, context);
     } on FlashCardNameBusy {
       loading = false;
       notifyListeners();
       showSnackBarError(flashcardNameBusy, context);
-    } catch (e, s) {
-      if (kDebugMode) {
-        print('administrator error: $e}');
-        print('administrator stacktrace: $s}');
-      }
+    } catch (_) {
       loading = false;
       notifyListeners();
-      showSnackBarError(flashcardNameBusy, context);
       return;
     }
-
-    List<Word> words = [];
-    for (int i = 0; i < wordFields.length; i++) {
-      words.add(Word(word: wordControllers[i].text, definition: definitionControllers[i].text, learModes: initalLearnMethod));
-    }
-
-    flashcardList.add(Flashcard(languageSet: languageController.text, nameSet: nameController.text, words: words, timeStamp: DateTime.now().millisecondsSinceEpoch));
-    flashcardCollection.doc(uid).update({'flashcard': flashcardList.map((e) => e.toJson()).toList()});
 
     loading = false;
     notifyListeners();
-
-    Navigator.pop(context);
-    showSnackBar(AppLocalizations.of(context)!.flashcardCreate, context);
   }
 
   Future<void> _checkFlashCardName() async {
-    var document = await flashcardCollection.doc(uid).get();
-
-    if (document.data() == null) {
+    var ownFlashcard = user.ownFlashcard;
+    if (ownFlashcard == null || ownFlashcard.isEmpty) {
       return;
     }
 
-    var value = document.data() as Map<String, dynamic>;
-
-    FlashCardSet flashcard = FlashCardSet.fromJson(value);
-
-    for (var element in flashcard.flashcards) {
-      if (element.nameSet == nameController.text) {
+    for (var element in ownFlashcard) {
+      var docRef = await FirebaseFirestore.instance.doc(element).get();
+      var flashcardSet = FlashCardSet.fromJson(docRef.data() as Map<String, dynamic>);
+      if (flashcardSet.flashcard.nameSet == nameController.text) {
         throw FlashCardNameBusy();
       }
     }
