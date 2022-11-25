@@ -1,3 +1,1 @@
-class BusyNickname implements Exception {
-  BusyNickname();
-}
+class BusyNickname implements Exception {}

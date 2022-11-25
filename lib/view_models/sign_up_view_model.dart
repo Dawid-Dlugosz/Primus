@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:primus/enum/collection.dart';
 import 'package:primus/exception/busy_nickname.dart';
+import 'package:primus/model/user.dart';
 import 'package:primus/screen/start_page.dart';
 import 'package:primus/utils/firebase_error.dart';
 import 'package:primus/utils/popup.dart';
@@ -24,10 +25,10 @@ class SignUpViewModel extends ChangeNotifier {
       loading = true;
       notifyListeners();
       await checkNickName();
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: mailController.text.trim(), password: passwordController.text).then((value) => {
+      await auth.FirebaseAuth.instance.createUserWithEmailAndPassword(email: mailController.text.trim(), password: passwordController.text).then((value) => {
             if (value.user?.uid != null)
               {
-                insertNickname(value.user!.uid),
+                _createUser(User(nickname: nameController.text, uid: value.user!.uid, toLearn: null, ownFlashcard: null)),
               },
           });
       loading = false;
@@ -37,13 +38,13 @@ class SignUpViewModel extends ChangeNotifier {
           builder: (context) => const StartPage(),
         ),
       );
-    } on FirebaseAuthException catch (e) {
+    } on auth.FirebaseAuthException catch (e) {
       showSnackBarError(e.code, context);
       loading = false;
       notifyListeners();
-    } on BusyNickname {
-      showSnackBarError(nicknameBusy, context);
+    } on BusyNickname catch (_) {
       loading = false;
+      showSnackBarError(nicknameBusy, context);
       notifyListeners();
     }
   }
@@ -54,16 +55,25 @@ class SignUpViewModel extends ChangeNotifier {
   }
 
   Future<void> checkNickName() async {
-    var doc = await FirebaseFirestore.instance.collection(FirebaseCollection.nickname.name).where('nick', isEqualTo: nameController.text).get();
-    if (doc.docs.isNotEmpty) {
-      throw BusyNickname();
+    if (!await _checlExistCollection()) {
+      return;
+    }
+    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).get();
+
+    for (var element in document.docs) {
+      var user = element.data();
+      if (user['nickname'] == nameController.text) {
+        throw BusyNickname();
+      }
     }
   }
 
-  void insertNickname(String uid) {
-    var doc = FirebaseFirestore.instance.collection(FirebaseCollection.nickname.name);
-    Map<String, dynamic> json = {};
-    json['nickname'] = nameController.text;
-    doc.doc(uid).set(json);
+  Future<void> _createUser(User user) async {
+    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(user.uid).set(user.toJson());
+  }
+
+  Future<bool> _checlExistCollection() async {
+    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).limit(1).get();
+    return document.size == 0 ? false : true;
   }
 }

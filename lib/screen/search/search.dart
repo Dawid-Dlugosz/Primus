@@ -5,7 +5,7 @@ import 'package:primus/enum/collection.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/screen/search/list_search.dart';
-import 'package:primus/utils/firestoreNames.dart';
+
 import 'package:primus/view_models/search_view_model.dart';
 import 'package:primus/widgets/card_flashcard.dart';
 import 'package:primus/widgets/error_widget.dart';
@@ -33,40 +33,44 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Consumer<SeachViewModel>(builder: (_, viewModel, __) {
       model = viewModel;
-      String nameSet = '';
       if (!viewModel.loading) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            title: Text('Searcher'),
+            title: Text('Searcher'), // TODO MAKE TRANSALTION
           ),
           body: Column(
             children: [
               TextField(
                 onChanged: (value) {
                   setState(() {
-                    nameSet = value;
+                    viewModel.name = value;
                   });
                 },
                 controller: viewModel.textEditingController,
-                onEditingComplete: () {},
                 decoration: InputDecoration.collapsed(
                   hintText: AppLocalizations.of(context)!.flashcardsName,
                   border: const OutlineInputBorder(),
                 ),
               ),
-              StreamBuilder<QuerySnapshot>(
-                stream: viewModel.snapshot,
-                builder: (context, snapshots) {
-                  if (snapshots.connectionState == ConnectionState.waiting) {
-                    return const LoadingWidget();
-                  }
-                  if (snapshots.hasData) {
-                    return ListSearch(snapshots, nameSet);
-                  }
-                  return const CustomErrorWidget();
-                },
-              ),
+
+              // TODO MAKE SEARCHER SCREEN
+              viewModel.name.isEmpty
+                  ? Text('Wyszukaj coś')
+                  : StreamBuilder<QuerySnapshot>(
+                      stream: viewModel.snapshot,
+                      builder: (context, snapshots) {
+                        if (snapshots.connectionState == ConnectionState.waiting) {
+                          return const LoadingWidget();
+                        }
+
+                        if (snapshots.hasData && snapshots.data != null && snapshots.data!.docs.isNotEmpty) {
+                          return ListSearch(snapshots, viewModel.name);
+                        }
+                        // TODO EMPTY WIDGET
+                        return const CustomErrorWidget();
+                      },
+                    ),
             ],
           ),
         );

@@ -63,5 +63,36 @@
                 "example": "22-08-2022"
             }
         }
-    }
+    },
+    "definition": "Definition",
+    "language": "Language: {lang}",
+    "@language": {
+        "description": "Language",
+        "placeholders": {
+            "lang": {
+                "type": "String",
+                "example": "English"
+            }
+        }
+    },
+    "author": "Author: {author}",
+    "@author": {
+        "description": "Author",
+        "placeholders": {
+            "author": {
+                "type": "String",
+                "example": "Dawid"
+            }
+        }
+    },
+    "learnedWord": "Learned words",
+    "unknowWord": "UnknowWord words",
+    "swiperEmpty": "It looks like there's nothing here, you need to learn a few words ;)",
+    "test": "Test",
+    "spelling": "Spelling",
+    "learnModeFlashcard": "Learn Mode: Flashcards",
+    "copyFlashcard": "Are you sure you want to copy the set to yourself?",
+    "yes": "Yes",
+    "no": "No",
+    "copied": "You have already copied this set"
 }

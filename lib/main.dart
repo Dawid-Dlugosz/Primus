@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:primus/migrations/firebase_migration_script.dart';
 import 'package:primus/screen/start_page.dart';
 import 'package:primus/utils/language_provider.dart';
 import 'package:primus/utils/theme.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  firebaseMigrateScript();
   runApp(const MyApp());
 }
 
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
             Locale('en', ''),
             Locale('pl', ''),
           ],
-          home: const StartPage(),
+          home: const SafeArea(child: StartPage()),
         ),
       ),
     );
