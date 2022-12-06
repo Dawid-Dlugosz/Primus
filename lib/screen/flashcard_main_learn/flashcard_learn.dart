@@ -26,7 +26,7 @@ class _FlashcardLearnState extends State<FlashcardLearn> {
             ? Scaffold(
                 appBar: AppBar(
                   leading: IconButton(
-                    icon: Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back),
                     onPressed: () => Navigator.pop(context, viewModel.flascardId),
                   ),
                   title: Row(

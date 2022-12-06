@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:primus/view_models/flashcard_learn_view_model.dart';
 
 class FlashcardLearnSettings extends StatefulWidget {
   FlashcardLearnSettings({required this.showOnlyUnknow, required this.learnOneMoreTime, Key? key}) : super(key: key);

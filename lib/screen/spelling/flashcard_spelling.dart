@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:primus/dialog/flascard_learn_settings.dart';
 import 'package:primus/utils/shared_preferences.dart';
 import 'package:primus/view_models/flashcard_spelling_view_model.dart';
-import 'package:primus/widgets/empty_widget.dart';
 import 'package:primus/widgets/flascard_learn/empty_words.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +26,7 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Tryb nauki: Pisanie'),
+                      const Text('Tryb nauki: Pisanie'),
                       InkWell(
                         onTap: () {
                           showDialog<void>(
