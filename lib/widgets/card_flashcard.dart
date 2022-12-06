@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/screen/flashcard_main_learn/flashcard_main.dart';
-import 'package:primus/screen/preview_flashcard.dart';
 import 'package:primus/view_models/flashcard_main_view_model.dart';
 import 'package:provider/provider.dart';
 

@@ -3,9 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/user.dart' as myUser;
-import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/screen/home/flashcard_list_home.dart';
-import 'package:primus/utils/firebase_error.dart';
 import 'package:primus/view_models/home_view_model.dart';
 import 'package:primus/widgets/empty_widget.dart';
 import 'package:primus/widgets/error_widget.dart';
@@ -34,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () async {
                         await FirebaseAuth.instance.signOut();
                       },
-                      icon: Icon(Icons.gamepad_rounded),
+                      icon: const Icon(Icons.gamepad_rounded),
                     )
                   ],
                 ),

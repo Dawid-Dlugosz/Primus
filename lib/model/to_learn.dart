@@ -1,5 +1,4 @@
 import 'package:primus/model/to_learn_word.dart';
-import 'package:primus/model/word.dart';
 
 class ToLearn {
   const ToLearn({

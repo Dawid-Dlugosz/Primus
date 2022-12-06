@@ -25,7 +25,7 @@ class AgainLearnFlashcard extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: again,
-          child: Text('Ucz się jeszcze raz'),
+          child: const Text('Ucz się jeszcze raz'),
         ),
       ],
     );
