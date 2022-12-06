@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:primus/dialog/clear_progres.dart';
-import 'package:primus/view_models/flashcard_learn_view_model.dart';
 
 class EmptyWords extends StatefulWidget {
-  const EmptyWords({required this.viewModel, Key? key}) : super(key: key);
-  final FlashcardLearnViewModel viewModel;
+  const EmptyWords({required this.showAllWords, required this.clearProgress, Key? key}) : super(key: key);
+  final VoidCallback showAllWords;
+  final VoidCallback clearProgress;
 
   @override
   State<EmptyWords> createState() => _EmptyWordsState();
@@ -15,29 +15,29 @@ class _EmptyWordsState extends State<EmptyWords> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Z tego kurus umiesz już wszystkie słowa, masz kilka możliowść:'),
+        const Text('Z tego kurus umiesz już wszystkie słowa, masz kilka możliowść:'),
         ElevatedButton(
-          child: Text('1. Wyzeruj postępy kurus'),
+          child: const Text('1. Wyzeruj postępy kurus'),
           onPressed: () {
             showDialog<void>(
               context: context,
               builder: (BuildContext context) {
-                return ClearProgress();
+                return const ClearProgress();
               },
             ).then((value) {
               var isReset = value as bool;
               if (isReset) {
-                widget.viewModel.clearPorgress();
+                widget.clearProgress();
               }
             });
           },
         ),
         ElevatedButton(
-          child: Text('2. Pokaż wszystkie słówka'),
-          onPressed: widget.viewModel.showAllWords,
+          child: const Text('2. Pokaż wszystkie słówka'),
+          onPressed: widget.showAllWords,
         ),
         ElevatedButton(
-          child: Text('3. Przejdź do następnego kurus'),
+          child: const Text('3. Przejdź do następnego kurus'),
           onPressed: Navigator.of(context).pop,
         ),
       ],

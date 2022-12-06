@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:primus/model/flashcard.dart';
 
 import 'package:primus/view_models/search_view_model.dart';
 import 'package:primus/widgets/card_flashcard.dart';

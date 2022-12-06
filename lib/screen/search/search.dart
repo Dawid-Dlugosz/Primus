@@ -1,13 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/model/flashcard.dart';
-import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/screen/search/list_search.dart';
 
 import 'package:primus/view_models/search_view_model.dart';
-import 'package:primus/widgets/card_flashcard.dart';
 import 'package:primus/widgets/error_widget.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +32,7 @@ class _SearchState extends State<Search> {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            title: Text('Searcher'), // TODO MAKE TRANSALTION
+            title: const Text('Searcher'), // TODO MAKE TRANSALTION
           ),
           body: Column(
             children: [
@@ -56,7 +51,7 @@ class _SearchState extends State<Search> {
 
               // TODO MAKE SEARCHER SCREEN
               viewModel.name.isEmpty
-                  ? Text('Wyszukaj coś')
+                  ? const Text('Wyszukaj coś')
                   : StreamBuilder<QuerySnapshot>(
                       stream: viewModel.snapshot,
                       builder: (context, snapshots) {

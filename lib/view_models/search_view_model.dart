@@ -1,11 +1,9 @@
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/enum/collection.dart';
 import 'package:primus/model/flashcard.dart';
-import 'package:primus/model/flashcard_set.dart';
 
 class SeachViewModel extends ChangeNotifier {
   SeachViewModel() {

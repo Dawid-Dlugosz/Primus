@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:primus/model/flashcard.dart';
 import 'package:primus/screen/flashcard_main_learn/flashcard_learn.dart';
+import 'package:primus/screen/spelling/flashcard_spelling.dart';
 import 'package:primus/view_models/flashcard_learn_view_model.dart';
 import 'package:primus/view_models/flashcard_main_view_model.dart';
-import 'package:primus/widgets/author_widget.dart';
-import 'package:primus/widgets/flip_card/flip_flashcard.dart';
+import 'package:primus/view_models/flashcard_spelling_view_model.dart';
 import 'package:primus/widgets/go_to_learn.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:primus/widgets/swiper_tinder/swiper_empty.dart';
@@ -83,12 +81,7 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                       child: const FlashcardLearn(),
                                     ),
                                   ),
-                                ).then((value) async {
-                                  // var x = value as Flashcard;
-                                  print('tolearn flashcardid: ${value}');
-                                  // TODO ZROBIĆ UPDATE TOLEARN
-                                  // await viewModel.updateFlashcard(value);
-                                });
+                                );
                               },
                             ),
                             const SizedBox(
@@ -108,7 +101,15 @@ class _FlashCardMainState extends State<FlashCardMain> {
                               iconData: Icons.spellcheck_outlined,
                               text: AppLocalizations.of(context)!.spelling,
                               learnMode: () {
-                                //TODO GO TO WRITE MODE
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangeNotifierProvider(
+                                      create: (context) => FlashcardSpellingViewModel(flashcardId: viewModel.flascardId),
+                                      child: const FlashcardSpelling(),
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           ],

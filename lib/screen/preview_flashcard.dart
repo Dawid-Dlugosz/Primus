@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/word.dart';
 import 'package:primus/widgets/flip_card/flip_flashcard.dart';
 
@@ -25,14 +24,14 @@ class _PreviewFlashcardState extends State<PreviewFlashcard> {
           children: [
             ElevatedButton(
               onPressed: () => widget.saveEdit(),
-              child: Text('Edytuj i zapisz'),
+              child: const Text('Edytuj i zapisz'),
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             ElevatedButton(
               onPressed: () => widget.learn(),
-              child: Text('Ucz się'),
+              child: const Text('Ucz się'),
             ),
           ],
         ),

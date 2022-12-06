@@ -2,12 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/enum/collection.dart';
-import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/flashcard_set.dart';
-import 'package:primus/model/learn_method.dart';
 import 'package:primus/model/to_learn.dart';
 import 'package:primus/model/to_learn_word.dart';
-import 'package:primus/model/word.dart';
 import 'package:primus/model/user.dart' as user;
 import 'package:primus/utils/shared_preferences.dart';
 
@@ -98,13 +95,13 @@ class FlashcardLearnViewModel extends ChangeNotifier {
     allKnowWords.clear();
     allUnknowWords.clear();
 
-    toLearn.words.forEach((element) {
+    for (var element in toLearn.words) {
       if (element.learnMethod.flashcard) {
         allKnowWords.add(element);
       } else {
         allUnknowWords.add(element);
       }
-    });
+    }
   }
 
   Future<user.User> getDocument() async {
