@@ -9,14 +9,14 @@ import 'package:primus/model/user.dart' as user;
 import 'package:primus/utils/shared_preferences.dart';
 
 class FlashcardLearnViewModel extends ChangeNotifier {
-  FlashcardLearnViewModel({required this.flascardId, required this.context}) {
+  FlashcardLearnViewModel({required this.flashcardId, required this.context}) {
     _init();
   }
 
-  final String flascardId;
+  final String flashcardId;
   final BuildContext context;
 
-  late String reference = 'flashcardSet/$flascardId';
+  late String reference = 'flashcardSet/$flashcardId';
 
   bool loaded = false;
   bool showOnlyUnknow = true;
@@ -41,7 +41,7 @@ class FlashcardLearnViewModel extends ChangeNotifier {
     showOnlyUnknow = await getFlashcardSettingsKnowWord();
     document = FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid);
     currentUser = await getDocument();
-    toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flascardId).first;
+    toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
     var flascardDocument = await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(toLearn.flashcardId).get();
     flashCardSet = FlashCardSet.fromJson(flascardDocument.data() as Map<String, dynamic>);
     language = flashCardSet.flashcard.languageSet;
@@ -90,7 +90,7 @@ class FlashcardLearnViewModel extends ChangeNotifier {
   }
 
   void splitWords() {
-    var toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flascardId).first;
+    var toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
 
     allKnowWords.clear();
     allUnknowWords.clear();
@@ -146,7 +146,7 @@ class FlashcardLearnViewModel extends ChangeNotifier {
     loaded = false;
     notifyListeners();
 
-    var toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flascardId).first;
+    var toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
 
     toLearn.words.map((e) {
       e.learnMethod.copyWith(flashcard: false);

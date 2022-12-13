@@ -27,7 +27,7 @@ class _FlashcardLearnState extends State<FlashcardLearn> {
                 appBar: AppBar(
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back),
-                    onPressed: () => Navigator.pop(context, viewModel.flascardId),
+                    onPressed: () => Navigator.pop(context, viewModel.flashcardId),
                   ),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,7 +57,7 @@ class _FlashcardLearnState extends State<FlashcardLearn> {
                 body: !viewModel.learnAgain
                     ? WillPopScope(
                         onWillPop: () {
-                          Navigator.pop(context, viewModel.flascardId);
+                          Navigator.pop(context, viewModel.flashcardId);
                           return Future(() => true);
                         },
                         child: viewModel.words.isEmpty

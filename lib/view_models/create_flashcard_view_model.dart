@@ -16,9 +16,8 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class FlashcardViewModel extends ChangeNotifier {
-  FlashcardViewModel(this.context) {
+  FlashcardViewModel(this.context, {this.flashCardSet}) {
     _init();
-    generateTextField();
     generateTextField();
   }
 
@@ -26,6 +25,7 @@ class FlashcardViewModel extends ChangeNotifier {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController languageController = TextEditingController();
+  FlashCardSet? flashCardSet;
 
   bool loading = false;
 
@@ -36,7 +36,6 @@ class FlashcardViewModel extends ChangeNotifier {
 
   late List<CreateFlashcardWidget> flashcardsWidget;
   late AppLocalizations appLocalizations;
-  // late CollectionReference flashcardCollection;
 
   late String uid;
   late myUser.User user;
