@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/user.dart' as myUser;
@@ -66,14 +67,14 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data != null && snapshot.data!.data() != null) {
                       var value = snapshot.data!.data() as Map<String, dynamic>;
+
                       if (value['ownFlashcard'] == null) {
                         return const EmptyWidget();
                       }
 
                       myUser.User user = myUser.User.fromJson(value);
-
-                      return FutureBuilder<List<Flashcard>>(
-                        future: viewModel.getUserFlahscards(user.ownFlashcard),
+                      return StreamBuilder<List<Flashcard>>(
+                        stream: Stream.fromFuture(viewModel.getUserFlahscards(user.ownFlashcard)),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return const LoadingWidget();
@@ -81,6 +82,7 @@ class _HomePageState extends State<HomePage> {
                           if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
                             return FlashcardListHome(
                               flashcards: snapshot.data!,
+                              delte: viewModel.deleteFlashcard,
                               uid: viewModel.uid,
                             );
                           }

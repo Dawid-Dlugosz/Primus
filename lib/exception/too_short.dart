@@ -1,0 +1,1 @@
+class TooShort implements Exception {}

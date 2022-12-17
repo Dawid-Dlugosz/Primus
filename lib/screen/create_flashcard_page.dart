@@ -42,15 +42,21 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
+              heroTag: 'Create',
               onPressed: () {
                 if (viewModel.formKey.currentState!.validate()) {
-                  viewModel.createFlashcardSet();
+                  if (viewModel.edit) {
+                    viewModel.editFlashcardSet();
+                  } else {
+                    viewModel.createFlashcardSet();
+                  }
                 }
               },
               child: const Icon(Icons.save),
             ),
             const SizedBox(height: 15),
             FloatingActionButton(
+              heroTag: 'Add',
               onPressed: () {
                 viewModel.generateTextField();
               },

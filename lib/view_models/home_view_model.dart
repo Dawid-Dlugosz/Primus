@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:primus/view_models/search_view_model.dart';
 import 'package:primus/enum/collection.dart';
 import 'package:primus/widgets/bottom_dialog_add.dart';
 import 'package:provider/provider.dart';
+import 'package:primus/model/user.dart' as user;
 
 class HomeViewModel extends ChangeNotifier {
   HomeViewModel(this.context) {
@@ -23,8 +26,7 @@ class HomeViewModel extends ChangeNotifier {
 
   void _init() async {
     uid = FirebaseAuth.instance.currentUser!.uid;
-
-    document = FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).snapshots();
+    _getDocument();
     loaded = true;
     notifyListeners();
   }
@@ -36,6 +38,11 @@ class HomeViewModel extends ChangeNotifier {
         return const BottomDialogAdd();
       },
     );
+  }
+
+  void _getDocument() {
+    document = FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).snapshots();
+    notifyListeners();
   }
 
   void navigateToSearch() {
@@ -65,5 +72,25 @@ class HomeViewModel extends ChangeNotifier {
     }
     flashcards.sort((a, b) => b.timeStamp.compareTo(a.timeStamp));
     return flashcards;
+  }
+
+  Future<void> deleteFlashcard(String flashcardId) async {
+    Navigator.pop(context);
+    loaded = false;
+    notifyListeners();
+
+    var currentUserDocument = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var currentUser = user.User.fromJson(currentUserDocument.data()!);
+
+    var ownFlashcard = currentUser.ownFlashcard;
+    ownFlashcard!.removeWhere((element) => element == 'flashcardSet/$flashcardId');
+
+    currentUser = currentUser.copyWith(ownFlashcard: ownFlashcard);
+
+    await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(flashcardId).delete();
+    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'ownFlashcard': ownFlashcard.map((e) => e).toList()});
+
+    loaded = true;
+    notifyListeners();
   }
 }
