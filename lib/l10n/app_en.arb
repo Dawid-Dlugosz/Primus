@@ -53,7 +53,7 @@
            }
         },
     "sets": "Sets",
-    "showMore": "Show more",
+    "showMore": "Show all",
     "lastUpdate": "Last update: {date}",
     "@lastUpdate": {
         "description": "last update",

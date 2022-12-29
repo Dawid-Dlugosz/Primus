@@ -11,7 +11,7 @@ import 'package:primus/widgets/create_flashcard_widget.dart';
 import 'package:provider/provider.dart';
 
 class CardFlashcard extends StatefulWidget {
-  const CardFlashcard({required this.flashcard, this.delete, this.fromSearch = false, Key? key}) : assert(fromSearch == false && delete != null);
+  const CardFlashcard({required this.flashcard, this.delete, this.fromSearch = false, Key? key});
 
   final Flashcard flashcard;
   final bool fromSearch;

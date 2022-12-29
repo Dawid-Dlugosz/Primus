@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:primus/dialog/copy_flashcard.dart';
+import 'package:primus/screen/create_flashcard_page.dart';
 import 'package:primus/screen/flashcard_main_learn/flashcard_learn.dart';
 import 'package:primus/screen/flashcard_spelling.dart';
 import 'package:primus/screen/test/flashcard_exam.dart';
+import 'package:primus/view_models/create_flashcard_view_model.dart';
 import 'package:primus/view_models/flashcard_learn_view_model.dart';
 import 'package:primus/view_models/flashcard_main_view_model.dart';
 import 'package:primus/view_models/flashcard_spelling_view_model.dart';
 import 'package:primus/view_models/flashcard_test_view_model.dart';
+import 'package:primus/widgets/author_widget.dart';
 import 'package:primus/widgets/go_to_learn.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:primus/widgets/swiper_tinder/swiper_empty.dart';
@@ -35,6 +39,20 @@ class _FlashCardMainState extends State<FlashCardMain> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      viewModel.currentUser.uid != viewModel.flashCardSet.owner
+                          ? AuthorWidget(
+                              nickname: viewModel.currentUser.nickname,
+                              add: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ChangeNotifierProvider(
+                                    create: (context) => FlashcardViewModel(context, flashcard: viewModel.flashCardSet.flashcard, copy: true),
+                                    child: const CreateFlashcardPage(),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(),
                       Expanded(
                         child: DefaultTabController(
                           length: 2,

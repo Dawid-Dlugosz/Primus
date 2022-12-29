@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/model/flashcard.dart';
+import 'package:primus/screen/show_all/all_flascard.dart';
 import 'package:primus/widgets/card_flashcard.dart';
 
 class FlashcardListHome extends StatefulWidget {
@@ -35,7 +36,7 @@ class _FlashcardListStateHome extends State<FlashcardListHome> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              // TODO Przenoszenie do listy gdzie są wszystkie zestawy
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AllFlashcard(widget.flashcards)));
             },
             child: Text(AppLocalizations.of(context)!.showMore),
           ),

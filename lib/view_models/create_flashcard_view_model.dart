@@ -19,7 +19,7 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class FlashcardViewModel extends ChangeNotifier {
-  FlashcardViewModel(this.context, {this.flashcard, this.edit = false}) {
+  FlashcardViewModel(this.context, {this.flashcard, this.edit = false, this.copy = false}) {
     _init();
   }
 
@@ -28,6 +28,7 @@ class FlashcardViewModel extends ChangeNotifier {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController languageController = TextEditingController();
   final bool edit;
+  final bool copy;
 
   Flashcard? flashcard;
 
@@ -185,8 +186,14 @@ class FlashcardViewModel extends ChangeNotifier {
         definition: definitionControllers[i].text,
       ));
     }
+    String flashcardId;
 
-    var flashcardId = edit ? flashcard!.id : const Uuid().v4();
+    if (edit) {
+      flashcardId = flashcard!.id;
+    } else {
+      flashcardId = const Uuid().v4();
+    }
+
     var flascard = Flashcard(
       id: flashcardId,
       languageSet: languageController.text,
@@ -195,7 +202,13 @@ class FlashcardViewModel extends ChangeNotifier {
       timeStamp: DateTime.now().millisecondsSinceEpoch,
     );
 
-    var flashCardSet = FlashCardSet(flashcard: flascard, owner: user.uid);
+    FlashCardSet flashCardSet;
+
+    if (copy) {
+      flashCardSet = FlashCardSet(flashcard: flascard, owner: uid);
+    } else {
+      flashCardSet = FlashCardSet(flashcard: flascard, owner: user.uid);
+    }
 
     return flashCardSet;
   }
@@ -227,7 +240,20 @@ class FlashcardViewModel extends ChangeNotifier {
         user = user.copyWith(ownFlashcard: newOwnFlashcard);
         await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(user.uid).update({'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
       }
-      Navigator.pop(context);
+      if (copy) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+              create: (context) => HomeViewModel(context),
+              child: const HomePage(),
+            ),
+          ),
+        );
+      } else {
+        Navigator.pop(context);
+      }
+
       showSnackBar(AppLocalizations.of(context)!.flashcardCreate, context);
     } on FlashCardNameBusy {
       loading = false;
