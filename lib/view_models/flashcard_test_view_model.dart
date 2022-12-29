@@ -84,11 +84,10 @@ class FlashcardTestViewModel extends ChangeNotifier {
     var rng = Random();
 
     // all words without current word
-
     var tmpWord = toLearn.words.where((element) => element.word.id != toLearnWord.word.id);
 
     Set<int> randomNumber = {};
-    while (randomNumber.length < 4) {
+    while (randomNumber.length < 3) {
       var randomIndex = rng.nextInt(tmpWord.length);
       randomNumber.add(randomIndex);
     }

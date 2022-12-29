@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/model/flashcard.dart';
+import 'package:primus/model/to_learn.dart';
 import 'package:primus/model/user.dart' as myUser;
 import 'package:primus/screen/home/flashcard_list_home.dart';
 import 'package:primus/view_models/home_view_model.dart';
-import 'package:primus/widgets/empty_widget.dart';
 import 'package:primus/widgets/error_widget.dart';
 import 'package:primus/widgets/loading_widget.dart';
+import 'package:primus/widgets/to_learn_list/to_learn_home_list.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,29 +68,47 @@ class _HomePageState extends State<HomePage> {
                     if (snapshot.hasData && snapshot.data != null && snapshot.data!.data() != null) {
                       var value = snapshot.data!.data() as Map<String, dynamic>;
 
-                      if (value['ownFlashcard'] == null) {
-                        return const EmptyWidget();
-                      }
-
                       myUser.User user = myUser.User.fromJson(value);
-                      return StreamBuilder<List<Flashcard>>(
-                        stream: Stream.fromFuture(viewModel.getUserFlahscards(user.ownFlashcard)),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
-                            return const LoadingWidget();
-                          }
-                          if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
-                            return FlashcardListHome(
-                              flashcards: snapshot.data!,
-                              delte: viewModel.deleteFlashcard,
-                              uid: viewModel.uid,
-                            );
-                          }
-                          return const EmptyWidget();
-                        },
+                      user.toLearn?.sort((a, b) => b.timeStamp.compareTo(a.timeStamp));
+                      return ListView(
+                        children: [
+                          // TO LEARN LIST
+                          StreamBuilder<List<ToLearn>>(
+                            stream: Stream.fromFuture(viewModel.getUserToLearn()),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const LoadingWidget();
+                              }
+                              if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
+                                return ToLearnHomeList(
+                                  toLearn: snapshot.data!,
+                                  delete: viewModel.deleteToLearn,
+                                );
+                              }
+                              return Container();
+                            },
+                          ),
+                          // SET LSIT
+                          user.ownFlashcard != null
+                              ? StreamBuilder<List<Flashcard>>(
+                                  stream: Stream.fromFuture(viewModel.getUserFlahscards(user.ownFlashcard)),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState == ConnectionState.waiting) {
+                                      return const LoadingWidget();
+                                    }
+                                    if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
+                                      return FlashcardListHome(
+                                        flashcards: snapshot.data!,
+                                        delte: viewModel.deleteFlashcard,
+                                        uid: viewModel.uid,
+                                      );
+                                    }
+                                    return Container();
+                                  })
+                              : Container()
+                        ],
                       );
                     }
-
                     return const CustomErrorWidget();
                   },
                 ),

@@ -92,7 +92,8 @@ class _FlashCardMainState extends State<FlashCardMain> {
                             GoToLearn(
                               iconData: Icons.copy_rounded,
                               text: AppLocalizations.of(context)!.flashcards,
-                              learnMode: () {
+                              learnMode: () async {
+                                await viewModel.copyFlashcardSetToLearn();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -110,7 +111,8 @@ class _FlashCardMainState extends State<FlashCardMain> {
                             GoToLearn(
                               iconData: Icons.ballot_outlined,
                               text: AppLocalizations.of(context)!.test,
-                              learnMode: () {
+                              learnMode: () async {
+                                await viewModel.copyFlashcardSetToLearn();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -128,7 +130,8 @@ class _FlashCardMainState extends State<FlashCardMain> {
                             GoToLearn(
                               iconData: Icons.spellcheck_outlined,
                               text: AppLocalizations.of(context)!.spelling,
-                              learnMode: () {
+                              learnMode: () async {
+                                await viewModel.copyFlashcardSetToLearn();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

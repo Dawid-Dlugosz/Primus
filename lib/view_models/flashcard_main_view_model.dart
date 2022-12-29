@@ -37,7 +37,6 @@ class FlashcardMainViewModel extends ChangeNotifier {
     language = flashCardSet.flashcard.languageSet;
 
     currentUser = await _getCurrentUser();
-    await copyFlashcardSetToLearn();
     setWords();
     loaded = true;
     notifyListeners();
@@ -51,19 +50,49 @@ class FlashcardMainViewModel extends ChangeNotifier {
 
   Future<void> copyFlashcardSetToLearn() async {
     if (currentUser.toLearn != null && currentUser.toLearn!.any((element) => element.flashcardId == flashCardSet.flashcard.id)) {
+      var toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashCardSet.flashcard.id).first.copyWith(timeStamp: DateTime.now().millisecondsSinceEpoch);
+      var indexToUpdate = currentUser.toLearn!.indexWhere((element) => element.flashcardId == flashCardSet.flashcard.id);
+      currentUser.toLearn![indexToUpdate] = toLearn;
+
+      await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(currentUser.uid).update({'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
+
+      notifyListeners();
+
       return;
     }
 
     List<ToLearn> updateToLearn = [];
     if (currentUser.toLearn == null || currentUser.toLearn!.isEmpty) {
-      updateToLearn.add(ToLearn(flashcardId: flashCardSet.flashcard.id, words: flashCardSet.flashcard.words.map((e) => ToLearnWord(word: e, learnMethod: LearnMethod(flashcard: false, spelling: false, test: false))).toList()));
-      await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(currentUser.uid).update({'toLearn': updateToLearn.map((e) => e.toJson()).toList()});
+      updateToLearn.add(
+        ToLearn(
+          timeStamp: DateTime.now().millisecondsSinceEpoch,
+          flashcardId: flashCardSet.flashcard.id,
+          words: flashCardSet.flashcard.words
+              .map(
+                (e) => ToLearnWord(
+                  word: e,
+                  learnMethod: LearnMethod(flashcard: false, spelling: false, test: false),
+                ),
+              )
+              .toList(),
+        ),
+      );
     } else {
       updateToLearn.addAll(currentUser.toLearn!);
-      updateToLearn.add(ToLearn(flashcardId: flashCardSet.flashcard.id, words: flashCardSet.flashcard.words.map((e) => ToLearnWord(word: e, learnMethod: LearnMethod(flashcard: false, spelling: false, test: false))).toList()));
-      await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(currentUser.uid).update({'toLearn': updateToLearn.map((e) => e.toJson()).toList()});
+      updateToLearn.add(
+        ToLearn(
+          timeStamp: DateTime.now().millisecondsSinceEpoch,
+          flashcardId: flashCardSet.flashcard.id,
+          words: flashCardSet.flashcard.words
+              .map(
+                (e) => ToLearnWord(word: e, learnMethod: LearnMethod(flashcard: false, spelling: false, test: false)),
+              )
+              .toList(),
+        ),
+      );
     }
 
+    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(currentUser.uid).update({'toLearn': updateToLearn.map((e) => e.toJson()).toList()});
     currentUser = currentUser.copyWith(toLearn: updateToLearn);
     notifyListeners();
   }
@@ -83,6 +112,14 @@ class FlashcardMainViewModel extends ChangeNotifier {
 
     allKnowWords.clear();
     allUnknowWords.clear();
+
+    if (currentUser.toLearn == null || currentUser.toLearn!.isEmpty) {
+      return;
+    }
+
+    if (currentUser.toLearn!.where((element) => element.flashcardId == reference.split('/')[1]).isEmpty) {
+      return;
+    }
 
     var words = currentUser.toLearn!.where((element) => element.flashcardId == reference.split('/')[1]).first.words;
     for (var element in words) {
