@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:primus/screen/flashcard_main_learn/flashcard_learn.dart';
-import 'package:primus/screen/spelling/flashcard_spelling.dart';
+import 'package:primus/screen/flashcard_spelling.dart';
+import 'package:primus/screen/test/flashcard_exam.dart';
 import 'package:primus/view_models/flashcard_learn_view_model.dart';
 import 'package:primus/view_models/flashcard_main_view_model.dart';
 import 'package:primus/view_models/flashcard_spelling_view_model.dart';
+import 'package:primus/view_models/flashcard_test_view_model.dart';
 import 'package:primus/widgets/go_to_learn.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:primus/widgets/swiper_tinder/swiper_empty.dart';
@@ -77,7 +79,7 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ChangeNotifierProvider(
-                                      create: (context) => FlashcardLearnViewModel(flascardId: viewModel.flascardId, context: context),
+                                      create: (context) => FlashcardLearnViewModel(flashcardId: viewModel.flascardId, context: context),
                                       child: const FlashcardLearn(),
                                     ),
                                   ),
@@ -91,7 +93,15 @@ class _FlashCardMainState extends State<FlashCardMain> {
                               iconData: Icons.ballot_outlined,
                               text: AppLocalizations.of(context)!.test,
                               learnMode: () {
-                                //TODO GO TO TEST LEARN
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangeNotifierProvider(
+                                      create: (context) => FlashcardTestViewModel(flashcardId: viewModel.flascardId, context: context),
+                                      child: const FlashcardExam(),
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                             const SizedBox(

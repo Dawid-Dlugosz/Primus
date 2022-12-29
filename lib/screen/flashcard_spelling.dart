@@ -135,7 +135,7 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                                                               viewModel.setEnterWord();
                                                               viewModel.incWordIndex();
                                                             },
-                                                            child: const Text('Sprawdź'),
+                                                            child: const Text('Dalej'),
                                                           )
                                                         : Container()
                                               ],
@@ -146,7 +146,7 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                               ),
                             ),
                           )
-                        : EmptyWords(showAllWords: viewModel.showAllWords, clearProgress: viewModel.clearPorgress),
+                        : EmptyWords(showAllWords: viewModel.showAllWords, clearProgress: viewModel.clearProgress),
                   ),
                 ),
               )

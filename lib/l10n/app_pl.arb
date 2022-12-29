@@ -94,5 +94,10 @@
     "copyFlashcard": "Czy na pewno chcesz skopiować zestaw do siebie?",
     "yes": "Tak",
     "no": "Nie",
-    "copied": "Skopiowałeś już ten zestaw"
+    "copied": "Skopiowałeś już ten zestaw",
+    "flashcardShort": "Zestaw jest za krótki, min. 4",
+    "flashcardUpdated": "Zaktualizowano zestaw",
+    "flashcardDelete": "Czy chcesz usunać zestaw?",
+    "edit": "Edytuj",
+    "delete": "Usuń"
 }

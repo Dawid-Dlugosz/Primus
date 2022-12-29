@@ -55,13 +55,14 @@ class _SearchState extends State<Search> {
                   : StreamBuilder<QuerySnapshot>(
                       stream: viewModel.snapshot,
                       builder: (context, snapshots) {
-                        if (snapshots.connectionState == ConnectionState.waiting) {
-                          return const LoadingWidget();
-                        }
+                        print('asdsads :${snapshots.data?.docs.length}');
+                        // if (snapshots.connectionState == ConnectionState.waiting) {
+                        //   return const LoadingWidget();
+                        // }
 
-                        if (snapshots.hasData && snapshots.data != null && snapshots.data!.docs.isNotEmpty) {
-                          return ListSearch(snapshots, viewModel.name);
-                        }
+                        // if (snapshots.hasData && snapshots.data != null && snapshots.data!.docs.isNotEmpty) {
+                        //   return ListSearch(snapshots, viewModel.name);
+                        // }
                         // TODO EMPTY WIDGET
                         return const CustomErrorWidget();
                       },

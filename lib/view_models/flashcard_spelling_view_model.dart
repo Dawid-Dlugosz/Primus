@@ -99,18 +99,21 @@ class FlashcardSpellingViewModel extends ChangeNotifier {
 
   void setEnterWord() {
     spellingWords[wordIndex].enterWord = textEditingController.text;
+    wrongDefinition = false;
     notifyListeners();
   }
 
   void incWordIndex() {
     wordIndex++;
     textEditingController.text = spellingWords[wordIndex].enterWord ?? '';
+    wrongDefinition = false;
     notifyListeners();
   }
 
   void decWordIndex() {
     wordIndex--;
     textEditingController.text = spellingWords[wordIndex].enterWord ?? '';
+    wrongDefinition = false;
     notifyListeners();
   }
 
@@ -126,15 +129,11 @@ class FlashcardSpellingViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void clearPorgress() async {
+  void clearProgress() async {
     loaded = false;
     notifyListeners();
 
     var toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
-
-    toLearn.words.map((e) {
-      e.learnMethod.copyWith(spelling: false);
-    });
 
     // Replace object in table, can't change sigle variable bcz is final
     for (var i = 0; i < toLearn.words.length; i++) {

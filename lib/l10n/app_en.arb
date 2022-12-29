@@ -94,5 +94,10 @@
     "copyFlashcard": "Are you sure you want to copy the set to yourself?",
     "yes": "Yes",
     "no": "No",
-    "copied": "You have already copied this set"
+    "copied": "You have already copied this set",
+    "flashcardShort": "Flashcard Set is too short, min 4",
+    "flashcardUpdated": "Flashcard updated",
+    "flashcardDelete": "Do you want to delete the set?",
+    "edit": "Edit",
+    "delete": "Delete"
 }
