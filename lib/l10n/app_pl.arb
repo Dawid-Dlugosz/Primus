@@ -99,5 +99,19 @@
     "flashcardUpdated": "Zaktualizowano zestaw",
     "flashcardDelete": "Czy chcesz usunać zestaw?",
     "edit": "Edytuj",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "duringStudy": "W trakcie nauki",
+    "def": "Definicja: {definition}",
+    "@def": {
+        "description": "Definition",
+        "placeholders": {
+            "definition": {
+                "type": "String",
+                "example": "English"
+            }
+        }
+    },
+    "toLearnDelete" : "Czy na pewno chcesz usunać zestaw do nauki?",
+    "toStudy" : "Do nauki",
+    "allSets" : "Wszystkie zestawy"
 }

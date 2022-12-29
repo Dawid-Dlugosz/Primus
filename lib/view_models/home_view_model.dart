@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/flashcard_set.dart';
+import 'package:primus/model/to_learn.dart';
 import 'package:primus/screen/search/search.dart';
 import 'package:primus/view_models/search_view_model.dart';
 import 'package:primus/enum/collection.dart';
@@ -74,6 +75,16 @@ class HomeViewModel extends ChangeNotifier {
     return flashcards;
   }
 
+  Future<List<ToLearn>> getUserToLearn() async {
+    List<ToLearn> toLearn = [];
+
+    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+
+    toLearn.addAll(user.User.fromJson(document.data() as Map<String, dynamic>).toLearn ?? []);
+
+    return toLearn;
+  }
+
   Future<void> deleteFlashcard(String flashcardId) async {
     Navigator.pop(context);
     loaded = false;
@@ -89,6 +100,25 @@ class HomeViewModel extends ChangeNotifier {
 
     await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(flashcardId).delete();
     await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'ownFlashcard': ownFlashcard.map((e) => e).toList()});
+
+    loaded = true;
+    notifyListeners();
+  }
+
+  Future<void> deleteToLearn(String flashcardId) async {
+    Navigator.pop(context);
+    loaded = false;
+    notifyListeners();
+
+    var currentUserDocument = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var currentUser = user.User.fromJson(currentUserDocument.data()!);
+
+    var toLearn = currentUser.toLearn;
+    toLearn!.removeWhere((element) => element.flashcardId == flashcardId);
+
+    currentUser = currentUser.copyWith(toLearn: toLearn);
+
+    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': toLearn.map((e) => e.toJson()).toList()});
 
     loaded = true;
     notifyListeners();

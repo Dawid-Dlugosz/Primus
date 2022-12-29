@@ -99,5 +99,19 @@
     "flashcardUpdated": "Flashcard updated",
     "flashcardDelete": "Do you want to delete the set?",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "duringStudy": "During studying",
+    "def": "Definition: {definition}",
+    "@def": {
+        "description": "Definition",
+        "placeholders": {
+            "definition": {
+                "type": "String",
+                "example": "English"
+            }
+        }
+    },
+    "toLearnDelete": "Are you sure you want delete the study set?",
+    "toStudy" : "To study",
+    "allSets" : "All sets"
 }

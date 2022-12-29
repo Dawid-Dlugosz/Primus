@@ -1,37 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:primus/model/flashcard.dart';
-import 'package:primus/view_models/all_flashcard_view_model.dart';
-import 'package:primus/widgets/card_flashcard.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:primus/model/to_learn.dart';
+import 'package:primus/view_models/to_learn_home_view_model.dart';
 import 'package:primus/widgets/empty_widget.dart';
 import 'package:primus/widgets/loading_widget.dart';
+import 'package:primus/widgets/to_learn_list/to_learn_wrapper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-class AllFlashcard extends StatelessWidget {
-  const AllFlashcard({Key? key}) : super(key: key);
+class AllToLearn extends StatefulWidget {
+  const AllToLearn({Key? key}) : super(key: key);
 
   @override
+  State<AllToLearn> createState() => _AllToLearnState();
+}
+
+class _AllToLearnState extends State<AllToLearn> {
+  @override
   Widget build(BuildContext context) {
-    return Consumer<AllFlashCardViewModel>(
+    return Consumer<ToLearnHomeViewModel>(
       builder: (context, viewModel, child) {
         return viewModel.loaded
             ? Scaffold(
                 appBar: AppBar(
-                  title: Text(AppLocalizations.of(context)!.allSets),
+                  title: Text(AppLocalizations.of(context)!.toStudy),
                 ),
-                body: StreamBuilder<List<Flashcard>>(
-                  stream: Stream.fromFuture(viewModel.getUserFlahscards()),
+                body: StreamBuilder<List<ToLearn>>(
+                  stream: Stream.fromFuture(viewModel.getUserToLearn()),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const LoadingWidget();
                     }
+
                     if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
                       return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return CardFlashcard(
-                            flashcard: snapshot.data![index],
-                            delete: viewModel.deleteFlashcard,
+                          return ToLearnWrapper(
+                            toLearn: snapshot.data![index],
+                            delete: viewModel.deleteToLearn,
                           );
                         },
                       );
