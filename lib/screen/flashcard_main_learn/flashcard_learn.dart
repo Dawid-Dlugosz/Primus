@@ -27,7 +27,7 @@ class _FlashcardLearnState extends State<FlashcardLearn> {
                 appBar: AppBar(
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back),
-                    onPressed: () => Navigator.pop(context, viewModel.flashcardId),
+                    onPressed: () => Navigator.pop(context),
                   ),
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

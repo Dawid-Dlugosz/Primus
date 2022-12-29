@@ -1,13 +1,14 @@
 import 'package:primus/model/word.dart';
 
 class TestWord {
-  TestWord({required this.answerA, required this.answerB, required this.answerC, required this.answerD, required this.word});
+  TestWord({required this.answerA, required this.answerB, required this.answerC, required this.answerD, required this.word, this.answer});
 
   final String answerA;
   final String answerB;
   final String answerC;
   final String answerD;
   final Word word;
+  String? answer;
 
   TestWord copyWith({
     String? answerA,

@@ -19,18 +19,17 @@ class _ListSearchState extends State<ListSearch> {
   Widget build(BuildContext context) {
     var viewModel = Provider.of<SeachViewModel>(context, listen: false);
 
-    viewModel.search(widget.snapshots.data!.docs, widget.nameSet);
-
     return Expanded(
-      child: ListView.builder(
-        itemCount: viewModel.listFlashcard.length,
-        itemBuilder: (context, index) {
-          return CardFlashcard(
-            flashcard: viewModel.listFlashcard[index]['flashcard'],
-            fromSearch: true,
-          );
-        },
-      ),
+      child: Container(),
+      // child: ListView.builder(
+      //   itemCount: viewModel.listFlashcard.length,
+      //   itemBuilder: (context, index) {
+      //     return CardFlashcard(
+      //       flashcard: viewModel.listFlashcard[index]['flashcard'],
+      //       fromSearch: true,
+      //     );
+      //   },
+      // ),
     );
   }
 }

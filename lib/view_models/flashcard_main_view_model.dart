@@ -35,7 +35,7 @@ class FlashcardMainViewModel extends ChangeNotifier {
     flashCardSet = await getDocument();
     nameSet = flashCardSet.flashcard.nameSet;
     language = flashCardSet.flashcard.languageSet;
-    // showAddWidget = await _checkFlashcardOwner();
+
     currentUser = await _getCurrentUser();
     await copyFlashcardSetToLearn();
     setWords();
@@ -75,40 +75,6 @@ class FlashcardMainViewModel extends ChangeNotifier {
     return FlashCardSet.fromJson(flashcardData as Map<String, dynamic>);
   }
 
-  // Future<CheckFlashcard> _checkFlashcardOwner() async {
-  // late DocumentReference<Object?> currentRef;
-  // late Map<String, dynamic>? loggedUserDoc;
-
-  // var flahscardDoc = await document.get();
-
-  // currentRef = flahscardDoc.reference;
-
-  // var flashcardLoggedUserDoc = await FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name).doc(FirebaseAuth.instance.currentUser!.uid).get();
-  // loggedUserDoc = flashcardLoggedUserDoc.data();
-
-  // return CheckFlashcard.add;
-
-  // if (uid == FirebaseAuth.instance.currentUser!.uid) {
-  //   return CheckFlashcard.empty;
-  // } else {
-  //   if (loggedUserDoc?['flashcardRef'] == null) {
-  //     return CheckFlashcard.add;
-  //   } else {
-  //     var flashcardRef = (loggedUserDoc!['flashcardRef'] as List).map((e) => FlashcardRef.fromJson(e)).toList();
-  //     if (flashcardRef != null) {
-  //       for (var element in flashcardRef) {
-  //         if (element.ref == currentRef && element.name == setName) {
-  //           return CheckFlashcard.copped;
-  //         }
-  //       }
-  //       return CheckFlashcard.add;
-  //     } else {
-  //       return CheckFlashcard.add;
-  //     }
-  //   }
-  // }
-  // }
-
   void setWords({setLoaded = false}) {
     if (setLoaded) {
       loaded = false;
@@ -133,36 +99,4 @@ class FlashcardMainViewModel extends ChangeNotifier {
 
     notifyListeners();
   }
-
-  // TODO DO PRZETESTOWANIA CZY DOBRZE DZIAŁA
-  Future<void> updateFlashcard(Flashcard flashcard) async {
-    loaded = false;
-    notifyListeners();
-
-    // flashCardSet.flashcards[flashCardSet.flashcards.indexWhere((element) => element.nameSet == flashcard.nameSet)] = flashcard;
-    await document.update({
-      // 'flashcard': flashCardSet.flashcards.map((e) => e.toJson()).toList(),
-    });
-    setWords();
-  }
-
-  void add() async {
-    await document.get().then((value) {
-      var currentRef = <FlashcardRef>[];
-      // var flashcardRef = flashCardSet.flashcardRef;
-      // if (flashcardRef == null) {
-      // currentRef.add(FlashcardRef(ref: value.reference, name: setName));
-      // } else {
-      // currentRef.addAll(flashcardRef);
-      // currentRef.add(FlashcardRef(ref: value.reference, name: setName));
-      // }
-
-      var loginUserDocument = FirebaseFirestore.instance.collection(FirebaseCollection.flashcards.name).doc(FirebaseAuth.instance.currentUser!.uid);
-
-      loginUserDocument.update({
-        'flashcardRef': currentRef.map((e) => e.toJson()).toList(),
-      });
-    });
-  }
 }
-//
