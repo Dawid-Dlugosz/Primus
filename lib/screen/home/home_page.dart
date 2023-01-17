@@ -9,6 +9,7 @@ import 'package:primus/view_models/home_view_model.dart';
 import 'package:primus/widgets/error_widget.dart';
 import 'package:primus/widgets/loading_widget.dart';
 import 'package:primus/widgets/to_learn_list/to_learn_home_list.dart';
+import 'package:primus/widgets/unit_home_list.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -105,7 +106,19 @@ class _HomePageState extends State<HomePage> {
                                     }
                                     return Container();
                                   })
-                              : Container()
+                              : Container(),
+                          StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                            stream: viewModel.unitDocuments,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData && snapshot.data != null && snapshot.data!.docs.isNotEmpty) {
+                                return UnitHomeList(
+                                  units: viewModel.getUnits(snapshot.data!),
+                                  delete: viewModel.deleteUnit,
+                                );
+                              }
+                              return Container();
+                            },
+                          ),
                         ],
                       );
                     }

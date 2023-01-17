@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/screen/create_flashcard_page.dart';
+import 'package:primus/screen/create_unit.dart';
 import 'package:primus/view_models/create_flashcard_view_model.dart';
+import 'package:primus/view_models/create_unit_view_model.dart';
 import 'package:provider/provider.dart';
 
 class BottomDialogAdd extends StatefulWidget {
@@ -39,7 +41,17 @@ class _BottomDialogAddState extends State<BottomDialogAdd> {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider(
+                  create: (context) => CreateUnitViewModel(context),
+                  child: CreateUnit(),
+                ),
+              ),
+            );
+          },
           child: Row(
             children: [
               const Icon(

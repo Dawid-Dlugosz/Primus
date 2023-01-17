@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/enum/check_flashcaard.dart';
 import 'package:primus/enum/collection.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/flashcard_ref.dart';
@@ -20,7 +19,6 @@ class FlashcardMainViewModel extends ChangeNotifier {
   final String flascardId;
   late String reference = 'flashcardSet/$flascardId';
   bool loaded = false;
-  CheckFlashcard showAddWidget = CheckFlashcard.empty;
 
   List<Word> allKnowWords = [];
   List<Word> allUnknowWords = [];

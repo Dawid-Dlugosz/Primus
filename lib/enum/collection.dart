@@ -1,5 +1,5 @@
 enum FirebaseCollection {
   users,
-  flashcards,
   flashcardSet,
+  unit,
 }
