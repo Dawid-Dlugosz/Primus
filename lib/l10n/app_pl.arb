@@ -113,5 +113,44 @@
     },
     "toLearnDelete" : "Czy na pewno chcesz usunać zestaw do nauki?",
     "toStudy" : "Do nauki",
-    "allSets" : "Wszystkie zestawy"
+    "allSets" : "Wszystkie zestawy",
+    "enterNameUnit" : "Podaj nazwę rozdziału",
+    "save" : "Zapisz",
+    "selectSets" : "Wybierz zestawy do folderu",
+    "nameIsbusy" : "Nazwa jest zajęta",
+    "createdUnit" : "Folder utworzony",
+    "units" : "Foldery",
+    "nameUnit" : "Unit name: {name}",
+    "@nameUnit": {
+        "description": "Name",
+        "placeholders" : {
+            "name": {
+                "type": "String",
+                "example": "School"
+            }
+        }
+    },
+    "setsCount" : "Liczba zestawów: {count}",
+    "@setsCount": {
+        "description": "Count",
+        "placeholders" : {
+            "count": {
+                "type": "int",
+                "example": "10"
+            }
+        }
+    },
+    "unitName" : "Folder: {name}",
+    "@unitName": {
+        "description": "Name",
+        "placeholders" : {
+            "name": {
+                "type": "String",
+                "example": "test"
+            }
+        }
+    },
+    "unitDelete" : "Czy chcesz usunąć Folder?",
+    "editSuccess" : "Edycja udana"
+
 }

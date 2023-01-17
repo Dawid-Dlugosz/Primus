@@ -113,5 +113,43 @@
     },
     "toLearnDelete": "Are you sure you want delete the study set?",
     "toStudy" : "To study",
-    "allSets" : "All sets"
+    "allSets" : "All sets",
+    "enterNameUnit" : "Enter unit name",
+    "save" : "Save",
+    "selectSets" : "Select sets to unit",
+    "nameIsbusy" : "Name is busy",
+    "createdUnit" : "Unit created",
+    "units" : "Units",
+    "nameUnit" : "Unit name: {name}",
+    "@nameUnit": {
+        "name": "Name",
+        "placeholders" : {
+            "name": {
+                "type": "String",
+                "example": "School"
+            }
+        }
+    },
+    "setsCount" : "Sets count: {count}",
+    "@setsCount": {
+        "description": "Count",
+        "placeholders" : {
+            "count": {
+                "type": "int",
+                "example": "10"
+            }
+        }
+    },
+    "unitName" : "Unit: {name}",
+    "@unitName": {
+        "description": "Name",
+        "placeholders" : {
+            "name": {
+                "type": "String",
+                "example": "test"
+            }
+        }
+    },
+    "unitDelete" : "Do you want to delete the unit?",
+    "editSuccess" : "Edit success"
 }

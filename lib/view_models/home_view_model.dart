@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:primus/model/flashcard.dart';
 import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/model/to_learn.dart';
+import 'package:primus/model/unit.dart';
 import 'package:primus/screen/search/search.dart';
 import 'package:primus/view_models/search_view_model.dart';
 import 'package:primus/enum/collection.dart';
@@ -24,11 +25,12 @@ class HomeViewModel extends ChangeNotifier {
 
   late String uid;
   late Stream<DocumentSnapshot> document;
-
+  late Stream<QuerySnapshot<Map<String, dynamic>>> unitDocuments;
   void _init() async {
     uid = FirebaseAuth.instance.currentUser!.uid;
     _getDocument();
     loaded = true;
+    unitDocuments = FirebaseFirestore.instance.collection(FirebaseCollection.unit.name).where('owner', isEqualTo: uid).snapshots();
     notifyListeners();
   }
 
@@ -120,6 +122,28 @@ class HomeViewModel extends ChangeNotifier {
 
     await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': toLearn.map((e) => e.toJson()).toList()});
 
+    loaded = true;
+    notifyListeners();
+  }
+
+  List<Unit> getUnits(QuerySnapshot<Map<String, dynamic>> querySnapshot) {
+    var units = <Unit>[];
+
+    for (var element in querySnapshot.docs) {
+      var unit = Unit.fromJson(element.data());
+      units.add(unit);
+    }
+
+    return units;
+  }
+
+  Future<void> deleteUnit(String unitId) async {
+    loaded = false;
+    notifyListeners();
+
+    await FirebaseFirestore.instance.collection(FirebaseCollection.unit.name).doc(unitId).delete();
+
+    Navigator.pop(context);
     loaded = true;
     notifyListeners();
   }
