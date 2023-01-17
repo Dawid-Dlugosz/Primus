@@ -151,6 +151,7 @@
         }
     },
     "unitDelete" : "Czy chcesz usunąć Folder?",
-    "editSuccess" : "Edycja udana"
+    "editSuccess" : "Edycja udana",
+    "allUnits" : "Wszystkie zestawy"
 
 }

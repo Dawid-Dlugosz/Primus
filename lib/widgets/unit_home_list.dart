@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:primus/model/unit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:primus/screen/show_all/all_units.dart';
 import 'package:primus/widgets/unit_item.dart';
 
 class UnitHomeList extends StatelessWidget {
@@ -25,7 +26,9 @@ class UnitHomeList extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AllUnits(delete: delete)));
+            },
             child: Text(AppLocalizations.of(context)!.showMore),
           ),
         ),

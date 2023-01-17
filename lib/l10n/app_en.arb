@@ -151,5 +151,6 @@
         }
     },
     "unitDelete" : "Do you want to delete the unit?",
-    "editSuccess" : "Edit success"
+    "editSuccess" : "Edit success",
+    "allUnits" : "All units"
 }
