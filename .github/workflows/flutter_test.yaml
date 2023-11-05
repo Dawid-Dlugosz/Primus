@@ -2,7 +2,7 @@ name: fluttest_test
 on: 
   pull_request: 
     branches:
-      - main
+      - master
   
 jobs:
   flutter_test:
