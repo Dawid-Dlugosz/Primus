@@ -12,7 +12,17 @@ const weakPassword = 'weak-password';
 const nicknameBusy = 'nickname-busy';
 const flashcardNameBusy = 'flashcard-name-busy';
 const flashcardTooShort = 'flashcard-short';
+const operationNotAllowed = 'operation-not-allowed';
 
+const authInvalidEmail = 'auth/invalid-email';
+const authMissingAndroidPKGname = 'auth/missing-android-pkg-name';
+const authMissingContinueUrid = 'auth/missing-continue-uri';
+const authMissingIosBundleId = 'auth/missing-ios-bundle-id';
+const authInvalidContinueUri = 'auth/invalid-continue-uri';
+const authUnauthorizedContinueUri = 'auth/unauthorized-continue-uri';
+const authUserNotFound = 'auth/user-not-found';
+
+// TODO DODAĆ WSZYSTKIE KODY
 String errorCodeToText(String errorCode, BuildContext context) {
   switch (errorCode) {
     case invalidEmail:

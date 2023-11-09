@@ -5,7 +5,7 @@ import 'package:primus/enum/collection.dart';
 import 'package:primus/exception/busy_nickname.dart';
 import 'package:primus/model/user.dart';
 import 'package:primus/screen/start_page.dart';
-import 'package:primus/utils/firebase_error.dart';
+import 'package:primus/features/auth/utils/firebase_error.dart';
 import 'package:primus/utils/popup.dart';
 
 class SignUpViewModel extends ChangeNotifier {
@@ -25,12 +25,20 @@ class SignUpViewModel extends ChangeNotifier {
       loading = true;
       notifyListeners();
       await checkNickName();
-      await auth.FirebaseAuth.instance.createUserWithEmailAndPassword(email: mailController.text.trim(), password: passwordController.text).then((value) => {
-            if (value.user?.uid != null)
-              {
-                _createUser(User(nickname: nameController.text, uid: value.user!.uid, toLearn: null, ownFlashcard: null)),
-              },
-          });
+      await auth.FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: mailController.text.trim(),
+              password: passwordController.text)
+          .then((value) => {
+                if (value.user?.uid != null)
+                  {
+                    _createUser(User(
+                        nickname: nameController.text,
+                        uid: value.user!.uid,
+                        toLearn: null,
+                        ownFlashcard: null)),
+                  },
+              });
       loading = false;
       Navigator.pushReplacement(
         context,
@@ -58,7 +66,9 @@ class SignUpViewModel extends ChangeNotifier {
     if (!await _checlExistCollection()) {
       return;
     }
-    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).get();
+    var document = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .get();
 
     for (var element in document.docs) {
       var user = element.data();
@@ -69,11 +79,17 @@ class SignUpViewModel extends ChangeNotifier {
   }
 
   Future<void> _createUser(User user) async {
-    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(user.uid).set(user.toJson());
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(user.uid)
+        .set(user.toJson());
   }
 
   Future<bool> _checlExistCollection() async {
-    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).limit(1).get();
+    var document = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .limit(1)
+        .get();
     return document.size == 0 ? false : true;
   }
 }

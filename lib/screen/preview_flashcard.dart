@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:primus/model/word.dart';
 import 'package:primus/widgets/flip_card/flip_flashcard.dart';
 
 class PreviewFlashcard extends StatefulWidget {
-  const PreviewFlashcard({required this.saveEdit, required this.learn, required this.words, required this.language, Key? key}) : super(key: key);
+  const PreviewFlashcard(
+      {required this.saveEdit,
+      required this.learn,
+      required this.words,
+      required this.language,
+      Key? key})
+      : super(key: key);
 
   final VoidCallback saveEdit;
   final VoidCallback learn;
@@ -35,15 +40,15 @@ class _PreviewFlashcardState extends State<PreviewFlashcard> {
             ),
           ],
         ),
-        Swiper(
-          loop: true,
-          itemCount: widget.words.length,
-          itemWidth: MediaQuery.of(context).size.width,
-          itemHeight: 200,
-          itemBuilder: (context, index) {
-            return FLipFlashcard(word: widget.words[index].word, wordDefinition: widget.words[index].definition, language: widget.language);
-          },
-        ),
+        // Swiper(
+        //   loop: true,
+        //   itemCount: widget.words.length,
+        //   itemWidth: MediaQuery.of(context).size.width,
+        //   itemHeight: 200,
+        //   itemBuilder: (context, index) {
+        //     return FLipFlashcard(word: widget.words[index].word, wordDefinition: widget.words[index].definition, language: widget.language);
+        //   },
+        // ),
       ],
     );
   }

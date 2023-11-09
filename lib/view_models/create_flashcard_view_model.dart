@@ -10,7 +10,7 @@ import 'package:primus/model/flashcard_set.dart';
 import 'package:primus/model/user.dart' as myUser;
 import 'package:primus/model/word.dart';
 import 'package:primus/screen/home/home_page.dart';
-import 'package:primus/utils/firebase_error.dart';
+import 'package:primus/features/auth/utils/firebase_error.dart';
 import 'package:primus/utils/language_provider.dart';
 import 'package:primus/utils/popup.dart';
 import 'package:primus/view_models/home_view_model.dart';
@@ -19,7 +19,8 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class FlashcardViewModel extends ChangeNotifier {
-  FlashcardViewModel(this.context, {this.flashcard, this.edit = false, this.copy = false}) {
+  FlashcardViewModel(this.context,
+      {this.flashcard, this.edit = false, this.copy = false}) {
     _init();
   }
 
@@ -49,11 +50,15 @@ class FlashcardViewModel extends ChangeNotifier {
     loading = true;
     notifyListeners();
 
-    var locale = Provider.of<LanguageProvider>(context, listen: false).currentLocale;
+    var locale =
+        Provider.of<LanguageProvider>(context, listen: false).currentLocale;
     appLocalizations = await AppLocalizations.delegate.load(locale);
 
     uid = FirebaseAuth.instance.currentUser!.uid;
-    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var document = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .get();
     user = myUser.User.fromJson(document.data()!);
 
     if (flashcard == null) {
@@ -63,7 +68,9 @@ class FlashcardViewModel extends ChangeNotifier {
       languageController.text = flashcard!.languageSet;
 
       for (var element in flashcard!.words) {
-        generateTextField(flashcardDefinition: element.definition, flashcardWord: element.word);
+        generateTextField(
+            flashcardDefinition: element.definition,
+            flashcardWord: element.word);
       }
     }
 
@@ -158,7 +165,10 @@ class FlashcardViewModel extends ChangeNotifier {
 
     var flashcardSet = _generateFlashcardSet();
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(flashcardSet.flashcard.id).update({'flashcard': flashcardSet.flashcard.toJson()});
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.flashcardSet.name)
+        .doc(flashcardSet.flashcard.id)
+        .update({'flashcard': flashcardSet.flashcard.toJson()});
     loading = false;
     notifyListeners();
 
@@ -226,19 +236,30 @@ class FlashcardViewModel extends ChangeNotifier {
 
       var flashCardSet = _generateFlashcardSet();
 
-      await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(flashCardSet.flashcard.id).set(flashCardSet.toJson());
+      await FirebaseFirestore.instance
+          .collection(FirebaseCollection.flashcardSet.name)
+          .doc(flashCardSet.flashcard.id)
+          .set(flashCardSet.toJson());
 
       var document = 'flashcardSet/${flashCardSet.flashcard.id}';
 
       if (user.ownFlashcard == null) {
         user = user.copyWith(ownFlashcard: [document]);
-        await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(user.uid).update({'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
+        await FirebaseFirestore.instance
+            .collection(FirebaseCollection.users.name)
+            .doc(user.uid)
+            .update(
+                {'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
       } else {
         var newOwnFlashcard = user.ownFlashcard;
         newOwnFlashcard!.add(document);
 
         user = user.copyWith(ownFlashcard: newOwnFlashcard);
-        await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(user.uid).update({'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
+        await FirebaseFirestore.instance
+            .collection(FirebaseCollection.users.name)
+            .doc(user.uid)
+            .update(
+                {'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
       }
       if (copy) {
         Navigator.push(
@@ -281,7 +302,8 @@ class FlashcardViewModel extends ChangeNotifier {
 
     for (var element in ownFlashcard) {
       var docRef = await FirebaseFirestore.instance.doc(element).get();
-      var flashcardSet = FlashCardSet.fromJson(docRef.data() as Map<String, dynamic>);
+      var flashcardSet =
+          FlashCardSet.fromJson(docRef.data() as Map<String, dynamic>);
       if (flashcardSet.flashcard.nameSet == nameController.text) {
         throw FlashCardNameBusy();
       }
