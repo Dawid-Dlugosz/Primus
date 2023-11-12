@@ -14,9 +14,21 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({
     required this.authRepo,
     required this.firestore,
-  }) : super(const AuthState.initial());
+  }) : super(const AuthState.initial()) {
+    _init();
+  }
   final AuthRepository authRepo;
   final FirebaseFirestore firestore;
+
+  void _init() {
+    authRepo.isUserLoggin().listen((user) {
+      if (user != null) {
+        emit(AuthState.authorized(user: user));
+      } else {
+        emit(const AuthState.initial());
+      }
+    });
+  }
 
   Future<void> logIn({
     required String email,
@@ -31,7 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     result.fold(
       (l) => emit(AuthState.error(errorCode: l)),
-      (r) => emit(AuthState.authorized(userCredential: r)),
+      (r) => emit(AuthState.authorized(user: r)),
     );
   }
 
@@ -61,7 +73,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     result.fold(
       (l) => emit(AuthState.error(errorCode: l)),
-      (r) => emit(AuthState.authorized(userCredential: r)),
+      (r) => emit(AuthState.authorized(user: r)),
     );
   }
 

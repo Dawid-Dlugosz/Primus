@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract class AuthRepository {
-  Future<Either<String, UserCredential>> logIn({
+  Future<Either<String, User>> logIn({
     required String email,
     required String password,
   });
   Future<void> logOut();
-  Future<Either<String, UserCredential>> createAccount({
+  Future<Either<String, User>> createAccount({
     required String email,
     required String password,
     required String nickname,
@@ -17,4 +17,6 @@ abstract class AuthRepository {
   });
 
   Future<Either<String, Unit>> checkNickname({required String nickname});
+
+  Stream<User?> isUserLoggin();
 }

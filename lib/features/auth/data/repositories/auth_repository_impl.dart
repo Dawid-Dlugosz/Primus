@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
@@ -12,36 +14,38 @@ class AuthRepositoryImpl implements AuthRepository {
     required this.firestore,
   });
 
+  final StreamController<User?> _authStateController =
+      StreamController<User?>();
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firestore;
   @override
-  Future<Either<String, UserCredential>> createAccount({
+  Future<Either<String, User>> createAccount({
     required String email,
     required String password,
     required String nickname,
   }) async {
     try {
-      final user = await firebaseAuth.createUserWithEmailAndPassword(
+      final userCredential = await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return Right(user);
+      return Right(userCredential.user!);
     } on FirebaseAuthException catch (e) {
       return Left(e.code);
     }
   }
 
   @override
-  Future<Either<String, UserCredential>> logIn({
+  Future<Either<String, User>> logIn({
     required String email,
     required String password,
   }) async {
     try {
-      final user = await firebaseAuth.signInWithEmailAndPassword(
+      final userCredential = await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return Right(user);
+      return Right(userCredential.user!);
     } on FirebaseAuthException catch (e) {
       return Left(e.code);
     }
@@ -78,5 +82,10 @@ class AuthRepositoryImpl implements AuthRepository {
     } on BusyNickname catch (_) {
       return const Left(nicknameBusy);
     }
+  }
+
+  @override
+  Stream<User?> isUserLoggin() async* {
+    yield* firebaseAuth.authStateChanges();
   }
 }
