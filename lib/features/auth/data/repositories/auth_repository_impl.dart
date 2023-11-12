@@ -14,12 +14,10 @@ class AuthRepositoryImpl implements AuthRepository {
     required this.firestore,
   });
 
-  final StreamController<User?> _authStateController =
-      StreamController<User?>();
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firestore;
   @override
-  Future<Either<String, User>> createAccount({
+  Future<Either<String, UserCredential>> createAccount({
     required String email,
     required String password,
     required String nickname,
@@ -29,14 +27,14 @@ class AuthRepositoryImpl implements AuthRepository {
         email: email,
         password: password,
       );
-      return Right(userCredential.user!);
+      return Right(userCredential);
     } on FirebaseAuthException catch (e) {
       return Left(e.code);
     }
   }
 
   @override
-  Future<Either<String, User>> logIn({
+  Future<Either<String, UserCredential>> logIn({
     required String email,
     required String password,
   }) async {
@@ -45,7 +43,7 @@ class AuthRepositoryImpl implements AuthRepository {
         email: email,
         password: password,
       );
-      return Right(userCredential.user!);
+      return Right(userCredential);
     } on FirebaseAuthException catch (e) {
       return Left(e.code);
     }
