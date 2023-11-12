@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:primus/model/unit.dart';
+import '../model/unit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/screen/show_all/all_units.dart';
-import 'package:primus/widgets/unit_item.dart';
+import '../screen/show_all/all_units.dart';
+import 'unit_item.dart';
 
 class UnitHomeList extends StatelessWidget {
-  const UnitHomeList({required this.units, required this.delete, Key? key}) : super(key: key);
+  const UnitHomeList({required this.units, required this.delete, Key? key})
+      : super(key: key);
 
   final List<Unit> units;
   final Function(String unitId) delete;
@@ -27,7 +28,10 @@ class UnitHomeList extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => AllUnits(delete: delete)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AllUnits(delete: delete)));
             },
             child: Text(AppLocalizations.of(context)!.showMore),
           ),

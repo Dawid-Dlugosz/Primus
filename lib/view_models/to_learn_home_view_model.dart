@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/model/to_learn.dart';
-import 'package:primus/model/user.dart' as user;
+import '../enum/collection.dart';
+import '../model/to_learn.dart';
+import '../model/user.dart' as user;
 
 class ToLearnHomeViewModel extends ChangeNotifier {
   ToLearnHomeViewModel(this.context) {
@@ -25,9 +25,14 @@ class ToLearnHomeViewModel extends ChangeNotifier {
   Future<List<ToLearn>> getUserToLearn() async {
     List<ToLearn> toLearn = [];
 
-    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var document = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .get();
 
-    toLearn.addAll(user.User.fromJson(document.data() as Map<String, dynamic>).toLearn ?? []);
+    toLearn.addAll(
+        user.User.fromJson(document.data() as Map<String, dynamic>).toLearn ??
+            []);
 
     return toLearn;
   }
@@ -37,7 +42,10 @@ class ToLearnHomeViewModel extends ChangeNotifier {
     loaded = false;
     notifyListeners();
 
-    var currentUserDocument = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var currentUserDocument = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .get();
     var currentUser = user.User.fromJson(currentUserDocument.data()!);
 
     var toLearn = currentUser.toLearn;
@@ -45,7 +53,10 @@ class ToLearnHomeViewModel extends ChangeNotifier {
 
     currentUser = currentUser.copyWith(toLearn: toLearn);
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': toLearn.map((e) => e.toJson()).toList()});
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .update({'toLearn': toLearn.map((e) => e.toJson()).toList()});
 
     loaded = true;
     notifyListeners();

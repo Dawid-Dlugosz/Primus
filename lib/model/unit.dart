@@ -1,4 +1,4 @@
-import 'package:primus/model/user.dart';
+import 'user.dart';
 
 class Unit {
   Unit({

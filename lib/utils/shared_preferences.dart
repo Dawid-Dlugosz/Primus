@@ -1,4 +1,4 @@
-import 'package:primus/enum/shared_preferenced_enum.dart';
+import '../enum/shared_preferenced_enum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<bool> getFlashcardSettingsKnowWord() async {

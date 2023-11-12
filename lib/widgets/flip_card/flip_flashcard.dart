@@ -1,11 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:primus/widgets/flip_card/front_card.dart';
-import 'package:primus/widgets/flip_card/reverse_card.dart';
+import 'front_card.dart';
+import 'reverse_card.dart';
 
 class FLipFlashcard extends StatefulWidget {
-  FLipFlashcard({required this.word, required this.wordDefinition, required this.language, Key? key}) : super(key: key);
+  FLipFlashcard(
+      {required this.word,
+      required this.wordDefinition,
+      required this.language,
+      Key? key})
+      : super(key: key);
 
   final String word;
   final String wordDefinition;

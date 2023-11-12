@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:primus/dialog/clear_progres.dart';
+import '../../dialog/clear_progres.dart';
 
 class EmptyWords extends StatefulWidget {
-  const EmptyWords({required this.showAllWords, required this.clearProgress, Key? key}) : super(key: key);
+  const EmptyWords(
+      {required this.showAllWords, required this.clearProgress, Key? key})
+      : super(key: key);
   final VoidCallback showAllWords;
   final VoidCallback clearProgress;
 
@@ -15,7 +17,8 @@ class _EmptyWordsState extends State<EmptyWords> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Z tego kurus umiesz już wszystkie słowa, masz kilka możliowść:'),
+        const Text(
+            'Z tego kurus umiesz już wszystkie słowa, masz kilka możliowść:'),
         ElevatedButton(
           child: const Text('1. Wyzeruj postępy kurus'),
           onPressed: () {

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:primus/model/test_word.dart';
+import '../../model/test_word.dart';
 
 class TestItem extends StatelessWidget {
-  const TestItem({required this.definition, required this.testWord, required this.setAnswer, Key? key}) : super(key: key);
+  const TestItem(
+      {required this.definition,
+      required this.testWord,
+      required this.setAnswer,
+      Key? key})
+      : super(key: key);
   final String definition;
   final Function(String answer) setAnswer;
   final TestWord testWord;
@@ -13,7 +18,8 @@ class TestItem extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
-          color: testWord.word.definition == testWord.answer && definition == testWord.answer
+          color: testWord.word.definition == testWord.answer &&
+                  definition == testWord.answer
               ? Colors.green
               : definition != testWord.answer
                   ? null

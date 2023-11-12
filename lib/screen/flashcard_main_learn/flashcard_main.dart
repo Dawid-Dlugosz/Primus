@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:primus/dialog/copy_flashcard.dart';
-import 'package:primus/screen/create_flashcard_page.dart';
-import 'package:primus/screen/flashcard_main_learn/flashcard_learn.dart';
-import 'package:primus/screen/flashcard_spelling.dart';
-import 'package:primus/screen/test/flashcard_exam.dart';
-import 'package:primus/view_models/create_flashcard_view_model.dart';
-import 'package:primus/view_models/flashcard_learn_view_model.dart';
-import 'package:primus/view_models/flashcard_main_view_model.dart';
-import 'package:primus/view_models/flashcard_spelling_view_model.dart';
-import 'package:primus/view_models/flashcard_test_view_model.dart';
-import 'package:primus/widgets/author_widget.dart';
-import 'package:primus/widgets/go_to_learn.dart';
-import 'package:primus/widgets/loading_widget.dart';
-import 'package:primus/widgets/swiper_tinder/swiper_empty.dart';
-import 'package:primus/widgets/swiper_tinder/swiper_tinder.dart';
+import '../../dialog/copy_flashcard.dart';
+import '../create_flashcard_page.dart';
+import 'flashcard_learn.dart';
+import '../flashcard_spelling.dart';
+import '../test/flashcard_exam.dart';
+import '../../view_models/create_flashcard_view_model.dart';
+import '../../view_models/flashcard_learn_view_model.dart';
+import '../../view_models/flashcard_main_view_model.dart';
+import '../../view_models/flashcard_spelling_view_model.dart';
+import '../../view_models/flashcard_test_view_model.dart';
+import '../../widgets/author_widget.dart';
+import '../../widgets/go_to_learn.dart';
+import '../../widgets/loading_widget.dart';
+import '../../widgets/swiper_tinder/swiper_empty.dart';
+import '../../widgets/swiper_tinder/swiper_tinder.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -46,7 +46,11 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ChangeNotifierProvider(
-                                    create: (context) => FlashcardViewModel(context, flashcard: viewModel.flashCardSet.flashcard, copy: true),
+                                    create: (context) => FlashcardViewModel(
+                                        context,
+                                        flashcard:
+                                            viewModel.flashCardSet.flashcard,
+                                        copy: true),
                                     child: const CreateFlashcardPage(),
                                   ),
                                 ),
@@ -63,10 +67,12 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                 child: TabBar(
                                   tabs: [
                                     Tab(
-                                      text: AppLocalizations.of(context)!.learnedWord,
+                                      text: AppLocalizations.of(context)!
+                                          .learnedWord,
                                     ),
                                     Tab(
-                                      text: AppLocalizations.of(context)!.unknowWord,
+                                      text: AppLocalizations.of(context)!
+                                          .unknowWord,
                                     ),
                                   ],
                                   indicatorSize: TabBarIndicatorSize.tab,
@@ -76,8 +82,16 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                 child: TabBarView(
                                   physics: const NeverScrollableScrollPhysics(),
                                   children: [
-                                    viewModel.allKnowWords.isNotEmpty ? SwiperTinder(words: viewModel.allKnowWords, language: viewModel.language) : const SwiperEmpty(),
-                                    viewModel.allUnknowWords.isNotEmpty ? SwiperTinder(words: viewModel.allUnknowWords, language: viewModel.language) : const SwiperEmpty(),
+                                    viewModel.allKnowWords.isNotEmpty
+                                        ? SwiperTinder(
+                                            words: viewModel.allKnowWords,
+                                            language: viewModel.language)
+                                        : const SwiperEmpty(),
+                                    viewModel.allUnknowWords.isNotEmpty
+                                        ? SwiperTinder(
+                                            words: viewModel.allUnknowWords,
+                                            language: viewModel.language)
+                                        : const SwiperEmpty(),
                                   ],
                                 ),
                               ),
@@ -97,8 +111,12 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ChangeNotifierProvider(
-                                      create: (context) => FlashcardLearnViewModel(flashcardId: viewModel.flascardId, context: context),
+                                    builder: (context) =>
+                                        ChangeNotifierProvider(
+                                      create: (context) =>
+                                          FlashcardLearnViewModel(
+                                              flashcardId: viewModel.flascardId,
+                                              context: context),
                                       child: const FlashcardLearn(),
                                     ),
                                   ),
@@ -116,8 +134,12 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ChangeNotifierProvider(
-                                      create: (context) => FlashcardTestViewModel(flashcardId: viewModel.flascardId, context: context),
+                                    builder: (context) =>
+                                        ChangeNotifierProvider(
+                                      create: (context) =>
+                                          FlashcardTestViewModel(
+                                              flashcardId: viewModel.flascardId,
+                                              context: context),
                                       child: const FlashcardExam(),
                                     ),
                                   ),
@@ -135,8 +157,12 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ChangeNotifierProvider(
-                                      create: (context) => FlashcardSpellingViewModel(flashcardId: viewModel.flascardId),
+                                    builder: (context) =>
+                                        ChangeNotifierProvider(
+                                      create: (context) =>
+                                          FlashcardSpellingViewModel(
+                                              flashcardId:
+                                                  viewModel.flascardId),
                                       child: const FlashcardSpelling(),
                                     ),
                                   ),

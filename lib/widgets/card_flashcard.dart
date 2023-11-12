@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:primus/dialog/delete_flashcard.dart';
-import 'package:primus/model/flashcard.dart';
-import 'package:primus/screen/create_flashcard_page.dart';
-import 'package:primus/screen/flashcard_main_learn/flashcard_main.dart';
-import 'package:primus/view_models/create_flashcard_view_model.dart';
-import 'package:primus/view_models/flashcard_main_view_model.dart';
+import '../dialog/delete_flashcard.dart';
+import '../model/flashcard.dart';
+import '../screen/create_flashcard_page.dart';
+import '../screen/flashcard_main_learn/flashcard_main.dart';
+import '../view_models/create_flashcard_view_model.dart';
+import '../view_models/flashcard_main_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CardFlashcard extends StatefulWidget {
-  const CardFlashcard({required this.flashcard, this.delete, this.fromSearch = false, Key? key}) : super(key: key);
+  const CardFlashcard(
+      {required this.flashcard, this.delete, this.fromSearch = false, Key? key})
+      : super(key: key);
 
   final Flashcard flashcard;
   final bool fromSearch;
@@ -42,7 +44,8 @@ class _CardFlashcardState extends State<CardFlashcard> {
           context,
           MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider(
-              create: (context) => FlashcardMainViewModel(flascardId: widget.flashcard.id),
+              create: (context) =>
+                  FlashcardMainViewModel(flascardId: widget.flashcard.id),
               child: const FlashCardMain(),
             ),
           ),
@@ -60,7 +63,8 @@ class _CardFlashcardState extends State<CardFlashcard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(AppLocalizations.of(context)!.nameFlashcardSet(flashcardName)),
+                    Text(AppLocalizations.of(context)!
+                        .nameFlashcardSet(flashcardName)),
                     !widget.fromSearch
                         ? PopupMenuButton(
                             itemBuilder: (context) => [
@@ -70,7 +74,8 @@ class _CardFlashcardState extends State<CardFlashcard> {
                               ),
                               PopupMenuItem(
                                 value: 'Delete',
-                                child: Text(AppLocalizations.of(context)!.delete),
+                                child:
+                                    Text(AppLocalizations.of(context)!.delete),
                               ),
                             ],
                             onSelected: (value) {
@@ -78,8 +83,12 @@ class _CardFlashcardState extends State<CardFlashcard> {
                                 Navigator.push(
                                   this.context,
                                   MaterialPageRoute(
-                                    builder: (context) => ChangeNotifierProvider(
-                                      create: (context) => FlashcardViewModel(context, flashcard: widget.flashcard, edit: true),
+                                    builder: (context) =>
+                                        ChangeNotifierProvider(
+                                      create: (context) => FlashcardViewModel(
+                                          context,
+                                          flashcard: widget.flashcard,
+                                          edit: true),
                                       child: const CreateFlashcardPage(),
                                     ),
                                   ),
@@ -87,7 +96,9 @@ class _CardFlashcardState extends State<CardFlashcard> {
                               } else {
                                 showDialog(
                                   context: context,
-                                  builder: (context) => DeleteFlashcard(delete: () => widget.delete!(widget.flashcard.id)),
+                                  builder: (context) => DeleteFlashcard(
+                                      delete: () =>
+                                          widget.delete!(widget.flashcard.id)),
                                 );
                               }
                             },
@@ -100,7 +111,8 @@ class _CardFlashcardState extends State<CardFlashcard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(AppLocalizations.of(context)!.lastUpdate(date)),
-                    Text(AppLocalizations.of(context)!.flashCardWordsCount(wordsCount)),
+                    Text(AppLocalizations.of(context)!
+                        .flashCardWordsCount(wordsCount)),
                   ],
                 )
               ],

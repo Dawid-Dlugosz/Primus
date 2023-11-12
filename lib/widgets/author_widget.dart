@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/dialog/copy_flashcard.dart';
+import '../dialog/copy_flashcard.dart';
 
 class AuthorWidget extends StatelessWidget {
-  const AuthorWidget({required this.nickname, required this.add, Key? key}) : super(key: key);
+  const AuthorWidget({required this.nickname, required this.add, Key? key})
+      : super(key: key);
 
   final String nickname;
   final VoidCallback add;

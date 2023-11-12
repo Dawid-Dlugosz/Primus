@@ -2,24 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/exception/flashcard_name_busy.dart';
-import 'package:primus/exception/too_short.dart';
-import 'package:primus/model/flashcard.dart';
-import 'package:primus/model/flashcard_set.dart';
-import 'package:primus/model/user.dart' as myUser;
-import 'package:primus/model/word.dart';
-import 'package:primus/screen/home/home_page.dart';
-import 'package:primus/utils/firebase_error.dart';
-import 'package:primus/utils/language_provider.dart';
-import 'package:primus/utils/popup.dart';
-import 'package:primus/view_models/home_view_model.dart';
-import 'package:primus/widgets/create_flashcard_widget.dart';
+import '../enum/collection.dart';
+import '../exception/flashcard_name_busy.dart';
+import '../exception/too_short.dart';
+import '../model/flashcard.dart';
+import '../model/flashcard_set.dart';
+import '../model/user.dart' as myUser;
+import '../model/word.dart';
+import '../screen/home/home_page.dart';
+import '../features/auth/utils/firebase_error.dart';
+import '../utils/language_provider.dart';
+import '../utils/popup.dart';
+import '../widgets/create_flashcard_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class FlashcardViewModel extends ChangeNotifier {
-  FlashcardViewModel(this.context, {this.flashcard, this.edit = false, this.copy = false}) {
+  FlashcardViewModel(this.context,
+      {this.flashcard, this.edit = false, this.copy = false}) {
     _init();
   }
 
@@ -49,11 +49,15 @@ class FlashcardViewModel extends ChangeNotifier {
     loading = true;
     notifyListeners();
 
-    var locale = Provider.of<LanguageProvider>(context, listen: false).currentLocale;
+    var locale =
+        Provider.of<LanguageProvider>(context, listen: false).currentLocale;
     appLocalizations = await AppLocalizations.delegate.load(locale);
 
     uid = FirebaseAuth.instance.currentUser!.uid;
-    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var document = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .get();
     user = myUser.User.fromJson(document.data()!);
 
     if (flashcard == null) {
@@ -63,7 +67,9 @@ class FlashcardViewModel extends ChangeNotifier {
       languageController.text = flashcard!.languageSet;
 
       for (var element in flashcard!.words) {
-        generateTextField(flashcardDefinition: element.definition, flashcardWord: element.word);
+        generateTextField(
+            flashcardDefinition: element.definition,
+            flashcardWord: element.word);
       }
     }
 
@@ -158,20 +164,23 @@ class FlashcardViewModel extends ChangeNotifier {
 
     var flashcardSet = _generateFlashcardSet();
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(flashcardSet.flashcard.id).update({'flashcard': flashcardSet.flashcard.toJson()});
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.flashcardSet.name)
+        .doc(flashcardSet.flashcard.id)
+        .update({'flashcard': flashcardSet.flashcard.toJson()});
     loading = false;
     notifyListeners();
 
     // Not back only push bcz stream builder dont detect edit flashcdardw
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ChangeNotifierProvider<HomeViewModel>(
-          create: (context) => HomeViewModel(context),
-          child: const HomePage(),
-        ),
-      ),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (_) => ChangeNotifierProvider<HomeViewModel>(
+    //       create: (context) => HomeViewModel(context),
+    //       child: const HomePage(),
+    //     ),
+    //   ),
+    // );
 
     showSnackBar(AppLocalizations.of(context)!.flashcardUpdated, context);
   }
@@ -226,30 +235,41 @@ class FlashcardViewModel extends ChangeNotifier {
 
       var flashCardSet = _generateFlashcardSet();
 
-      await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(flashCardSet.flashcard.id).set(flashCardSet.toJson());
+      await FirebaseFirestore.instance
+          .collection(FirebaseCollection.flashcardSet.name)
+          .doc(flashCardSet.flashcard.id)
+          .set(flashCardSet.toJson());
 
       var document = 'flashcardSet/${flashCardSet.flashcard.id}';
 
       if (user.ownFlashcard == null) {
         user = user.copyWith(ownFlashcard: [document]);
-        await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(user.uid).update({'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
+        await FirebaseFirestore.instance
+            .collection(FirebaseCollection.users.name)
+            .doc(user.uid)
+            .update(
+                {'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
       } else {
         var newOwnFlashcard = user.ownFlashcard;
         newOwnFlashcard!.add(document);
 
         user = user.copyWith(ownFlashcard: newOwnFlashcard);
-        await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(user.uid).update({'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
+        await FirebaseFirestore.instance
+            .collection(FirebaseCollection.users.name)
+            .doc(user.uid)
+            .update(
+                {'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
       }
       if (copy) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-              create: (context) => HomeViewModel(context),
-              child: const HomePage(),
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => ChangeNotifierProvider(
+        //       create: (context) => HomeViewModel(context),
+        //       child: const HomePage(),
+        //     ),
+        //   ),
+        // );
       } else {
         Navigator.pop(context);
       }
@@ -281,7 +301,8 @@ class FlashcardViewModel extends ChangeNotifier {
 
     for (var element in ownFlashcard) {
       var docRef = await FirebaseFirestore.instance.doc(element).get();
-      var flashcardSet = FlashCardSet.fromJson(docRef.data() as Map<String, dynamic>);
+      var flashcardSet =
+          FlashCardSet.fromJson(docRef.data() as Map<String, dynamic>);
       if (flashcardSet.flashcard.nameSet == nameController.text) {
         throw FlashCardNameBusy();
       }

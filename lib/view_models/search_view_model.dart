@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/model/flashcard.dart';
+import '../enum/collection.dart';
+import '../model/flashcard.dart';
 
 class SeachViewModel extends ChangeNotifier {
   SeachViewModel() {
@@ -21,7 +21,9 @@ class SeachViewModel extends ChangeNotifier {
   void _init() async {
     loading = true;
     notifyListeners();
-    snapshot = FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).snapshots();
+    snapshot = FirebaseFirestore.instance
+        .collection(FirebaseCollection.flashcardSet.name)
+        .snapshots();
     userUid = FirebaseAuth.instance.currentUser!.uid;
     loading = false;
     notifyListeners();

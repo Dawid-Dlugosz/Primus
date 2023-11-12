@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FrontCard extends StatefulWidget {
-  const FrontCard({required this.word, required this.flip, required this.language, Key? key}) : super(key: key);
+  const FrontCard(
+      {required this.word,
+      required this.flip,
+      required this.language,
+      Key? key})
+      : super(key: key);
 
   final String word;
   final Function flip;

@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/model/test_word.dart';
-import 'package:primus/model/to_learn.dart';
-import 'package:primus/model/to_learn_word.dart';
-import 'package:primus/model/user.dart' as user;
+import '../enum/collection.dart';
+import '../model/test_word.dart';
+import '../model/to_learn.dart';
+import '../model/to_learn_word.dart';
+import '../model/user.dart' as user;
 
 class FlashcardTestViewModel extends ChangeNotifier {
   FlashcardTestViewModel({required this.flashcardId, required this.context}) {
@@ -32,9 +32,14 @@ class FlashcardTestViewModel extends ChangeNotifier {
   List<TestWord> testWords = [];
   Future<void> _init() async {
     uid = FirebaseAuth.instance.currentUser!.uid;
-    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var document = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .get();
     currentUser = user.User.fromJson(document.data()!);
-    toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
+    toLearn = currentUser.toLearn!
+        .where((element) => element.flashcardId == flashcardId)
+        .first;
 
     splitWords();
     wordToShow();
@@ -84,7 +89,8 @@ class FlashcardTestViewModel extends ChangeNotifier {
     var rng = Random();
 
     // all words without current word
-    var tmpWord = toLearn.words.where((element) => element.word.id != toLearnWord.word.id);
+    var tmpWord = toLearn.words
+        .where((element) => element.word.id != toLearnWord.word.id);
 
     Set<int> randomNumber = {};
     while (randomNumber.length < 3) {
@@ -140,15 +146,22 @@ class FlashcardTestViewModel extends ChangeNotifier {
 
   Future<void> markWordAsKnow() async {
     var word = testWords[wordIndex].word;
-    var index = toLearn.words.indexWhere((element) => element.word.id == word.id);
+    var index =
+        toLearn.words.indexWhere((element) => element.word.id == word.id);
     var learnMethod = toLearn.words[index].learnMethod.copyWith(test: true);
-    toLearn.words[index] = toLearn.words[index].copyWith(learnMethod: learnMethod);
+    toLearn.words[index] =
+        toLearn.words[index].copyWith(learnMethod: learnMethod);
 
-    var toLearnIndex = currentUser.toLearn!.indexWhere((element) => element.flashcardId == toLearn.flashcardId);
+    var toLearnIndex = currentUser.toLearn!
+        .indexWhere((element) => element.flashcardId == toLearn.flashcardId);
 
     currentUser.toLearn![toLearnIndex] == toLearn;
 
-    FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
+    FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .update(
+            {'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
     notifyListeners();
   }
 
@@ -158,14 +171,20 @@ class FlashcardTestViewModel extends ChangeNotifier {
 
     for (var i = 0; i < toLearn.words.length; i++) {
       var learnMethodCopy = toLearn.words[i].learnMethod.copyWith(test: false);
-      toLearn.words[i] = toLearn.words[i].copyWith(learnMethod: learnMethodCopy);
+      toLearn.words[i] =
+          toLearn.words[i].copyWith(learnMethod: learnMethodCopy);
     }
 
-    var toLearnIndex = currentUser.toLearn!.indexWhere((element) => element.flashcardId == toLearn.flashcardId);
+    var toLearnIndex = currentUser.toLearn!
+        .indexWhere((element) => element.flashcardId == toLearn.flashcardId);
 
     currentUser.toLearn![toLearnIndex] = toLearn;
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .update(
+            {'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
 
     testWords.clear;
     splitWords();
