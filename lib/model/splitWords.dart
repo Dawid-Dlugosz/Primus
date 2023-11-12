@@ -1,4 +1,4 @@
-import 'package:primus/model/word.dart';
+import 'word.dart';
 
 class SplitWords {
   SplitWords({required this.allKnowWords, required this.allUnknowWords});

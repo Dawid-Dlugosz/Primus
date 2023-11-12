@@ -1,5 +1,5 @@
-import 'package:primus/model/learn_method.dart';
-import 'package:primus/model/word.dart';
+import 'learn_method.dart';
+import 'word.dart';
 
 class ToLearnWord {
   ToLearnWord({required this.word, required this.learnMethod});
@@ -7,7 +7,9 @@ class ToLearnWord {
   final LearnMethod learnMethod;
   final Word word;
   factory ToLearnWord.fromJson(Map<String, dynamic> json) {
-    return ToLearnWord(word: Word.fromJson(json['word']), learnMethod: LearnMethod.fromJson(json['learnMethod']));
+    return ToLearnWord(
+        word: Word.fromJson(json['word']),
+        learnMethod: LearnMethod.fromJson(json['learnMethod']));
   }
 
   Map<String, dynamic> toJson() {

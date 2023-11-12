@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:primus/dialog/flascard_learn_settings.dart';
-import 'package:primus/utils/shared_preferences.dart';
-import 'package:primus/view_models/flashcard_spelling_view_model.dart';
-import 'package:primus/widgets/flascard_learn/empty_words.dart';
-import 'package:primus/widgets/loading_widget.dart';
+import '../dialog/flascard_learn_settings.dart';
+import '../utils/shared_preferences.dart';
+import '../view_models/flashcard_spelling_view_model.dart';
+import '../widgets/flascard_learn/empty_words.dart';
+import '../widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class FlashcardSpelling extends StatefulWidget {
@@ -38,7 +38,8 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                               );
                             },
                           ).then((value) async {
-                            await setFlashcardSettingsKnowWord(viewModel.showOnlyUnknow);
+                            await setFlashcardSettingsKnowWord(
+                                viewModel.showOnlyUnknow);
                           });
                         },
                         child: const Icon(Icons.settings),
@@ -48,21 +49,28 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                 ),
                 body: Center(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 15),
                     child: viewModel.spellingWords.isNotEmpty
                         ? Card(
-                            color: viewModel.spellingWords[viewModel.wordIndex].correct ? Colors.green : Colors.white,
+                            color: viewModel
+                                    .spellingWords[viewModel.wordIndex].correct
+                                ? Colors.green
+                                : Colors.white,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 10),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       viewModel.wordIndex != 0
                                           ? IconButton(
-                                              icon: const Icon(Icons.arrow_back),
+                                              icon:
+                                                  const Icon(Icons.arrow_back),
                                               onPressed: () {
                                                 viewModel.setEnterWord();
                                                 viewModel.decWordIndex();
@@ -70,14 +78,19 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                                             )
                                           : Container(),
                                       Text(
-                                        viewModel.spellingWords[viewModel.wordIndex].word.word,
+                                        viewModel
+                                            .spellingWords[viewModel.wordIndex]
+                                            .word
+                                            .word,
                                         style: const TextStyle(fontSize: 20),
                                       ),
-                                      viewModel.wordIndex != viewModel.spellingWords.length - 1
+                                      viewModel.wordIndex !=
+                                              viewModel.spellingWords.length - 1
                                           ? Transform.rotate(
                                               angle: pi,
                                               child: IconButton(
-                                                icon: const Icon(Icons.arrow_back),
+                                                icon: const Icon(
+                                                    Icons.arrow_back),
                                                 onPressed: () {
                                                   viewModel.setEnterWord();
                                                   viewModel.incWordIndex();
@@ -87,8 +100,13 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                                           : Container()
                                     ],
                                   ),
-                                  viewModel.spellingWords[viewModel.wordIndex].showHint ? Text('Odpowiedź: ${viewModel.spellingWords[viewModel.wordIndex].word.definition}') : Container(),
-                                  viewModel.spellingWords[viewModel.wordIndex].correct
+                                  viewModel.spellingWords[viewModel.wordIndex]
+                                          .showHint
+                                      ? Text(
+                                          'Odpowiedź: ${viewModel.spellingWords[viewModel.wordIndex].word.definition}')
+                                      : Container(),
+                                  viewModel.spellingWords[viewModel.wordIndex]
+                                          .correct
                                       ? RichText(
                                           text: TextSpan(
                                             text: 'Definicja ',
@@ -98,8 +116,13 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                                             ),
                                             children: [
                                               TextSpan(
-                                                text: viewModel.spellingWords[viewModel.wordIndex].word.definition,
-                                                style: const TextStyle(fontSize: 20),
+                                                text: viewModel
+                                                    .spellingWords[
+                                                        viewModel.wordIndex]
+                                                    .word
+                                                    .definition,
+                                                style: const TextStyle(
+                                                    fontSize: 20),
                                               ),
                                             ],
                                           ),
@@ -107,35 +130,58 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                                       : Column(
                                           children: [
                                             TextFormField(
-                                              controller: viewModel.textEditingController,
+                                              controller: viewModel
+                                                  .textEditingController,
                                               decoration: InputDecoration(
-                                                label: const Text('Podaj znaczenie słowa'),
-                                                errorText: viewModel.wrongDefinition ? 'Podaj poprawną definicje' : null,
+                                                label: const Text(
+                                                    'Podaj znaczenie słowa'),
+                                                errorText: viewModel
+                                                        .wrongDefinition
+                                                    ? 'Podaj poprawną definicje'
+                                                    : null,
                                               ),
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                !viewModel.spellingWords[viewModel.wordIndex].showHint
+                                                !viewModel
+                                                        .spellingWords[
+                                                            viewModel.wordIndex]
+                                                        .showHint
                                                     ? ElevatedButton(
-                                                        onPressed: viewModel.markAsUnknow,
-                                                        child: const Text('Pokaż podpowiedź'),
+                                                        onPressed: viewModel
+                                                            .markAsUnknow,
+                                                        child: const Text(
+                                                            'Pokaż podpowiedź'),
                                                       )
                                                     : Container(),
-                                                !viewModel.spellingWords[viewModel.wordIndex].showHint
+                                                !viewModel
+                                                        .spellingWords[
+                                                            viewModel.wordIndex]
+                                                        .showHint
                                                     ? ElevatedButton(
                                                         onPressed: () {
-                                                          viewModel.markAsKnow();
+                                                          viewModel
+                                                              .markAsKnow();
                                                         },
-                                                        child: const Text('Sprawdź'),
+                                                        child: const Text(
+                                                            'Sprawdź'),
                                                       )
-                                                    : viewModel.spellingWords.length - 1 != viewModel.wordIndex
+                                                    : viewModel.spellingWords
+                                                                    .length -
+                                                                1 !=
+                                                            viewModel.wordIndex
                                                         ? ElevatedButton(
                                                             onPressed: () {
-                                                              viewModel.setEnterWord();
-                                                              viewModel.incWordIndex();
+                                                              viewModel
+                                                                  .setEnterWord();
+                                                              viewModel
+                                                                  .incWordIndex();
                                                             },
-                                                            child: const Text('Dalej'),
+                                                            child: const Text(
+                                                                'Dalej'),
                                                           )
                                                         : Container()
                                               ],
@@ -146,7 +192,9 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                               ),
                             ),
                           )
-                        : EmptyWords(showAllWords: viewModel.showAllWords, clearProgress: viewModel.clearProgress),
+                        : EmptyWords(
+                            showAllWords: viewModel.showAllWords,
+                            clearProgress: viewModel.clearProgress),
                   ),
                 ),
               )

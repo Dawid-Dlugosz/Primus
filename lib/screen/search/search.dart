@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/screen/search/list_search.dart';
+import 'list_search.dart';
 
-import 'package:primus/view_models/search_view_model.dart';
-import 'package:primus/widgets/empty_widget.dart';
-import 'package:primus/widgets/error_widget.dart';
-import 'package:primus/widgets/loading_widget.dart';
+import '../../view_models/search_view_model.dart';
+
+import '../../widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -55,16 +54,20 @@ class _SearchState extends State<Search> {
                   ? const Text('Wyszukaj coś')
                   : StreamBuilder<QuerySnapshot>(
                       stream: viewModel.snapshot,
-                      builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
-                        if (snapshots.connectionState == ConnectionState.waiting) {
+                      builder:
+                          (context, AsyncSnapshot<QuerySnapshot> snapshots) {
+                        if (snapshots.connectionState ==
+                            ConnectionState.waiting) {
                           return const LoadingWidget();
                         }
 
-                        if (snapshots.hasData && snapshots.data != null && snapshots.data!.docs.isNotEmpty) {
+                        if (snapshots.hasData &&
+                            snapshots.data != null &&
+                            snapshots.data!.docs.isNotEmpty) {
                           return ListSearch(snapshots, viewModel.name);
                         }
 
-                        return const CustomErrorWidget();
+                        return const SizedBox();
                       },
                     ),
             ],

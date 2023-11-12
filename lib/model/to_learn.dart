@@ -1,4 +1,4 @@
-import 'package:primus/model/to_learn_word.dart';
+import 'to_learn_word.dart';
 
 class ToLearn {
   const ToLearn({
@@ -14,7 +14,9 @@ class ToLearn {
   factory ToLearn.fromJson(Map<String, dynamic> json) {
     return ToLearn(
       flashcardId: json['flashcardId'],
-      words: (json['words'] as List<dynamic>).map((e) => ToLearnWord.fromJson(e)).toList(),
+      words: (json['words'] as List<dynamic>)
+          .map((e) => ToLearnWord.fromJson(e))
+          .toList(),
       timeStamp: json['timeStamp'],
     );
   }
@@ -27,7 +29,9 @@ class ToLearn {
     return json;
   }
 
-  ToLearn copyWith({String? flashcardId, List<ToLearnWord>? words, int? timeStamp}) => ToLearn(
+  ToLearn copyWith(
+          {String? flashcardId, List<ToLearnWord>? words, int? timeStamp}) =>
+      ToLearn(
         flashcardId: flashcardId ?? this.flashcardId,
         words: words ?? this.words,
         timeStamp: timeStamp ?? this.timeStamp,

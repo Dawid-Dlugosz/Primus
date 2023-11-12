@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/dialog/delete_unit.dart';
-import 'package:primus/model/unit.dart';
-import 'package:primus/screen/create_unit.dart';
-import 'package:primus/screen/unit_screen.dart';
-import 'package:primus/view_models/create_unit_view_model.dart';
-import 'package:primus/view_models/unit_screen_view_model.dart';
+import '../dialog/delete_unit.dart';
+import '../model/unit.dart';
+import '../screen/create_unit.dart';
+import '../screen/unit_screen.dart';
+import '../view_models/create_unit_view_model.dart';
+import '../view_models/unit_screen_view_model.dart';
 import 'package:provider/provider.dart';
 
 class UnitItem extends StatelessWidget {
-  const UnitItem({required this.unit, required this.delete, Key? key}) : super(key: key);
+  const UnitItem({required this.unit, required this.delete, Key? key})
+      : super(key: key);
 
   final Unit unit;
   final Function(String unitId) delete;
@@ -37,7 +38,8 @@ class UnitItem extends StatelessWidget {
               Text(AppLocalizations.of(context)!.nameUnit(unit.name)),
               Row(
                 children: [
-                  Text(AppLocalizations.of(context)!.setsCount(unit.sets.length)),
+                  Text(AppLocalizations.of(context)!
+                      .setsCount(unit.sets.length)),
                   PopupMenuButton(
                       padding: const EdgeInsets.all(0),
                       itemBuilder: (context) => [
@@ -56,7 +58,8 @@ class UnitItem extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ChangeNotifierProvider(
-                                create: (context) => CreateUnitViewModel(context, unit: unit),
+                                create: (context) =>
+                                    CreateUnitViewModel(context, unit: unit),
                                 child: CreateUnit(),
                               ),
                             ),
@@ -64,7 +67,8 @@ class UnitItem extends StatelessWidget {
                         } else {
                           showDialog(
                             context: context,
-                            builder: (context) => DeleteUnit(delete: () => delete(unit.id)),
+                            builder: (context) =>
+                                DeleteUnit(delete: () => delete(unit.id)),
                           );
                         }
                       }),

@@ -1,4 +1,4 @@
-import 'package:primus/model/flashcard.dart';
+import 'flashcard.dart';
 
 class FlashCardSet {
   FlashCardSet({required this.flashcard, required this.owner});

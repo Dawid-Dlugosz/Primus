@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/model/flashcard.dart';
-import 'package:primus/screen/show_all/all_flascard.dart';
-import 'package:primus/view_models/all_flashcard_view_model.dart';
-import 'package:primus/widgets/card_flashcard.dart';
+import '../../model/flashcard.dart';
+import '../show_all/all_flascard.dart';
+import '../../view_models/all_flashcard_view_model.dart';
+import '../../widgets/card_flashcard.dart';
 import 'package:provider/provider.dart';
 
 class FlashcardListHome extends StatefulWidget {
-  const FlashcardListHome({required this.flashcards, required this.uid, required this.delte, Key? key}) : super(key: key);
+  const FlashcardListHome(
+      {required this.flashcards,
+      required this.uid,
+      required this.delte,
+      Key? key})
+      : super(key: key);
 
   final List<Flashcard> flashcards;
   final String uid;
@@ -44,7 +49,8 @@ class _FlashcardListHomeState extends State<FlashcardListHome> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ChangeNotifierProvider(
-                    create: (context) => AllFlashCardViewModel(context: context),
+                    create: (context) =>
+                        AllFlashCardViewModel(context: context),
                     child: const AllFlashcard(),
                   ),
                 ),

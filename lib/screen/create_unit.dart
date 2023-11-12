@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/view_models/create_unit_view_model.dart';
-import 'package:primus/widgets/empty_widget.dart';
-import 'package:primus/widgets/loading_widget.dart';
-import 'package:primus/widgets/unit_chips.dart';
+import '../view_models/create_unit_view_model.dart';
+import '../widgets/empty_widget.dart';
+import '../widgets/loading_widget.dart';
+import '../widgets/unit_chips.dart';
 import 'package:provider/provider.dart';
 
 class CreateUnit extends StatefulWidget {
@@ -32,7 +32,8 @@ class _CreateUnitState extends State<CreateUnit> {
                   title: Text(AppLocalizations.of(context)!.createUnit),
                 ),
                 body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                   child: Form(
                     key: formKey,
                     child: Column(
@@ -44,14 +45,17 @@ class _CreateUnitState extends State<CreateUnit> {
                               controller: nameController,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return AppLocalizations.of(context)!.enterNameUnit;
+                                  return AppLocalizations.of(context)!
+                                      .enterNameUnit;
                                 }
                                 return null;
                               },
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Text(AppLocalizations.of(context)!.selectSets),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                  AppLocalizations.of(context)!.selectSets),
                             ),
                             viewModel.flashcards.isNotEmpty
                                 ? Wrap(
@@ -61,8 +65,13 @@ class _CreateUnitState extends State<CreateUnit> {
                                           .map(
                                             (e) => UnitChips(
                                               name: e.flashcard.nameSet,
-                                              addFlashcard: () => viewModel.addToUnit(e),
-                                              selected: viewModel.flascardsAddToUnit.any((element) => element.flashcard.id == e.flashcard.id),
+                                              addFlashcard: () =>
+                                                  viewModel.addToUnit(e),
+                                              selected: viewModel
+                                                  .flascardsAddToUnit
+                                                  .any((element) =>
+                                                      element.flashcard.id ==
+                                                      e.flashcard.id),
                                             ),
                                           )
                                           .toList(),

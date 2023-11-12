@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:primus/model/test_word.dart';
-import 'package:primus/screen/test/test_item.dart';
-import 'package:primus/view_models/flashcard_test_view_model.dart';
+import '../../model/test_word.dart';
+import 'test_item.dart';
+import '../../view_models/flashcard_test_view_model.dart';
 
 class TestCard extends StatelessWidget {
-  const TestCard({required this.answer, required this.viewModel, Key? key}) : super(key: key);
+  const TestCard({required this.answer, required this.viewModel, Key? key})
+      : super(key: key);
 
   final TestWord answer;
   final FlashcardTestViewModel viewModel;
@@ -20,12 +21,18 @@ class TestCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                viewModel.wordIndex != 0 ? IconButton(icon: const Icon(Icons.arrow_back), onPressed: viewModel.decWordIndex) : Container(),
+                viewModel.wordIndex != 0
+                    ? IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: viewModel.decWordIndex)
+                    : Container(),
                 Text('Słowo: ${answer.word.word}'),
                 viewModel.wordIndex != viewModel.testWords.length - 1
                     ? Transform.rotate(
                         angle: pi,
-                        child: IconButton(icon: const Icon(Icons.arrow_back), onPressed: viewModel.incWordIndex),
+                        child: IconButton(
+                            icon: const Icon(Icons.arrow_back),
+                            onPressed: viewModel.incWordIndex),
                       )
                     : Container()
               ],
@@ -34,10 +41,22 @@ class TestCard extends StatelessWidget {
               height: 250,
               child: ListView(
                 children: [
-                  TestItem(definition: answer.answerA, setAnswer: viewModel.setAnswer, testWord: answer),
-                  TestItem(definition: answer.answerB, setAnswer: viewModel.setAnswer, testWord: answer),
-                  TestItem(definition: answer.answerC, setAnswer: viewModel.setAnswer, testWord: answer),
-                  TestItem(definition: answer.answerD, setAnswer: viewModel.setAnswer, testWord: answer),
+                  TestItem(
+                      definition: answer.answerA,
+                      setAnswer: viewModel.setAnswer,
+                      testWord: answer),
+                  TestItem(
+                      definition: answer.answerB,
+                      setAnswer: viewModel.setAnswer,
+                      testWord: answer),
+                  TestItem(
+                      definition: answer.answerC,
+                      setAnswer: viewModel.setAnswer,
+                      testWord: answer),
+                  TestItem(
+                      definition: answer.answerD,
+                      setAnswer: viewModel.setAnswer,
+                      testWord: answer),
                 ],
               ),
             ),

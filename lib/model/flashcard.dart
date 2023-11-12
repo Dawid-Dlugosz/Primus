@@ -1,7 +1,12 @@
-import 'package:primus/model/word.dart';
+import 'word.dart';
 
 class Flashcard {
-  Flashcard({required this.id, required this.languageSet, required this.nameSet, required this.words, required this.timeStamp});
+  Flashcard(
+      {required this.id,
+      required this.languageSet,
+      required this.nameSet,
+      required this.words,
+      required this.timeStamp});
 
   final String id;
   final String languageSet;
@@ -14,7 +19,9 @@ class Flashcard {
       id: json['id'],
       languageSet: json['languageSet'],
       nameSet: json['nameSet'],
-      words: (json['words'] as List<dynamic>).map((e) => Word.fromJson(e)).toList(),
+      words: (json['words'] as List<dynamic>)
+          .map((e) => Word.fromJson(e))
+          .toList(),
       timeStamp: json['timeStamp'],
     );
   }

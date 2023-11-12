@@ -1,13 +1,14 @@
-import 'package:primus/model/to_learn.dart';
+import '../../model/to_learn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/screen/show_all/all_to_learn.dart';
-import 'package:primus/view_models/to_learn_home_view_model.dart';
-import 'package:primus/widgets/to_learn_list/to_learn_wrapper.dart';
+import '../../screen/show_all/all_to_learn.dart';
+import '../../view_models/to_learn_home_view_model.dart';
+import 'to_learn_wrapper.dart';
 import 'package:provider/provider.dart';
 
 class ToLearnHomeList extends StatefulWidget {
-  const ToLearnHomeList({required this.toLearn, required this.delete, Key? key}) : super(key: key);
+  const ToLearnHomeList({required this.toLearn, required this.delete, Key? key})
+      : super(key: key);
   final List<ToLearn> toLearn;
   final Function(String flashcardId) delete;
 

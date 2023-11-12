@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/dialog/delete_flashcard.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/model/flashcard.dart';
-import 'package:primus/model/flashcard_set.dart';
-import 'package:primus/model/user.dart' as u;
+import '../dialog/delete_flashcard.dart';
+import '../enum/collection.dart';
+import '../model/flashcard.dart';
+import '../model/flashcard_set.dart';
+import '../model/user.dart' as u;
 
 class AllFlashCardViewModel extends ChangeNotifier {
   AllFlashCardViewModel({required this.context}) {
@@ -25,7 +25,10 @@ class AllFlashCardViewModel extends ChangeNotifier {
   }
 
   Future<List<Flashcard>> getUserFlahscards() async {
-    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var document = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .get();
     var user = u.User.fromJson(document.data() as Map<String, dynamic>);
 
     List<Flashcard> flashcards = [];
@@ -49,16 +52,26 @@ class AllFlashCardViewModel extends ChangeNotifier {
     loaded = false;
     notifyListeners();
 
-    var currentUserDocument = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var currentUserDocument = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .get();
     var currentUser = u.User.fromJson(currentUserDocument.data()!);
 
     var ownFlashcard = currentUser.ownFlashcard;
-    ownFlashcard!.removeWhere((element) => element == 'flashcardSet/$flashcardId');
+    ownFlashcard!
+        .removeWhere((element) => element == 'flashcardSet/$flashcardId');
 
     currentUser = currentUser.copyWith(ownFlashcard: ownFlashcard);
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(flashcardId).delete();
-    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'ownFlashcard': ownFlashcard.map((e) => e).toList()});
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.flashcardSet.name)
+        .doc(flashcardId)
+        .delete();
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .update({'ownFlashcard': ownFlashcard.map((e) => e).toList()});
 
     loaded = true;
     notifyListeners();

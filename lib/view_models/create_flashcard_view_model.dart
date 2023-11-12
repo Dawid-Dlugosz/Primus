@@ -2,19 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/exception/flashcard_name_busy.dart';
-import 'package:primus/exception/too_short.dart';
-import 'package:primus/model/flashcard.dart';
-import 'package:primus/model/flashcard_set.dart';
-import 'package:primus/model/user.dart' as myUser;
-import 'package:primus/model/word.dart';
-import 'package:primus/screen/home/home_page.dart';
-import 'package:primus/features/auth/utils/firebase_error.dart';
-import 'package:primus/utils/language_provider.dart';
-import 'package:primus/utils/popup.dart';
-import 'package:primus/view_models/home_view_model.dart';
-import 'package:primus/widgets/create_flashcard_widget.dart';
+import '../enum/collection.dart';
+import '../exception/flashcard_name_busy.dart';
+import '../exception/too_short.dart';
+import '../model/flashcard.dart';
+import '../model/flashcard_set.dart';
+import '../model/user.dart' as myUser;
+import '../model/word.dart';
+import '../screen/home/home_page.dart';
+import '../features/auth/utils/firebase_error.dart';
+import '../utils/language_provider.dart';
+import '../utils/popup.dart';
+import '../widgets/create_flashcard_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
@@ -173,15 +172,15 @@ class FlashcardViewModel extends ChangeNotifier {
     notifyListeners();
 
     // Not back only push bcz stream builder dont detect edit flashcdardw
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ChangeNotifierProvider<HomeViewModel>(
-          create: (context) => HomeViewModel(context),
-          child: const HomePage(),
-        ),
-      ),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (_) => ChangeNotifierProvider<HomeViewModel>(
+    //       create: (context) => HomeViewModel(context),
+    //       child: const HomePage(),
+    //     ),
+    //   ),
+    // );
 
     showSnackBar(AppLocalizations.of(context)!.flashcardUpdated, context);
   }
@@ -262,15 +261,15 @@ class FlashcardViewModel extends ChangeNotifier {
                 {'ownFlashcard': user.ownFlashcard!.map((e) => e).toList()});
       }
       if (copy) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-              create: (context) => HomeViewModel(context),
-              child: const HomePage(),
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => ChangeNotifierProvider(
+        //       create: (context) => HomeViewModel(context),
+        //       child: const HomePage(),
+        //     ),
+        //   ),
+        // );
       } else {
         Navigator.pop(context);
       }

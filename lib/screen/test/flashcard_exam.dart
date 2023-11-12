@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:primus/dialog/flascard_learn_settings.dart';
-import 'package:primus/screen/test/test_card.dart';
-import 'package:primus/utils/shared_preferences.dart';
-import 'package:primus/view_models/flashcard_test_view_model.dart';
-import 'package:primus/widgets/flascard_learn/empty_words.dart';
+import '../../dialog/flascard_learn_settings.dart';
+import 'test_card.dart';
+import '../../utils/shared_preferences.dart';
+import '../../view_models/flashcard_test_view_model.dart';
+import '../../widgets/flascard_learn/empty_words.dart';
 import 'package:provider/provider.dart';
 
 class FlashcardExam extends StatefulWidget {
@@ -50,7 +50,9 @@ class _FlashcardExamState extends State<FlashcardExam> {
                         answer: viewModel.testWords[viewModel.wordIndex],
                         viewModel: viewModel,
                       )
-                    : EmptyWords(showAllWords: viewModel.showAlWords, clearProgress: viewModel.clearProgress),
+                    : EmptyWords(
+                        showAllWords: viewModel.showAlWords,
+                        clearProgress: viewModel.clearProgress),
               )
             : Container();
       },

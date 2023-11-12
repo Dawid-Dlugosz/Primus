@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:primus/model/word.dart';
-import 'package:primus/widgets/flip_card/flip_flashcard.dart';
+import '../model/word.dart';
+import '../widgets/flip_card/flip_flashcard.dart';
 
 class PreviewFlashcard extends StatefulWidget {
   const PreviewFlashcard(

@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:primus/enum/collection.dart';
 import 'package:primus/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:primus/features/auth/domain/repositories/auth_repository.dart';
 import 'package:primus/features/auth/utils/firebase_error.dart';
@@ -10,15 +13,26 @@ class MockFirebaseAuth extends Mock implements FirebaseAuth {}
 
 class MockUserCredential extends Mock implements UserCredential {}
 
+class MockFirebaseFirestore extends Fake implements FirebaseFirestore {}
+
+class MockQuerySnapshot extends Mock implements QuerySnapshot {}
+
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   late MockFirebaseAuth firebaseAuth;
   late AuthRepository repositoryImpl;
   late MockUserCredential userCredential;
+  late FakeFirebaseFirestore cloudFirestore;
 
   setUpAll(() {
     userCredential = MockUserCredential();
     firebaseAuth = MockFirebaseAuth();
-    repositoryImpl = AuthRepositoryImpl(firebaseAuth: firebaseAuth);
+
+    cloudFirestore = FakeFirebaseFirestore();
+    repositoryImpl = AuthRepositoryImpl(
+      firebaseAuth: firebaseAuth,
+      firestore: cloudFirestore,
+    );
   });
 
   void expectFailure(
@@ -47,6 +61,7 @@ void main() {
 
           Future<Either<String, UserCredential>> invokeRepoFunction() async {
             return repositoryImpl.createAccount(
+              nickname: 'nickname',
               email: 'email',
               password: 'password',
             );
@@ -324,6 +339,41 @@ void main() {
               expect(result, const Right(unit));
             },
           );
+        },
+      );
+
+      group(
+        'check nickname',
+        () {
+          test('checkNickname should return Left if nickname is busy',
+              () async {
+            final collection =
+                cloudFirestore.collection(FirebaseCollection.users.name);
+            final doc = collection.doc('test');
+            await doc.set({'nickname': 'nickname'});
+
+            var result = await repositoryImpl.checkNickname(
+              nickname: 'nickname',
+            );
+
+            // Assert the result
+            expect(result, const Left(nicknameBusy));
+          });
+
+          test('checkNickname should return Right if nickname is free',
+              () async {
+            final collection =
+                cloudFirestore.collection(FirebaseCollection.users.name);
+            final doc = collection.doc('test');
+            await doc.set({'nickname': 'not'});
+
+            var result = await repositoryImpl.checkNickname(
+              nickname: 'nickname',
+            );
+
+            // Assert the result
+            expect(result, const Right(unit));
+          });
         },
       );
     },

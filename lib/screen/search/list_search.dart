@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/model/flashcard_set.dart';
+import '../../model/flashcard_set.dart';
 
-import 'package:primus/view_models/search_view_model.dart';
-import 'package:primus/widgets/card_flashcard.dart';
-import 'package:primus/widgets/empty_widget.dart';
+import '../../view_models/search_view_model.dart';
+import '../../widgets/card_flashcard.dart';
+import '../../widgets/empty_widget.dart';
 import 'package:provider/provider.dart';
 
 class ListSearch extends StatelessWidget {
@@ -19,8 +19,10 @@ class ListSearch extends StatelessWidget {
     List<FlashCardSet> getSearcherSets() {
       List<FlashCardSet> flashcardSet = [];
       for (var element in snapshots.data!.docs) {
-        if ((element.data() as Map<String, dynamic>)['owner'] != viewModel.userUid) {
-          var flascardSet = FlashCardSet.fromJson(element.data() as Map<String, dynamic>);
+        if ((element.data() as Map<String, dynamic>)['owner'] !=
+            viewModel.userUid) {
+          var flascardSet =
+              FlashCardSet.fromJson(element.data() as Map<String, dynamic>);
           if (flascardSet.flashcard.nameSet.contains(viewModel.name)) {
             flashcardSet.add(flascardSet);
           }

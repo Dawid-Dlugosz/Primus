@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:primus/features/auth/utils/firebase_error.dart';
+import '../features/auth/utils/firebase_error.dart';
 
 void showSnackBarError(String errorCode, BuildContext context) {
   var snackBar = SnackBar(content: Text(errorCodeToText(errorCode, context)));

@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/model/flashcard_set.dart';
-import 'package:primus/model/unit.dart';
-import 'package:primus/utils/language_provider.dart';
+import '../enum/collection.dart';
+import '../model/flashcard_set.dart';
+import '../model/unit.dart';
+import '../utils/language_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -26,7 +26,8 @@ class CreateUnitViewModel extends ChangeNotifier {
   Future<void> _init() async {
     uid = FirebaseAuth.instance.currentUser!.uid;
 
-    var locale = Provider.of<LanguageProvider>(context, listen: false).currentLocale;
+    var locale =
+        Provider.of<LanguageProvider>(context, listen: false).currentLocale;
     appLocalizations = await AppLocalizations.delegate.load(locale);
 
     flashcards = await getAllSets();
@@ -43,7 +44,10 @@ class CreateUnitViewModel extends ChangeNotifier {
 
   Future<List<FlashCardSet>> getAllSets() async {
     var flaschardSets = <FlashCardSet>[];
-    var documents = await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).where('owner', isEqualTo: uid).get();
+    var documents = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.flashcardSet.name)
+        .where('owner', isEqualTo: uid)
+        .get();
     for (var element in documents.docs) {
       var data = element.data();
       flaschardSets.add(FlashCardSet.fromJson(data));
@@ -53,8 +57,10 @@ class CreateUnitViewModel extends ChangeNotifier {
   }
 
   void addToUnit(FlashCardSet flashCardSet) {
-    if (flascardsAddToUnit.any((element) => element.flashcard.id == flashCardSet.flashcard.id)) {
-      flascardsAddToUnit.removeWhere((element) => element.flashcard.id == flashCardSet.flashcard.id);
+    if (flascardsAddToUnit
+        .any((element) => element.flashcard.id == flashCardSet.flashcard.id)) {
+      flascardsAddToUnit.removeWhere(
+          (element) => element.flashcard.id == flashCardSet.flashcard.id);
     } else {
       flascardsAddToUnit.add(flashCardSet);
     }
@@ -72,7 +78,11 @@ class CreateUnitViewModel extends ChangeNotifier {
     loaded = false;
     notifyListeners();
 
-    var units = await FirebaseFirestore.instance.collection(FirebaseCollection.unit.name).where('owner', isNotEqualTo: uid).where('name', isEqualTo: name).get();
+    var units = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.unit.name)
+        .where('owner', isNotEqualTo: uid)
+        .where('name', isEqualTo: name)
+        .get();
 
     if (units.docs.isNotEmpty) {
       var snackBar = SnackBar(
@@ -95,9 +105,15 @@ class CreateUnitViewModel extends ChangeNotifier {
       flashcardReference.add(reference);
     }
 
-    var newUnit = unit!.copyWith(name: name, sets: flashcardReference, timeStamp: DateTime.now().millisecondsSinceEpoch);
+    var newUnit = unit!.copyWith(
+        name: name,
+        sets: flashcardReference,
+        timeStamp: DateTime.now().millisecondsSinceEpoch);
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.unit.name).doc(newUnit.id).set(newUnit.toJson());
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.unit.name)
+        .doc(newUnit.id)
+        .set(newUnit.toJson());
 
     var snackBar = SnackBar(
       content: Text(appLocalizations.editSuccess),
@@ -116,7 +132,11 @@ class CreateUnitViewModel extends ChangeNotifier {
     loaded = false;
     notifyListeners();
 
-    var units = await FirebaseFirestore.instance.collection(FirebaseCollection.unit.name).where('owner', isEqualTo: uid).where('name', isEqualTo: name).get();
+    var units = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.unit.name)
+        .where('owner', isEqualTo: uid)
+        .where('name', isEqualTo: name)
+        .get();
     if (units.docs.isNotEmpty) {
       var snackBar = SnackBar(
         content: Text(appLocalizations.nameIsbusy),
@@ -145,7 +165,10 @@ class CreateUnitViewModel extends ChangeNotifier {
       name: name,
     );
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.unit.name).doc(unit.id).set(unit.toJson());
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.unit.name)
+        .doc(unit.id)
+        .set(unit.toJson());
 
     var snackBar = SnackBar(
       content: Text(appLocalizations.createUnit),

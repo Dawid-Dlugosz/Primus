@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:primus/model/to_learn.dart';
-import 'package:primus/view_models/to_learn_home_view_model.dart';
-import 'package:primus/widgets/empty_widget.dart';
-import 'package:primus/widgets/loading_widget.dart';
-import 'package:primus/widgets/to_learn_list/to_learn_wrapper.dart';
+import '../../model/to_learn.dart';
+import '../../view_models/to_learn_home_view_model.dart';
+import '../../widgets/empty_widget.dart';
+import '../../widgets/loading_widget.dart';
+import '../../widgets/to_learn_list/to_learn_wrapper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +31,9 @@ class _AllToLearnState extends State<AllToLearn> {
                       return const LoadingWidget();
                     }
 
-                    if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
+                    if (snapshot.hasData &&
+                        snapshot.data != null &&
+                        snapshot.data!.isNotEmpty) {
                       return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {

@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/model/spelling_word.dart';
-import 'package:primus/model/to_learn.dart';
-import 'package:primus/model/user.dart' as user;
-import 'package:primus/utils/shared_preferences.dart';
+import '../enum/collection.dart';
+import '../model/spelling_word.dart';
+import '../model/to_learn.dart';
+import '../model/user.dart' as user;
+import '../utils/shared_preferences.dart';
 
 class FlashcardSpellingViewModel extends ChangeNotifier {
   FlashcardSpellingViewModel({required this.flashcardId}) {
@@ -31,7 +31,10 @@ class FlashcardSpellingViewModel extends ChangeNotifier {
   Future<void> _init() async {
     uid = FirebaseAuth.instance.currentUser!.uid;
     showOnlyUnknow = await getFlashcardSettingsKnowWord();
-    var document = await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).get();
+    var document = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .get();
     currentUser = user.User.fromJson(document.data()!);
 
     splitWords();
@@ -42,13 +45,16 @@ class FlashcardSpellingViewModel extends ChangeNotifier {
   }
 
   void splitWords() {
-    toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
+    toLearn = currentUser.toLearn!
+        .where((element) => element.flashcardId == flashcardId)
+        .first;
 
     allKnowWords.clear();
     allUnknowWords.clear();
 
     for (var element in toLearn.words) {
-      var spellingWord = SpellingWord(word: element.word, showHint: false, correct: false);
+      var spellingWord =
+          SpellingWord(word: element.word, showHint: false, correct: false);
       if (element.learnMethod.spelling) {
         allKnowWords.add(spellingWord);
       } else {
@@ -73,7 +79,8 @@ class FlashcardSpellingViewModel extends ChangeNotifier {
   }
 
   void markAsUnknow({String? enterText}) {
-    spellingWords[wordIndex] = spellingWords[wordIndex].copyWith(showHint: true);
+    spellingWords[wordIndex] =
+        spellingWords[wordIndex].copyWith(showHint: true);
     spellingWords[wordIndex].enterWord = enterText;
     notifyListeners();
   }
@@ -82,14 +89,23 @@ class FlashcardSpellingViewModel extends ChangeNotifier {
     var spellingWord = spellingWords[wordIndex];
     setEnterWord();
     if (textEditingController.text == spellingWord.word.definition) {
-      var index = toLearn.words.indexWhere((element) => element.word.id == spellingWord.word.id);
+      var index = toLearn.words
+          .indexWhere((element) => element.word.id == spellingWord.word.id);
       var learnMethod = toLearn.words[index].learnMethod;
-      toLearn.words[index] = toLearn.words[index].copyWith(learnMethod: learnMethod.copyWith(spelling: true));
-      spellingWords[wordIndex] = spellingWords[wordIndex].copyWith(correct: true);
-      var toLearnIndex = currentUser.toLearn!.indexWhere((element) => element.flashcardId == flashcardId);
+      toLearn.words[index] = toLearn.words[index]
+          .copyWith(learnMethod: learnMethod.copyWith(spelling: true));
+      spellingWords[wordIndex] =
+          spellingWords[wordIndex].copyWith(correct: true);
+      var toLearnIndex = currentUser.toLearn!
+          .indexWhere((element) => element.flashcardId == flashcardId);
       currentUser.toLearn![toLearnIndex] = toLearn;
       wrongDefinition = false;
-      FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
+      FirebaseFirestore.instance
+          .collection(FirebaseCollection.users.name)
+          .doc(uid)
+          .update({
+        'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()
+      });
     } else {
       wrongDefinition = true;
     }
@@ -133,7 +149,9 @@ class FlashcardSpellingViewModel extends ChangeNotifier {
     loaded = false;
     notifyListeners();
 
-    var toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
+    var toLearn = currentUser.toLearn!
+        .where((element) => element.flashcardId == flashcardId)
+        .first;
 
     // Replace object in table, can't change sigle variable bcz is final
     for (var i = 0; i < toLearn.words.length; i++) {
@@ -141,9 +159,16 @@ class FlashcardSpellingViewModel extends ChangeNotifier {
       toLearn.words[i] = toLearn.words[i].copyWith(learnMethod: toLearnCopy);
     }
 
-    currentUser.toLearn!.where((element) => toLearn.flashcardId == element.flashcardId).first == toLearn;
+    currentUser.toLearn!
+            .where((element) => toLearn.flashcardId == element.flashcardId)
+            .first ==
+        toLearn;
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .update(
+            {'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
     splitWords();
     wordsToShow();
 

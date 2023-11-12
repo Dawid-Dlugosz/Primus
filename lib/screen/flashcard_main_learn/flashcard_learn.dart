@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:primus/dialog/flascard_learn_settings.dart';
-import 'package:primus/utils/shared_preferences.dart';
-import 'package:primus/widgets/flascard_learn/empty_words.dart';
-import 'package:primus/widgets/flascard_learn/swiper_flascard.dart';
-import 'package:primus/view_models/flashcard_learn_view_model.dart';
-import 'package:primus/widgets/again_learn_flashcard.dart';
+import '../../dialog/flascard_learn_settings.dart';
+import '../../utils/shared_preferences.dart';
+import '../../widgets/flascard_learn/empty_words.dart';
+import '../../widgets/flascard_learn/swiper_flascard.dart';
+import '../../view_models/flashcard_learn_view_model.dart';
+import '../../widgets/again_learn_flashcard.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/widgets/loading_widget.dart';
+import '../../widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class FlashcardLearn extends StatefulWidget {
@@ -46,7 +46,8 @@ class _FlashcardLearnState extends State<FlashcardLearn> {
                               );
                             },
                           ).then((value) async {
-                            await setFlashcardSettingsKnowWord(viewModel.showOnlyUnknow);
+                            await setFlashcardSettingsKnowWord(
+                                viewModel.showOnlyUnknow);
                           });
                         },
                         child: const Icon(Icons.settings),

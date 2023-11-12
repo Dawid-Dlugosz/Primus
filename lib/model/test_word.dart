@@ -1,7 +1,13 @@
-import 'package:primus/model/word.dart';
+import 'word.dart';
 
 class TestWord {
-  TestWord({required this.answerA, required this.answerB, required this.answerC, required this.answerD, required this.word, this.answer});
+  TestWord(
+      {required this.answerA,
+      required this.answerB,
+      required this.answerC,
+      required this.answerD,
+      required this.word,
+      this.answer});
 
   final String answerA;
   final String answerB;

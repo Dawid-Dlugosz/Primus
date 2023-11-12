@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/view_models/create_flashcard_view_model.dart';
-import 'package:primus/widgets/create_flashcard_widget.dart';
-import 'package:primus/widgets/loading_widget.dart';
+import '../view_models/create_flashcard_view_model.dart';
+import '../widgets/create_flashcard_widget.dart';
+import '../widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class CreateFlashcardPage extends StatefulWidget {
@@ -78,7 +78,8 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context)!.flashcardsNameError;
+                          return AppLocalizations.of(context)!
+                              .flashcardsNameError;
                         }
                         return null;
                       },
@@ -86,13 +87,15 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
                     TextFormField(
                       controller: viewModel.languageController,
                       decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.flashcardsLanguage,
+                        labelText:
+                            AppLocalizations.of(context)!.flashcardsLanguage,
                         border: const OutlineInputBorder(),
                         prefixIcon: const Icon(Icons.language),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppLocalizations.of(context)!.flashcardLanguageError;
+                          return AppLocalizations.of(context)!
+                              .flashcardLanguageError;
                         }
                         return null;
                       },

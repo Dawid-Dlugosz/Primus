@@ -10,8 +10,11 @@ abstract class AuthRepository {
   Future<Either<String, UserCredential>> createAccount({
     required String email,
     required String password,
+    required String nickname,
   });
   Future<Either<String, Unit>> resetPassword({
     required String email,
   });
+
+  Future<Either<String, Unit>> checkNickname({required String nickname});
 }

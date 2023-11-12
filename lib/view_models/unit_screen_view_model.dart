@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/model/flashcard_set.dart';
-import 'package:primus/model/unit.dart';
+import '../model/flashcard_set.dart';
+import '../model/unit.dart';
 
 class UnitScreenViewModel extends ChangeNotifier {
   UnitScreenViewModel({required this.unit}) {

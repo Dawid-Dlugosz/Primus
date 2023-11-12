@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:primus/enum/collection.dart';
-import 'package:primus/model/flashcard_set.dart';
-import 'package:primus/model/to_learn.dart';
-import 'package:primus/model/to_learn_word.dart';
-import 'package:primus/model/user.dart' as user;
-import 'package:primus/utils/shared_preferences.dart';
+import '../enum/collection.dart';
+import '../model/flashcard_set.dart';
+import '../model/to_learn.dart';
+import '../model/to_learn_word.dart';
+import '../model/user.dart' as user;
+import '../utils/shared_preferences.dart';
 
 class FlashcardLearnViewModel extends ChangeNotifier {
   FlashcardLearnViewModel({required this.flashcardId, required this.context}) {
@@ -39,11 +39,19 @@ class FlashcardLearnViewModel extends ChangeNotifier {
   void _init() async {
     uid = FirebaseAuth.instance.currentUser!.uid;
     showOnlyUnknow = await getFlashcardSettingsKnowWord();
-    document = FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid);
+    document = FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid);
     currentUser = await getDocument();
-    toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
-    var flascardDocument = await FirebaseFirestore.instance.collection(FirebaseCollection.flashcardSet.name).doc(toLearn.flashcardId).get();
-    flashCardSet = FlashCardSet.fromJson(flascardDocument.data() as Map<String, dynamic>);
+    toLearn = currentUser.toLearn!
+        .where((element) => element.flashcardId == flashcardId)
+        .first;
+    var flascardDocument = await FirebaseFirestore.instance
+        .collection(FirebaseCollection.flashcardSet.name)
+        .doc(toLearn.flashcardId)
+        .get();
+    flashCardSet =
+        FlashCardSet.fromJson(flascardDocument.data() as Map<String, dynamic>);
     language = flashCardSet.flashcard.languageSet;
 
     splitWords();
@@ -90,7 +98,9 @@ class FlashcardLearnViewModel extends ChangeNotifier {
   }
 
   void splitWords() {
-    var toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
+    var toLearn = currentUser.toLearn!
+        .where((element) => element.flashcardId == flashcardId)
+        .first;
 
     allKnowWords.clear();
     allUnknowWords.clear();
@@ -113,14 +123,24 @@ class FlashcardLearnViewModel extends ChangeNotifier {
   void markAsKnow() async {
     var currentWordId = words[currentIndex].word.id;
 
-    var index = toLearn.words.indexWhere((element) => element.word.id == currentWordId);
+    var index =
+        toLearn.words.indexWhere((element) => element.word.id == currentWordId);
 
-    var toLearnCopy = toLearn.words[index].learnMethod.copyWith(flashcard: true);
-    toLearn.words[index] = toLearn.words[index].copyWith(learnMethod: toLearnCopy);
+    var toLearnCopy =
+        toLearn.words[index].learnMethod.copyWith(flashcard: true);
+    toLearn.words[index] =
+        toLearn.words[index].copyWith(learnMethod: toLearnCopy);
 
-    currentUser.toLearn!.where((element) => toLearn.flashcardId == element.flashcardId).first == toLearn;
+    currentUser.toLearn!
+            .where((element) => toLearn.flashcardId == element.flashcardId)
+            .first ==
+        toLearn;
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .update(
+            {'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
 
     currentIndex++;
     notifyListeners();
@@ -129,14 +149,24 @@ class FlashcardLearnViewModel extends ChangeNotifier {
   void markAsUnknow() async {
     var currentWordId = words[currentIndex].word.id;
 
-    var index = toLearn.words.indexWhere((element) => element.word.id == currentWordId);
+    var index =
+        toLearn.words.indexWhere((element) => element.word.id == currentWordId);
 
-    var toLearnCopy = toLearn.words[index].learnMethod.copyWith(flashcard: false);
-    toLearn.words[index] = toLearn.words[index].copyWith(learnMethod: toLearnCopy);
+    var toLearnCopy =
+        toLearn.words[index].learnMethod.copyWith(flashcard: false);
+    toLearn.words[index] =
+        toLearn.words[index].copyWith(learnMethod: toLearnCopy);
 
-    currentUser.toLearn!.where((element) => toLearn.flashcardId == element.flashcardId).first == toLearn;
+    currentUser.toLearn!
+            .where((element) => toLearn.flashcardId == element.flashcardId)
+            .first ==
+        toLearn;
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .update(
+            {'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
 
     currentIndex++;
     notifyListeners();
@@ -146,7 +176,9 @@ class FlashcardLearnViewModel extends ChangeNotifier {
     loaded = false;
     notifyListeners();
 
-    var toLearn = currentUser.toLearn!.where((element) => element.flashcardId == flashcardId).first;
+    var toLearn = currentUser.toLearn!
+        .where((element) => element.flashcardId == flashcardId)
+        .first;
 
     toLearn.words.map((e) {
       e.learnMethod.copyWith(flashcard: false);
@@ -158,9 +190,16 @@ class FlashcardLearnViewModel extends ChangeNotifier {
       toLearn.words[i] = toLearn.words[i].copyWith(learnMethod: toLearnCopy);
     }
 
-    currentUser.toLearn!.where((element) => toLearn.flashcardId == element.flashcardId).first == toLearn;
+    currentUser.toLearn!
+            .where((element) => toLearn.flashcardId == element.flashcardId)
+            .first ==
+        toLearn;
 
-    await FirebaseFirestore.instance.collection(FirebaseCollection.users.name).doc(uid).update({'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
+    await FirebaseFirestore.instance
+        .collection(FirebaseCollection.users.name)
+        .doc(uid)
+        .update(
+            {'toLearn': currentUser.toLearn!.map((e) => e.toJson()).toList()});
     splitWords();
     wordsToShow();
 

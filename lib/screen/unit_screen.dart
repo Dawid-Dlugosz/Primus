@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/view_models/unit_screen_view_model.dart';
-import 'package:primus/widgets/card_flashcard.dart';
-import 'package:primus/widgets/loading_widget.dart';
+import '../view_models/unit_screen_view_model.dart';
+import '../widgets/card_flashcard.dart';
+import '../widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class UnitScreen extends StatelessWidget {
@@ -15,7 +15,8 @@ class UnitScreen extends StatelessWidget {
         return viewModel.loaded
             ? Scaffold(
                 appBar: AppBar(
-                  title: Text(AppLocalizations.of(context)!.nameUnit(viewModel.unit.name)),
+                  title: Text(AppLocalizations.of(context)!
+                      .nameUnit(viewModel.unit.name)),
                 ),
                 body: Column(
                   children: [

@@ -1,4 +1,4 @@
-import 'package:primus/model/to_learn.dart';
+import 'to_learn.dart';
 
 class User {
   const User({
@@ -18,8 +18,14 @@ class User {
     return User(
       nickname: json['nickname'],
       uid: json['uid'],
-      ownFlashcard: json['ownFlashcard'] == null ? null : json['ownFlashcard'].cast<String>()!,
-      toLearn: json['toLearn'] == null ? null : (json['toLearn'] as List<dynamic>).map((e) => ToLearn.fromJson(e)).toList(),
+      ownFlashcard: json['ownFlashcard'] == null
+          ? null
+          : json['ownFlashcard'].cast<String>()!,
+      toLearn: json['toLearn'] == null
+          ? null
+          : (json['toLearn'] as List<dynamic>)
+              .map((e) => ToLearn.fromJson(e))
+              .toList(),
     );
   }
 
@@ -32,7 +38,12 @@ class User {
     return json;
   }
 
-  User copyWith({String? nickname, String? uid, List<String>? ownFlashcard, List<ToLearn>? toLearn}) => User(
+  User copyWith(
+          {String? nickname,
+          String? uid,
+          List<String>? ownFlashcard,
+          List<ToLearn>? toLearn}) =>
+      User(
         nickname: nickname ?? this.nickname,
         uid: uid ?? this.uid,
         ownFlashcard: ownFlashcard ?? this.ownFlashcard,
