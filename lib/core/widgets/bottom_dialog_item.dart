@@ -1,9 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BottomDialogItem extends StatelessWidget {
-  const BottomDialogItem(
-      {required this.iconData, required this.text, super.key});
+  const BottomDialogItem({
+    required this.iconData,
+    required this.text,
+    super.key,
+  });
   final String text;
   final IconData iconData;
 
