@@ -6,7 +6,7 @@ import '../../widgets/flascard_learn/swiper_flascard.dart';
 import '../../view_models/flashcard_learn_view_model.dart';
 import '../../widgets/again_learn_flashcard.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../widgets/loading_widget.dart';
+import '../../core/screens/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class FlashcardLearn extends StatefulWidget {

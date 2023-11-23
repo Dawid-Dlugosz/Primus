@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/core/widgets/bottom_dialog_item.dart';
-import '../screen/create_flashcard_page.dart';
+import '../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
 import '../screen/create_unit.dart';
 import '../view_models/create_flashcard_view_model.dart';
 import '../view_models/create_unit_view_model.dart';

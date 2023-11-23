@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../dialog/copy_flashcard.dart';
-import '../create_flashcard_page.dart';
+import '../../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
 import 'flashcard_learn.dart';
 import '../flashcard_spelling.dart';
 import '../test/flashcard_exam.dart';
@@ -11,7 +11,7 @@ import '../../view_models/flashcard_spelling_view_model.dart';
 import '../../view_models/flashcard_test_view_model.dart';
 import '../../widgets/author_widget.dart';
 import '../../widgets/go_to_learn.dart';
-import '../../widgets/loading_widget.dart';
+import '../../core/screens/loading_widget.dart';
 import '../../widgets/swiper_tinder/swiper_empty.dart';
 import '../../widgets/swiper_tinder/swiper_tinder.dart';
 import 'package:provider/provider.dart';

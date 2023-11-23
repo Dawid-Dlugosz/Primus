@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CreateFlashcardWidget extends StatefulWidget {
+class CreateFlashcardWidget extends StatelessWidget {
   const CreateFlashcardWidget(
       {super.key,
-      required this.wordField,
-      required this.definitionField,
+      required this.wordController,
+      required this.definitionController,
       required this.removeFlashcard});
 
-  final TextFormField wordField;
-  final TextFormField definitionField;
+  final TextEditingController wordController;
+  final TextEditingController definitionController;
   final VoidCallback removeFlashcard;
 
-  @override
-  State<CreateFlashcardWidget> createState() => _CreateFlashcardWidgetState();
-}
-
-class _CreateFlashcardWidgetState extends State<CreateFlashcardWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,13 +23,33 @@ class _CreateFlashcardWidgetState extends State<CreateFlashcardWidget> {
               alignment: Alignment.centerRight,
               child: IconButton(
                 icon: const Icon(Icons.close),
-                onPressed: () {
-                  widget.removeFlashcard();
-                },
+                onPressed: removeFlashcard,
               ),
             ),
-            widget.wordField,
-            widget.definitionField,
+            TextFormField(
+              controller: wordController,
+              decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.definitionHint,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return AppLocalizations.of(context)!.flashcardsNameError;
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: definitionController,
+              decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.definitionHint,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return AppLocalizations.of(context)!.flashcardsNameError;
+                }
+                return null;
+              },
+            )
           ],
         ),
       ),

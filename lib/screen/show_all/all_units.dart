@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../enum/collection.dart';
 import '../../model/unit.dart';
 import '../../widgets/empty_widget.dart';
-import '../../widgets/loading_widget.dart';
+import '../../core/screens/loading_widget.dart';
 import '../../widgets/unit_item.dart';
 
 class AllUnits extends StatelessWidget {

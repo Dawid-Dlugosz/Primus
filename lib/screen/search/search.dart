@@ -4,7 +4,7 @@ import 'list_search.dart';
 
 import '../../view_models/search_view_model.dart';
 
-import '../../widgets/loading_widget.dart';
+import '../../core/screens/loading_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

@@ -6,7 +6,7 @@ import '../../model/to_learn.dart';
 import '../../model/user.dart' as myUser;
 import '../../widgets/bottom_dialog_add.dart';
 import 'flashcard_list_home.dart';
-import '../../widgets/loading_widget.dart';
+import '../../core/screens/loading_widget.dart';
 import '../../widgets/to_learn_list/to_learn_home_list.dart';
 import '../../widgets/unit_home_list.dart';
 import 'package:provider/provider.dart';
