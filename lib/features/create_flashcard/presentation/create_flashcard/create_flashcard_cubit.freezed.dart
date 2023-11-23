@@ -19,32 +19,50 @@ mixin _$CreateFlashcardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(String flashcardSetId) success,
+    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function() loadind,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(String flashcardSetId)? success,
+    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function()? loadind,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(String flashcardSetId)? success,
+    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function()? loadind,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loadind,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loadind,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loadind,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -108,6 +126,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(String flashcardSetId) success,
+    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function() loadind,
   }) {
     return initial();
   }
@@ -116,6 +137,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(String flashcardSetId)? success,
+    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function()? loadind,
   }) {
     return initial?.call();
   }
@@ -124,6 +148,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(String flashcardSetId)? success,
+    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function()? loadind,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -136,6 +163,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loadind,
   }) {
     return initial(this);
   }
@@ -144,6 +174,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loadind,
   }) {
     return initial?.call(this);
   }
@@ -152,6 +185,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loadind,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -163,4 +199,412 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements CreateFlashcardState {
   const factory _Initial() = _$InitialImpl;
+}
+
+/// @nodoc
+abstract class _$$SuccessImplCopyWith<$Res> {
+  factory _$$SuccessImplCopyWith(
+          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
+      __$$SuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String flashcardSetId});
+}
+
+/// @nodoc
+class __$$SuccessImplCopyWithImpl<$Res>
+    extends _$CreateFlashcardStateCopyWithImpl<$Res, _$SuccessImpl>
+    implements _$$SuccessImplCopyWith<$Res> {
+  __$$SuccessImplCopyWithImpl(
+      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? flashcardSetId = null,
+  }) {
+    return _then(_$SuccessImpl(
+      flashcardSetId: null == flashcardSetId
+          ? _value.flashcardSetId
+          : flashcardSetId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SuccessImpl implements _Success {
+  const _$SuccessImpl({required this.flashcardSetId});
+
+  @override
+  final String flashcardSetId;
+
+  @override
+  String toString() {
+    return 'CreateFlashcardState.success(flashcardSetId: $flashcardSetId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessImpl &&
+            (identical(other.flashcardSetId, flashcardSetId) ||
+                other.flashcardSetId == flashcardSetId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, flashcardSetId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String flashcardSetId) success,
+    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function() loadind,
+  }) {
+    return success(flashcardSetId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String flashcardSetId)? success,
+    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function()? loadind,
+  }) {
+    return success?.call(flashcardSetId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String flashcardSetId)? success,
+    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function()? loadind,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(flashcardSetId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loadind,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loadind,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loadind,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Success implements CreateFlashcardState {
+  const factory _Success({required final String flashcardSetId}) =
+      _$SuccessImpl;
+
+  String get flashcardSetId;
+  @JsonKey(ignore: true)
+  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CreateFlashcardErrors errorMessage});
+}
+
+/// @nodoc
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$CreateFlashcardStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorMessage = null,
+  }) {
+    return _then(_$ErrorImpl(
+      errorMessage: null == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as CreateFlashcardErrors,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ErrorImpl implements _Error {
+  const _$ErrorImpl({required this.errorMessage});
+
+  @override
+  final CreateFlashcardErrors errorMessage;
+
+  @override
+  String toString() {
+    return 'CreateFlashcardState.error(errorMessage: $errorMessage)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorImpl &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorMessage);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String flashcardSetId) success,
+    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function() loadind,
+  }) {
+    return error(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String flashcardSetId)? success,
+    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function()? loadind,
+  }) {
+    return error?.call(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String flashcardSetId)? success,
+    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function()? loadind,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(errorMessage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loadind,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loadind,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loadind,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Error implements CreateFlashcardState {
+  const factory _Error({required final CreateFlashcardErrors errorMessage}) =
+      _$ErrorImpl;
+
+  CreateFlashcardErrors get errorMessage;
+  @JsonKey(ignore: true)
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$CreateFlashcardStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadingImpl implements _Loading {
+  const _$LoadingImpl();
+
+  @override
+  String toString() {
+    return 'CreateFlashcardState.loadind()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String flashcardSetId) success,
+    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function() loadind,
+  }) {
+    return loadind();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String flashcardSetId)? success,
+    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function()? loadind,
+  }) {
+    return loadind?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String flashcardSetId)? success,
+    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function()? loadind,
+    required TResult orElse(),
+  }) {
+    if (loadind != null) {
+      return loadind();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loadind,
+  }) {
+    return loadind(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loadind,
+  }) {
+    return loadind?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loadind,
+    required TResult orElse(),
+  }) {
+    if (loadind != null) {
+      return loadind(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements CreateFlashcardState {
+  const factory _Loading() = _$LoadingImpl;
 }
