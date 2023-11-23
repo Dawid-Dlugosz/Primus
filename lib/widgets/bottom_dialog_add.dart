@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/core/widgets/bottom_dialog_item.dart';
 import '../screen/create_flashcard_page.dart';
