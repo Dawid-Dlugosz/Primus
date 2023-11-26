@@ -22,7 +22,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   String get nickname => throw _privateConstructorUsedError;
   List<String> get ownFlashcard => throw _privateConstructorUsedError;
-  ToLearn get toLearn => throw _privateConstructorUsedError;
+  List<ToLearn> get toLearn => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,10 +38,8 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String nickname,
       List<String> ownFlashcard,
-      ToLearn toLearn,
+      List<ToLearn> toLearn,
       String uid});
-
-  $ToLearnCopyWith<$Res> get toLearn;
 }
 
 /// @nodoc
@@ -74,20 +72,12 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       toLearn: null == toLearn
           ? _value.toLearn
           : toLearn // ignore: cast_nullable_to_non_nullable
-              as ToLearn,
+              as List<ToLearn>,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ToLearnCopyWith<$Res> get toLearn {
-    return $ToLearnCopyWith<$Res>(_value.toLearn, (value) {
-      return _then(_value.copyWith(toLearn: value) as $Val);
-    });
   }
 }
 
@@ -101,11 +91,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String nickname,
       List<String> ownFlashcard,
-      ToLearn toLearn,
+      List<ToLearn> toLearn,
       String uid});
-
-  @override
-  $ToLearnCopyWith<$Res> get toLearn;
 }
 
 /// @nodoc
@@ -133,9 +120,9 @@ class __$$UserImplCopyWithImpl<$Res>
           : ownFlashcard // ignore: cast_nullable_to_non_nullable
               as List<String>,
       toLearn: null == toLearn
-          ? _value.toLearn
+          ? _value._toLearn
           : toLearn // ignore: cast_nullable_to_non_nullable
-              as ToLearn,
+              as List<ToLearn>,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -151,9 +138,10 @@ class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.nickname,
       required final List<String> ownFlashcard,
-      required this.toLearn,
+      required final List<ToLearn> toLearn,
       required this.uid})
-      : _ownFlashcard = ownFlashcard;
+      : _ownFlashcard = ownFlashcard,
+        _toLearn = toLearn;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -168,8 +156,14 @@ class _$UserImpl implements _User {
     return EqualUnmodifiableListView(_ownFlashcard);
   }
 
+  final List<ToLearn> _toLearn;
   @override
-  final ToLearn toLearn;
+  List<ToLearn> get toLearn {
+    if (_toLearn is EqualUnmodifiableListView) return _toLearn;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_toLearn);
+  }
+
   @override
   final String uid;
 
@@ -187,14 +181,18 @@ class _$UserImpl implements _User {
                 other.nickname == nickname) &&
             const DeepCollectionEquality()
                 .equals(other._ownFlashcard, _ownFlashcard) &&
-            (identical(other.toLearn, toLearn) || other.toLearn == toLearn) &&
+            const DeepCollectionEquality().equals(other._toLearn, _toLearn) &&
             (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, nickname,
-      const DeepCollectionEquality().hash(_ownFlashcard), toLearn, uid);
+  int get hashCode => Object.hash(
+      runtimeType,
+      nickname,
+      const DeepCollectionEquality().hash(_ownFlashcard),
+      const DeepCollectionEquality().hash(_toLearn),
+      uid);
 
   @JsonKey(ignore: true)
   @override
@@ -214,7 +212,7 @@ abstract class _User implements User {
   const factory _User(
       {required final String nickname,
       required final List<String> ownFlashcard,
-      required final ToLearn toLearn,
+      required final List<ToLearn> toLearn,
       required final String uid}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -224,7 +222,7 @@ abstract class _User implements User {
   @override
   List<String> get ownFlashcard;
   @override
-  ToLearn get toLearn;
+  List<ToLearn> get toLearn;
   @override
   String get uid;
   @override

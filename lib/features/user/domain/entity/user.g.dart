@@ -11,7 +11,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       ownFlashcard: (json['ownFlashcard'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      toLearn: ToLearn.fromJson(json['toLearn'] as Map<String, dynamic>),
+      toLearn: (json['toLearn'] as List<dynamic>)
+          .map((e) => ToLearn.fromJson(e as Map<String, dynamic>))
+          .toList(),
       uid: json['uid'] as String,
     );
 
@@ -19,6 +21,6 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
       'nickname': instance.nickname,
       'ownFlashcard': instance.ownFlashcard,
-      'toLearn': instance.toLearn.toJson(),
+      'toLearn': instance.toLearn.map((e) => e.toJson()).toList(),
       'uid': instance.uid,
     };

@@ -11,7 +11,7 @@ class User with _$User {
   const factory User({
     required String nickname,
     required List<String> ownFlashcard,
-    required ToLearn toLearn,
+    required List<ToLearn> toLearn,
     required String uid,
   }) = _User;
 
