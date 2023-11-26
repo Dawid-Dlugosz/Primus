@@ -10,6 +10,7 @@ import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dar
 import 'package:primus/features/create_flashcard/domain/entity/word.dart';
 import 'package:primus/features/create_flashcard/domain/repository/create_flash_card_repository.dart';
 import 'package:uuid/uuid.dart';
+import 'package:logger/logger.dart';
 import '../../../../enum/collection.dart';
 import '../../../../exception/flashcard_name_busy.dart';
 
@@ -21,6 +22,7 @@ class CreateFlashCardRepositoryImpl extends CreateFlashcardRepository {
 
   final FirebaseFirestore firestore;
   final String authUserId;
+  final Logger logger = Logger();
 
   @override
   Future<Either<Failure, String>> createFlashcardSet({
@@ -57,7 +59,12 @@ class CreateFlashCardRepositoryImpl extends CreateFlashcardRepository {
       return const Left(Failure.tooShort());
     } on FlashCardNameBusy catch (_) {
       return const Left(Failure.flashcardNameBuse());
-    } catch (_) {
+    } catch (e, s) {
+      logger.f(
+        'CreateFlashcardRepository createFlashcardSet',
+        error: e,
+        stackTrace: s,
+      );
       return const Left(Failure.general());
     }
   }
@@ -68,7 +75,10 @@ class CreateFlashCardRepositoryImpl extends CreateFlashcardRepository {
         .doc(authUserId)
         .get();
 
-    final documentData = documentSnapshot.data()!;
+    final documentData = documentSnapshot.data();
+    if (documentData == null) {
+      return;
+    }
 
     final flashcards = documentData['ownFlashcard'] as List<dynamic>?;
     if (flashcards == null || flashcards.isEmpty) {
@@ -80,8 +90,10 @@ class CreateFlashCardRepositoryImpl extends CreateFlashcardRepository {
           .collection(FirebaseCollection.flashcardSet.name)
           .doc(element)
           .get();
-      final documentData = documentSnapshot.data()!;
-
+      final documentData = documentSnapshot.data();
+      if (documentData == null) {
+        return;
+      }
       final nameSet = documentData['flashcard']['nameSet'];
 
       if (nameSet == newNameSet) {

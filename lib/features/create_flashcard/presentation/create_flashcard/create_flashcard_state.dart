@@ -7,7 +7,7 @@ class CreateFlashcardState with _$CreateFlashcardState {
     required String flashcardSetId,
   }) = _Success;
   const factory CreateFlashcardState.error({
-    required CreateFlashcardErrors errorMessage,
+    required CreateFlashcardError errorMessage,
   }) = _Error;
   const factory CreateFlashcardState.loadind() = _Loading;
 }

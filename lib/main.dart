@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:primus/custom_multi_bloc_provider.dart';
-import 'migrations/firebase_migration_script.dart';
 import 'screen/start_page.dart';
 import 'utils/language_provider.dart';
 import 'utils/theme.dart';

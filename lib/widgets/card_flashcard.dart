@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:primus/features/create_flashcard/presentation/screens/create_flashcard_page_wrapper.dart';
 import '../dialog/delete_flashcard.dart';
 import '../model/flashcard.dart';
 import '../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
@@ -89,7 +90,7 @@ class _CardFlashcardState extends State<CardFlashcard> {
                                           context,
                                           flashcard: widget.flashcard,
                                           edit: true),
-                                      child: const CreateFlashcardPage(),
+                                      child: const CreateFlashcardPageWrapper(),
                                     ),
                                   ),
                                 );

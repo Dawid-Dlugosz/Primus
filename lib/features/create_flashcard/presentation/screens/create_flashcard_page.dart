@@ -16,17 +16,13 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
   late final GlobalKey<FormState> formKey;
   late final TextEditingController nameController;
   late final TextEditingController languageController;
-  // late final List<TextFormField> wordsFields;
-  // late final List<TextFormField> definitionsFields;
   late final List<TextEditingController> wordsController;
   late final List<TextEditingController> definitionsController;
 
   void removeWorField(index) {
     setState(() {
-      // wordsFields.removeAt(index);
-      // definitionsFields.removeAt(index);
-      wordsController.remove(index);
-      definitionsController.remove(index);
+      wordsController.removeAt(index);
+      definitionsController.removeAt(index);
     });
   }
 
@@ -40,8 +36,6 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
     setState(() {
       wordsController.add(wordController);
       definitionsController.add(definitionController);
-      // wordsFields.add(word);
-      // definitionsFields.add(definition);
     });
   }
 
@@ -50,12 +44,50 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
     formKey = GlobalKey<FormState>();
     nameController = TextEditingController();
     languageController = TextEditingController();
+    generateControllers();
+    super.initState();
+  }
 
+  @override
+  void dispose() {
+    wordsController.clear();
+    definitionsController.clear();
+    nameController.clear();
+    languageController.clear();
+    super.dispose();
+  }
+
+  void generateControllers() {
     wordsController = [];
     definitionsController = [];
-    // wordsFields = [];
-    // definitionsFields = [];
-    super.initState();
+    for (var i = 0; i < 4; i++) {
+      wordsController.add(TextEditingController());
+      definitionsController.add(TextEditingController());
+    }
+  }
+
+  void createSnackBar(CreateFlashcardError error) {
+    var textMessage = "";
+
+    switch (error) {
+      case CreateFlashcardError.nameBusy:
+        textMessage = AppLocalizations.of(context)!.nameIsbusy;
+        break;
+      case CreateFlashcardError.tooShort:
+        textMessage = AppLocalizations.of(context)!.flashcardShort;
+        break;
+      default:
+        textMessage = AppLocalizations.of(context)!.error;
+        break;
+    }
+    final snackBar = SnackBar(
+      content: Text(
+        textMessage,
+        style: const TextStyle(fontSize: 18),
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -64,10 +96,16 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
       listener: (context, state) {
         state.maybeMap(
           success: (value) {
-            // TODO MAKE USER REPOSITORY AND INSERT VALUES TO FIRESTORE AND BACK TO MAIN SCREEN
+            Navigator.pop(context);
+            final snackbar = SnackBar(
+              content: Text(
+                AppLocalizations.of(context)!.flashcardCreate,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
           },
           error: (value) {
-            // TODO MAKE SNACKBAR WHEN IS ERROR
+            createSnackBar(value.errorMessage);
           },
           orElse: () {},
         );

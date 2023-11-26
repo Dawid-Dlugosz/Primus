@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:primus/features/create_flashcard/presentation/screens/create_flashcard_page_wrapper.dart';
+import 'package:primus/widgets/create_flashcard_widget.dart';
 import '../../dialog/copy_flashcard.dart';
 import '../../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
 import 'flashcard_learn.dart';
@@ -51,7 +53,7 @@ class _FlashCardMainState extends State<FlashCardMain> {
                                         flashcard:
                                             viewModel.flashCardSet.flashcard,
                                         copy: true),
-                                    child: const CreateFlashcardPage(),
+                                    child: const CreateFlashcardPageWrapper(),
                                   ),
                                 ),
                               ),

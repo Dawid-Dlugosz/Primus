@@ -13,7 +13,7 @@ class CreateFlashcardPageWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CreateFlashcardCubit(
+      create: (_) => CreateFlashcardCubit(
         flashcardRepository: CreateFlashCardRepositoryImpl(
           firestore: FirebaseFirestore.instance,
           authUserId: FirebaseAuth.instance.currentUser!.uid,

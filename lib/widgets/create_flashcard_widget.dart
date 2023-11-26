@@ -23,7 +23,7 @@ class CreateFlashcardWidget extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: IconButton(
                 icon: const Icon(Icons.close),
-                onPressed: removeFlashcard,
+                onPressed: () => removeFlashcard(),
               ),
             ),
             TextFormField(

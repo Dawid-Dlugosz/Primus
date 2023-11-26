@@ -61,6 +61,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   json_serializable: ^6.7.1
+  logger: ^2.0.2+1
   shared_preferences: ^2.2.2
   uuid: ^4.2.1
 

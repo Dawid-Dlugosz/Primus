@@ -8,7 +8,7 @@ import '../../../../core/failure.dart';
 part 'create_flashcard_state.dart';
 part 'create_flashcard_cubit.freezed.dart';
 
-enum CreateFlashcardErrors {
+enum CreateFlashcardError {
   nameBusy,
   tooShort,
   general,
@@ -45,16 +45,16 @@ class CreateFlashcardCubit extends Cubit<CreateFlashcardState> {
   void _generateErrorState(Failure failure) {
     if (failure == const Failure.tooShort()) {
       emit(const CreateFlashcardState.error(
-          errorMessage: CreateFlashcardErrors.tooShort));
+          errorMessage: CreateFlashcardError.tooShort));
     }
 
     if (failure == const Failure.flashcardNameBuse()) {
       emit(const CreateFlashcardState.error(
-          errorMessage: CreateFlashcardErrors.nameBusy));
+          errorMessage: CreateFlashcardError.nameBusy));
     }
     if (failure == const Failure.general()) {
       emit(const CreateFlashcardState.error(
-          errorMessage: CreateFlashcardErrors.general));
+          errorMessage: CreateFlashcardError.general));
     }
   }
 }

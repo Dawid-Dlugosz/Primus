@@ -20,7 +20,7 @@ mixin _$CreateFlashcardState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
-    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$CreateFlashcardState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
-    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$CreateFlashcardState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
-    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
   }) =>
@@ -127,7 +127,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
-    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) {
     return initial();
@@ -138,7 +138,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
-    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) {
     return initial?.call();
@@ -149,7 +149,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
-    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
   }) {
@@ -268,7 +268,7 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
-    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) {
     return success(flashcardSetId);
@@ -279,7 +279,7 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
-    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) {
     return success?.call(flashcardSetId);
@@ -290,7 +290,7 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
-    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
   }) {
@@ -354,7 +354,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CreateFlashcardErrors errorMessage});
+  $Res call({CreateFlashcardError errorMessage});
 }
 
 /// @nodoc
@@ -374,7 +374,7 @@ class __$$ErrorImplCopyWithImpl<$Res>
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
-              as CreateFlashcardErrors,
+              as CreateFlashcardError,
     ));
   }
 }
@@ -385,7 +385,7 @@ class _$ErrorImpl implements _Error {
   const _$ErrorImpl({required this.errorMessage});
 
   @override
-  final CreateFlashcardErrors errorMessage;
+  final CreateFlashcardError errorMessage;
 
   @override
   String toString() {
@@ -415,7 +415,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
-    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) {
     return error(errorMessage);
@@ -426,7 +426,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
-    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) {
     return error?.call(errorMessage);
@@ -437,7 +437,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
-    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
   }) {
@@ -486,10 +486,10 @@ class _$ErrorImpl implements _Error {
 }
 
 abstract class _Error implements CreateFlashcardState {
-  const factory _Error({required final CreateFlashcardErrors errorMessage}) =
+  const factory _Error({required final CreateFlashcardError errorMessage}) =
       _$ErrorImpl;
 
-  CreateFlashcardErrors get errorMessage;
+  CreateFlashcardError get errorMessage;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -535,7 +535,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
-    required TResult Function(CreateFlashcardErrors errorMessage) error,
+    required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) {
     return loadind();
@@ -546,7 +546,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
-    TResult? Function(CreateFlashcardErrors errorMessage)? error,
+    TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) {
     return loadind?.call();
@@ -557,7 +557,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
-    TResult Function(CreateFlashcardErrors errorMessage)? error,
+    TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
   }) {
