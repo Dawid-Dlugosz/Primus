@@ -54,7 +54,7 @@ void main() {
         expect: () => [
           const CreateFlashcardState.loadind(),
           const CreateFlashcardState.error(
-            errorMessage: CreateFlashcardErrors.tooShort,
+            errorMessage: CreateFlashcardError.tooShort,
           )
         ],
       );
@@ -84,7 +84,7 @@ void main() {
         expect: () => [
           const CreateFlashcardState.loadind(),
           const CreateFlashcardState.error(
-            errorMessage: CreateFlashcardErrors.nameBusy,
+            errorMessage: CreateFlashcardError.nameBusy,
           )
         ],
       );
@@ -114,7 +114,7 @@ void main() {
         expect: () => [
           const CreateFlashcardState.loadind(),
           const CreateFlashcardState.error(
-            errorMessage: CreateFlashcardErrors.general,
+            errorMessage: CreateFlashcardError.general,
           )
         ],
       );
