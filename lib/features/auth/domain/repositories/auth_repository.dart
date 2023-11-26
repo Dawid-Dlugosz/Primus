@@ -17,4 +17,6 @@ abstract class AuthRepository {
   });
 
   Future<Either<String, Unit>> checkNickname({required String nickname});
+
+  Stream<User?> isUserLoggin();
 }

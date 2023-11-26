@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:primus/features/auth/presentation/pages/login_page.dart';
-import 'package:primus/widgets/loading_widget.dart';
+import 'package:primus/core/screens/loading_widget.dart';
 import '../core/widgets/snack_bar_info.dart';
 import '../features/auth/utils/firebase_error.dart';
 import 'home/home_page.dart';

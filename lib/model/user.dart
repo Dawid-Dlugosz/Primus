@@ -1,5 +1,6 @@
 import 'to_learn.dart';
 
+// TODO I THINK TO DELETE
 class User {
   const User({
     required this.nickname,

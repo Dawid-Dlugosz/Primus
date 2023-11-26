@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
@@ -21,11 +23,11 @@ class AuthRepositoryImpl implements AuthRepository {
     required String nickname,
   }) async {
     try {
-      final user = await firebaseAuth.createUserWithEmailAndPassword(
+      final userCredential = await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return Right(user);
+      return Right(userCredential);
     } on FirebaseAuthException catch (e) {
       return Left(e.code);
     }
@@ -37,11 +39,11 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     try {
-      final user = await firebaseAuth.signInWithEmailAndPassword(
+      final userCredential = await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return Right(user);
+      return Right(userCredential);
     } on FirebaseAuthException catch (e) {
       return Left(e.code);
     }
@@ -78,5 +80,10 @@ class AuthRepositoryImpl implements AuthRepository {
     } on BusyNickname catch (_) {
       return const Left(nicknameBusy);
     }
+  }
+
+  @override
+  Stream<User?> isUserLoggin() async* {
+    yield* firebaseAuth.authStateChanges();
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../view_models/create_unit_view_model.dart';
 import '../widgets/empty_widget.dart';
-import '../widgets/loading_widget.dart';
+import '../core/screens/loading_widget.dart';
 import '../widgets/unit_chips.dart';
 import 'package:provider/provider.dart';
 

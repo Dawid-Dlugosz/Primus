@@ -17,6 +17,8 @@ class MockFirebaseFirestore extends Fake implements FirebaseFirestore {}
 
 class MockQuerySnapshot extends Mock implements QuerySnapshot {}
 
+class MockUser extends Mock implements User {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MockFirebaseAuth firebaseAuth;
@@ -27,7 +29,6 @@ void main() {
   setUpAll(() {
     userCredential = MockUserCredential();
     firebaseAuth = MockFirebaseAuth();
-
     cloudFirestore = FakeFirebaseFirestore();
     repositoryImpl = AuthRepositoryImpl(
       firebaseAuth: firebaseAuth,
@@ -206,7 +207,9 @@ void main() {
                   email: 'email',
                   password: 'password',
                 ),
-              ).thenAnswer((_) async => userCredential);
+              ).thenAnswer(
+                (_) async => userCredential,
+              );
 
               final result = await invokeRepoFunction();
 

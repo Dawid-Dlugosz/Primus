@@ -5,7 +5,7 @@ import '../dialog/flascard_learn_settings.dart';
 import '../utils/shared_preferences.dart';
 import '../view_models/flashcard_spelling_view_model.dart';
 import '../widgets/flascard_learn/empty_words.dart';
-import '../widgets/loading_widget.dart';
+import '../core/screens/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class FlashcardSpelling extends StatefulWidget {

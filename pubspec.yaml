@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bloc: ^8.1.2
+  bloc_test: ^9.1.5
   cloud_firestore: ^4.3.0
 
   # The following adds the Cupertino Icons font to your application.
@@ -60,6 +61,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   json_serializable: ^6.7.1
+  logger: ^2.0.2+1
   shared_preferences: ^2.2.2
   uuid: ^4.2.1
 

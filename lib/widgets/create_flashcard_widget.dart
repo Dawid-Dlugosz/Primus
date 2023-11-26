@@ -1,34 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CreateFlashcardWidget extends StatefulWidget {
-  const CreateFlashcardWidget({Key? key, required this.wordField, required this.definitionField, required this.removeFlashcard}) : super(key: key);
+class CreateFlashcardWidget extends StatelessWidget {
+  const CreateFlashcardWidget(
+      {super.key,
+      required this.wordController,
+      required this.definitionController,
+      required this.removeFlashcard});
 
-  final TextFormField wordField;
-  final TextFormField definitionField;
+  final TextEditingController wordController;
+  final TextEditingController definitionController;
   final VoidCallback removeFlashcard;
 
   @override
-  State<CreateFlashcardWidget> createState() => _CreateFlashcardWidgetState();
-}
-
-class _CreateFlashcardWidgetState extends State<CreateFlashcardWidget> {
-  @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                widget.removeFlashcard();
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Card(
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () => removeFlashcard(),
+              ),
+            ),
+            TextFormField(
+              controller: wordController,
+              decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.definitionHint,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return AppLocalizations.of(context)!.flashcardsNameError;
+                }
+                return null;
               },
             ),
-          ),
-          widget.wordField,
-          widget.definitionField,
-        ],
+            TextFormField(
+              controller: definitionController,
+              decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.definitionHint,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return AppLocalizations.of(context)!.flashcardsNameError;
+                }
+                return null;
+              },
+            )
+          ],
+        ),
       ),
     );
   }

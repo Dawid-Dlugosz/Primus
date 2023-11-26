@@ -4,7 +4,7 @@ import '../../view_models/all_flashcard_view_model.dart';
 import '../../widgets/card_flashcard.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/empty_widget.dart';
-import '../../widgets/loading_widget.dart';
+import '../../core/screens/loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class AllFlashcard extends StatelessWidget {
