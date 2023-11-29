@@ -28,7 +28,7 @@ class UserRepositoryImpl implements UserRepository {
           .doc(user.uid)
           .set(newUser.toJson());
 
-      return Right(user);
+      return Right(newUser);
     } catch (e, s) {
       logger.f(
         'UserRepositoryImp addFlashcardSetToUser',
