@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/features/create_flashcard/presentation/create_flashcard/create_flashcard_cubit.dart';
 import 'package:primus/core/screens/loading_widget.dart';
+import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 import '../../../../widgets/create_flashcard_widget.dart';
 
 class CreateFlashcardPage extends StatefulWidget {
@@ -97,6 +98,9 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
         state.maybeMap(
           success: (value) {
             Navigator.pop(context);
+            context.read<UserCubit>().addFlashcardSetToUser(
+                  flashcardSetId: value.flashcardSetId,
+                );
             final snackbar = SnackBar(
               content: Text(
                 AppLocalizations.of(context)!.flashcardCreate,

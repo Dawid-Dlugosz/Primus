@@ -51,6 +51,7 @@ class UserRepositoryImpl implements UserRepository {
         ownFlashcard: [],
         toLearn: [],
       );
+
       await firestore
           .collection(FirebaseCollection.users.name)
           .doc(uid)
