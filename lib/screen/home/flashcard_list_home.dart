@@ -6,6 +6,7 @@ import '../../view_models/all_flashcard_view_model.dart';
 import '../../widgets/card_flashcard.dart';
 import 'package:provider/provider.dart';
 
+// TODO DELETE
 class FlashcardListHome extends StatefulWidget {
   const FlashcardListHome(
       {required this.flashcards,
@@ -34,11 +35,12 @@ class _FlashcardListHomeState extends State<FlashcardListHome> {
           shrinkWrap: true,
           itemCount: widget.flashcards.take(3).length,
           itemBuilder: (context, index) {
+            return SizedBox();
             // TODO PORPAWIĆ USUSWANIE U KAŻDEGO UŻYTKOWNIKA KTÓRY W TO LEARN MA ID USUWANEGO ZESTAWU MUSI ZOSTAĆ USUNIĘTE
-            return CardFlashcard(
-              flashcard: widget.flashcards[index],
-              delete: widget.delte,
-            );
+            // return CardFlashcard(
+            //   flashcard: widget.flashcards[index],
+            //   delete: widget.delte,
+            // );
           },
         ),
         SizedBox(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../view_models/unit_screen_view_model.dart';
-import '../widgets/card_flashcard.dart';
+import '../core/widgets/card_flashcard.dart';
 import '../core/screens/loading_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -25,10 +25,11 @@ class UnitScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: viewModel.flashcardSets.length,
                       itemBuilder: (context, index) {
-                        return CardFlashcard(
-                          flashcard: viewModel.flashcardSets[index].flashcard,
-                          fromSearch: true,
-                        );
+                        return SizedBox();
+                        // return CardFlashcard(
+                        //   flashcard: viewModel.flashcardSets[index].flashcard,
+                        //   fromSearch: true,
+                        // );
                       },
                     )
                   ],

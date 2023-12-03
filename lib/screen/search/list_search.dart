@@ -37,10 +37,11 @@ class ListSearch extends StatelessWidget {
             child: ListView.builder(
               itemCount: getSearcherSets().length,
               itemBuilder: (context, index) {
-                return CardFlashcard(
-                  flashcard: getSearcherSets()[index].flashcard,
-                  fromSearch: true,
-                );
+                return SizedBox();
+                // return CardFlashcard(
+                //   flashcard: getSearcherSets()[index].flashcard,
+                //   fromSearch: true,
+                // );
               },
             ),
           )

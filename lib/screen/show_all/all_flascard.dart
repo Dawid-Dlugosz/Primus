@@ -31,10 +31,11 @@ class AllFlashcard extends StatelessWidget {
                       return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return CardFlashcard(
-                            flashcard: snapshot.data![index],
-                            delete: viewModel.deleteFlashcard,
-                          );
+                          return SizedBox();
+                          // return CardFlashcard(
+                          //   flashcard: snapshot.data![index],
+                          //   delete: viewModel.deleteFlashcard,
+                          // );
                         },
                       );
                     }

@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:primus/features/create_flashcard/presentation/screens/create_flashcard_page_wrapper.dart';
-import '../dialog/delete_flashcard.dart';
-import '../model/flashcard.dart';
-import '../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
-import '../screen/flashcard_main_learn/flashcard_main.dart';
-import '../view_models/create_flashcard_view_model.dart';
-import '../view_models/flashcard_main_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard.dart';
+import '../../dialog/delete_flashcard.dart';
 
 class CardFlashcard extends StatefulWidget {
-  const CardFlashcard(
-      {required this.flashcard, this.delete, this.fromSearch = false, Key? key})
-      : super(key: key);
+  const CardFlashcard({
+    required this.flashcard,
+    this.delete,
+    this.fromSearch = false,
+    super.key,
+  });
 
-  final Flashcard flashcard;
+  final FlashCard flashcard;
   final bool fromSearch;
   final Function(String flashcardId)? delete;
   @override
@@ -41,16 +38,17 @@ class _CardFlashcardState extends State<CardFlashcard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-              create: (context) =>
-                  FlashcardMainViewModel(flascardId: widget.flashcard.id),
-              child: const FlashCardMain(),
-            ),
-          ),
-        );
+        // TODO SHOW FLASHCARD
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => ChangeNotifierProvider(
+        //       create: (context) =>
+        //           FlashcardMainViewModel(flascardId: widget.flashcard.id),
+        //       child: const FlashCardMain(),
+        //     ),
+        //   ),
+        // );
       },
       child: SizedBox(
         width: double.infinity,
@@ -81,19 +79,20 @@ class _CardFlashcardState extends State<CardFlashcard> {
                             ],
                             onSelected: (value) {
                               if (value == 'Edit') {
-                                Navigator.push(
-                                  this.context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ChangeNotifierProvider(
-                                      create: (context) => FlashcardViewModel(
-                                          context,
-                                          flashcard: widget.flashcard,
-                                          edit: true),
-                                      child: const CreateFlashcardPageWrapper(),
-                                    ),
-                                  ),
-                                );
+                                // TODO MAKE EDIT
+                                // Navigator.push(
+                                //   this.context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) =>
+                                //         ChangeNotifierProvider(
+                                //       create: (context) => FlashcardViewModel(
+                                //           context,
+                                //           flashcard: widget.flashcard,
+                                //           edit: true),
+                                //       child: const CreateFlashcardPageWrapper(),
+                                //     ),
+                                //   ),
+                                // );
                               } else {
                                 showDialog(
                                   context: context,
