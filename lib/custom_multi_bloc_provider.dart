@@ -43,9 +43,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
             repository: UserFlashcardRepositoryImpl(
               firestore: firestore,
             ),
-            firebaseAuth: firebaseAuth,
           ),
-          lazy: false,
         )
       ],
       child: child,

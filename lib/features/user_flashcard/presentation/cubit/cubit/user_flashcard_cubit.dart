@@ -14,16 +14,13 @@ part 'user_flashcard_cubit.freezed.dart';
 class UserFlashcardCubit extends Cubit<UserFlashcardState> {
   UserFlashcardCubit({
     required this.repository,
-    required this.firebaseAuth,
-  }) : super(const UserFlashcardState.initial()) {
-    loadFlashcardSets(uid: firebaseAuth.currentUser!.uid);
-  }
+  }) : super(const UserFlashcardState.initial());
 
-  final FirebaseAuth firebaseAuth;
   final UserFlashcardRepository repository;
 
   Future<void> loadFlashcardSets({required String uid}) async {
     final result = await repository.streamFlashcardSet(uid: uid);
+
     result.fold(
       (l) => emit(const UserFlashcardState.error()),
       (r) {
