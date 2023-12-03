@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:primus/features/user_flashcard/presentation/cubit/cubit/user_flashcard_cubit.dart';
 import '../../widgets/bottom_dialog_add.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,8 +57,17 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        child: Column(
+          children: [
+            BlocBuilder<UserFlashcardCubit, UserFlashcardState>(
+              builder: (_, state) {
+                return const SizedBox();
+              },
+            )
+          ],
+        ),
         // child: StreamBuilder<DocumentSnapshot>(
         //   stream: viewModel.document,
         //   builder: (context, snapshot) {

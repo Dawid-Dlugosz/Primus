@@ -6,6 +6,8 @@ import 'package:primus/features/auth/data/repositories/auth_repository_impl.dart
 import 'package:primus/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:primus/features/user/data/repository/user_repository_impl.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
+import 'package:primus/features/user_flashcard/data/repository/user_flashcard_repository_impl.dart';
+import 'package:primus/features/user_flashcard/presentation/cubit/cubit/user_flashcard_cubit.dart';
 
 class CustomMultiBlocProvider extends StatelessWidget {
   const CustomMultiBlocProvider({required this.child, super.key});
@@ -14,24 +16,36 @@ class CustomMultiBlocProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final firebaseAuth = FirebaseAuth.instance;
+    final firestore = FirebaseFirestore.instance;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(
           create: (_) => AuthCubit(
             authRepo: AuthRepositoryImpl(
-              firebaseAuth: FirebaseAuth.instance,
-              firestore: FirebaseFirestore.instance,
+              firebaseAuth: firebaseAuth,
+              firestore: firestore,
             ),
-            firestore: FirebaseFirestore.instance,
+            firestore: firestore,
           ),
           lazy: false,
         ),
         BlocProvider(
           create: (_) => UserCubit(
             repository: UserRepositoryImpl(
-              firestore: FirebaseFirestore.instance,
+              firestore: firestore,
             ),
           ),
+        ),
+        BlocProvider(
+          create: (_) => UserFlashcardCubit(
+            repository: UserFlashcardRepositoryImpl(
+              firestore: firestore,
+            ),
+            firebaseAuth: firebaseAuth,
+          ),
+          lazy: false,
         )
       ],
       child: child,
