@@ -28,14 +28,18 @@ class UserCubit extends Cubit<User?> {
   Future<void> addFlashcardSetToUser({
     required String flashcardSetId,
   }) async {
-    final result = await repository.addFlashcardSetToUser(
-      flashcardSetId: flashcardSetId,
-      user: state!,
-    );
+    if (state != null) {
+      final result = await repository.addFlashcardSetToUser(
+        flashcardSetId: flashcardSetId,
+        user: state!,
+      );
 
-    result.fold(
-      (l) => emit(state!),
-      (user) => emit(user),
-    );
+      result.fold(
+        (l) => emit(state),
+        (user) => emit(user),
+      );
+    } else {
+      emit(state);
+    }
   }
 }

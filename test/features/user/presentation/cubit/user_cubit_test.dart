@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:primus/core/failure.dart';
-import 'package:primus/features/user/data/repository/user_repository_impl.dart';
 import 'package:primus/features/user/domain/entity/user.dart';
 import 'package:primus/features/user/domain/repository/user_repository.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
@@ -75,9 +74,10 @@ void main() {
         expect: () => [tUser],
       );
 
-      blocTest(
+      blocTest<UserCubit, User?>(
         'should emit [User] with new flashcardid when repo return right',
         build: () => cubit,
+        seed: () => tUser,
         act: (_) {
           when(
             () => repository.addFlashcardSetToUser(
@@ -90,7 +90,6 @@ void main() {
 
           cubit.addFlashcardSetToUser(
             flashcardSetId: tFlashcardId,
-            user: tUser,
           );
         },
         expect: () => [tUserWithFlashcard],
@@ -111,17 +110,16 @@ void main() {
 
           cubit.addFlashcardSetToUser(
             flashcardSetId: tFlashcardId,
-            user: tUser,
           );
         },
         expect: () => [null],
       );
 
-      blocTest(
-        'should emit [User] without new flashcard when repo return left',
+      blocTest<UserCubit, User?>(
+        'should emit empty list without state bcz repo repo failre and bloc emit the same state',
         build: () => cubit,
-        setUp: () => tUserWithFlashcard,
-        act: (_) {
+        seed: () => tUserWithFlashcard,
+        act: (_) async {
           when(
             () => repository.addFlashcardSetToUser(
               flashcardSetId: any(named: 'flashcardSetId'),
@@ -129,10 +127,11 @@ void main() {
             ),
           ).thenAnswer((_) async => const Left(Failure.user()));
 
-          cubit.addFlashcardSetToUser(
-              flashcardSetId: tFlashcardId, user: tUserWithFlashcard);
+          await cubit.addFlashcardSetToUser(
+            flashcardSetId: tFlashcardId,
+          );
         },
-        expect: () => [tUserWithFlashcard],
+        expect: () => [],
       );
     },
   );

@@ -30,7 +30,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
       if (firebaseAuth.currentUser != null) {
         await firebaseAuth.currentUser!.updateDisplayName(nickname);
-        print('sdasdasda ${firebaseAuth.currentUser}');
       }
 
       return Right(firebaseAuth.currentUser!);
