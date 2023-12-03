@@ -73,7 +73,9 @@ class AuthCubit extends Cubit<AuthState> {
 
     result.fold(
       (l) => emit(AuthState.error(errorCode: l)),
-      (r) => emit(AuthState.authorized(user: r.user!)),
+      (r) async {
+        emit(AuthState.authorized(user: r));
+      },
     );
   }
 

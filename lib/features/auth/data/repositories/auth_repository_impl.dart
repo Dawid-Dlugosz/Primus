@@ -17,17 +17,22 @@ class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firestore;
   @override
-  Future<Either<String, UserCredential>> createAccount({
+  Future<Either<String, User>> createAccount({
     required String email,
     required String password,
     required String nickname,
   }) async {
     try {
-      final userCredential = await firebaseAuth.createUserWithEmailAndPassword(
+      await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return Right(userCredential);
+
+      if (firebaseAuth.currentUser != null) {
+        await firebaseAuth.currentUser!.updateDisplayName(nickname);
+      }
+
+      return Right(firebaseAuth.currentUser!);
     } on FirebaseAuthException catch (e) {
       return Left(e.code);
     }

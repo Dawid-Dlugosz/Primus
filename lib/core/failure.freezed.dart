@@ -20,6 +20,7 @@ mixin _$Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() tooShort,
     required TResult Function() flashcardNameBuse,
+    required TResult Function() user,
     required TResult Function() general,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +28,7 @@ mixin _$Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? tooShort,
     TResult? Function()? flashcardNameBuse,
+    TResult? Function()? user,
     TResult? Function()? general,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +36,7 @@ mixin _$Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? tooShort,
     TResult Function()? flashcardNameBuse,
+    TResult Function()? user,
     TResult Function()? general,
     required TResult orElse(),
   }) =>
@@ -42,6 +45,7 @@ mixin _$Failure {
   TResult map<TResult extends Object?>({
     required TResult Function(_ToShort value) tooShort,
     required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
+    required TResult Function(_User value) user,
     required TResult Function(_General value) general,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +53,7 @@ mixin _$Failure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ToShort value)? tooShort,
     TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult? Function(_User value)? user,
     TResult? Function(_General value)? general,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +61,7 @@ mixin _$Failure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ToShort value)? tooShort,
     TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult Function(_User value)? user,
     TResult Function(_General value)? general,
     required TResult orElse(),
   }) =>
@@ -119,6 +125,7 @@ class _$ToShortImpl implements _ToShort {
   TResult when<TResult extends Object?>({
     required TResult Function() tooShort,
     required TResult Function() flashcardNameBuse,
+    required TResult Function() user,
     required TResult Function() general,
   }) {
     return tooShort();
@@ -129,6 +136,7 @@ class _$ToShortImpl implements _ToShort {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? tooShort,
     TResult? Function()? flashcardNameBuse,
+    TResult? Function()? user,
     TResult? Function()? general,
   }) {
     return tooShort?.call();
@@ -139,6 +147,7 @@ class _$ToShortImpl implements _ToShort {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? tooShort,
     TResult Function()? flashcardNameBuse,
+    TResult Function()? user,
     TResult Function()? general,
     required TResult orElse(),
   }) {
@@ -153,6 +162,7 @@ class _$ToShortImpl implements _ToShort {
   TResult map<TResult extends Object?>({
     required TResult Function(_ToShort value) tooShort,
     required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
+    required TResult Function(_User value) user,
     required TResult Function(_General value) general,
   }) {
     return tooShort(this);
@@ -163,6 +173,7 @@ class _$ToShortImpl implements _ToShort {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ToShort value)? tooShort,
     TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult? Function(_User value)? user,
     TResult? Function(_General value)? general,
   }) {
     return tooShort?.call(this);
@@ -173,6 +184,7 @@ class _$ToShortImpl implements _ToShort {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ToShort value)? tooShort,
     TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult Function(_User value)? user,
     TResult Function(_General value)? general,
     required TResult orElse(),
   }) {
@@ -227,6 +239,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
   TResult when<TResult extends Object?>({
     required TResult Function() tooShort,
     required TResult Function() flashcardNameBuse,
+    required TResult Function() user,
     required TResult Function() general,
   }) {
     return flashcardNameBuse();
@@ -237,6 +250,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? tooShort,
     TResult? Function()? flashcardNameBuse,
+    TResult? Function()? user,
     TResult? Function()? general,
   }) {
     return flashcardNameBuse?.call();
@@ -247,6 +261,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? tooShort,
     TResult Function()? flashcardNameBuse,
+    TResult Function()? user,
     TResult Function()? general,
     required TResult orElse(),
   }) {
@@ -261,6 +276,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
   TResult map<TResult extends Object?>({
     required TResult Function(_ToShort value) tooShort,
     required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
+    required TResult Function(_User value) user,
     required TResult Function(_General value) general,
   }) {
     return flashcardNameBuse(this);
@@ -271,6 +287,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ToShort value)? tooShort,
     TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult? Function(_User value)? user,
     TResult? Function(_General value)? general,
   }) {
     return flashcardNameBuse?.call(this);
@@ -281,6 +298,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ToShort value)? tooShort,
     TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult Function(_User value)? user,
     TResult Function(_General value)? general,
     required TResult orElse(),
   }) {
@@ -293,6 +311,119 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
 
 abstract class _FlashcardNameBusy implements Failure {
   const factory _FlashcardNameBusy() = _$FlashcardNameBusyImpl;
+}
+
+/// @nodoc
+abstract class _$$UserImplCopyWith<$Res> {
+  factory _$$UserImplCopyWith(
+          _$UserImpl value, $Res Function(_$UserImpl) then) =
+      __$$UserImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UserImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$UserImpl>
+    implements _$$UserImplCopyWith<$Res> {
+  __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$UserImpl implements _User {
+  const _$UserImpl();
+
+  @override
+  String toString() {
+    return 'Failure.user()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UserImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() tooShort,
+    required TResult Function() flashcardNameBuse,
+    required TResult Function() user,
+    required TResult Function() general,
+  }) {
+    return user();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? tooShort,
+    TResult? Function()? flashcardNameBuse,
+    TResult? Function()? user,
+    TResult? Function()? general,
+  }) {
+    return user?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? tooShort,
+    TResult Function()? flashcardNameBuse,
+    TResult Function()? user,
+    TResult Function()? general,
+    required TResult orElse(),
+  }) {
+    if (user != null) {
+      return user();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ToShort value) tooShort,
+    required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
+    required TResult Function(_User value) user,
+    required TResult Function(_General value) general,
+  }) {
+    return user(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ToShort value)? tooShort,
+    TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult? Function(_User value)? user,
+    TResult? Function(_General value)? general,
+  }) {
+    return user?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ToShort value)? tooShort,
+    TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult Function(_User value)? user,
+    TResult Function(_General value)? general,
+    required TResult orElse(),
+  }) {
+    if (user != null) {
+      return user(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _User implements Failure {
+  const factory _User() = _$UserImpl;
 }
 
 /// @nodoc
@@ -335,6 +466,7 @@ class _$GeneralImpl implements _General {
   TResult when<TResult extends Object?>({
     required TResult Function() tooShort,
     required TResult Function() flashcardNameBuse,
+    required TResult Function() user,
     required TResult Function() general,
   }) {
     return general();
@@ -345,6 +477,7 @@ class _$GeneralImpl implements _General {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? tooShort,
     TResult? Function()? flashcardNameBuse,
+    TResult? Function()? user,
     TResult? Function()? general,
   }) {
     return general?.call();
@@ -355,6 +488,7 @@ class _$GeneralImpl implements _General {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? tooShort,
     TResult Function()? flashcardNameBuse,
+    TResult Function()? user,
     TResult Function()? general,
     required TResult orElse(),
   }) {
@@ -369,6 +503,7 @@ class _$GeneralImpl implements _General {
   TResult map<TResult extends Object?>({
     required TResult Function(_ToShort value) tooShort,
     required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
+    required TResult Function(_User value) user,
     required TResult Function(_General value) general,
   }) {
     return general(this);
@@ -379,6 +514,7 @@ class _$GeneralImpl implements _General {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ToShort value)? tooShort,
     TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult? Function(_User value)? user,
     TResult? Function(_General value)? general,
   }) {
     return general?.call(this);
@@ -389,6 +525,7 @@ class _$GeneralImpl implements _General {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ToShort value)? tooShort,
     TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult Function(_User value)? user,
     TResult Function(_General value)? general,
     required TResult orElse(),
   }) {

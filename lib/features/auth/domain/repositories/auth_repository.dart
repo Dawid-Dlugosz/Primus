@@ -7,7 +7,7 @@ abstract class AuthRepository {
     required String password,
   });
   Future<void> logOut();
-  Future<Either<String, UserCredential>> createAccount({
+  Future<Either<String, User>> createAccount({
     required String email,
     required String password,
     required String nickname,

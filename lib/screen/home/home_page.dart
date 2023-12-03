@@ -1,18 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../model/flashcard.dart';
-import '../../model/to_learn.dart';
-import '../../model/user.dart' as myUser;
 import '../../widgets/bottom_dialog_add.dart';
-import 'flashcard_list_home.dart';
-import '../../core/screens/loading_widget.dart';
-import '../../widgets/to_learn_list/to_learn_home_list.dart';
-import '../../widgets/unit_home_list.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -64,8 +55,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         // child: StreamBuilder<DocumentSnapshot>(
         //   stream: viewModel.document,
         //   builder: (context, snapshot) {

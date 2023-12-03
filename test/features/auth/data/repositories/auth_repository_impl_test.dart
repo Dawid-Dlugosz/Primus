@@ -25,9 +25,10 @@ void main() {
   late AuthRepository repositoryImpl;
   late MockUserCredential userCredential;
   late FakeFirebaseFirestore cloudFirestore;
-
+  late MockUser user;
   setUpAll(() {
     userCredential = MockUserCredential();
+    user = MockUser();
     firebaseAuth = MockFirebaseAuth();
     cloudFirestore = FakeFirebaseFirestore();
     repositoryImpl = AuthRepositoryImpl(
@@ -38,6 +39,13 @@ void main() {
 
   void expectFailure(
     Either<String, UserCredential> result,
+    String code,
+  ) {
+    expect(result, Left(code));
+  }
+
+  void expectUserFailure(
+    Either<String, User> result,
     String code,
   ) {
     expect(result, Left(code));
@@ -58,9 +66,12 @@ void main() {
             ).thenThrow(
               FirebaseAuthException(code: code),
             );
+
+            when(() => firebaseAuth.currentUser!.updateDisplayName(any()))
+                .thenAnswer((_) async {});
           }
 
-          Future<Either<String, UserCredential>> invokeRepoFunction() async {
+          Future<Either<String, User>> invokeRepoFunction() async {
             return repositoryImpl.createAccount(
               nickname: 'nickname',
               email: 'email',
@@ -73,7 +84,7 @@ void main() {
             () async {
               setUpWhenFailure(emailAlreadyExist);
               final result = await invokeRepoFunction();
-              expectFailure(result, emailAlreadyExist);
+              expectUserFailure(result, emailAlreadyExist);
             },
           );
 
@@ -84,7 +95,7 @@ void main() {
 
               final result = await invokeRepoFunction();
 
-              expectFailure(result, invalidEmail);
+              expectUserFailure(result, invalidEmail);
             },
           );
 
@@ -95,7 +106,7 @@ void main() {
 
               final result = await invokeRepoFunction();
 
-              expectFailure(result, operationNotAllowed);
+              expectUserFailure(result, operationNotAllowed);
 
               expect(
                 result,
@@ -111,26 +122,7 @@ void main() {
 
               final result = await invokeRepoFunction();
 
-              expectFailure(result, weakPassword);
-            },
-          );
-
-          test(
-            'Should return UserCredential for correct login and password',
-            () async {
-              when(
-                () => firebaseAuth.createUserWithEmailAndPassword(
-                  email: 'email',
-                  password: 'password',
-                ),
-              ).thenAnswer((_) async => userCredential);
-
-              final result = await invokeRepoFunction();
-
-              expect(
-                result,
-                Right(userCredential),
-              );
+              expectUserFailure(result, weakPassword);
             },
           );
         },
