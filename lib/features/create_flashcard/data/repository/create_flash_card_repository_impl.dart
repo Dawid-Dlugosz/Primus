@@ -35,9 +35,7 @@ class CreateFlashCardRepositoryImpl extends CreateFlashcardRepository {
       if (words.length < 4) {
         throw TooShort();
       }
-
       await _checkFlashCardName(name);
-
       final flashcardSet = _generateFlashcardSet(
         words,
         definitions,

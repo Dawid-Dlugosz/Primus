@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../model/flashcard.dart';
 import '../../view_models/all_flashcard_view_model.dart';
-import '../../widgets/card_flashcard.dart';
+import '../../core/widgets/card_flashcard.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/empty_widget.dart';
 import '../../core/screens/loading_widget.dart';
@@ -31,10 +31,11 @@ class AllFlashcard extends StatelessWidget {
                       return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return CardFlashcard(
-                            flashcard: snapshot.data![index],
-                            delete: viewModel.deleteFlashcard,
-                          );
+                          return SizedBox();
+                          // return CardFlashcard(
+                          //   flashcard: snapshot.data![index],
+                          //   delete: viewModel.deleteFlashcard,
+                          // );
                         },
                       );
                     }

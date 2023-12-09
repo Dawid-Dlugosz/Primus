@@ -5,6 +5,7 @@ class EmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO MAKE EMPTY SCREEN
     return Column(
       children: const [
         Text('Nic tutaj nie ma'),

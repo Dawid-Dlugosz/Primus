@@ -8,4 +8,5 @@ class Failure with _$Failure {
   const factory Failure.flashcardNameBuse() = _FlashcardNameBusy;
   const factory Failure.user() = _User;
   const factory Failure.general() = _General;
+  const factory Failure.flashcard() = _Flashcard;
 }

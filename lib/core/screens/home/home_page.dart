@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/bottom_dialog_add.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:primus/core/screens/home/flashcard_list_home.dart';
+import 'package:primus/features/user_flashcard/presentation/cubit/cubit/user_flashcard_cubit.dart';
+import '../../../../widgets/bottom_dialog_add.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -55,8 +58,28 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        child: Column(
+          children: [
+            BlocBuilder<UserFlashcardCubit, UserFlashcardState>(
+              builder: (_, state) {
+                return state.maybeMap(
+                  loaded: (value) {
+                    return FlashcardListHome(
+                      flashcardsSets: value.flashcardSets,
+                    );
+                  },
+                  orElse: () => Container(
+                    color: Colors.red,
+                    width: 20,
+                    height: 20,
+                  ),
+                );
+              },
+            )
+          ],
+        ),
         // child: StreamBuilder<DocumentSnapshot>(
         //   stream: viewModel.document,
         //   builder: (context, snapshot) {

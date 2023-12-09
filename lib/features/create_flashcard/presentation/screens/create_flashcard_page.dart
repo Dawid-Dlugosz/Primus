@@ -95,6 +95,7 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
   Widget build(BuildContext context) {
     return BlocListener<CreateFlashcardCubit, CreateFlashcardState>(
       listener: (context, state) {
+        print("asdokp[sadkasdk[kas]] ${state}");
         state.maybeMap(
           success: (value) {
             Navigator.pop(context);

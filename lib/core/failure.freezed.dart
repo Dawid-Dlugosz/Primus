@@ -22,6 +22,7 @@ mixin _$Failure {
     required TResult Function() flashcardNameBuse,
     required TResult Function() user,
     required TResult Function() general,
+    required TResult Function() flashcard,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$Failure {
     TResult? Function()? flashcardNameBuse,
     TResult? Function()? user,
     TResult? Function()? general,
+    TResult? Function()? flashcard,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$Failure {
     TResult Function()? flashcardNameBuse,
     TResult Function()? user,
     TResult Function()? general,
+    TResult Function()? flashcard,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$Failure {
     required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
     required TResult Function(_User value) user,
     required TResult Function(_General value) general,
+    required TResult Function(_Flashcard value) flashcard,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$Failure {
     TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult? Function(_User value)? user,
     TResult? Function(_General value)? general,
+    TResult? Function(_Flashcard value)? flashcard,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$Failure {
     TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult Function(_User value)? user,
     TResult Function(_General value)? general,
+    TResult Function(_Flashcard value)? flashcard,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,6 +133,7 @@ class _$ToShortImpl implements _ToShort {
     required TResult Function() flashcardNameBuse,
     required TResult Function() user,
     required TResult Function() general,
+    required TResult Function() flashcard,
   }) {
     return tooShort();
   }
@@ -138,6 +145,7 @@ class _$ToShortImpl implements _ToShort {
     TResult? Function()? flashcardNameBuse,
     TResult? Function()? user,
     TResult? Function()? general,
+    TResult? Function()? flashcard,
   }) {
     return tooShort?.call();
   }
@@ -149,6 +157,7 @@ class _$ToShortImpl implements _ToShort {
     TResult Function()? flashcardNameBuse,
     TResult Function()? user,
     TResult Function()? general,
+    TResult Function()? flashcard,
     required TResult orElse(),
   }) {
     if (tooShort != null) {
@@ -164,6 +173,7 @@ class _$ToShortImpl implements _ToShort {
     required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
     required TResult Function(_User value) user,
     required TResult Function(_General value) general,
+    required TResult Function(_Flashcard value) flashcard,
   }) {
     return tooShort(this);
   }
@@ -175,6 +185,7 @@ class _$ToShortImpl implements _ToShort {
     TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult? Function(_User value)? user,
     TResult? Function(_General value)? general,
+    TResult? Function(_Flashcard value)? flashcard,
   }) {
     return tooShort?.call(this);
   }
@@ -186,6 +197,7 @@ class _$ToShortImpl implements _ToShort {
     TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult Function(_User value)? user,
     TResult Function(_General value)? general,
+    TResult Function(_Flashcard value)? flashcard,
     required TResult orElse(),
   }) {
     if (tooShort != null) {
@@ -241,6 +253,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     required TResult Function() flashcardNameBuse,
     required TResult Function() user,
     required TResult Function() general,
+    required TResult Function() flashcard,
   }) {
     return flashcardNameBuse();
   }
@@ -252,6 +265,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     TResult? Function()? flashcardNameBuse,
     TResult? Function()? user,
     TResult? Function()? general,
+    TResult? Function()? flashcard,
   }) {
     return flashcardNameBuse?.call();
   }
@@ -263,6 +277,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     TResult Function()? flashcardNameBuse,
     TResult Function()? user,
     TResult Function()? general,
+    TResult Function()? flashcard,
     required TResult orElse(),
   }) {
     if (flashcardNameBuse != null) {
@@ -278,6 +293,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
     required TResult Function(_User value) user,
     required TResult Function(_General value) general,
+    required TResult Function(_Flashcard value) flashcard,
   }) {
     return flashcardNameBuse(this);
   }
@@ -289,6 +305,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult? Function(_User value)? user,
     TResult? Function(_General value)? general,
+    TResult? Function(_Flashcard value)? flashcard,
   }) {
     return flashcardNameBuse?.call(this);
   }
@@ -300,6 +317,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult Function(_User value)? user,
     TResult Function(_General value)? general,
+    TResult Function(_Flashcard value)? flashcard,
     required TResult orElse(),
   }) {
     if (flashcardNameBuse != null) {
@@ -354,6 +372,7 @@ class _$UserImpl implements _User {
     required TResult Function() flashcardNameBuse,
     required TResult Function() user,
     required TResult Function() general,
+    required TResult Function() flashcard,
   }) {
     return user();
   }
@@ -365,6 +384,7 @@ class _$UserImpl implements _User {
     TResult? Function()? flashcardNameBuse,
     TResult? Function()? user,
     TResult? Function()? general,
+    TResult? Function()? flashcard,
   }) {
     return user?.call();
   }
@@ -376,6 +396,7 @@ class _$UserImpl implements _User {
     TResult Function()? flashcardNameBuse,
     TResult Function()? user,
     TResult Function()? general,
+    TResult Function()? flashcard,
     required TResult orElse(),
   }) {
     if (user != null) {
@@ -391,6 +412,7 @@ class _$UserImpl implements _User {
     required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
     required TResult Function(_User value) user,
     required TResult Function(_General value) general,
+    required TResult Function(_Flashcard value) flashcard,
   }) {
     return user(this);
   }
@@ -402,6 +424,7 @@ class _$UserImpl implements _User {
     TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult? Function(_User value)? user,
     TResult? Function(_General value)? general,
+    TResult? Function(_Flashcard value)? flashcard,
   }) {
     return user?.call(this);
   }
@@ -413,6 +436,7 @@ class _$UserImpl implements _User {
     TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult Function(_User value)? user,
     TResult Function(_General value)? general,
+    TResult Function(_Flashcard value)? flashcard,
     required TResult orElse(),
   }) {
     if (user != null) {
@@ -468,6 +492,7 @@ class _$GeneralImpl implements _General {
     required TResult Function() flashcardNameBuse,
     required TResult Function() user,
     required TResult Function() general,
+    required TResult Function() flashcard,
   }) {
     return general();
   }
@@ -479,6 +504,7 @@ class _$GeneralImpl implements _General {
     TResult? Function()? flashcardNameBuse,
     TResult? Function()? user,
     TResult? Function()? general,
+    TResult? Function()? flashcard,
   }) {
     return general?.call();
   }
@@ -490,6 +516,7 @@ class _$GeneralImpl implements _General {
     TResult Function()? flashcardNameBuse,
     TResult Function()? user,
     TResult Function()? general,
+    TResult Function()? flashcard,
     required TResult orElse(),
   }) {
     if (general != null) {
@@ -505,6 +532,7 @@ class _$GeneralImpl implements _General {
     required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
     required TResult Function(_User value) user,
     required TResult Function(_General value) general,
+    required TResult Function(_Flashcard value) flashcard,
   }) {
     return general(this);
   }
@@ -516,6 +544,7 @@ class _$GeneralImpl implements _General {
     TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult? Function(_User value)? user,
     TResult? Function(_General value)? general,
+    TResult? Function(_Flashcard value)? flashcard,
   }) {
     return general?.call(this);
   }
@@ -527,6 +556,7 @@ class _$GeneralImpl implements _General {
     TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
     TResult Function(_User value)? user,
     TResult Function(_General value)? general,
+    TResult Function(_Flashcard value)? flashcard,
     required TResult orElse(),
   }) {
     if (general != null) {
@@ -538,4 +568,124 @@ class _$GeneralImpl implements _General {
 
 abstract class _General implements Failure {
   const factory _General() = _$GeneralImpl;
+}
+
+/// @nodoc
+abstract class _$$FlashcardImplCopyWith<$Res> {
+  factory _$$FlashcardImplCopyWith(
+          _$FlashcardImpl value, $Res Function(_$FlashcardImpl) then) =
+      __$$FlashcardImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FlashcardImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$FlashcardImpl>
+    implements _$$FlashcardImplCopyWith<$Res> {
+  __$$FlashcardImplCopyWithImpl(
+      _$FlashcardImpl _value, $Res Function(_$FlashcardImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FlashcardImpl implements _Flashcard {
+  const _$FlashcardImpl();
+
+  @override
+  String toString() {
+    return 'Failure.flashcard()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FlashcardImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() tooShort,
+    required TResult Function() flashcardNameBuse,
+    required TResult Function() user,
+    required TResult Function() general,
+    required TResult Function() flashcard,
+  }) {
+    return flashcard();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? tooShort,
+    TResult? Function()? flashcardNameBuse,
+    TResult? Function()? user,
+    TResult? Function()? general,
+    TResult? Function()? flashcard,
+  }) {
+    return flashcard?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? tooShort,
+    TResult Function()? flashcardNameBuse,
+    TResult Function()? user,
+    TResult Function()? general,
+    TResult Function()? flashcard,
+    required TResult orElse(),
+  }) {
+    if (flashcard != null) {
+      return flashcard();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ToShort value) tooShort,
+    required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
+    required TResult Function(_User value) user,
+    required TResult Function(_General value) general,
+    required TResult Function(_Flashcard value) flashcard,
+  }) {
+    return flashcard(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ToShort value)? tooShort,
+    TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult? Function(_User value)? user,
+    TResult? Function(_General value)? general,
+    TResult? Function(_Flashcard value)? flashcard,
+  }) {
+    return flashcard?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ToShort value)? tooShort,
+    TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult Function(_User value)? user,
+    TResult Function(_General value)? general,
+    TResult Function(_Flashcard value)? flashcard,
+    required TResult orElse(),
+  }) {
+    if (flashcard != null) {
+      return flashcard(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Flashcard implements Failure {
+  const factory _Flashcard() = _$FlashcardImpl;
 }

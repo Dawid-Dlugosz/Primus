@@ -4,9 +4,10 @@ import 'package:primus/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:primus/features/auth/presentation/pages/login_page.dart';
 import 'package:primus/core/screens/loading_widget.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
+import 'package:primus/features/user_flashcard/presentation/cubit/cubit/user_flashcard_cubit.dart';
+import '../core/screens/home/home_page.dart';
 import '../core/widgets/snack_bar_info.dart';
 import '../features/auth/utils/firebase_error.dart';
-import 'home/home_page.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
@@ -28,7 +29,11 @@ class _StartPageState extends State<StartPage> {
         listener: (_, state) {
           state.maybeMap(
             authorized: (value) {
+              context.read<UserFlashcardCubit>().loadFlashcardSets(
+                    uid: value.user.uid,
+                  );
               if (value.user.displayName != null) {
+                // TODO SPRWADZIĆ CZY JAK SIĘ ZALOGUJE TO CXZY NIE BĘDZIE CHCIAŁO UTOWRZYĆ NOWEGO KONTA
                 context.read<UserCubit>().createUser(
                       nickname: value.user.displayName!,
                       uid: value.user.uid,

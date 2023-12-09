@@ -22,20 +22,21 @@ class CreateFlashcardCubit extends Cubit<CreateFlashcardState> {
 
   final CreateFlashcardRepository flashcardRepository;
 
-  Future<void> createFlashcardSet({
+  void createFlashcardSet({
     required String name,
     required String language,
     required List<TextEditingController> words,
     required List<TextEditingController> definitions,
   }) async {
     emit(const CreateFlashcardState.loadind());
+    print('saddsaassdsa');
     final result = await flashcardRepository.createFlashcardSet(
       name: name,
       language: language,
       words: words,
       definitions: definitions,
     );
-
+    print('sddsaasdsa ${result}');
     result.fold(
       (l) => _generateErrorState(l),
       (r) => emit(CreateFlashcardState.success(flashcardSetId: r)),
