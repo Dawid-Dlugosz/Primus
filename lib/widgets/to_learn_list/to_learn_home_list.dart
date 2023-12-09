@@ -1,7 +1,7 @@
 import '../../model/to_learn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../screen/show_all/all_to_learn.dart';
+import '../../core/screens/home/show_all/all_to_learn.dart';
 import '../../view_models/to_learn_home_view_model.dart';
 import 'to_learn_wrapper.dart';
 import 'package:provider/provider.dart';

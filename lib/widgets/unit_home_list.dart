@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/unit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../screen/show_all/all_units.dart';
+import '../core/screens/home/show_all/all_units.dart';
 import 'unit_item.dart';
 
 class UnitHomeList extends StatelessWidget {

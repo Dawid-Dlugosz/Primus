@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
+import 'show_all/all_flascard.dart';
 import '../../widgets/card_flashcard.dart';
 
 class FlashcardListHome extends StatefulWidget {
@@ -37,17 +38,12 @@ class _FlashcardListHomeState extends State<FlashcardListHome> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              // TODO POKAZYWANIE WSZYSTKICH
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => ChangeNotifierProvider(
-              //       create: (context) =>
-              //           AllFlashCardViewModel(context: context),
-              //       child: const AllFlashcard(),
-              //     ),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AllFlashcard(),
+                ),
+              );
             },
             child: Text(AppLocalizations.of(context)!.showMore),
           ),
