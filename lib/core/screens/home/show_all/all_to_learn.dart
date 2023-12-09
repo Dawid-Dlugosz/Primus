@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../model/to_learn.dart';
-import '../../view_models/to_learn_home_view_model.dart';
-import '../../widgets/empty_widget.dart';
-import '../../core/screens/loading_widget.dart';
-import '../../widgets/to_learn_list/to_learn_wrapper.dart';
+import '../../../../model/to_learn.dart';
+import '../../../../view_models/to_learn_home_view_model.dart';
+import '../../../../widgets/empty_widget.dart';
+import '../../loading_widget.dart';
+import '../../../../widgets/to_learn_list/to_learn_wrapper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
