@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../model/flashcard_set.dart';
 
 import '../../view_models/search_view_model.dart';
-import '../../widgets/card_flashcard.dart';
+import '../../core/widgets/card_flashcard.dart';
 import '../../widgets/empty_widget.dart';
 import 'package:provider/provider.dart';
 

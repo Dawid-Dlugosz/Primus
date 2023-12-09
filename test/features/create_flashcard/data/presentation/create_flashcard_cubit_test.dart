@@ -44,7 +44,7 @@ void main() {
             (_) async => const Left(Failure.tooShort()),
           );
 
-          await cubit.createFlashcardSet(
+          cubit.createFlashcardSet(
             name: 'name',
             language: 'language',
             words: [],
@@ -74,7 +74,7 @@ void main() {
             (_) async => const Left(Failure.flashcardNameBuse()),
           );
 
-          await cubit.createFlashcardSet(
+          cubit.createFlashcardSet(
             name: 'name',
             language: 'language',
             words: [],
@@ -104,7 +104,7 @@ void main() {
             (_) async => const Left(Failure.general()),
           );
 
-          await cubit.createFlashcardSet(
+          cubit.createFlashcardSet(
             name: 'name',
             language: 'language',
             words: [],
@@ -132,7 +132,7 @@ void main() {
             ),
           ).thenAnswer((_) async => const Right('test-value'));
 
-          await cubit.createFlashcardSet(
+          cubit.createFlashcardSet(
             name: 'name',
             language: 'language',
             words: [],

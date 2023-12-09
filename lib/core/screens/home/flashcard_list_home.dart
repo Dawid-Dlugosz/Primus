@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../model/flashcard.dart';
-import '../show_all/all_flascard.dart';
-import '../../view_models/all_flashcard_view_model.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import '../../widgets/card_flashcard.dart';
-import 'package:provider/provider.dart';
 
-// TODO DELETE
 class FlashcardListHome extends StatefulWidget {
-  const FlashcardListHome(
-      {required this.flashcards,
-      required this.uid,
-      required this.delte,
-      Key? key})
-      : super(key: key);
+  const FlashcardListHome({
+    required this.flashcardsSets,
+    super.key,
+  });
 
-  final List<Flashcard> flashcards;
-  final String uid;
-  final Function(String flashcardId) delte;
+  final List<FlashcardSet> flashcardsSets;
 
   @override
   State<FlashcardListHome> createState() => _FlashcardListHomeState();
@@ -33,30 +25,29 @@ class _FlashcardListHomeState extends State<FlashcardListHome> {
         ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: widget.flashcards.take(3).length,
+          itemCount: widget.flashcardsSets.take(3).length,
           itemBuilder: (context, index) {
-            return SizedBox();
             // TODO PORPAWIĆ USUSWANIE U KAŻDEGO UŻYTKOWNIKA KTÓRY W TO LEARN MA ID USUWANEGO ZESTAWU MUSI ZOSTAĆ USUNIĘTE
-            // return CardFlashcard(
-            //   flashcard: widget.flashcards[index],
-            //   delete: widget.delte,
-            // );
+            return CardFlashcard(
+              flashcard: widget.flashcardsSets[index].flashCard,
+            );
           },
         ),
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider(
-                    create: (context) =>
-                        AllFlashCardViewModel(context: context),
-                    child: const AllFlashcard(),
-                  ),
-                ),
-              );
+              // TODO POKAZYWANIE WSZYSTKICH
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => ChangeNotifierProvider(
+              //       create: (context) =>
+              //           AllFlashCardViewModel(context: context),
+              //       child: const AllFlashcard(),
+              //     ),
+              //   ),
+              // );
             },
             child: Text(AppLocalizations.of(context)!.showMore),
           ),

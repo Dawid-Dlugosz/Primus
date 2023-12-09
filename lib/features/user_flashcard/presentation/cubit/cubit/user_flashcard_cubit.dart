@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:primus/features/user_flashcard/domain/repository/user_flashcard_repository.dart';
 
@@ -20,7 +19,6 @@ class UserFlashcardCubit extends Cubit<UserFlashcardState> {
 
   Future<void> loadFlashcardSets({required String uid}) async {
     final result = await repository.streamFlashcardSet(uid: uid);
-
     result.fold(
       (l) => emit(const UserFlashcardState.error()),
       (r) {
@@ -45,6 +43,15 @@ class UserFlashcardCubit extends Cubit<UserFlashcardState> {
       final flashcardSet = FlashcardSet.fromJson(data);
       flashcardSets.add(flashcardSet);
     }
+
+    flashcardSets.sort((flashcardSet1, flashcardSet2) {
+      final flashcard1Timestamp = DateTime.fromMillisecondsSinceEpoch(
+          flashcardSet1.flashCard.timeStamp);
+      final flashcard2Timestamp = DateTime.fromMillisecondsSinceEpoch(
+          flashcardSet2.flashCard.timeStamp);
+
+      return flashcard2Timestamp.compareTo(flashcard1Timestamp);
+    });
 
     return flashcardSets;
   }
