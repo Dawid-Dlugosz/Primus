@@ -1,7 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:primus/features/create_flashcard/data/repository/create_flash_card_repository_impl.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard.dart';
+import 'package:primus/features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
+
+import '../../dialog/delete_flashcard.dart';
 
 class CardFlashcard extends StatelessWidget {
   const CardFlashcard({
@@ -78,13 +86,21 @@ class CardFlashcard extends StatelessWidget {
                                 //   ),
                                 // );
                               } else {
-                                // TODO DELETE
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (context) => DeleteFlashcard(
-                                //       delete: () =>
-                                //           widget.delete!(widget.flashcard.id)),
-                                // );
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => BlocProvider(
+                                    create: (context) => CUDFlashcardCubit(
+                                        flashcardRepository:
+                                            FlashCardRepositoryImpl(
+                                      firestore: FirebaseFirestore.instance,
+                                      authUserId: FirebaseAuth
+                                          .instance.currentUser!.uid,
+                                    )),
+                                    child: DeleteFlashcard(
+                                      flashcardId: flashcard.id,
+                                    ),
+                                  ),
+                                );
                               }
                             },
                             child: const Icon(Icons.more_vert),

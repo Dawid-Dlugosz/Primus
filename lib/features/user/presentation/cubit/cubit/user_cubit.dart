@@ -10,7 +10,7 @@ class UserCubit extends Cubit<User?> {
 
   final UserRepository repository;
 
-  Future<void> createUser({
+  void createUser({
     required String nickname,
     required String uid,
   }) async {
@@ -25,7 +25,7 @@ class UserCubit extends Cubit<User?> {
     );
   }
 
-  Future<void> addFlashcardSetToUser({
+  void addFlashcardSetToUser({
     required String flashcardSetId,
   }) async {
     if (state != null) {

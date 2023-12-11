@@ -19,7 +19,6 @@ mixin _$UserFlashcardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<FlashcardSet> flashcardSets) loaded,
     required TResult Function() error,
@@ -28,7 +27,6 @@ mixin _$UserFlashcardState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult? Function()? error,
@@ -37,7 +35,6 @@ mixin _$UserFlashcardState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult Function()? error,
@@ -47,7 +44,6 @@ mixin _$UserFlashcardState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
@@ -56,7 +52,6 @@ mixin _$UserFlashcardState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
@@ -65,7 +60,6 @@ mixin _$UserFlashcardState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
@@ -131,7 +125,6 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<FlashcardSet> flashcardSets) loaded,
     required TResult Function() error,
@@ -143,7 +136,6 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult? Function()? error,
@@ -155,7 +147,6 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult Function()? error,
@@ -171,7 +162,6 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
@@ -183,7 +173,6 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
@@ -195,7 +184,6 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
@@ -210,126 +198,6 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements UserFlashcardState {
   const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$UserFlashcardStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
-
-  @override
-  String toString() {
-    return 'UserFlashcardState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() empty,
-    required TResult Function(List<FlashcardSet> flashcardSets) loaded,
-    required TResult Function() error,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? empty,
-    TResult? Function(List<FlashcardSet> flashcardSets)? loaded,
-    TResult? Function()? error,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? empty,
-    TResult Function(List<FlashcardSet> flashcardSets)? loaded,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Empty value)? empty,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements UserFlashcardState {
-  const factory _Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
@@ -371,7 +239,6 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<FlashcardSet> flashcardSets) loaded,
     required TResult Function() error,
@@ -383,7 +250,6 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult? Function()? error,
@@ -395,7 +261,6 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult Function()? error,
@@ -411,7 +276,6 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
@@ -423,7 +287,6 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
@@ -435,7 +298,6 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
@@ -525,7 +387,6 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<FlashcardSet> flashcardSets) loaded,
     required TResult Function() error,
@@ -537,7 +398,6 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult? Function()? error,
@@ -549,7 +409,6 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult Function()? error,
@@ -565,7 +424,6 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
@@ -577,7 +435,6 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
@@ -589,7 +446,6 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
@@ -651,7 +507,6 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
     required TResult Function() empty,
     required TResult Function(List<FlashcardSet> flashcardSets) loaded,
     required TResult Function() error,
@@ -663,7 +518,6 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
     TResult? Function()? empty,
     TResult? Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult? Function()? error,
@@ -675,7 +529,6 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
     TResult Function()? empty,
     TResult Function(List<FlashcardSet> flashcardSets)? loaded,
     TResult Function()? error,
@@ -691,7 +544,6 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
@@ -703,7 +555,6 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
@@ -715,7 +566,6 @@ class _$ErrorImpl implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Empty value)? empty,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'create_flashcard_cubit.dart';
+part of 'cud_flashcard_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$CreateFlashcardState {
+mixin _$CUDFlashcardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -69,17 +69,16 @@ mixin _$CreateFlashcardState {
 }
 
 /// @nodoc
-abstract class $CreateFlashcardStateCopyWith<$Res> {
-  factory $CreateFlashcardStateCopyWith(CreateFlashcardState value,
-          $Res Function(CreateFlashcardState) then) =
-      _$CreateFlashcardStateCopyWithImpl<$Res, CreateFlashcardState>;
+abstract class $CUDFlashcardStateCopyWith<$Res> {
+  factory $CUDFlashcardStateCopyWith(
+          CUDFlashcardState value, $Res Function(CUDFlashcardState) then) =
+      _$CUDFlashcardStateCopyWithImpl<$Res, CUDFlashcardState>;
 }
 
 /// @nodoc
-class _$CreateFlashcardStateCopyWithImpl<$Res,
-        $Val extends CreateFlashcardState>
-    implements $CreateFlashcardStateCopyWith<$Res> {
-  _$CreateFlashcardStateCopyWithImpl(this._value, this._then);
+class _$CUDFlashcardStateCopyWithImpl<$Res, $Val extends CUDFlashcardState>
+    implements $CUDFlashcardStateCopyWith<$Res> {
+  _$CUDFlashcardStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -96,7 +95,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$CreateFlashcardStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$CUDFlashcardStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -110,7 +109,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'CreateFlashcardState.initial()';
+    return 'CUDFlashcardState.initial()';
   }
 
   @override
@@ -197,7 +196,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements CreateFlashcardState {
+abstract class _Initial implements CUDFlashcardState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -212,7 +211,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$CreateFlashcardStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$CUDFlashcardStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
@@ -242,7 +241,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'CreateFlashcardState.success(flashcardSetId: $flashcardSetId)';
+    return 'CUDFlashcardState.success(flashcardSetId: $flashcardSetId)';
   }
 
   @override
@@ -338,7 +337,7 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements CreateFlashcardState {
+abstract class _Success implements CUDFlashcardState {
   const factory _Success({required final String flashcardSetId}) =
       _$SuccessImpl;
 
@@ -359,7 +358,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$CreateFlashcardStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$CUDFlashcardStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -389,7 +388,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'CreateFlashcardState.error(errorMessage: $errorMessage)';
+    return 'CUDFlashcardState.error(errorMessage: $errorMessage)';
   }
 
   @override
@@ -485,7 +484,7 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements CreateFlashcardState {
+abstract class _Error implements CUDFlashcardState {
   const factory _Error({required final CreateFlashcardError errorMessage}) =
       _$ErrorImpl;
 
@@ -504,7 +503,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$CreateFlashcardStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$CUDFlashcardStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -518,7 +517,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'CreateFlashcardState.loadind()';
+    return 'CUDFlashcardState.loadind()';
   }
 
   @override
@@ -605,6 +604,6 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements CreateFlashcardState {
+abstract class _Loading implements CUDFlashcardState {
   const factory _Loading() = _$LoadingImpl;
 }

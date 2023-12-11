@@ -127,7 +127,7 @@ void main() {
             ),
           ).thenAnswer((_) async => const Left(Failure.user()));
 
-          await cubit.addFlashcardSetToUser(
+          cubit.addFlashcardSetToUser(
             flashcardSetId: tFlashcardId,
           );
         },

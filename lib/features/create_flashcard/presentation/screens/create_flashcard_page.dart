@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/features/create_flashcard/presentation/create_flashcard/create_flashcard_cubit.dart';
+import 'package:primus/features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
 import 'package:primus/core/screens/loading_widget.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 import '../../../../widgets/create_flashcard_widget.dart';
@@ -93,9 +93,8 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CreateFlashcardCubit, CreateFlashcardState>(
+    return BlocListener<CUDFlashcardCubit, CUDFlashcardState>(
       listener: (context, state) {
-        print("asdokp[sadkasdk[kas]] ${state}");
         state.maybeMap(
           success: (value) {
             Navigator.pop(context);
@@ -126,7 +125,7 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
               heroTag: 'Create',
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  context.read<CreateFlashcardCubit>().createFlashcardSet(
+                  context.read<CUDFlashcardCubit>().createFlashcardSet(
                         name: nameController.text,
                         language: languageController.text,
                         words: wordsController,
@@ -146,7 +145,7 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
             ),
           ],
         ),
-        body: BlocBuilder<CreateFlashcardCubit, CreateFlashcardState>(
+        body: BlocBuilder<CUDFlashcardCubit, CUDFlashcardState>(
           builder: (context, state) {
             return state.maybeMap(
               orElse: () {
