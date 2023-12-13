@@ -13,4 +13,9 @@ abstract class UserRepository {
     required String flashcardSetId,
     required User user,
   });
+
+  Future<Either<Failure, User>> deleteFlashcardSet({
+    required String flashcardSetId,
+    required User user,
+  });
 }

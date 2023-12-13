@@ -133,6 +133,42 @@ void main() {
         },
         expect: () => [],
       );
+
+      group(
+        'deleteFlashcardSet',
+        () {
+          blocTest<UserCubit, User?>(
+            'Should emit new [User] state when repo return user',
+            build: () => cubit,
+            seed: () => tUserWithFlashcard,
+            act: (_) {
+              when(() => repository.deleteFlashcardSet(
+                  flashcardSetId: any(named: 'flashcardSetId'),
+                  user: tUserWithFlashcard)).thenAnswer(
+                (_) async => const Right(tUser),
+              );
+
+              cubit.deleteFlashcardSet(flashcardSetId: tFlashcardId);
+            },
+            expect: () => [tUser],
+          );
+
+          blocTest<UserCubit, User?>(
+            'Should emit state when repo return failure',
+            build: () => cubit,
+            seed: () => tUserWithFlashcard,
+            act: (_) {
+              when(() => repository.deleteFlashcardSet(
+                      flashcardSetId: any(named: 'flashcardSetId'),
+                      user: tUserWithFlashcard))
+                  .thenAnswer((_) async => const Left(Failure.user()));
+
+              cubit.deleteFlashcardSet(flashcardSetId: tFlashcardId);
+            },
+            expect: () => [],
+          );
+        },
+      );
     },
   );
 }

@@ -42,4 +42,18 @@ class UserCubit extends Cubit<User?> {
       emit(state);
     }
   }
+
+  void deleteFlashcardSet({required String flashcardSetId}) async {
+    if (state != null) {
+      final result = await repository.deleteFlashcardSet(
+        flashcardSetId: flashcardSetId,
+        user: state!,
+      );
+      result.fold(
+        (l) => emit(state),
+        (user) => emit(user),
+      );
+    }
+    emit(state);
+  }
 }
