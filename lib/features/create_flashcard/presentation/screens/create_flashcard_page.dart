@@ -45,7 +45,6 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
     formKey = GlobalKey<FormState>();
     nameController = TextEditingController();
     languageController = TextEditingController();
-
     generateControllers();
     super.initState();
   }
@@ -59,7 +58,7 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
     super.dispose();
   }
 
-  void generateControllers() {
+  void generateControllers({String? word, String? definition}) {
     wordsController = [];
     definitionsController = [];
     for (var i = 0; i < 4; i++) {
@@ -97,6 +96,22 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
     return BlocListener<CUDFlashcardCubit, CUDFlashcardState>(
       listener: (context, state) {
         state.maybeMap(
+          editing: (value) {
+            wordsController.clear();
+            definitionsController.clear();
+            final flashCard = value.flashcardSet.flashCard;
+            nameController.text = flashCard.nameSet;
+            languageController.text = flashCard.languageSet;
+
+            for (var element in flashCard.words) {
+              final wordController = TextEditingController();
+              final definitionController = TextEditingController();
+              wordController.text = element.word;
+              definitionController.text = element.definition;
+              wordsController.add(wordController);
+              definitionsController.add(definitionController);
+            }
+          },
           success: (value) {
             Navigator.pop(context);
             context.read<UserCubit>().addFlashcardSetToUser(

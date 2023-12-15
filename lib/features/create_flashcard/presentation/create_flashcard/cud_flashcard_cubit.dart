@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/create_flashcard/domain/repository/create_flash_card_repository.dart';
 
 import '../../../../core/failure.dart';
@@ -13,6 +14,7 @@ enum CreateFlashcardError {
   tooShort,
   general,
   delete,
+  edit,
 }
 
 class CUDFlashcardCubit extends Cubit<CUDFlashcardState> {
@@ -23,8 +25,24 @@ class CUDFlashcardCubit extends Cubit<CUDFlashcardState> {
 
   final FlashcardRepository flashcardRepository;
 
-  void setFlashcardSetToEdit() {
+  void setFlashcardSetToEdit({required String flashcardSetId}) async {
     emit(const CUDFlashcardState.loadind());
+
+    final result =
+        await flashcardRepository.editFlashcardSet(flashcardId: flashcardSetId);
+
+    result.fold(
+      (l) => emit(
+        const CUDFlashcardState.error(
+          errorMessage: CreateFlashcardError.edit,
+        ),
+      ),
+      (flashcardSet) => emit(
+        CUDFlashcardState.editing(
+          flashcardSet: flashcardSet,
+        ),
+      ),
+    );
   }
 
   void createFlashcardSet({

@@ -9,7 +9,7 @@ import 'package:primus/features/create_flashcard/domain/entity/flashcard.dart';
 import 'package:primus/features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
 
 import '../../dialog/delete_flashcard.dart';
-import '../../features/create_flashcard/presentation/screens/create_flashcard_page_wrapper.dart';
+import '../../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
 
 class CardFlashcard extends StatelessWidget {
   const CardFlashcard({
@@ -74,8 +74,19 @@ class CardFlashcard extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) =>
-                                        const CreateFlashcardPageWrapper(),
+                                    builder: (_) => BlocProvider(
+                                      create: (_) => CUDFlashcardCubit(
+                                        flashcardRepository:
+                                            FlashCardRepositoryImpl(
+                                          firestore: FirebaseFirestore.instance,
+                                          authUserId: FirebaseAuth
+                                              .instance.currentUser!.uid,
+                                        ),
+                                      )..setFlashcardSetToEdit(
+                                          flashcardSetId: flashcard.id,
+                                        ),
+                                      child: const CreateFlashcardPage(),
+                                    ),
                                   ),
                                 );
                               } else {

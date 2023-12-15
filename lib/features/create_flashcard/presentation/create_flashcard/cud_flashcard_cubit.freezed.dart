@@ -20,6 +20,7 @@ mixin _$CUDFlashcardState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
+    required TResult Function(FlashcardSet flashcardSet) editing,
     required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) =>
@@ -28,6 +29,7 @@ mixin _$CUDFlashcardState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
+    TResult? Function(FlashcardSet flashcardSet)? editing,
     TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) =>
@@ -36,6 +38,7 @@ mixin _$CUDFlashcardState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
+    TResult Function(FlashcardSet flashcardSet)? editing,
     TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$CUDFlashcardState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Success value) success,
+    required TResult Function(_Editing value) editing,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loadind,
   }) =>
@@ -53,6 +57,7 @@ mixin _$CUDFlashcardState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Editing value)? editing,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loadind,
   }) =>
@@ -61,6 +66,7 @@ mixin _$CUDFlashcardState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Success value)? success,
+    TResult Function(_Editing value)? editing,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loadind,
     required TResult orElse(),
@@ -126,6 +132,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
+    required TResult Function(FlashcardSet flashcardSet) editing,
     required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) {
@@ -137,6 +144,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
+    TResult? Function(FlashcardSet flashcardSet)? editing,
     TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) {
@@ -148,6 +156,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
+    TResult Function(FlashcardSet flashcardSet)? editing,
     TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
@@ -163,6 +172,7 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Success value) success,
+    required TResult Function(_Editing value) editing,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loadind,
   }) {
@@ -174,6 +184,7 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Editing value)? editing,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loadind,
   }) {
@@ -185,6 +196,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Success value)? success,
+    TResult Function(_Editing value)? editing,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loadind,
     required TResult orElse(),
@@ -267,6 +279,7 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
+    required TResult Function(FlashcardSet flashcardSet) editing,
     required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) {
@@ -278,6 +291,7 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
+    TResult? Function(FlashcardSet flashcardSet)? editing,
     TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) {
@@ -289,6 +303,7 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
+    TResult Function(FlashcardSet flashcardSet)? editing,
     TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
@@ -304,6 +319,7 @@ class _$SuccessImpl implements _Success {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Success value) success,
+    required TResult Function(_Editing value) editing,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loadind,
   }) {
@@ -315,6 +331,7 @@ class _$SuccessImpl implements _Success {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Editing value)? editing,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loadind,
   }) {
@@ -326,6 +343,7 @@ class _$SuccessImpl implements _Success {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Success value)? success,
+    TResult Function(_Editing value)? editing,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loadind,
     required TResult orElse(),
@@ -344,6 +362,169 @@ abstract class _Success implements CUDFlashcardState {
   String get flashcardSetId;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EditingImplCopyWith<$Res> {
+  factory _$$EditingImplCopyWith(
+          _$EditingImpl value, $Res Function(_$EditingImpl) then) =
+      __$$EditingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({FlashcardSet flashcardSet});
+
+  $FlashcardSetCopyWith<$Res> get flashcardSet;
+}
+
+/// @nodoc
+class __$$EditingImplCopyWithImpl<$Res>
+    extends _$CUDFlashcardStateCopyWithImpl<$Res, _$EditingImpl>
+    implements _$$EditingImplCopyWith<$Res> {
+  __$$EditingImplCopyWithImpl(
+      _$EditingImpl _value, $Res Function(_$EditingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? flashcardSet = null,
+  }) {
+    return _then(_$EditingImpl(
+      flashcardSet: null == flashcardSet
+          ? _value.flashcardSet
+          : flashcardSet // ignore: cast_nullable_to_non_nullable
+              as FlashcardSet,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $FlashcardSetCopyWith<$Res> get flashcardSet {
+    return $FlashcardSetCopyWith<$Res>(_value.flashcardSet, (value) {
+      return _then(_value.copyWith(flashcardSet: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$EditingImpl implements _Editing {
+  const _$EditingImpl({required this.flashcardSet});
+
+  @override
+  final FlashcardSet flashcardSet;
+
+  @override
+  String toString() {
+    return 'CUDFlashcardState.editing(flashcardSet: $flashcardSet)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EditingImpl &&
+            (identical(other.flashcardSet, flashcardSet) ||
+                other.flashcardSet == flashcardSet));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, flashcardSet);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EditingImplCopyWith<_$EditingImpl> get copyWith =>
+      __$$EditingImplCopyWithImpl<_$EditingImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String flashcardSetId) success,
+    required TResult Function(FlashcardSet flashcardSet) editing,
+    required TResult Function(CreateFlashcardError errorMessage) error,
+    required TResult Function() loadind,
+  }) {
+    return editing(flashcardSet);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String flashcardSetId)? success,
+    TResult? Function(FlashcardSet flashcardSet)? editing,
+    TResult? Function(CreateFlashcardError errorMessage)? error,
+    TResult? Function()? loadind,
+  }) {
+    return editing?.call(flashcardSet);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String flashcardSetId)? success,
+    TResult Function(FlashcardSet flashcardSet)? editing,
+    TResult Function(CreateFlashcardError errorMessage)? error,
+    TResult Function()? loadind,
+    required TResult orElse(),
+  }) {
+    if (editing != null) {
+      return editing(flashcardSet);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Editing value) editing,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Loading value) loadind,
+  }) {
+    return editing(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_Editing value)? editing,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Loading value)? loadind,
+  }) {
+    return editing?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Success value)? success,
+    TResult Function(_Editing value)? editing,
+    TResult Function(_Error value)? error,
+    TResult Function(_Loading value)? loadind,
+    required TResult orElse(),
+  }) {
+    if (editing != null) {
+      return editing(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Editing implements CUDFlashcardState {
+  const factory _Editing({required final FlashcardSet flashcardSet}) =
+      _$EditingImpl;
+
+  FlashcardSet get flashcardSet;
+  @JsonKey(ignore: true)
+  _$$EditingImplCopyWith<_$EditingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -414,6 +595,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
+    required TResult Function(FlashcardSet flashcardSet) editing,
     required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) {
@@ -425,6 +607,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
+    TResult? Function(FlashcardSet flashcardSet)? editing,
     TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) {
@@ -436,6 +619,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
+    TResult Function(FlashcardSet flashcardSet)? editing,
     TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
@@ -451,6 +635,7 @@ class _$ErrorImpl implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Success value) success,
+    required TResult Function(_Editing value) editing,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loadind,
   }) {
@@ -462,6 +647,7 @@ class _$ErrorImpl implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Editing value)? editing,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loadind,
   }) {
@@ -473,6 +659,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Success value)? success,
+    TResult Function(_Editing value)? editing,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loadind,
     required TResult orElse(),
@@ -534,6 +721,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(String flashcardSetId) success,
+    required TResult Function(FlashcardSet flashcardSet) editing,
     required TResult Function(CreateFlashcardError errorMessage) error,
     required TResult Function() loadind,
   }) {
@@ -545,6 +733,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(String flashcardSetId)? success,
+    TResult? Function(FlashcardSet flashcardSet)? editing,
     TResult? Function(CreateFlashcardError errorMessage)? error,
     TResult? Function()? loadind,
   }) {
@@ -556,6 +745,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(String flashcardSetId)? success,
+    TResult Function(FlashcardSet flashcardSet)? editing,
     TResult Function(CreateFlashcardError errorMessage)? error,
     TResult Function()? loadind,
     required TResult orElse(),
@@ -571,6 +761,7 @@ class _$LoadingImpl implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Success value) success,
+    required TResult Function(_Editing value) editing,
     required TResult Function(_Error value) error,
     required TResult Function(_Loading value) loadind,
   }) {
@@ -582,6 +773,7 @@ class _$LoadingImpl implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Success value)? success,
+    TResult? Function(_Editing value)? editing,
     TResult? Function(_Error value)? error,
     TResult? Function(_Loading value)? loadind,
   }) {
@@ -593,6 +785,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Success value)? success,
+    TResult Function(_Editing value)? editing,
     TResult Function(_Error value)? error,
     TResult Function(_Loading value)? loadind,
     required TResult orElse(),

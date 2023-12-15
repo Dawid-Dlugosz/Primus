@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/core/widgets/bottom_dialog_item.dart';
-import 'package:primus/features/create_flashcard/presentation/screens/create_flashcard_page_wrapper.dart';
+import '../features/create_flashcard/data/repository/create_flash_card_repository_impl.dart';
+import '../features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
+import '../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
 import '../screen/create_unit.dart';
 import '../view_models/create_unit_view_model.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +32,15 @@ class _BottomDialogAddState extends State<BottomDialogAdd> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => const CreateFlashcardPageWrapper(),
+                  builder: (_) => BlocProvider(
+                    create: (_) => CUDFlashcardCubit(
+                      flashcardRepository: FlashCardRepositoryImpl(
+                        firestore: FirebaseFirestore.instance,
+                        authUserId: FirebaseAuth.instance.currentUser!.uid,
+                      ),
+                    ),
+                    child: const CreateFlashcardPage(),
+                  ),
                 ),
               );
             },
