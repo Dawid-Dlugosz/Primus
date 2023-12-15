@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -90,12 +89,13 @@ class CardFlashcard extends StatelessWidget {
                                   context: context,
                                   builder: (_) => BlocProvider(
                                     create: (context) => CUDFlashcardCubit(
-                                        flashcardRepository:
-                                            FlashCardRepositoryImpl(
-                                      firestore: FirebaseFirestore.instance,
-                                      authUserId: FirebaseAuth
-                                          .instance.currentUser!.uid,
-                                    )),
+                                      flashcardRepository:
+                                          FlashCardRepositoryImpl(
+                                        firestore: FirebaseFirestore.instance,
+                                        authUserId: FirebaseAuth
+                                            .instance.currentUser!.uid,
+                                      ),
+                                    ),
                                     child: DeleteFlashcard(
                                       flashcardId: flashcard.id,
                                     ),

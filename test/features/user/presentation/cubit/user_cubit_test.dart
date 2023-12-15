@@ -154,7 +154,7 @@ void main() {
           );
 
           blocTest<UserCubit, User?>(
-            'Should emit state when repo return failure',
+            'Should emit empty state when repo return failure',
             build: () => cubit,
             seed: () => tUserWithFlashcard,
             act: (_) {
