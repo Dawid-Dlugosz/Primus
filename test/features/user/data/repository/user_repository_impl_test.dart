@@ -22,6 +22,7 @@ void main() {
     uid: '123123',
   );
   const tFlashcardSetId = 'asas';
+  const tDeletedFlashcard = '12-12-12';
   group(
     'userRepositoryImpl',
     () {
@@ -90,6 +91,27 @@ void main() {
             actualData,
             user.toJson(),
           );
+        },
+      );
+
+      test(
+        'Should return user with new own flashcard',
+        () async {
+          firestore
+              .collection(FirebaseCollection.users.name)
+              .doc(user.uid)
+              .set({
+            'ownFlashcard': ['12-12-12']
+          });
+
+          final result = await repository.deleteFlashcardSet(
+            flashcardSetId: tDeletedFlashcard,
+            user: user,
+          );
+
+          final newUser = result.toOption().toNullable();
+
+          expect(newUser?.ownFlashcard, []);
         },
       );
     },

@@ -10,7 +10,7 @@ class UserCubit extends Cubit<User?> {
 
   final UserRepository repository;
 
-  Future<void> createUser({
+  void createUser({
     required String nickname,
     required String uid,
   }) async {
@@ -25,7 +25,7 @@ class UserCubit extends Cubit<User?> {
     );
   }
 
-  Future<void> addFlashcardSetToUser({
+  void addFlashcardSetToUser({
     required String flashcardSetId,
   }) async {
     if (state != null) {
@@ -41,5 +41,19 @@ class UserCubit extends Cubit<User?> {
     } else {
       emit(state);
     }
+  }
+
+  void deleteFlashcardSet({required String flashcardSetId}) async {
+    if (state != null) {
+      final result = await repository.deleteFlashcardSet(
+        flashcardSetId: flashcardSetId,
+        user: state!,
+      );
+      result.fold(
+        (l) => emit(state),
+        (user) => emit(user),
+      );
+    }
+    emit(state);
   }
 }

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/features/create_flashcard/data/repository/create_flash_card_repository_impl.dart';
-import 'package:primus/features/create_flashcard/presentation/create_flashcard/create_flashcard_cubit.dart';
+import 'package:primus/features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
 
 import 'create_flashcard_page.dart';
 
@@ -13,8 +13,8 @@ class CreateFlashcardPageWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CreateFlashcardCubit(
-        flashcardRepository: CreateFlashCardRepositoryImpl(
+      create: (_) => CUDFlashcardCubit(
+        flashcardRepository: FlashCardRepositoryImpl(
           firestore: FirebaseFirestore.instance,
           authUserId: FirebaseAuth.instance.currentUser!.uid,
         ),

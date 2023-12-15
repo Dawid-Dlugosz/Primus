@@ -1,8 +1,7 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:fpdart/fpdart.dart';
+// ignore: depend_on_referenced_packages
 import 'package:logger/logger.dart';
 import 'package:primus/core/failure.dart';
 import 'package:primus/enum/collection.dart';
@@ -59,6 +58,27 @@ class UserRepositoryImpl implements UserRepository {
       return Right(user);
     } catch (e, s) {
       logger.f('UserRepositoryImp userCreate', error: e, stackTrace: s);
+      return const Left(Failure.user());
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> deleteFlashcardSet({
+    required String flashcardSetId,
+    required User user,
+  }) async {
+    try {
+      final newOwnFlashcard = user.ownFlashcard
+          .where((element) => !element.contains(flashcardSetId));
+
+      await firestore
+          .collection(FirebaseCollection.users.name)
+          .doc(user.uid)
+          .update({'ownFlashcard': newOwnFlashcard.toList()});
+
+      return Right(user.copyWith(ownFlashcard: newOwnFlashcard.toList()));
+    } catch (e, s) {
+      logger.f('UserRepositoryImp deleteFlashcardSet', error: e, stackTrace: s);
       return const Left(Failure.user());
     }
   }

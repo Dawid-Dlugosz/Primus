@@ -14,8 +14,8 @@ import 'package:logger/logger.dart';
 import '../../../../enum/collection.dart';
 import '../../../../exception/flashcard_name_busy.dart';
 
-class CreateFlashCardRepositoryImpl extends CreateFlashcardRepository {
-  CreateFlashCardRepositoryImpl({
+class FlashCardRepositoryImpl extends FlashcardRepository {
+  FlashCardRepositoryImpl({
     required this.firestore,
     required this.authUserId,
   });
@@ -132,5 +132,21 @@ class CreateFlashCardRepositoryImpl extends CreateFlashcardRepository {
     );
 
     return flashCardSet;
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deleteFlashcardSet({
+    required String flashcardId,
+  }) async {
+    try {
+      await firestore
+          .collection(FirebaseCollection.flashcardSet.name)
+          .doc(flashcardId)
+          .delete();
+
+      return const Right(unit);
+    } catch (_) {
+      return const Left(Failure.flashcard());
+    }
   }
 }
