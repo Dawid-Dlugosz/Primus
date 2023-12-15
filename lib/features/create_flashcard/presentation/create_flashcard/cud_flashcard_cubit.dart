@@ -23,6 +23,10 @@ class CUDFlashcardCubit extends Cubit<CUDFlashcardState> {
 
   final FlashcardRepository flashcardRepository;
 
+  void setFlashcardSetToEdit() {
+    emit(const CUDFlashcardState.loadind());
+  }
+
   void createFlashcardSet({
     required String name,
     required String language,

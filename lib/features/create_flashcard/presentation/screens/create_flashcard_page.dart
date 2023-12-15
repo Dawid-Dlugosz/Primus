@@ -45,6 +45,7 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
     formKey = GlobalKey<FormState>();
     nameController = TextEditingController();
     languageController = TextEditingController();
+
     generateControllers();
     super.initState();
   }

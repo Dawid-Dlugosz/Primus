@@ -9,6 +9,7 @@ import 'package:primus/features/create_flashcard/domain/entity/flashcard.dart';
 import 'package:primus/features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
 
 import '../../dialog/delete_flashcard.dart';
+import '../../features/create_flashcard/presentation/screens/create_flashcard_page_wrapper.dart';
 
 class CardFlashcard extends StatelessWidget {
   const CardFlashcard({
@@ -70,20 +71,13 @@ class CardFlashcard extends StatelessWidget {
                             ],
                             onSelected: (value) {
                               if (value == 'Edit') {
-                                // TODO MAKE EDIT
-                                // Navigator.push(
-                                //   this.context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         ChangeNotifierProvider(
-                                //       create: (context) => FlashcardViewModel(
-                                //           context,
-                                //           flashcard: widget.flashcard,
-                                //           edit: true),
-                                //       child: const CreateFlashcardPageWrapper(),
-                                //     ),
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        const CreateFlashcardPageWrapper(),
+                                  ),
+                                );
                               } else {
                                 showDialog(
                                   context: context,

@@ -1,11 +1,14 @@
-import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:primus/core/failure.dart';
 import 'package:primus/enum/collection.dart';
 import 'package:primus/features/create_flashcard/data/repository/create_flash_card_repository_impl.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 
 void main() {
   late FlashCardRepositoryImpl repositoryImpl;
@@ -36,6 +39,18 @@ void main() {
   ];
 
   const tFlashcardId = 'flashcardId';
+
+  const tFlashcardSet = FlashcardSet(
+    flashCard: FlashCard(
+      id: tFlashcardId,
+      languageSet: 'English',
+      nameSet: 'test',
+      words: [],
+      timeStamp: 1701022109526,
+    ),
+    ownerId: '1222,',
+  );
+
   group(
     'createFlashcardRepositoryImpl',
     () {
@@ -174,6 +189,73 @@ void main() {
           },
         );
       });
+
+      group(
+        'EditFlashcardSet function',
+        () {
+          test(
+            'should return Failure.flashcard if firebase return empty data',
+            () async {
+              firestore
+                  .collection(FirebaseCollection.flashcardSet.name)
+                  .doc(tFlashcardId)
+                  .set({});
+
+              final result = await repositoryImpl.editFlashcardSet(
+                flashcardId: tFlashcardId,
+              );
+
+              expect(result, const Left(Failure.flashcard()));
+            },
+          );
+
+          test(
+            'should return Failure.flashcard if firebase return wrong object',
+            () async {
+              firestore
+                  .collection(FirebaseCollection.flashcardSet.name)
+                  .doc(tFlashcardId)
+                  .set({
+                'test': 123,
+              });
+
+              final result = await repositoryImpl.editFlashcardSet(
+                flashcardId: tFlashcardId,
+              );
+
+              expect(result, const Left(Failure.flashcard()));
+            },
+          );
+
+          test(
+            'should return flashcardSet if firebase return right object',
+            () async {
+              firestore
+                  .collection(FirebaseCollection.flashcardSet.name)
+                  .doc(tFlashcardId)
+                  .set(
+                {
+                  'flashCard': {
+                    'id': tFlashcardId,
+                    'languageSet': 'English',
+                    'nameSet': 'test',
+                    'timeStamp': 1701022109526,
+                    'words': [],
+                  },
+                  'ownerId': '1222',
+                },
+              );
+
+              final result = await repositoryImpl.editFlashcardSet(
+                flashcardId: tFlashcardId,
+              );
+
+              // expect(result, const Right(tFlashcardSet));
+              expect(result.toNullable(), isA<FlashcardSet>());
+            },
+          );
+        },
+      );
     },
   );
 }

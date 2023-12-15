@@ -22,6 +22,7 @@ class FlashCardRepositoryImpl extends FlashcardRepository {
 
   final FirebaseFirestore firestore;
   final String authUserId;
+
   final Logger logger = Logger();
 
   @override
@@ -146,6 +147,33 @@ class FlashCardRepositoryImpl extends FlashcardRepository {
 
       return const Right(unit);
     } catch (_) {
+      return const Left(Failure.flashcard());
+    }
+  }
+
+  @override
+  Future<Either<Failure, FlashcardSet>> editFlashcardSet(
+      {required String flashcardId}) async {
+    try {
+      final result = await firestore
+          .collection(FirebaseCollection.flashcardSet.name)
+          .doc(flashcardId)
+          .get();
+
+      final data = result.data();
+
+      if (data == null) {
+        return const Left(Failure.flashcard());
+      }
+      final flashcardSet = FlashcardSet.fromJson(data);
+
+      return Right(flashcardSet);
+    } catch (e, s) {
+      logger.f(
+        'CreateFlashcardRepository editFlashcardSet',
+        error: e,
+        stackTrace: s,
+      );
       return const Left(Failure.flashcard());
     }
   }
