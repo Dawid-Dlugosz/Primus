@@ -77,6 +77,8 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
       case CreateFlashcardError.tooShort:
         textMessage = AppLocalizations.of(context)!.flashcardShort;
         break;
+      case CreateFlashcardError.edit:
+        textMessage = AppLocalizations.of(context)!.editingError;
       default:
         textMessage = AppLocalizations.of(context)!.error;
         break;
@@ -112,6 +114,15 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
               definitionsController.add(definitionController);
             }
           },
+          edited: (value) {
+            Navigator.pop(context);
+            final snackbar = SnackBar(
+              content: Text(
+                AppLocalizations.of(context)!.editSuccess,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          },
           success: (value) {
             Navigator.pop(context);
             context.read<UserCubit>().addFlashcardSetToUser(
@@ -141,12 +152,25 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
               heroTag: 'Create',
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  context.read<CUDFlashcardCubit>().createFlashcardSet(
-                        name: nameController.text,
-                        language: languageController.text,
-                        words: wordsController,
-                        definitions: wordsController,
-                      );
+                  context.read<CUDFlashcardCubit>().state.maybeMap(
+                    editing: (value) {
+                      context.read<CUDFlashcardCubit>().editFlashcardSet(
+                            name: nameController.text,
+                            language: languageController.text,
+                            words: wordsController,
+                            definitions: definitionsController,
+                            flashcardSet: value.flashcardSet,
+                          );
+                    },
+                    orElse: () {
+                      context.read<CUDFlashcardCubit>().createFlashcardSet(
+                            name: nameController.text,
+                            language: languageController.text,
+                            words: wordsController,
+                            definitions: definitionsController,
+                          );
+                    },
+                  );
                 }
               },
               child: const Icon(Icons.save),

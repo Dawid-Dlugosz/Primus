@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/create_flashcard/domain/repository/create_flash_card_repository.dart';
+// ignore: depend_on_referenced_packages
+import 'package:uuid/uuid.dart';
 
 import '../../../../core/failure.dart';
+import '../../domain/entity/word.dart';
 
 part 'cud_flashcard_state.dart';
 part 'cud_flashcard_cubit.freezed.dart';
@@ -28,8 +31,8 @@ class CUDFlashcardCubit extends Cubit<CUDFlashcardState> {
   void setFlashcardSetToEdit({required String flashcardSetId}) async {
     emit(const CUDFlashcardState.loadind());
 
-    final result =
-        await flashcardRepository.editFlashcardSet(flashcardId: flashcardSetId);
+    final result = await flashcardRepository.setupEditFlashcardSet(
+        flashcardId: flashcardSetId);
 
     result.fold(
       (l) => emit(
@@ -94,5 +97,50 @@ class CUDFlashcardCubit extends Cubit<CUDFlashcardState> {
       emit(const CUDFlashcardState.error(
           errorMessage: CreateFlashcardError.general));
     }
+  }
+
+  void editFlashcardSet({
+    required String name,
+    required String language,
+    required List<TextEditingController> words,
+    required List<TextEditingController> definitions,
+    required FlashcardSet flashcardSet,
+  }) async {
+    emit(const CUDFlashcardState.loadind());
+    final newWords = <Word>[];
+    for (var i = 0; i < words.length; i++) {
+      newWords.add(
+        Word(
+          id: const Uuid().v4(),
+          word: words[i].text,
+          definition: definitions[i].text,
+        ),
+      );
+    }
+
+    final newFlashcard = flashcardSet.flashCard.copyWith(
+      nameSet: name,
+      languageSet: language,
+      words: newWords,
+      timeStamp: DateTime.now().millisecondsSinceEpoch,
+    );
+
+    final newFlashcardSet = flashcardSet.copyWith(
+      flashCard: newFlashcard,
+    );
+
+    final result = await flashcardRepository.editFlashcardSet(
+      flashcardSet: newFlashcardSet,
+      uid: flashcardSet.ownerId,
+    );
+
+    result.fold(
+      (l) => emit(const CUDFlashcardState.error(
+        errorMessage: CreateFlashcardError.edit,
+      )),
+      (r) => emit(CUDFlashcardState.edited(
+        flashcardSet: newFlashcardSet,
+      )),
+    );
   }
 }

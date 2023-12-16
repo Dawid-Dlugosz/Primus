@@ -153,5 +153,6 @@
     "unitDelete" : "Czy chcesz usunąć Folder?",
     "editSuccess" : "Edycja udana",
     "allUnits" : "Wszystkie zestawy",
-    "ok": "OK"
+    "ok": "OK",
+    "editingError": "Przy edycji wystąpił błąd"
 }

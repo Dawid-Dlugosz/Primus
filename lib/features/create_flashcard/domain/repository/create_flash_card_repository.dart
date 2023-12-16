@@ -17,7 +17,12 @@ abstract class FlashcardRepository {
     required String flashcardId,
   });
 
-  Future<Either<Failure, FlashcardSet>> editFlashcardSet({
+  Future<Either<Failure, FlashcardSet>> setupEditFlashcardSet({
     required String flashcardId,
+  });
+
+  Future<Either<Failure, Unit>> editFlashcardSet({
+    required FlashcardSet flashcardSet,
+    required String uid,
   });
 }
