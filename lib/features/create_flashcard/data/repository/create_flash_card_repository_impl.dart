@@ -22,6 +22,7 @@ class FlashCardRepositoryImpl extends FlashcardRepository {
 
   final FirebaseFirestore firestore;
   final String authUserId;
+
   final Logger logger = Logger();
 
   @override
@@ -146,6 +147,110 @@ class FlashCardRepositoryImpl extends FlashcardRepository {
 
       return const Right(unit);
     } catch (_) {
+      return const Left(Failure.flashcard());
+    }
+  }
+
+  @override
+  Future<Either<Failure, FlashcardSet>> setupEditFlashcardSet(
+      {required String flashcardId}) async {
+    try {
+      final result = await firestore
+          .collection(FirebaseCollection.flashcardSet.name)
+          .doc(flashcardId)
+          .get();
+
+      final data = result.data();
+
+      if (data == null) {
+        return const Left(Failure.flashcard());
+      }
+      final flashcardSet = FlashcardSet.fromJson(data);
+
+      return Right(flashcardSet);
+    } catch (e, s) {
+      logger.f(
+        'CreateFlashcardRepository editFlashcardSet',
+        error: e,
+        stackTrace: s,
+      );
+      return const Left(Failure.flashcard());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> editFlashcardSet({
+    required FlashcardSet flashcardSet,
+    required String uid,
+  }) async {
+    try {
+      final result = await checkExistingNameFlashcardSet(
+          flashcardSet: flashcardSet, uid: uid);
+      await result.fold(
+        (l) => throw (Exception()),
+        (value) async {
+          if (!value) {
+            throw FlashCardNameBusy();
+          }
+          await firestore
+              .collection(FirebaseCollection.flashcardSet.name)
+              .doc(flashcardSet.flashCard.id)
+              .set(flashcardSet.toJson());
+        },
+      );
+      return const Right(unit);
+    } on FlashCardNameBusy {
+      return const Left(Failure.flashcardNameBuse());
+    } catch (e, s) {
+      logger.f(
+        'CreateFlashcardRepository editFlashcardSet',
+        error: e,
+        stackTrace: s,
+      );
+      return const Left(Failure.flashcard());
+    }
+  }
+
+  @visibleForTesting
+  Future<Either<Failure, bool>> checkExistingNameFlashcardSet({
+    required FlashcardSet flashcardSet,
+    required uid,
+  }) async {
+    try {
+      final result = await firestore
+          .collection(FirebaseCollection.flashcardSet.name)
+          .where(
+            'ownerId',
+            isEqualTo: uid,
+          )
+          .get();
+
+      final docs = result.docs;
+
+      for (var element in docs) {
+        final data = element.data();
+        final tmpFlashcardSet = FlashcardSet.fromJson(data);
+        if (tmpFlashcardSet.flashCard.nameSet ==
+                flashcardSet.flashCard.nameSet &&
+            tmpFlashcardSet.flashCard.id == flashcardSet.flashCard.id) {
+          return const Right(true);
+        }
+
+        if (tmpFlashcardSet.flashCard.nameSet ==
+                flashcardSet.flashCard.nameSet &&
+            tmpFlashcardSet.flashCard.id != flashcardSet.flashCard.id) {
+          return const Right(false);
+        }
+      }
+
+      return const Right(true);
+    } catch (e, s) {
+      logger.f(
+        'CreateFlashCardRepository checkExistingNameFlashcardSet',
+        error: e,
+        stackTrace: s,
+      );
+
       return const Left(Failure.flashcard());
     }
   }

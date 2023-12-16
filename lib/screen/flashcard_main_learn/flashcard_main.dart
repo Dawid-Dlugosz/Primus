@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:primus/features/create_flashcard/presentation/screens/create_flashcard_page_wrapper.dart';
-import 'package:primus/widgets/create_flashcard_widget.dart';
-import '../../dialog/copy_flashcard.dart';
-import '../../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
+
 import 'flashcard_learn.dart';
 import '../flashcard_spelling.dart';
 import '../test/flashcard_exam.dart';
@@ -44,20 +41,21 @@ class _FlashCardMainState extends State<FlashCardMain> {
                       viewModel.currentUser.uid != viewModel.flashCardSet.owner
                           ? AuthorWidget(
                               nickname: viewModel.currentUser.nickname,
-                              add: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ChangeNotifierProvider(
-                                    create: (context) => FlashcardViewModel(
-                                        context,
-                                        flashcard:
-                                            viewModel.flashCardSet.flashcard,
-                                        copy: true),
-                                    child: const CreateFlashcardPageWrapper(),
-                                  ),
-                                ),
-                              ),
-                            )
+                              add: () => {}
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => ChangeNotifierProvider(
+                              //       create: (context) => FlashcardViewModel(
+                              //           context,
+                              //           flashcard:
+                              //               viewModel.flashCardSet.flashcard,
+                              //           copy: true),
+                              //       child: const CreateFlashcardPageWrapper(),
+                              // ),
+                              // ),
+                              // ),
+                              )
                           : Container(),
                       Expanded(
                         child: DefaultTabController(

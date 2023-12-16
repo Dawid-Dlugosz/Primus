@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 
 import '../../../../core/failure.dart';
 
@@ -14,5 +15,14 @@ abstract class FlashcardRepository {
 
   Future<Either<Failure, Unit>> deleteFlashcardSet({
     required String flashcardId,
+  });
+
+  Future<Either<Failure, FlashcardSet>> setupEditFlashcardSet({
+    required String flashcardId,
+  });
+
+  Future<Either<Failure, Unit>> editFlashcardSet({
+    required FlashcardSet flashcardSet,
+    required String uid,
   });
 }

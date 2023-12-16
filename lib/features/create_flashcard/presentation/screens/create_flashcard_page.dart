@@ -58,7 +58,7 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
     super.dispose();
   }
 
-  void generateControllers() {
+  void generateControllers({String? word, String? definition}) {
     wordsController = [];
     definitionsController = [];
     for (var i = 0; i < 4; i++) {
@@ -77,6 +77,8 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
       case CreateFlashcardError.tooShort:
         textMessage = AppLocalizations.of(context)!.flashcardShort;
         break;
+      case CreateFlashcardError.edit:
+        textMessage = AppLocalizations.of(context)!.editingError;
       default:
         textMessage = AppLocalizations.of(context)!.error;
         break;
@@ -96,6 +98,31 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
     return BlocListener<CUDFlashcardCubit, CUDFlashcardState>(
       listener: (context, state) {
         state.maybeMap(
+          editing: (value) {
+            wordsController.clear();
+            definitionsController.clear();
+            final flashCard = value.flashcardSet.flashCard;
+            nameController.text = flashCard.nameSet;
+            languageController.text = flashCard.languageSet;
+
+            for (var element in flashCard.words) {
+              final wordController = TextEditingController();
+              final definitionController = TextEditingController();
+              wordController.text = element.word;
+              definitionController.text = element.definition;
+              wordsController.add(wordController);
+              definitionsController.add(definitionController);
+            }
+          },
+          edited: (value) {
+            Navigator.pop(context);
+            final snackbar = SnackBar(
+              content: Text(
+                AppLocalizations.of(context)!.editSuccess,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          },
           success: (value) {
             Navigator.pop(context);
             context.read<UserCubit>().addFlashcardSetToUser(
@@ -125,12 +152,25 @@ class _CreateFlashcardPageState extends State<CreateFlashcardPage> {
               heroTag: 'Create',
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  context.read<CUDFlashcardCubit>().createFlashcardSet(
-                        name: nameController.text,
-                        language: languageController.text,
-                        words: wordsController,
-                        definitions: wordsController,
-                      );
+                  context.read<CUDFlashcardCubit>().state.maybeMap(
+                    editing: (value) {
+                      context.read<CUDFlashcardCubit>().editFlashcardSet(
+                            name: nameController.text,
+                            language: languageController.text,
+                            words: wordsController,
+                            definitions: definitionsController,
+                            flashcardSet: value.flashcardSet,
+                          );
+                    },
+                    orElse: () {
+                      context.read<CUDFlashcardCubit>().createFlashcardSet(
+                            name: nameController.text,
+                            language: languageController.text,
+                            words: wordsController,
+                            definitions: definitionsController,
+                          );
+                    },
+                  );
                 }
               },
               child: const Icon(Icons.save),

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/core/screens/home/flashcard_list_home.dart';
+import 'package:primus/core/screens/loading_widget.dart';
 import 'package:primus/features/user_flashcard/presentation/cubit/cubit/user_flashcard_cubit.dart';
 import '../../../../widgets/bottom_dialog_add.dart';
 
@@ -70,88 +71,12 @@ class _HomePageState extends State<HomePage> {
                       flashcardsSets: value.flashcardSets,
                     );
                   },
-                  orElse: () => Container(
-                    color: Colors.red,
-                    width: 20,
-                    height: 20,
-                  ),
+                  orElse: () => const LoadingWidget(),
                 );
               },
             )
           ],
         ),
-        // child: StreamBuilder<DocumentSnapshot>(
-        //   stream: viewModel.document,
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasData &&
-        //         snapshot.data != null &&
-        //         snapshot.data!.data() != null) {
-        //       var value = snapshot.data!.data() as Map<String, dynamic>;
-
-        //       myUser.User user = myUser.User.fromJson(value);
-        //       user.toLearn?.sort((a, b) => b.timeStamp.compareTo(a.timeStamp));
-        //       return ListView(
-        //         children: [
-        // TO LEARN LIST
-        // StreamBuilder<List<ToLearn>>(
-        //   stream: Stream.fromFuture(viewModel.getUserToLearn()),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.connectionState == ConnectionState.waiting) {
-        //       return const LoadingWidget();
-        //     }
-        //     if (snapshot.hasData &&
-        //         snapshot.data != null &&
-        //         snapshot.data!.isNotEmpty) {
-        //       return ToLearnHomeList(
-        //         toLearn: snapshot.data!,
-        //         delete: viewModel.deleteToLearn,
-        //       );
-        //     }
-        //     return Container();
-        //   },
-        // ),
-        // SET LSIT
-        //       user.ownFlashcard != null
-        //           ? StreamBuilder<List<Flashcard>>(
-        //               stream: Stream.fromFuture(
-        //                   viewModel.getUserFlahscards(user.ownFlashcard)),
-        //               builder: (context, snapshot) {
-        //                 if (snapshot.connectionState ==
-        //                     ConnectionState.waiting) {
-        //                   return const LoadingWidget();
-        //                 }
-        //                 if (snapshot.hasData &&
-        //                     snapshot.data != null &&
-        //                     snapshot.data!.isNotEmpty) {
-        //                   return FlashcardListHome(
-        //                     flashcards: snapshot.data!,
-        //                     delte: viewModel.deleteFlashcard,
-        //                     uid: viewModel.uid,
-        //                   );
-        //                 }
-        //                 return Container();
-        //               })
-        //           : Container(),
-        //       StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        //         stream: viewModel.unitDocuments,
-        //         builder: (context, snapshot) {
-        //           if (snapshot.hasData &&
-        //               snapshot.data != null &&
-        //               snapshot.data!.docs.isNotEmpty) {
-        //             return UnitHomeList(
-        //               units: viewModel.getUnits(snapshot.data!),
-        //               delete: viewModel.deleteUnit,
-        //             );
-        //           }
-        //           return Container();
-        //         },
-        //       ),
-        //     ],
-        //   );
-        // }
-        // return const CustomErrorWidget();
-        // },
-        // ),
       ),
     );
   }
