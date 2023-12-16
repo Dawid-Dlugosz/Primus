@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/core/screens/home/flashcard_list_home.dart';
 import 'package:primus/core/screens/loading_widget.dart';
 import 'package:primus/features/user_flashcard/presentation/cubit/cubit/user_flashcard_cubit.dart';
+import 'package:primus/screen/search/search.dart';
 import '../../../../widgets/bottom_dialog_add.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,8 +38,12 @@ class _HomePageState extends State<HomePage> {
           FloatingActionButton(
             heroTag: 'seach',
             onPressed: () {
-              // TODO MAKE SEARCH SCREEN
-              // viewModel.navigateToSearch();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Search(),
+                ),
+              );
             },
             child: const Icon(Icons.search_rounded),
           ),
