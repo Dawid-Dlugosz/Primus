@@ -5,27 +5,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:primus/features/create_flashcard/data/repository/create_flash_card_repository_impl.dart';
-import 'package:primus/features/create_flashcard/domain/entity/flashcard.dart';
 import 'package:primus/features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
 
 import '../../dialog/delete_flashcard.dart';
+import '../../features/create_flashcard/domain/entity/flashcard_set.dart';
 import '../../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
+import '../../screen/flashcard_main_learn/flashcard_main.dart';
 
 class CardFlashcard extends StatelessWidget {
   const CardFlashcard({
-    required this.flashcard,
+    required this.flashcardSet,
     this.fromSearch = false,
     super.key,
   });
 
-  final FlashCard flashcard;
+  final FlashcardSet flashcardSet;
   final bool fromSearch;
 
   @override
   Widget build(BuildContext context) {
-    final flashcardName = flashcard.nameSet;
-    final wordsCount = flashcard.words.length;
-    final dt = DateTime.fromMillisecondsSinceEpoch(flashcard.timeStamp);
+    final flashcardName = flashcardSet.flashCard.nameSet;
+    final wordsCount = flashcardSet.flashCard.words.length;
+    final dt =
+        DateTime.fromMillisecondsSinceEpoch(flashcardSet.flashCard.timeStamp);
     final date = DateFormat('dd-MM-yy').format(dt);
 
     return SizedBox(
@@ -34,17 +36,14 @@ class CardFlashcard extends StatelessWidget {
       child: Card(
         child: InkWell(
           onTap: () {
-            // TODO SHOW FLASHCARD
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => ChangeNotifierProvider(
-            //       create: (context) =>
-            //           FlashcardMainViewModel(flascardId: widget.flashcard.id),
-            //       child: const FlashCardMain(),
-            //     ),
-            //   ),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => FlashCardMain(
+                  flashcardSet: flashcardSet,
+                ),
+              ),
+            );
           },
           child: Container(
             padding: const EdgeInsets.all(16.0),
@@ -83,7 +82,8 @@ class CardFlashcard extends StatelessWidget {
                                               .instance.currentUser!.uid,
                                         ),
                                       )..setFlashcardSetToEdit(
-                                          flashcardSetId: flashcard.id,
+                                          flashcardSetId:
+                                              flashcardSet.flashCard.id,
                                         ),
                                       child: const CreateFlashcardPage(),
                                     ),
@@ -102,7 +102,7 @@ class CardFlashcard extends StatelessWidget {
                                       ),
                                     ),
                                     child: DeleteFlashcard(
-                                      flashcardId: flashcard.id,
+                                      flashcardId: flashcardSet.flashCard.id,
                                     ),
                                   ),
                                 );

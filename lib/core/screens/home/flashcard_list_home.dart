@@ -30,7 +30,7 @@ class _FlashcardListHomeState extends State<FlashcardListHome> {
           itemBuilder: (context, index) {
             // TODO PORPAWIĆ USUSWANIE U KAŻDEGO UŻYTKOWNIKA KTÓRY W TO LEARN MA ID USUWANEGO ZESTAWU MUSI ZOSTAĆ USUNIĘTE
             return CardFlashcard(
-              flashcard: widget.flashcardsSets[index].flashCard,
+              flashcardSet: widget.flashcardsSets[index],
             );
           },
         ),

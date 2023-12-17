@@ -12,7 +12,7 @@ class FlashcardSetList extends StatelessWidget {
       itemCount: flashcardSets.length,
       itemBuilder: (_, index) {
         return CardFlashcard(
-          flashcard: flashcardSets[index].flashCard,
+          flashcardSet: flashcardSets[index],
         );
       },
     );

@@ -29,7 +29,7 @@ class AllFlashcard extends StatelessWidget {
                 itemCount: flashcardSets.length,
                 itemBuilder: (context, index) {
                   return CardFlashcard(
-                    flashcard: flashcardSets[index].flashCard,
+                    flashcardSet: flashcardSets[index],
                   );
                 },
               );
