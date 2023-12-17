@@ -156,5 +156,6 @@
     "ok": "OK",
     "editingError": "Przy edycji wystąpił błąd",
     "searcher": "Wyszukiwarka",
-    "searchSomething": "Wyszukaj coś"
+    "searchSomething": "Wyszukaj coś",
+    "unknow": "Nieznany"
 }

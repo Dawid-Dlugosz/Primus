@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:primus/features/author_name/data/repository/author_name_repository_impl.dart';
+import 'package:primus/features/author_name/presentation/author_name/author_name_cubit.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 
@@ -31,9 +35,16 @@ class FlashCardMain extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            context.read<UserCubit>().state?.uid != flashcardSet.ownerId
-                ? AuthorWidget(
-                    ownerId: flashcardSet.ownerId,
+            context.read<UserCubit>().state?.uid == flashcardSet.ownerId
+                ? BlocProvider(
+                    create: (context) => AuthorNameCubit(
+                      repository: AuthorNameRepositoryImpl(
+                        firestore: FirebaseFirestore.instance,
+                      ),
+                    )..getAuthorName(uid: flashcardSet.ownerId),
+                    child: AuthorWidget(
+                      ownerId: flashcardSet.ownerId,
+                    ),
                   )
                 : const SizedBox(),
             Expanded(

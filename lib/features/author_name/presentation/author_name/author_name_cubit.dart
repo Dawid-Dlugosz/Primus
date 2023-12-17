@@ -9,7 +9,6 @@ class AuthorNameCubit extends Cubit<String> {
 
   Future<void> getAuthorName({required String uid}) async {
     final result = await repository.getAuthorName(uid: uid);
-
     result.fold(
       (l) => emit(''),
       (r) => emit(r),

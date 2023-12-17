@@ -23,7 +23,9 @@ class AuthorNameRepositoryImpl implements AuthorNameRepository {
           .collection(FirebaseCollection.users.name)
           .doc(uid)
           .get();
+
       final nickname = document.get('nickname');
+
       if (nickname == null) {
         throw Exception();
       }
