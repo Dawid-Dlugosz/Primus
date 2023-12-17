@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 
+import '../../features/author_name/presentation/widgets/author_widget.dart';
 import 'flashcard_learn.dart';
 import '../flashcard_spelling.dart';
 import '../test/flashcard_exam.dart';
@@ -9,7 +10,6 @@ import '../../view_models/flashcard_learn_view_model.dart';
 import '../../view_models/flashcard_main_view_model.dart';
 import '../../view_models/flashcard_spelling_view_model.dart';
 import '../../view_models/flashcard_test_view_model.dart';
-import '../../widgets/author_widget.dart';
 import '../../widgets/go_to_learn.dart';
 import '../../core/screens/loading_widget.dart';
 import '../../widgets/swiper_tinder/swiper_empty.dart';

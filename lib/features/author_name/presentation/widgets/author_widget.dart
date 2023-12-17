@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../dialog/copy_flashcard.dart';
+import '../../../../dialog/copy_flashcard.dart';
 
 class AuthorWidget extends StatelessWidget {
   const AuthorWidget({required this.ownerId, super.key});
