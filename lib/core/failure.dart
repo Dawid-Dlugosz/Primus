@@ -9,4 +9,5 @@ class Failure with _$Failure {
   const factory Failure.user() = _User;
   const factory Failure.general() = _General;
   const factory Failure.flashcard() = _Flashcard;
+  const factory Failure.search() = _Search;
 }

@@ -1,81 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'list_search.dart';
-
-import '../../view_models/search_view_model.dart';
-
-import '../../core/screens/loading_widget.dart';
-import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:primus/core/widgets/search_something.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
+import 'package:primus/features/search/presentation/search/search_cubit.dart';
+import 'package:primus/screen/search/list_search.dart';
+import 'package:primus/widgets/empty_widget.dart';
 
 class Search extends StatefulWidget {
-  const Search({Key? key}) : super(key: key);
+  const Search({super.key});
 
   @override
   State<Search> createState() => _SearchState();
 }
 
 class _SearchState extends State<Search> {
-  late SeachViewModel model;
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
 
   @override
   void dispose() {
-    model.textEditingController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SeachViewModel>(builder: (_, viewModel, __) {
-      model = viewModel;
-      if (!viewModel.loading) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            title: const Text('Searcher'), // TODO MAKE TRANSALTION
-          ),
-          body: Column(
-            children: [
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    viewModel.name = value;
-                  });
-                },
-                controller: viewModel.textEditingController,
-                decoration: InputDecoration.collapsed(
-                  hintText: AppLocalizations.of(context)!.flashcardsName,
-                  border: const OutlineInputBorder(),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.searcher),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  _controller.text = value;
+                });
+                context.read<SearchCubit>().searchFlashcard(name: value);
+              },
+              controller: _controller,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.all(8.0),
+                hintText: AppLocalizations.of(context)!.flashcardsName,
+                border: const OutlineInputBorder(),
               ),
-
-              // TODO MAKE SEARCHER SCREEN
-              viewModel.name.isEmpty
-                  ? const Text('Wyszukaj coś')
-                  : StreamBuilder<QuerySnapshot>(
-                      stream: viewModel.snapshot,
-                      builder:
-                          (context, AsyncSnapshot<QuerySnapshot> snapshots) {
-                        if (snapshots.connectionState ==
-                            ConnectionState.waiting) {
-                          return const LoadingWidget();
-                        }
-
-                        if (snapshots.hasData &&
-                            snapshots.data != null &&
-                            snapshots.data!.docs.isNotEmpty) {
-                          return ListSearch(snapshots, viewModel.name);
-                        }
-
-                        return const SizedBox();
-                      },
-                    ),
-            ],
+            ),
           ),
-        );
-      } else {
-        return const LoadingWidget();
-      }
-    });
+          const SizedBox(
+            height: 10,
+          ),
+          _controller.text.isEmpty
+              ? const SearchSomething()
+              : BlocBuilder<SearchCubit, List<FlashcardSet>>(
+                  builder: (context, state) {
+                    if (state.isEmpty) {
+                      return const EmptyWidget();
+                    } else {
+                      return ListSearch(
+                        flashcardSets: state,
+                      );
+                    }
+                  },
+                ),
+        ],
+      ),
+    );
   }
 }
