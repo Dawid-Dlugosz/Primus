@@ -9,8 +9,6 @@ import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dar
 import 'package:primus/features/search/domain/repository/search_repository.dart';
 import 'package:primus/features/search/presentation/search/search_cubit.dart';
 
-import '../../../user/presentation/cubit/user_cubit_test.dart';
-
 class MockSearchRepository extends Mock implements SearchRepository {}
 
 void main() {
@@ -63,7 +61,7 @@ void main() {
 
               cubit.searchFlashcard(name: '');
             },
-            expect: () => [],
+            expect: () => [[]],
           );
 
           blocTest(
