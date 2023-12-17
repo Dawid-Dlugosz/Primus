@@ -28,16 +28,16 @@ class ToLearnItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-              create: (context) =>
-                  FlashcardMainViewModel(flascardId: flashcard.id),
-              child: const FlashCardMain(),
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => ChangeNotifierProvider(
+        //       create: (context) =>
+        //           FlashcardMainViewModel(flascardId: flashcard.id),
+        //       child: const FlashCardMain(flashcardSet: ,),
+        //     ),
+        //   ),
+        // );
       },
       child: SizedBox(
         width: double.infinity,

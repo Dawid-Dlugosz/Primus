@@ -3,11 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../dialog/copy_flashcard.dart';
 
 class AuthorWidget extends StatelessWidget {
-  const AuthorWidget({required this.nickname, required this.add, Key? key})
-      : super(key: key);
+  const AuthorWidget({required this.ownerId, super.key});
 
-  final String nickname;
-  final VoidCallback add;
+  final String ownerId;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,19 +15,21 @@ class AuthorWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // TODO MAKE CUBIT TO SERACH OWNERID
           Text(
-            AppLocalizations.of(context)!.author(nickname),
+            AppLocalizations.of(context)!.author(ownerId),
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
+          // TODO MAKE COPY FLASHCARD TO TOLEARN
           IconButton(
             onPressed: () {
               showDialog<void>(
                 context: context,
                 builder: (BuildContext context) {
-                  return CopyFlashcard(add: add);
+                  return CopyFlashcard(add: () {});
                 },
               );
             },
