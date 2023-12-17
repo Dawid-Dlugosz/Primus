@@ -154,5 +154,7 @@
     "editSuccess" : "Edit success",
     "allUnits" : "All units",
     "ok": "OK",
-    "editingError": "Editing error"
+    "editingError": "Editing error",
+    "searcher": "Searcher",
+    "searchSomething": "Search something"
 }

@@ -154,5 +154,7 @@
     "editSuccess" : "Edycja udana",
     "allUnits" : "Wszystkie zestawy",
     "ok": "OK",
-    "editingError": "Przy edycji wystąpił błąd"
+    "editingError": "Przy edycji wystąpił błąd",
+    "searcher": "Wyszukiwarka",
+    "searchSomething": "Wyszukaj coś"
 }
