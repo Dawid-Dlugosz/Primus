@@ -132,8 +132,9 @@ class __$$ToLearnWordImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$ToLearnWordImpl implements _ToLearnWord {
-  const _$ToLearnWordImpl({required this.learnMethod, required this.word});
+class _$ToLearnWordImpl extends _ToLearnWord {
+  const _$ToLearnWordImpl({required this.learnMethod, required this.word})
+      : super._();
 
   factory _$ToLearnWordImpl.fromJson(Map<String, dynamic> json) =>
       _$$ToLearnWordImplFromJson(json);
@@ -176,10 +177,11 @@ class _$ToLearnWordImpl implements _ToLearnWord {
   }
 }
 
-abstract class _ToLearnWord implements ToLearnWord {
+abstract class _ToLearnWord extends ToLearnWord {
   const factory _ToLearnWord(
       {required final LearnMethod learnMethod,
       required final Word word}) = _$ToLearnWordImpl;
+  const _ToLearnWord._() : super._();
 
   factory _ToLearnWord.fromJson(Map<String, dynamic> json) =
       _$ToLearnWordImpl.fromJson;

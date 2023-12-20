@@ -24,6 +24,7 @@ mixin _$Failure {
     required TResult Function() general,
     required TResult Function() flashcard,
     required TResult Function() search,
+    required TResult Function() word,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$Failure {
     TResult? Function()? general,
     TResult? Function()? flashcard,
     TResult? Function()? search,
+    TResult? Function()? word,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$Failure {
     TResult Function()? general,
     TResult Function()? flashcard,
     TResult Function()? search,
+    TResult Function()? word,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +58,7 @@ mixin _$Failure {
     required TResult Function(_General value) general,
     required TResult Function(_Flashcard value) flashcard,
     required TResult Function(_Search value) search,
+    required TResult Function(_Word value) word,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +69,7 @@ mixin _$Failure {
     TResult? Function(_General value)? general,
     TResult? Function(_Flashcard value)? flashcard,
     TResult? Function(_Search value)? search,
+    TResult? Function(_Word value)? word,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +80,7 @@ mixin _$Failure {
     TResult Function(_General value)? general,
     TResult Function(_Flashcard value)? flashcard,
     TResult Function(_Search value)? search,
+    TResult Function(_Word value)? word,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -115,12 +121,18 @@ class __$$ToShortImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ToShortImpl implements _ToShort {
+class _$ToShortImpl with DiagnosticableTreeMixin implements _ToShort {
   const _$ToShortImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Failure.tooShort()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'Failure.tooShort'));
   }
 
   @override
@@ -141,6 +153,7 @@ class _$ToShortImpl implements _ToShort {
     required TResult Function() general,
     required TResult Function() flashcard,
     required TResult Function() search,
+    required TResult Function() word,
   }) {
     return tooShort();
   }
@@ -154,6 +167,7 @@ class _$ToShortImpl implements _ToShort {
     TResult? Function()? general,
     TResult? Function()? flashcard,
     TResult? Function()? search,
+    TResult? Function()? word,
   }) {
     return tooShort?.call();
   }
@@ -167,6 +181,7 @@ class _$ToShortImpl implements _ToShort {
     TResult Function()? general,
     TResult Function()? flashcard,
     TResult Function()? search,
+    TResult Function()? word,
     required TResult orElse(),
   }) {
     if (tooShort != null) {
@@ -184,6 +199,7 @@ class _$ToShortImpl implements _ToShort {
     required TResult Function(_General value) general,
     required TResult Function(_Flashcard value) flashcard,
     required TResult Function(_Search value) search,
+    required TResult Function(_Word value) word,
   }) {
     return tooShort(this);
   }
@@ -197,6 +213,7 @@ class _$ToShortImpl implements _ToShort {
     TResult? Function(_General value)? general,
     TResult? Function(_Flashcard value)? flashcard,
     TResult? Function(_Search value)? search,
+    TResult? Function(_Word value)? word,
   }) {
     return tooShort?.call(this);
   }
@@ -210,6 +227,7 @@ class _$ToShortImpl implements _ToShort {
     TResult Function(_General value)? general,
     TResult Function(_Flashcard value)? flashcard,
     TResult Function(_Search value)? search,
+    TResult Function(_Word value)? word,
     required TResult orElse(),
   }) {
     if (tooShort != null) {
@@ -241,12 +259,20 @@ class __$$FlashcardNameBusyImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
+class _$FlashcardNameBusyImpl
+    with DiagnosticableTreeMixin
+    implements _FlashcardNameBusy {
   const _$FlashcardNameBusyImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Failure.flashcardNameBuse()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'Failure.flashcardNameBuse'));
   }
 
   @override
@@ -267,6 +293,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     required TResult Function() general,
     required TResult Function() flashcard,
     required TResult Function() search,
+    required TResult Function() word,
   }) {
     return flashcardNameBuse();
   }
@@ -280,6 +307,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     TResult? Function()? general,
     TResult? Function()? flashcard,
     TResult? Function()? search,
+    TResult? Function()? word,
   }) {
     return flashcardNameBuse?.call();
   }
@@ -293,6 +321,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     TResult Function()? general,
     TResult Function()? flashcard,
     TResult Function()? search,
+    TResult Function()? word,
     required TResult orElse(),
   }) {
     if (flashcardNameBuse != null) {
@@ -310,6 +339,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     required TResult Function(_General value) general,
     required TResult Function(_Flashcard value) flashcard,
     required TResult Function(_Search value) search,
+    required TResult Function(_Word value) word,
   }) {
     return flashcardNameBuse(this);
   }
@@ -323,6 +353,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     TResult? Function(_General value)? general,
     TResult? Function(_Flashcard value)? flashcard,
     TResult? Function(_Search value)? search,
+    TResult? Function(_Word value)? word,
   }) {
     return flashcardNameBuse?.call(this);
   }
@@ -336,6 +367,7 @@ class _$FlashcardNameBusyImpl implements _FlashcardNameBusy {
     TResult Function(_General value)? general,
     TResult Function(_Flashcard value)? flashcard,
     TResult Function(_Search value)? search,
+    TResult Function(_Word value)? word,
     required TResult orElse(),
   }) {
     if (flashcardNameBuse != null) {
@@ -366,12 +398,18 @@ class __$$UserImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserImpl implements _User {
+class _$UserImpl with DiagnosticableTreeMixin implements _User {
   const _$UserImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Failure.user()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'Failure.user'));
   }
 
   @override
@@ -392,6 +430,7 @@ class _$UserImpl implements _User {
     required TResult Function() general,
     required TResult Function() flashcard,
     required TResult Function() search,
+    required TResult Function() word,
   }) {
     return user();
   }
@@ -405,6 +444,7 @@ class _$UserImpl implements _User {
     TResult? Function()? general,
     TResult? Function()? flashcard,
     TResult? Function()? search,
+    TResult? Function()? word,
   }) {
     return user?.call();
   }
@@ -418,6 +458,7 @@ class _$UserImpl implements _User {
     TResult Function()? general,
     TResult Function()? flashcard,
     TResult Function()? search,
+    TResult Function()? word,
     required TResult orElse(),
   }) {
     if (user != null) {
@@ -435,6 +476,7 @@ class _$UserImpl implements _User {
     required TResult Function(_General value) general,
     required TResult Function(_Flashcard value) flashcard,
     required TResult Function(_Search value) search,
+    required TResult Function(_Word value) word,
   }) {
     return user(this);
   }
@@ -448,6 +490,7 @@ class _$UserImpl implements _User {
     TResult? Function(_General value)? general,
     TResult? Function(_Flashcard value)? flashcard,
     TResult? Function(_Search value)? search,
+    TResult? Function(_Word value)? word,
   }) {
     return user?.call(this);
   }
@@ -461,6 +504,7 @@ class _$UserImpl implements _User {
     TResult Function(_General value)? general,
     TResult Function(_Flashcard value)? flashcard,
     TResult Function(_Search value)? search,
+    TResult Function(_Word value)? word,
     required TResult orElse(),
   }) {
     if (user != null) {
@@ -492,12 +536,18 @@ class __$$GeneralImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GeneralImpl implements _General {
+class _$GeneralImpl with DiagnosticableTreeMixin implements _General {
   const _$GeneralImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Failure.general()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'Failure.general'));
   }
 
   @override
@@ -518,6 +568,7 @@ class _$GeneralImpl implements _General {
     required TResult Function() general,
     required TResult Function() flashcard,
     required TResult Function() search,
+    required TResult Function() word,
   }) {
     return general();
   }
@@ -531,6 +582,7 @@ class _$GeneralImpl implements _General {
     TResult? Function()? general,
     TResult? Function()? flashcard,
     TResult? Function()? search,
+    TResult? Function()? word,
   }) {
     return general?.call();
   }
@@ -544,6 +596,7 @@ class _$GeneralImpl implements _General {
     TResult Function()? general,
     TResult Function()? flashcard,
     TResult Function()? search,
+    TResult Function()? word,
     required TResult orElse(),
   }) {
     if (general != null) {
@@ -561,6 +614,7 @@ class _$GeneralImpl implements _General {
     required TResult Function(_General value) general,
     required TResult Function(_Flashcard value) flashcard,
     required TResult Function(_Search value) search,
+    required TResult Function(_Word value) word,
   }) {
     return general(this);
   }
@@ -574,6 +628,7 @@ class _$GeneralImpl implements _General {
     TResult? Function(_General value)? general,
     TResult? Function(_Flashcard value)? flashcard,
     TResult? Function(_Search value)? search,
+    TResult? Function(_Word value)? word,
   }) {
     return general?.call(this);
   }
@@ -587,6 +642,7 @@ class _$GeneralImpl implements _General {
     TResult Function(_General value)? general,
     TResult Function(_Flashcard value)? flashcard,
     TResult Function(_Search value)? search,
+    TResult Function(_Word value)? word,
     required TResult orElse(),
   }) {
     if (general != null) {
@@ -618,12 +674,18 @@ class __$$FlashcardImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FlashcardImpl implements _Flashcard {
+class _$FlashcardImpl with DiagnosticableTreeMixin implements _Flashcard {
   const _$FlashcardImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Failure.flashcard()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'Failure.flashcard'));
   }
 
   @override
@@ -644,6 +706,7 @@ class _$FlashcardImpl implements _Flashcard {
     required TResult Function() general,
     required TResult Function() flashcard,
     required TResult Function() search,
+    required TResult Function() word,
   }) {
     return flashcard();
   }
@@ -657,6 +720,7 @@ class _$FlashcardImpl implements _Flashcard {
     TResult? Function()? general,
     TResult? Function()? flashcard,
     TResult? Function()? search,
+    TResult? Function()? word,
   }) {
     return flashcard?.call();
   }
@@ -670,6 +734,7 @@ class _$FlashcardImpl implements _Flashcard {
     TResult Function()? general,
     TResult Function()? flashcard,
     TResult Function()? search,
+    TResult Function()? word,
     required TResult orElse(),
   }) {
     if (flashcard != null) {
@@ -687,6 +752,7 @@ class _$FlashcardImpl implements _Flashcard {
     required TResult Function(_General value) general,
     required TResult Function(_Flashcard value) flashcard,
     required TResult Function(_Search value) search,
+    required TResult Function(_Word value) word,
   }) {
     return flashcard(this);
   }
@@ -700,6 +766,7 @@ class _$FlashcardImpl implements _Flashcard {
     TResult? Function(_General value)? general,
     TResult? Function(_Flashcard value)? flashcard,
     TResult? Function(_Search value)? search,
+    TResult? Function(_Word value)? word,
   }) {
     return flashcard?.call(this);
   }
@@ -713,6 +780,7 @@ class _$FlashcardImpl implements _Flashcard {
     TResult Function(_General value)? general,
     TResult Function(_Flashcard value)? flashcard,
     TResult Function(_Search value)? search,
+    TResult Function(_Word value)? word,
     required TResult orElse(),
   }) {
     if (flashcard != null) {
@@ -744,12 +812,18 @@ class __$$SearchImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SearchImpl implements _Search {
+class _$SearchImpl with DiagnosticableTreeMixin implements _Search {
   const _$SearchImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Failure.search()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'Failure.search'));
   }
 
   @override
@@ -770,6 +844,7 @@ class _$SearchImpl implements _Search {
     required TResult Function() general,
     required TResult Function() flashcard,
     required TResult Function() search,
+    required TResult Function() word,
   }) {
     return search();
   }
@@ -783,6 +858,7 @@ class _$SearchImpl implements _Search {
     TResult? Function()? general,
     TResult? Function()? flashcard,
     TResult? Function()? search,
+    TResult? Function()? word,
   }) {
     return search?.call();
   }
@@ -796,6 +872,7 @@ class _$SearchImpl implements _Search {
     TResult Function()? general,
     TResult Function()? flashcard,
     TResult Function()? search,
+    TResult Function()? word,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -813,6 +890,7 @@ class _$SearchImpl implements _Search {
     required TResult Function(_General value) general,
     required TResult Function(_Flashcard value) flashcard,
     required TResult Function(_Search value) search,
+    required TResult Function(_Word value) word,
   }) {
     return search(this);
   }
@@ -826,6 +904,7 @@ class _$SearchImpl implements _Search {
     TResult? Function(_General value)? general,
     TResult? Function(_Flashcard value)? flashcard,
     TResult? Function(_Search value)? search,
+    TResult? Function(_Word value)? word,
   }) {
     return search?.call(this);
   }
@@ -839,6 +918,7 @@ class _$SearchImpl implements _Search {
     TResult Function(_General value)? general,
     TResult Function(_Flashcard value)? flashcard,
     TResult Function(_Search value)? search,
+    TResult Function(_Word value)? word,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -850,4 +930,141 @@ class _$SearchImpl implements _Search {
 
 abstract class _Search implements Failure {
   const factory _Search() = _$SearchImpl;
+}
+
+/// @nodoc
+abstract class _$$WordImplCopyWith<$Res> {
+  factory _$$WordImplCopyWith(
+          _$WordImpl value, $Res Function(_$WordImpl) then) =
+      __$$WordImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$WordImplCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$WordImpl>
+    implements _$$WordImplCopyWith<$Res> {
+  __$$WordImplCopyWithImpl(_$WordImpl _value, $Res Function(_$WordImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$WordImpl with DiagnosticableTreeMixin implements _Word {
+  const _$WordImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Failure.word()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'Failure.word'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$WordImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() tooShort,
+    required TResult Function() flashcardNameBuse,
+    required TResult Function() user,
+    required TResult Function() general,
+    required TResult Function() flashcard,
+    required TResult Function() search,
+    required TResult Function() word,
+  }) {
+    return word();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? tooShort,
+    TResult? Function()? flashcardNameBuse,
+    TResult? Function()? user,
+    TResult? Function()? general,
+    TResult? Function()? flashcard,
+    TResult? Function()? search,
+    TResult? Function()? word,
+  }) {
+    return word?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? tooShort,
+    TResult Function()? flashcardNameBuse,
+    TResult Function()? user,
+    TResult Function()? general,
+    TResult Function()? flashcard,
+    TResult Function()? search,
+    TResult Function()? word,
+    required TResult orElse(),
+  }) {
+    if (word != null) {
+      return word();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ToShort value) tooShort,
+    required TResult Function(_FlashcardNameBusy value) flashcardNameBuse,
+    required TResult Function(_User value) user,
+    required TResult Function(_General value) general,
+    required TResult Function(_Flashcard value) flashcard,
+    required TResult Function(_Search value) search,
+    required TResult Function(_Word value) word,
+  }) {
+    return word(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ToShort value)? tooShort,
+    TResult? Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult? Function(_User value)? user,
+    TResult? Function(_General value)? general,
+    TResult? Function(_Flashcard value)? flashcard,
+    TResult? Function(_Search value)? search,
+    TResult? Function(_Word value)? word,
+  }) {
+    return word?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ToShort value)? tooShort,
+    TResult Function(_FlashcardNameBusy value)? flashcardNameBuse,
+    TResult Function(_User value)? user,
+    TResult Function(_General value)? general,
+    TResult Function(_Flashcard value)? flashcard,
+    TResult Function(_Search value)? search,
+    TResult Function(_Word value)? word,
+    required TResult orElse(),
+  }) {
+    if (word != null) {
+      return word(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Word implements Failure {
+  const factory _Word() = _$WordImpl;
 }

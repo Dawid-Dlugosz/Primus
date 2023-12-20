@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:primus/core/widgets/custom_error_widget.dart';
 import 'package:primus/features/author_name/data/repository/author_name_repository_impl.dart';
 import 'package:primus/features/author_name/presentation/author_name/author_name_cubit.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
+import 'package:primus/features/vocabulary/presentation/vocabulary/vocabulary_cubit.dart';
 
 import '../../features/author_name/presentation/widgets/author_widget.dart';
 import 'flashcard_learn.dart';
@@ -20,6 +22,8 @@ import '../../widgets/swiper_tinder/swiper_empty.dart';
 import '../../widgets/swiper_tinder/swiper_tinder.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'flashcard_vocabulary.dart';
 
 class FlashCardMain extends StatelessWidget {
   const FlashCardMain({required this.flashcardSet, super.key});
@@ -63,25 +67,8 @@ class FlashCardMain extends StatelessWidget {
                       ],
                       indicatorSize: TabBarIndicatorSize.tab,
                     ),
-                    // TODO MAKE CUBIT TO SPLIT KNOW AND UNKNOW
-                    const Expanded(
-                      child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          SwiperEmpty(),
-                          SwiperEmpty(),
-                          //   viewModel.allKnowWords.isNotEmpty
-                          //       ? SwiperTinder(
-                          //           words: viewModel.allKnowWords,
-                          //           language: viewModel.language)
-                          //       : const SwiperEmpty(),
-                          // viewModel.allUnknowWords.isNotEmpty
-                          //     ? SwiperTinder(
-                          //         words: viewModel.allUnknowWords,
-                          //         language: viewModel.language)
-                          //     : const SwiperEmpty(),
-                        ],
-                      ),
+                    FlashcardVocabulary(
+                      language: flashcardSet.flashCard.languageSet,
                     ),
                     Expanded(
                       child: ListView(

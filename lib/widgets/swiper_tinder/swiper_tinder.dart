@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:primus/model/word.dart';
+
 import 'package:primus/widgets/flip_card/flip_flashcard.dart';
 
+import '../../features/create_flashcard/domain/entity/word.dart';
+
+;
 class SwiperTinder extends StatefulWidget {
   const SwiperTinder({required this.words, required this.language, Key? key})
       : super(key: key);
