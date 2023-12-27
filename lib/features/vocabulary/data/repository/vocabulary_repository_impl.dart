@@ -26,7 +26,9 @@ class VocabularyRepositoryImpl implements VocabularyRepository {
           .collection(FirebaseCollection.flashcardSet.name)
           .doc(flashcardSetId)
           .get();
-      final data = document.get('words');
+
+      final data = document.get(FieldPath(const ['flashCard', 'words']));
+
       for (var value in (data as List<dynamic>)) {
         words.add(Word.fromJson(value));
       }

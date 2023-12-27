@@ -9,7 +9,9 @@ import '../../widgets/swiper_tinder/swiper_tinder.dart';
 
 class FlashcardVocabulary extends StatelessWidget {
   const FlashcardVocabulary({required this.language, super.key});
+
   final String language;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<VocabularyCubit, VocabularyState>(

@@ -6,6 +6,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:primus/features/create_flashcard/data/repository/create_flash_card_repository_impl.dart';
 import 'package:primus/features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
+import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
+import 'package:primus/features/vocabulary/data/repository/vocabulary_repository_impl.dart';
+import 'package:primus/features/vocabulary/presentation/vocabulary/vocabulary_cubit.dart';
 
 import '../../dialog/delete_flashcard.dart';
 import '../../features/create_flashcard/domain/entity/flashcard_set.dart';
@@ -39,8 +42,18 @@ class CardFlashcard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => FlashCardMain(
-                  flashcardSet: flashcardSet,
+                builder: (_) => BlocProvider(
+                  create: (context) => VocabularyCubit(
+                    repository: VocabularyRepositoryImpl(
+                      firestore: FirebaseFirestore.instance,
+                    ),
+                  )..getVocabulary(
+                      user: context.read<UserCubit>().state!,
+                      flashcardSetId: flashcardSet.flashCard.id,
+                    ),
+                  child: FlashCardMain(
+                    flashcardSet: flashcardSet,
+                  ),
                 ),
               ),
             );
