@@ -61,7 +61,13 @@ void main() {
               firestore
                   .collection(FirebaseCollection.flashcardSet.name)
                   .doc(tFlashcardSetId)
-                  .set({'words': []});
+                  .set(
+                {
+                  'flashCard': {
+                    'words': [],
+                  },
+                },
+              );
 
               final result =
                   await repository.getWords(flashcardSetId: tFlashcardSetId);
@@ -76,11 +82,15 @@ void main() {
               firestore
                   .collection(FirebaseCollection.flashcardSet.name)
                   .doc(tFlashcardSetId)
-                  .set({
-                'words': [
-                  {'test': 'test'}
-                ]
-              });
+                  .set(
+                {
+                  'flashCard': {
+                    'words': [
+                      {'test': 'test'}
+                    ]
+                  }
+                },
+              );
 
               final result =
                   await repository.getWords(flashcardSetId: tFlashcardSetId);
@@ -95,9 +105,13 @@ void main() {
               await firestore
                   .collection(FirebaseCollection.flashcardSet.name)
                   .doc(tFlashcardSetId)
-                  .set({
-                'words': tWords.map((e) => e.toJson()).toList(),
-              });
+                  .set(
+                {
+                  'flashCard': {
+                    'words': tWords.map((e) => e.toJson()).toList(),
+                  }
+                },
+              );
 
               final result =
                   await repository.getWords(flashcardSetId: tFlashcardSetId);
