@@ -39,7 +39,9 @@ class FlashCardMain extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            context.read<UserCubit>().state?.uid == flashcardSet.ownerId
+            context.watch<UserCubit>().containtFlashcardSet(
+                      flashcardSetId: flashcardSet.flashCard.id,
+                    )
                 ? BlocProvider(
                     create: (context) => AuthorNameCubit(
                       repository: AuthorNameRepositoryImpl(
@@ -47,7 +49,7 @@ class FlashCardMain extends StatelessWidget {
                       ),
                     )..getAuthorName(uid: flashcardSet.ownerId),
                     child: AuthorWidget(
-                      ownerId: flashcardSet.ownerId,
+                      flashcardSet: flashcardSet,
                     ),
                   )
                 : const SizedBox(),

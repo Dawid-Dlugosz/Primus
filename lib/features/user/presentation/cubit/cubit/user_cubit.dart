@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/user/domain/repository/user_repository.dart';
 
 import '../../../domain/entity/user.dart';
@@ -55,5 +56,40 @@ class UserCubit extends Cubit<User?> {
       );
     }
     emit(state);
+  }
+
+  void copyFlashcard({required FlashcardSet flashcardSet}) async {
+    if (state != null) {
+      final result = await repository.copyFlashcradSet(
+        flashcardSet: flashcardSet,
+        user: state!,
+      );
+
+      result.fold(
+        (l) => emit(state),
+        (user) => emit(user),
+      );
+    }
+    emit(state);
+  }
+
+  bool containtFlashcardSet({required String flashcardSetId}) {
+    if (state == null) {
+      return false;
+    }
+    if (state!.ownFlashcard.contains('flashcardSet/$flashcardSetId')) {
+      return true;
+    }
+
+    if (state!.toLearn.isEmpty) {
+      return false;
+    }
+
+    for (var element in state!.toLearn) {
+      if (element.flashcardId == flashcardSetId) {
+        return true;
+      }
+    }
+    return false;
   }
 }
