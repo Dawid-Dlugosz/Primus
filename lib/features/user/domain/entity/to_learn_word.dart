@@ -8,6 +8,8 @@ part 'to_learn_word.g.dart';
 
 @freezed
 class ToLearnWord with _$ToLearnWord {
+  const ToLearnWord._();
+
   @JsonSerializable(explicitToJson: true)
   const factory ToLearnWord({
     required LearnMethod learnMethod,
@@ -16,4 +18,7 @@ class ToLearnWord with _$ToLearnWord {
 
   factory ToLearnWord.fromJson(Map<String, dynamic> json) =>
       _$ToLearnWordFromJson(json);
+
+  bool isKnowedWord() =>
+      learnMethod.spelling && learnMethod.flashcard && learnMethod.test;
 }
