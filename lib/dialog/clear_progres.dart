@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ClearProgress extends StatelessWidget {
-  const ClearProgress({Key? key}) : super(key: key);
+  const ClearProgress({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class ClearProgress extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Czy na pewno chcesz cofnąć postęp?'),
+            Text(AppLocalizations.of(context)!.clearProgress),
             const SizedBox(
               height: 10,
             ),
@@ -22,13 +23,13 @@ class ClearProgress extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context, true);
                   },
-                  child: Text('Tak'),
+                  child: Text(AppLocalizations.of(context)!.yes),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context, false);
                   },
-                  child: Text('Nie'),
+                  child: Text(AppLocalizations.of(context)!.no),
                 ),
               ],
             ),
