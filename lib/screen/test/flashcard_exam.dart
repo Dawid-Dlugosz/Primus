@@ -50,9 +50,7 @@ class _FlashcardExamState extends State<FlashcardExam> {
                         answer: viewModel.testWords[viewModel.wordIndex],
                         viewModel: viewModel,
                       )
-                    : EmptyWords(
-                        showAllWords: viewModel.showAlWords,
-                        clearProgress: viewModel.clearProgress),
+                    : EmptyWords(clearProgress: viewModel.clearProgress),
               )
             : Container();
       },

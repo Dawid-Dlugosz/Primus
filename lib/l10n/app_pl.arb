@@ -157,5 +157,6 @@
     "editingError": "Przy edycji wystąpił błąd",
     "searcher": "Wyszukiwarka",
     "searchSomething": "Wyszukaj coś",
-    "unknow": "Nieznany"
+    "unknow": "Nieznany",
+    "spellingType": "Tryb nauki: Pisanie"
 }

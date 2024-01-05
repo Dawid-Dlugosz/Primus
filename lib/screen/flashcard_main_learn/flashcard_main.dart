@@ -4,11 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/features/author_name/data/repository/author_name_repository_impl.dart';
 import 'package:primus/features/author_name/presentation/author_name/author_name_cubit.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
+import 'package:primus/features/learn_method/presentation/cubit/spelling/spelling_cubit.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 
+import '../../dialog/copy_flashcard.dart';
 import '../../features/author_name/presentation/widgets/author_widget.dart';
 import '../../widgets/go_to_learn.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../flashcard_spelling.dart';
 import 'flashcard_vocabulary.dart';
 
 class FlashCardMain extends StatelessWidget {
@@ -19,9 +22,14 @@ class FlashCardMain extends StatelessWidget {
     if (!context.read<UserCubit>().containtFlashcardSet(
           flashcardSetId: flashcardSet.flashCard.id,
         )) {
-      context.read<UserCubit>().containtFlashcardSet(
-            flashcardSetId: flashcardSet.flashCard.id,
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return CopyFlashcard(
+            flashcardSet: flashcardSet,
           );
+        },
+      );
     }
   }
 
@@ -123,18 +131,26 @@ class FlashCardMain extends StatelessWidget {
                             text: AppLocalizations.of(context)!.spelling,
                             learnMode: () async {
                               checkIsContain(context);
-                              // await viewModel.copyFlashcardSetToLearn();
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => ChangeNotifierProvider(
-                              //       create: (context) =>
-                              //           FlashcardSpellingViewModel(
-                              //               flashcardId: viewModel.flascardId),
-                              //       child: const FlashcardSpelling(),
-                              //     ),
-                              //   ),
-                              // );
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                          create: (context) => SpellingCubit(
+                                            flashcardSetId:
+                                                flashcardSet.flashCard.id,
+                                            user: context.read<UserCubit>(),
+                                          )..initial(),
+                                          child: const FlashcardSpelling(),
+                                        )
+                                    // builder: (context) => ChangeNotifierProvider(
+                                    //   create: (context) =>
+                                    //       FlashcardSpellingViewModel(
+                                    //           flashcardId: viewModel.flascardId),
+                                    //   child: const FlashcardSpelling(),
+                                    // ),
+                                    ),
+                              );
                             },
                           )
                         ],

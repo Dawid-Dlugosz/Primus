@@ -157,5 +157,6 @@
     "editingError": "Editing error",
     "searcher": "Searcher",
     "searchSomething": "Search something",
-    "unknow": "Unknow"
+    "unknow": "Unknow",
+    "spellingType": "Learn method: Spelling"
 }

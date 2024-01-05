@@ -32,13 +32,9 @@ class _StartPageState extends State<StartPage> {
               context.read<UserFlashcardCubit>().loadFlashcardSets(
                     uid: value.user.uid,
                   );
-              if (value.user.displayName != null) {
-                // TODO SPRWADZIĆ CZY JAK SIĘ ZALOGUJE TO CXZY NIE BĘDZIE CHCIAŁO UTOWRZYĆ NOWEGO KONTA
-                context.read<UserCubit>().createUser(
-                      nickname: value.user.displayName!,
-                      uid: value.user.uid,
-                    );
-              }
+
+              context.read<UserCubit>().getuser(
+                  uid: value.user.uid, nickname: value.user.displayName ?? '');
             },
             error: (value) {
               final communicate = errorCodeToText(value.errorCode, context);

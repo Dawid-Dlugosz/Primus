@@ -63,7 +63,6 @@ class _FlashcardLearnState extends State<FlashcardLearn> {
                         },
                         child: viewModel.words.isEmpty
                             ? EmptyWords(
-                                showAllWords: viewModel.showAllWords,
                                 clearProgress: viewModel.clearPorgress,
                               )
                             : SwiperFlashcard(viewModel: viewModel),

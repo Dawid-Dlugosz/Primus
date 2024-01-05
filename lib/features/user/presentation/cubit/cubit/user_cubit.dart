@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
+import 'package:primus/features/user/domain/entity/to_learn.dart';
 import 'package:primus/features/user/domain/repository/user_repository.dart';
 
 import '../../../domain/entity/user.dart';
@@ -10,6 +11,14 @@ class UserCubit extends Cubit<User?> {
   }) : super(null);
 
   final UserRepository repository;
+
+  void getuser({required String uid, required String nickname}) async {
+    final failureOrUser = await repository.getUser(uid: uid);
+    failureOrUser.fold(
+      (failure) => createUser(nickname: nickname, uid: uid),
+      (user) => emit(user),
+    );
+  }
 
   void createUser({
     required String nickname,
@@ -42,6 +51,18 @@ class UserCubit extends Cubit<User?> {
     } else {
       emit(state);
     }
+  }
+
+  void deleteToLearn({required String flashcardSetId}) async {
+    final failureOrUser = await repository.deleteToLearn(
+      flashcardSetId: flashcardSetId,
+      user: state!,
+    );
+
+    failureOrUser.fold(
+      (failure) => emit(state),
+      (user) => emit(user),
+    );
   }
 
   void deleteFlashcardSet({required String flashcardSetId}) async {
@@ -91,5 +112,18 @@ class UserCubit extends Cubit<User?> {
       }
     }
     return false;
+  }
+
+  void updateToLearn({required ToLearn toLearn}) async {
+    final failureOrUser = await repository.updateToLearn(
+      uid: state!.uid,
+      toLearn: toLearn,
+      user: state!,
+    );
+
+    failureOrUser.fold(
+      (failure) => emit(state),
+      (user) => emit(user),
+    );
   }
 }
