@@ -93,7 +93,7 @@ class UserRepositoryImpl implements UserRepository {
     required User user,
   }) async {
     try {
-      final newToLearns = user.toLearn;
+      final newToLearns = [...user.toLearn];
       const learnMethod = LearnMethod(
         flashcard: false,
         spelling: false,
@@ -116,7 +116,7 @@ class UserRepositoryImpl implements UserRepository {
       newToLearns.add(toLearn);
       final newUser = user.copyWith(toLearn: newToLearns);
 
-      await FirebaseFirestore.instance
+      await firestore
           .collection(FirebaseCollection.users.name)
           .doc(user.uid)
           .update(

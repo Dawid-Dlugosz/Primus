@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
-import 'show_all/all_flascard.dart';
-import '../../widgets/card_flashcard.dart';
+import 'package:primus/core/widgets/card_to_learn.dart';
+import 'package:primus/features/user/domain/entity/to_learn.dart';
 
-class FlashcardListHome extends StatelessWidget {
-  const FlashcardListHome({
-    required this.flashcardsSets,
-    super.key,
-  });
+import 'show_all/all_to_learn.dart';
 
-  final List<FlashcardSet> flashcardsSets;
+class ToLearnListHome extends StatelessWidget {
+  const ToLearnListHome({required this.toLearns, super.key});
+
+  final List<ToLearn> toLearns;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +19,10 @@ class FlashcardListHome extends StatelessWidget {
         ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: flashcardsSets.take(3).length,
+          itemCount: toLearns.take(3).length,
           itemBuilder: (context, index) {
-            return CardFlashcard(
-              flashcardSet: flashcardsSets[index],
+            return CardToLearn(
+              toLearn: toLearns[index],
             );
           },
         ),
@@ -35,14 +33,13 @@ class FlashcardListHome extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AllFlashcard(),
+                  builder: (context) => const AllToLearn(),
                 ),
               );
             },
             child: Text(AppLocalizations.of(context)!.showMore),
           ),
-        ),
-        Text(AppLocalizations.of(context)!.toStudy),
+        )
       ],
     );
   }

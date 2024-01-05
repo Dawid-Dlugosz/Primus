@@ -1,33 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:primus/core/widgets/custom_error_widget.dart';
 import 'package:primus/features/author_name/data/repository/author_name_repository_impl.dart';
 import 'package:primus/features/author_name/presentation/author_name/author_name_cubit.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
-import 'package:primus/features/vocabulary/presentation/vocabulary/vocabulary_cubit.dart';
 
 import '../../features/author_name/presentation/widgets/author_widget.dart';
-import 'flashcard_learn.dart';
-import '../flashcard_spelling.dart';
-import '../test/flashcard_exam.dart';
-import '../../view_models/flashcard_learn_view_model.dart';
-import '../../view_models/flashcard_main_view_model.dart';
-import '../../view_models/flashcard_spelling_view_model.dart';
-import '../../view_models/flashcard_test_view_model.dart';
 import '../../widgets/go_to_learn.dart';
-import '../../core/screens/loading_widget.dart';
-import '../../widgets/swiper_tinder/swiper_empty.dart';
-import '../../widgets/swiper_tinder/swiper_tinder.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'flashcard_vocabulary.dart';
 
 class FlashCardMain extends StatelessWidget {
   const FlashCardMain({required this.flashcardSet, super.key});
   final FlashcardSet flashcardSet;
+
+  void checkIsContain(BuildContext context) {
+    if (!context.read<UserCubit>().containtFlashcardSet(
+          flashcardSetId: flashcardSet.flashCard.id,
+        )) {
+      context.read<UserCubit>().containtFlashcardSet(
+            flashcardSetId: flashcardSet.flashCard.id,
+          );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +35,7 @@ class FlashCardMain extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            context.watch<UserCubit>().containtFlashcardSet(
+            !context.watch<UserCubit>().containtFlashcardSet(
                       flashcardSetId: flashcardSet.flashCard.id,
                     )
                 ? BlocProvider(
@@ -80,7 +76,8 @@ class FlashCardMain extends StatelessWidget {
                             iconData: Icons.copy_rounded,
                             text: AppLocalizations.of(context)!.flashcards,
                             learnMode: () async {
-                              // TODO
+                              checkIsContain(context);
+
                               // await viewModel.copyFlashcardSetToLearn();
                               // Navigator.push(
                               //   context,
@@ -103,7 +100,7 @@ class FlashCardMain extends StatelessWidget {
                             iconData: Icons.ballot_outlined,
                             text: AppLocalizations.of(context)!.test,
                             learnMode: () async {
-                              // TODO
+                              checkIsContain(context);
                               // await viewModel.copyFlashcardSetToLearn();
                               // Navigator.push(
                               //   context,
@@ -125,7 +122,7 @@ class FlashCardMain extends StatelessWidget {
                             iconData: Icons.spellcheck_outlined,
                             text: AppLocalizations.of(context)!.spelling,
                             learnMode: () async {
-                              // TODO
+                              checkIsContain(context);
                               // await viewModel.copyFlashcardSetToLearn();
                               // Navigator.push(
                               //   context,

@@ -8,7 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class AllToLearn extends StatefulWidget {
-  const AllToLearn({Key? key}) : super(key: key);
+  const AllToLearn({super.key});
 
   @override
   State<AllToLearn> createState() => _AllToLearnState();

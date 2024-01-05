@@ -41,6 +41,7 @@ class CopyFlashcard extends StatelessWidget {
                       context
                           .read<UserCubit>()
                           .copyFlashcard(flashcardSet: flashcardSet);
+                      Navigator.pop(context);
                     },
                     child: Text(AppLocalizations.of(context)!.yes),
                   ),
