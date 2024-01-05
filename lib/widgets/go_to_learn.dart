@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GoToLearn extends StatelessWidget {
   const GoToLearn(
       {required this.iconData,
       required this.text,
       required this.learnMode,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   final IconData iconData;
   final String text;

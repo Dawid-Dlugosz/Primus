@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/features/author_name/presentation/author_name/author_name_cubit.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import '../../../../dialog/copy_flashcard.dart';
 
 class AuthorWidget extends StatelessWidget {
-  const AuthorWidget({required this.ownerId, super.key});
+  const AuthorWidget({required this.flashcardSet, super.key});
 
-  final String ownerId;
+  final FlashcardSet flashcardSet;
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +36,14 @@ class AuthorWidget extends StatelessWidget {
                 );
               },
             ),
-            // TODO MAKE COPY FLASHCARD TO TOLEARN
             IconButton(
               onPressed: () {
                 showDialog<void>(
                   context: context,
                   builder: (BuildContext context) {
-                    return CopyFlashcard(add: () {});
+                    return CopyFlashcard(
+                      flashcardSet: flashcardSet,
+                    );
                   },
                 );
               },

@@ -2,6 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:primus/features/user/domain/entity/user.dart';
 
 import '../../../../core/failure.dart';
+import '../../../create_flashcard/domain/entity/flashcard_set.dart';
 
 abstract class UserRepository {
   Future<Either<Failure, User>> createUser({
@@ -16,6 +17,11 @@ abstract class UserRepository {
 
   Future<Either<Failure, User>> deleteFlashcardSet({
     required String flashcardSetId,
+    required User user,
+  });
+
+  Future<Either<Failure, User>> copyFlashcradSet({
+    required FlashcardSet flashcardSet,
     required User user,
   });
 }

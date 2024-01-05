@@ -5,6 +5,10 @@ import 'package:fpdart/fpdart.dart';
 import 'package:logger/logger.dart';
 import 'package:primus/core/failure.dart';
 import 'package:primus/enum/collection.dart';
+import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
+import 'package:primus/features/user/domain/entity/learn_method.dart';
+import 'package:primus/features/user/domain/entity/to_learn.dart';
+import 'package:primus/features/user/domain/entity/to_learn_word.dart';
 import 'package:primus/features/user/domain/repository/user_repository.dart';
 import 'package:primus/features/user/domain/entity/user.dart';
 
@@ -79,6 +83,54 @@ class UserRepositoryImpl implements UserRepository {
       return Right(user.copyWith(ownFlashcard: newOwnFlashcard.toList()));
     } catch (e, s) {
       logger.f('UserRepositoryImp deleteFlashcardSet', error: e, stackTrace: s);
+      return const Left(Failure.user());
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> copyFlashcradSet({
+    required FlashcardSet flashcardSet,
+    required User user,
+  }) async {
+    try {
+      final newToLearns = [...user.toLearn];
+      const learnMethod = LearnMethod(
+        flashcard: false,
+        spelling: false,
+        test: false,
+      );
+
+      final toLearn = ToLearn(
+        flashcardId: flashcardSet.flashCard.id,
+        words: flashcardSet.flashCard.words
+            .map(
+              (e) => ToLearnWord(
+                learnMethod: learnMethod,
+                word: e,
+              ),
+            )
+            .toList(),
+        timeStamp: DateTime.now().millisecondsSinceEpoch,
+      );
+
+      newToLearns.add(toLearn);
+      final newUser = user.copyWith(toLearn: newToLearns);
+
+      await firestore
+          .collection(FirebaseCollection.users.name)
+          .doc(user.uid)
+          .update(
+        {
+          'toLearn': newToLearns.map((e) => e.toJson()).toList(),
+        },
+      );
+      return Right(newUser);
+    } catch (e, s) {
+      logger.f(
+        'UserRepository copuFlashcardSet',
+        error: e,
+        stackTrace: s,
+      );
       return const Left(Failure.user());
     }
   }
