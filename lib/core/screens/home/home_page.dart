@@ -119,9 +119,18 @@ class _HomePageState extends State<HomePage> {
                   );
                 }
                 return const SizedBox();
-              })
-            ],
-          ),
+              }
+
+              if (state.toLearn.isNotEmpty) {
+                final newToLearn = [...state.toLearn];
+                newToLearn.sort((a, b) => a.timeStamp.compareTo(b.timeStamp));
+                return ToLearnListHome(
+                  toLearns: newToLearn,
+                );
+              }
+              return const SizedBox();
+            })
+          ],
         ),
       ),
     );
