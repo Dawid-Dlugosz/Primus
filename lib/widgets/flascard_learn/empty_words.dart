@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../dialog/clear_progres.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmptyWords extends StatelessWidget {
   const EmptyWords({
@@ -14,10 +15,10 @@ class EmptyWords extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Z tego kurus umiesz już wszystkie słowa, masz kilka możliowść:',
+          AppLocalizations.of(context)!.knowAll,
         ),
         ElevatedButton(
-          child: Text('1. Wyzeruj postępy kurus'),
+          child: Text(AppLocalizations.of(context)!.firstChoice),
           onPressed: () {
             showDialog<void>(
               context: context,
@@ -33,10 +34,10 @@ class EmptyWords extends StatelessWidget {
           },
         ),
         ElevatedButton(
-          child: const Text(
-            '2. Przejdź do następnego kurus',
-          ),
           onPressed: Navigator.of(context).pop,
+          child: Text(
+            AppLocalizations.of(context)!.secondChoice,
+          ),
         ),
       ],
     );

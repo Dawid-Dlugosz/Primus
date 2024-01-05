@@ -9,7 +9,7 @@ import '../../loading_widget.dart';
 import '../../../../widgets/unit_item.dart';
 
 class AllUnits extends StatelessWidget {
-  const AllUnits({required this.delete, Key? key}) : super(key: key);
+  const AllUnits({required this.delete, super.key});
 
   final Function(String id) delete;
 

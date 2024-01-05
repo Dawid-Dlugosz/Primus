@@ -5,8 +5,7 @@ import '../core/screens/home/show_all/all_units.dart';
 import 'unit_item.dart';
 
 class UnitHomeList extends StatelessWidget {
-  const UnitHomeList({required this.units, required this.delete, Key? key})
-      : super(key: key);
+  const UnitHomeList({required this.units, required this.delete, super.key});
 
   final List<Unit> units;
   final Function(String unitId) delete;

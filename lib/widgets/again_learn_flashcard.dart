@@ -1,33 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:primus/features/learn_method/presentation/cubit/flashcard/flashcard_learn_cubit.dart';
 
 class AgainLearnFlashcard extends StatelessWidget {
-  const AgainLearnFlashcard({required this.again, Key? key}) : super(key: key);
+  const AgainLearnFlashcard({required this.again, super.key});
 
   final VoidCallback again;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        const Text(
-          'To już wszystkie słowka, czy chcesz uczyć się jeszcze raz?',
-          style: TextStyle(
-            fontSize: 20,
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.itsAllWords,
+            style: const TextStyle(
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
           ),
-        ),
-        const Text(
-          'TUTAJ BĘDZIE IKONA BUZKI KTÓRA SIĘ NAMYŚLA',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+          const Text(
+            '?',
+            style: TextStyle(
+              fontSize: 60,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
-        ),
-        ElevatedButton(
-          onPressed: again,
-          child: const Text('Ucz się jeszcze raz'),
-        ),
-      ],
+          ElevatedButton(
+            onPressed: () => context.read<FlashcardLearnCubit>().tryAgain(),
+            child: Text(AppLocalizations.of(context)!.learnAgain),
+          ),
+        ],
+      ),
     );
   }
 }

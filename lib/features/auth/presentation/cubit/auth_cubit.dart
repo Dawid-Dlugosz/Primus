@@ -82,7 +82,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> resetPassword({required String email}) async {
     emit(const AuthState.loading());
     // TODO NIE WIEM JAKA TO JESZCZE ZROBIC JAKI STAN ZWRÓCIC
-    final result = await authRepo.resetPassword(email: email);
+    // final result = await authRepo.resetPassword(email: email);
 
     throw UnimplementedError();
   }

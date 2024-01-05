@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'spelling_cubit.dart';
+part of 'flashcard_learn_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SpellingState {
+mixin _$FlashcardLearnState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<SpellingWord> know,
-            List<SpellingWord> unknow, bool wrongDefinition, ToLearn toLearn)
+    required TResult Function(bool learnAgain, String language,
+            List<ToLearnWord> know, List<ToLearnWord> unknow, ToLearn toLearn)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<SpellingWord> know, List<SpellingWord> unknow,
-            bool wrongDefinition, ToLearn toLearn)?
+    TResult? Function(bool learnAgain, String language, List<ToLearnWord> know,
+            List<ToLearnWord> unknow, ToLearn toLearn)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<SpellingWord> know, List<SpellingWord> unknow,
-            bool wrongDefinition, ToLearn toLearn)?
+    TResult Function(bool learnAgain, String language, List<ToLearnWord> know,
+            List<ToLearnWord> unknow, ToLearn toLearn)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -63,16 +63,16 @@ mixin _$SpellingState {
 }
 
 /// @nodoc
-abstract class $SpellingStateCopyWith<$Res> {
-  factory $SpellingStateCopyWith(
-          SpellingState value, $Res Function(SpellingState) then) =
-      _$SpellingStateCopyWithImpl<$Res, SpellingState>;
+abstract class $FlashcardLearnStateCopyWith<$Res> {
+  factory $FlashcardLearnStateCopyWith(
+          FlashcardLearnState value, $Res Function(FlashcardLearnState) then) =
+      _$FlashcardLearnStateCopyWithImpl<$Res, FlashcardLearnState>;
 }
 
 /// @nodoc
-class _$SpellingStateCopyWithImpl<$Res, $Val extends SpellingState>
-    implements $SpellingStateCopyWith<$Res> {
-  _$SpellingStateCopyWithImpl(this._value, this._then);
+class _$FlashcardLearnStateCopyWithImpl<$Res, $Val extends FlashcardLearnState>
+    implements $FlashcardLearnStateCopyWith<$Res> {
+  _$FlashcardLearnStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -89,7 +89,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$SpellingStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$FlashcardLearnStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -103,7 +103,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'SpellingState.initial()';
+    return 'FlashcardLearnState.initial()';
   }
 
   @override
@@ -119,8 +119,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<SpellingWord> know,
-            List<SpellingWord> unknow, bool wrongDefinition, ToLearn toLearn)
+    required TResult Function(bool learnAgain, String language,
+            List<ToLearnWord> know, List<ToLearnWord> unknow, ToLearn toLearn)
         loaded,
   }) {
     return initial();
@@ -130,8 +130,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<SpellingWord> know, List<SpellingWord> unknow,
-            bool wrongDefinition, ToLearn toLearn)?
+    TResult? Function(bool learnAgain, String language, List<ToLearnWord> know,
+            List<ToLearnWord> unknow, ToLearn toLearn)?
         loaded,
   }) {
     return initial?.call();
@@ -141,8 +141,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<SpellingWord> know, List<SpellingWord> unknow,
-            bool wrongDefinition, ToLearn toLearn)?
+    TResult Function(bool learnAgain, String language, List<ToLearnWord> know,
+            List<ToLearnWord> unknow, ToLearn toLearn)?
         loaded,
     required TResult orElse(),
   }) {
@@ -184,7 +184,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements SpellingState {
+abstract class _Initial implements FlashcardLearnState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -195,9 +195,10 @@ abstract class _$$LoadedImplCopyWith<$Res> {
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {List<SpellingWord> know,
-      List<SpellingWord> unknow,
-      bool wrongDefinition,
+      {bool learnAgain,
+      String language,
+      List<ToLearnWord> know,
+      List<ToLearnWord> unknow,
       ToLearn toLearn});
 
   $ToLearnCopyWith<$Res> get toLearn;
@@ -205,7 +206,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$SpellingStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$FlashcardLearnStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
@@ -214,24 +215,29 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? learnAgain = null,
+    Object? language = null,
     Object? know = null,
     Object? unknow = null,
-    Object? wrongDefinition = null,
     Object? toLearn = null,
   }) {
     return _then(_$LoadedImpl(
+      learnAgain: null == learnAgain
+          ? _value.learnAgain
+          : learnAgain // ignore: cast_nullable_to_non_nullable
+              as bool,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
       know: null == know
           ? _value._know
           : know // ignore: cast_nullable_to_non_nullable
-              as List<SpellingWord>,
+              as List<ToLearnWord>,
       unknow: null == unknow
           ? _value._unknow
           : unknow // ignore: cast_nullable_to_non_nullable
-              as List<SpellingWord>,
-      wrongDefinition: null == wrongDefinition
-          ? _value.wrongDefinition
-          : wrongDefinition // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as List<ToLearnWord>,
       toLearn: null == toLearn
           ? _value.toLearn
           : toLearn // ignore: cast_nullable_to_non_nullable
@@ -252,37 +258,40 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(
-      {required final List<SpellingWord> know,
-      required final List<SpellingWord> unknow,
-      required this.wrongDefinition,
+      {required this.learnAgain,
+      required this.language,
+      required final List<ToLearnWord> know,
+      required final List<ToLearnWord> unknow,
       required this.toLearn})
       : _know = know,
         _unknow = unknow;
 
-  final List<SpellingWord> _know;
   @override
-  List<SpellingWord> get know {
+  final bool learnAgain;
+  @override
+  final String language;
+  final List<ToLearnWord> _know;
+  @override
+  List<ToLearnWord> get know {
     if (_know is EqualUnmodifiableListView) return _know;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_know);
   }
 
-  final List<SpellingWord> _unknow;
+  final List<ToLearnWord> _unknow;
   @override
-  List<SpellingWord> get unknow {
+  List<ToLearnWord> get unknow {
     if (_unknow is EqualUnmodifiableListView) return _unknow;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_unknow);
   }
 
   @override
-  final bool wrongDefinition;
-  @override
   final ToLearn toLearn;
 
   @override
   String toString() {
-    return 'SpellingState.loaded(know: $know, unknow: $unknow, wrongDefinition: $wrongDefinition, toLearn: $toLearn)';
+    return 'FlashcardLearnState.loaded(learnAgain: $learnAgain, language: $language, know: $know, unknow: $unknow, toLearn: $toLearn)';
   }
 
   @override
@@ -290,19 +299,22 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
+            (identical(other.learnAgain, learnAgain) ||
+                other.learnAgain == learnAgain) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
             const DeepCollectionEquality().equals(other._know, _know) &&
             const DeepCollectionEquality().equals(other._unknow, _unknow) &&
-            (identical(other.wrongDefinition, wrongDefinition) ||
-                other.wrongDefinition == wrongDefinition) &&
             (identical(other.toLearn, toLearn) || other.toLearn == toLearn));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      learnAgain,
+      language,
       const DeepCollectionEquality().hash(_know),
       const DeepCollectionEquality().hash(_unknow),
-      wrongDefinition,
       toLearn);
 
   @JsonKey(ignore: true)
@@ -315,35 +327,35 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<SpellingWord> know,
-            List<SpellingWord> unknow, bool wrongDefinition, ToLearn toLearn)
+    required TResult Function(bool learnAgain, String language,
+            List<ToLearnWord> know, List<ToLearnWord> unknow, ToLearn toLearn)
         loaded,
   }) {
-    return loaded(know, unknow, wrongDefinition, toLearn);
+    return loaded(learnAgain, language, know, unknow, toLearn);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<SpellingWord> know, List<SpellingWord> unknow,
-            bool wrongDefinition, ToLearn toLearn)?
+    TResult? Function(bool learnAgain, String language, List<ToLearnWord> know,
+            List<ToLearnWord> unknow, ToLearn toLearn)?
         loaded,
   }) {
-    return loaded?.call(know, unknow, wrongDefinition, toLearn);
+    return loaded?.call(learnAgain, language, know, unknow, toLearn);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<SpellingWord> know, List<SpellingWord> unknow,
-            bool wrongDefinition, ToLearn toLearn)?
+    TResult Function(bool learnAgain, String language, List<ToLearnWord> know,
+            List<ToLearnWord> unknow, ToLearn toLearn)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(know, unknow, wrongDefinition, toLearn);
+      return loaded(learnAgain, language, know, unknow, toLearn);
     }
     return orElse();
   }
@@ -380,16 +392,18 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements SpellingState {
+abstract class _Loaded implements FlashcardLearnState {
   const factory _Loaded(
-      {required final List<SpellingWord> know,
-      required final List<SpellingWord> unknow,
-      required final bool wrongDefinition,
+      {required final bool learnAgain,
+      required final String language,
+      required final List<ToLearnWord> know,
+      required final List<ToLearnWord> unknow,
       required final ToLearn toLearn}) = _$LoadedImpl;
 
-  List<SpellingWord> get know;
-  List<SpellingWord> get unknow;
-  bool get wrongDefinition;
+  bool get learnAgain;
+  String get language;
+  List<ToLearnWord> get know;
+  List<ToLearnWord> get unknow;
   ToLearn get toLearn;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>

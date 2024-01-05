@@ -158,5 +158,11 @@
     "searcher": "Wyszukiwarka",
     "searchSomething": "Wyszukaj coś",
     "unknow": "Nieznany",
-    "spellingType": "Tryb nauki: Pisanie"
+    "spellingType": "Tryb nauki: Pisanie",
+    "knowAll": "Z tego kurus umiesz już wszystkie słowa, masz kilka możliowść:",
+    "firstChoice": "1. Wyzeruj postępy kurus",
+    "secondChoice": "2. Przejdź do następnego kurus",
+    "clearProgress": "Czy na pewno chcesz cofnąć postęp?",
+    "itsAllWords": "To już wszystkie słowka, czy chcesz uczyć się jeszcze raz",
+    "learnAgain": "Ucz się jeszcze raz"
 }

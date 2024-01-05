@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:mocktail/mocktail.dart';
+
 import 'package:primus/core/failure.dart';
 import 'package:primus/enum/collection.dart';
 import 'package:primus/features/create_flashcard/data/repository/create_flash_card_repository_impl.dart';

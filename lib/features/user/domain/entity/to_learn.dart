@@ -7,6 +7,7 @@ part 'to_learn.freezed.dart';
 
 @freezed
 class ToLearn with _$ToLearn {
+  // ignore: invalid_annotation_target
   @JsonSerializable(explicitToJson: true)
   const factory ToLearn({
     required String flashcardId,

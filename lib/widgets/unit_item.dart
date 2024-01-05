@@ -9,8 +9,7 @@ import '../view_models/unit_screen_view_model.dart';
 import 'package:provider/provider.dart';
 
 class UnitItem extends StatelessWidget {
-  const UnitItem({required this.unit, required this.delete, Key? key})
-      : super(key: key);
+  const UnitItem({required this.unit, required this.delete, super.key});
 
   final Unit unit;
   final Function(String unitId) delete;

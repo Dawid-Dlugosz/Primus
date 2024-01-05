@@ -10,6 +10,7 @@ part 'to_learn_word.g.dart';
 class ToLearnWord with _$ToLearnWord {
   const ToLearnWord._();
 
+  // ignore: invalid_annotation_target
   @JsonSerializable(explicitToJson: true)
   const factory ToLearnWord({
     required LearnMethod learnMethod,

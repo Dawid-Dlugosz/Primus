@@ -1,5 +1,3 @@
-import 'user.dart';
-
 class Unit {
   Unit({
     required this.owner,
