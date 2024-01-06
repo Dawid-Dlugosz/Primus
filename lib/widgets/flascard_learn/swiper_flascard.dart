@@ -24,13 +24,21 @@ class SwiperFlashcard extends StatefulWidget {
 class _SwiperFlashcardState extends State<SwiperFlashcard> {
   final CardSwiperController _controller = CardSwiperController();
 
-  // TODO ZROBIĆ ZANZACZENIE UMIEIM/ NIE UMIEM NA ON SWIPE, JEŚLI W PRAWWO TO UMIEIM
-  // NIE WIEM JAK TO ROZWIĄZAĆ PO STRONIE CUBITA, TO BO JEST PYTANIE CZY CHCE JESZCZE RAZ I JAK KLIKNE TAK, TO MAM TE SAME FISZKI
-  // NIE ZALEZNIE CZY ODPOWIEDZIAŁEM DOBRZE CZY NIE. Wydaje mi sie ze najlepiej
-  // bedzie przekazywać zmienione toLearn do userCubit który sobie będzie to aktualizoawł na bierząco
-  // a do stanu, toLearn ze stanu i będzie git
-  void _onSwipeLeft() {}
-  void _onSwipeRight() {}
+  void _onSwipeLeft(int index) {
+    final id = widget.words[index].word.id;
+    context.read<FlashcardLearnCubit>().markToLearnWord(
+          wordId: id,
+          marker: false,
+        );
+  }
+
+  void _onSwipeRight(int index) {
+    final id = widget.words[index].word.id;
+    context.read<FlashcardLearnCubit>().markToLearnWord(
+          wordId: id,
+          marker: true,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +49,25 @@ class _SwiperFlashcardState extends State<SwiperFlashcard> {
             margin: const EdgeInsets.only(top: 50),
             height: MediaQuery.of(context).size.height * 0.7,
             child: CardSwiper(
+              allowedSwipeDirection: AllowedSwipeDirection.symmetric(
+                horizontal: true,
+                vertical: false,
+              ),
               onEnd: () => context.read<FlashcardLearnCubit>().askAgain(),
               isLoop: false,
+              onSwipe: (previousIndex, currentIndex, direction) {
+                if (direction == CardSwiperDirection.left) {
+                  _onSwipeLeft(previousIndex);
+                }
+                if (direction == CardSwiperDirection.right) {
+                  _onSwipeRight(previousIndex);
+                }
+                return true;
+              },
               controller: _controller,
               cardsCount: widget.words.length,
-              numberOfCardsDisplayed: 3,
+              numberOfCardsDisplayed:
+                  widget.words.length > 3 ? 3 : widget.words.length,
               cardBuilder: (
                 context,
                 index,

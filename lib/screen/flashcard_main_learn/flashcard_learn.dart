@@ -40,15 +40,12 @@ class _FlashcardLearnState extends State<FlashcardLearn> {
             orElse: () => const LoadingWidget(),
             loaded: (value) {
               if (value.learnAgain) {
-                return AgainLearnFlashcard(
-                  again: () => {},
-                  // again: () => viewModel.learnOneMoreTime(),
-                );
+                return const AgainLearnFlashcard();
               }
               if (value.unknow.isEmpty) {
                 return EmptyWords(
-                  clearProgress: () => {},
-                  // clearProgress: viewModel.clearPorgress,
+                  clearProgress: () =>
+                      context.read<FlashcardLearnCubit>().clearProgress(),
                 );
               }
               return SwiperFlashcard(

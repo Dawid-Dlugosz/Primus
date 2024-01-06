@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:primus/features/create_flashcard/domain/entity/word.dart';
+import 'package:primus/features/user/domain/entity/learn_method.dart';
 import 'package:primus/features/user/domain/entity/to_learn.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 
@@ -69,5 +71,51 @@ class FlashcardLearnCubit extends Cubit<FlashcardLearnState> {
     );
   }
 
-  void markToLearnWord({required wordId, required bool value}) {}
+  void markToLearnWord({
+    required String wordId,
+    required bool marker,
+  }) {
+    state.maybeMap(
+      orElse: () => emit(state),
+      loaded: (value) {
+        final newToLearnWords = [...value.toLearn.words];
+        final index =
+            newToLearnWords.indexWhere((element) => element.word.id == wordId);
+        final toLearnCopy =
+            newToLearnWords[index].learnMethod.copyWith(flashcard: marker);
+        newToLearnWords[index] =
+            newToLearnWords[index].copyWith(learnMethod: toLearnCopy);
+
+        user.updateToLearn(
+            toLearn: value.toLearn.copyWith(words: newToLearnWords));
+
+        emit(
+          FlashcardLearnState.loaded(
+            learnAgain: value.learnAgain,
+            language: language,
+            know: value.know,
+            unknow: value.unknow,
+            toLearn: value.toLearn.copyWith(words: newToLearnWords),
+          ),
+        );
+      },
+    );
+  }
+
+  void clearProgress() {
+    state.maybeMap(
+      orElse: () => emit(state),
+      loaded: (value) {
+        final newWords = [...value.toLearn.words];
+        for (var i = 0; i < newWords.length; i++) {
+          final learnMethodCopy =
+              newWords[i].learnMethod.copyWith(flashcard: false);
+          newWords[i] = newWords[i].copyWith(learnMethod: learnMethodCopy);
+        }
+        final newToLearn = value.toLearn.copyWith(words: newWords);
+        user.updateToLearn(toLearn: newToLearn);
+        initial(toLearnVariable: newToLearn);
+      },
+    );
+  }
 }
