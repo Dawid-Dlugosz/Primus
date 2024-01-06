@@ -25,10 +25,8 @@ void main() {
   late AuthRepository repositoryImpl;
   late MockUserCredential userCredential;
   late FakeFirebaseFirestore cloudFirestore;
-  late MockUser user;
   setUpAll(() {
     userCredential = MockUserCredential();
-    user = MockUser();
     firebaseAuth = MockFirebaseAuth();
     cloudFirestore = FakeFirebaseFirestore();
     repositoryImpl = AuthRepositoryImpl(

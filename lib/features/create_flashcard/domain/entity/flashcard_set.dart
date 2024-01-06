@@ -6,6 +6,7 @@ part 'flashcard_set.g.dart';
 
 @freezed
 class FlashcardSet with _$FlashcardSet {
+  // ignore: invalid_annotation_target
   @JsonSerializable(explicitToJson: true)
   const factory FlashcardSet({
     required FlashCard flashCard,

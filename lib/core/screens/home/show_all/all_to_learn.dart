@@ -1,55 +1,28 @@
 import 'package:flutter/material.dart';
-import '../../../../model/to_learn.dart';
-import '../../../../view_models/to_learn_home_view_model.dart';
-import '../../../../widgets/empty_widget.dart';
-import '../../loading_widget.dart';
-import '../../../../widgets/to_learn_list/to_learn_wrapper.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 
-class AllToLearn extends StatefulWidget {
-  const AllToLearn({super.key});
+import '../../../../features/user/domain/entity/to_learn.dart';
+import '../../../widgets/card_to_learn.dart';
 
-  @override
-  State<AllToLearn> createState() => _AllToLearnState();
-}
+class AllToLearn extends StatelessWidget {
+  const AllToLearn({required this.toLearns, super.key});
 
-class _AllToLearnState extends State<AllToLearn> {
+  final List<ToLearn> toLearns;
   @override
   Widget build(BuildContext context) {
-    return Consumer<ToLearnHomeViewModel>(
-      builder: (context, viewModel, child) {
-        return viewModel.loaded
-            ? Scaffold(
-                appBar: AppBar(
-                  title: Text(AppLocalizations.of(context)!.toStudy),
-                ),
-                body: StreamBuilder<List<ToLearn>>(
-                  stream: Stream.fromFuture(viewModel.getUserToLearn()),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const LoadingWidget();
-                    }
-
-                    if (snapshot.hasData &&
-                        snapshot.data != null &&
-                        snapshot.data!.isNotEmpty) {
-                      return ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context, index) {
-                          return ToLearnWrapper(
-                            toLearn: snapshot.data![index],
-                            delete: viewModel.deleteToLearn,
-                          );
-                        },
-                      );
-                    }
-                    return const EmptyWidget();
-                  },
-                ),
-              )
-            : const LoadingWidget();
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.toStudy),
+      ),
+      body: ListView.builder(
+        itemCount: toLearns.length,
+        itemBuilder: (context, index) {
+          return CardToLearn(
+            toLearn: toLearns[index],
+          );
+        },
+      ),
     );
   }
 }

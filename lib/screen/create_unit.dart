@@ -7,7 +7,7 @@ import '../widgets/unit_chips.dart';
 import 'package:provider/provider.dart';
 
 class CreateUnit extends StatefulWidget {
-  CreateUnit({Key? key}) : super(key: key);
+  const CreateUnit({Key? key}) : super(key: key);
 
   @override
   State<CreateUnit> createState() => _CreateUnitState();

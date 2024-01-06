@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:primus/features/user/domain/entity/to_learn_word.dart';
 import 'package:primus/features/user/domain/entity/user.dart';
+import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 import 'package:primus/features/vocabulary/domain/entity/vocabulary.dart';
 import 'package:primus/features/vocabulary/domain/repository/vocabulary_repository.dart';
 
@@ -17,7 +18,7 @@ class VocabularyCubit extends Cubit<VocabularyState> {
   final VocabularyRepository repository;
 
   void getVocabulary({
-    required User user,
+    required UserCubit user,
     required String flashcardSetId,
   }) async {
     final result = await repository.getWords(flashcardSetId: flashcardSetId);
@@ -26,17 +27,10 @@ class VocabularyCubit extends Cubit<VocabularyState> {
       (l) => emit(const VocabularyState.error()),
       (words) {
         try {
-          final toLearn = user.toLearn.firstWhere(
-            (element) => element.flashcardId == flashcardSetId,
-          );
-          emit(
-            VocabularyState.loaded(
-              vocabulary: splitWords(
-                toLearn.words,
-                words,
-              ),
-            ),
-          );
+          _initSplitWords(user.state!, flashcardSetId, words);
+          user.stream.listen((event) {
+            _initSplitWords(event!, flashcardSetId, words);
+          });
         } catch (_) {
           emit(
             VocabularyState.loaded(
@@ -47,10 +41,21 @@ class VocabularyCubit extends Cubit<VocabularyState> {
             ),
           );
         }
-        for (var element in user.toLearn) {
-          if (element.flashcardId == flashcardSetId) {}
-        }
       },
+    );
+  }
+
+  void _initSplitWords(User user, String flashcardSetId, List<Word> words) {
+    final toLearn = user.toLearn.firstWhere(
+      (element) => element.flashcardId == flashcardSetId,
+    );
+    emit(
+      VocabularyState.loaded(
+        vocabulary: splitWords(
+          toLearn.words,
+          words,
+        ),
+      ),
     );
   }
 

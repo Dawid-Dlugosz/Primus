@@ -48,7 +48,7 @@ class CardFlashcard extends StatelessWidget {
                       firestore: FirebaseFirestore.instance,
                     ),
                   )..getVocabulary(
-                      user: context.read<UserCubit>().state!,
+                      user: context.read<UserCubit>(),
                       flashcardSetId: flashcardSet.flashCard.id,
                     ),
                   child: FlashCardMain(

@@ -157,5 +157,13 @@
     "editingError": "Editing error",
     "searcher": "Searcher",
     "searchSomething": "Search something",
-    "unknow": "Unknow"
+    "unknow": "Unknow",
+    "spellingType": "Learn method: Spelling",
+    "knowAll": "From this course you know all words, you have few choices:",
+    "firstChoice": "1. Clear course progres",
+    "secondChoice": "2. Go to next course",
+    "clearProgress": "Are you soure to clear progress?",
+    "itsAllWords": "These are all the words, do you want learn again?",
+    "learnAgain": "Learn again",
+    "learnMethodTest": "Learn method: Test"
 }

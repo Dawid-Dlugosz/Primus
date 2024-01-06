@@ -4,11 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/features/author_name/data/repository/author_name_repository_impl.dart';
 import 'package:primus/features/author_name/presentation/author_name/author_name_cubit.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
+import 'package:primus/features/learn_method/presentation/cubit/flashcard/flashcard_learn_cubit.dart';
+import 'package:primus/features/learn_method/presentation/cubit/single_choice_test/single_choice_test_cubit.dart';
+import 'package:primus/features/learn_method/presentation/cubit/spelling/spelling_cubit.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
+import 'package:primus/screen/flashcard_main_learn/flashcard_learn.dart';
 
+import '../../dialog/copy_flashcard.dart';
 import '../../features/author_name/presentation/widgets/author_widget.dart';
 import '../../widgets/go_to_learn.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../flashcard_spelling.dart';
+import '../test/flashcard_exam.dart';
 import 'flashcard_vocabulary.dart';
 
 class FlashCardMain extends StatelessWidget {
@@ -19,9 +26,14 @@ class FlashCardMain extends StatelessWidget {
     if (!context.read<UserCubit>().containtFlashcardSet(
           flashcardSetId: flashcardSet.flashCard.id,
         )) {
-      context.read<UserCubit>().containtFlashcardSet(
-            flashcardSetId: flashcardSet.flashCard.id,
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return CopyFlashcard(
+            flashcardSet: flashcardSet,
           );
+        },
+      );
     }
   }
 
@@ -79,18 +91,28 @@ class FlashCardMain extends StatelessWidget {
                               checkIsContain(context);
 
                               // await viewModel.copyFlashcardSetToLearn();
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => ChangeNotifierProvider(
-                              //       create: (context) =>
-                              //           FlashcardLearnViewModel(
-                              //               flashcardId: viewModel.flascardId,
-                              //               context: context),
-                              //       child: const FlashcardLearn(),
-                              //     ),
-                              //   ),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => FlashcardLearnCubit(
+                                      user: context.read<UserCubit>(),
+                                      language:
+                                          flashcardSet.flashCard.languageSet,
+                                      flashcardSetId: flashcardSet.flashCard.id,
+                                    )..initial(),
+                                    child: const FlashcardLearn(),
+                                  ),
+                                ),
+                                // MaterialPageRoute(
+                                //   builder: (context) => ChangeNotifierProvider(
+                                //     create: (context) =>
+                                //         FlashcardLearnViewModel(
+                                //             flashcardId: viewModel.flascardId,
+                                //             context: context),
+                                //     child: const FlashcardLearn(),
+                                //   ),
+                              );
                             },
                           ),
                           const SizedBox(
@@ -101,18 +123,19 @@ class FlashCardMain extends StatelessWidget {
                             text: AppLocalizations.of(context)!.test,
                             learnMode: () async {
                               checkIsContain(context);
-                              // await viewModel.copyFlashcardSetToLearn();
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => ChangeNotifierProvider(
-                              //       create: (context) => FlashcardTestViewModel(
-                              //           flashcardId: viewModel.flascardId,
-                              //           context: context),
-                              //       child: const FlashcardExam(),
-                              //     ),
-                              //   ),
-                              // );
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => SingleChoiceTestCubit(
+                                      flashcardSetId: flashcardSet.flashCard.id,
+                                      user: context.read<UserCubit>(),
+                                    )..initial(),
+                                    child: const FlashcardExam(),
+                                  ),
+                                ),
+                              );
                             },
                           ),
                           const SizedBox(
@@ -123,18 +146,19 @@ class FlashCardMain extends StatelessWidget {
                             text: AppLocalizations.of(context)!.spelling,
                             learnMode: () async {
                               checkIsContain(context);
-                              // await viewModel.copyFlashcardSetToLearn();
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => ChangeNotifierProvider(
-                              //       create: (context) =>
-                              //           FlashcardSpellingViewModel(
-                              //               flashcardId: viewModel.flascardId),
-                              //       child: const FlashcardSpelling(),
-                              //     ),
-                              //   ),
-                              // );
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                          create: (context) => SpellingCubit(
+                                            flashcardSetId:
+                                                flashcardSet.flashCard.id,
+                                            user: context.read<UserCubit>(),
+                                          )..initial(),
+                                          child: const FlashcardSpelling(),
+                                        )),
+                              );
                             },
                           )
                         ],
@@ -148,158 +172,5 @@ class FlashCardMain extends StatelessWidget {
         ),
       ),
     );
-    // return Consumer<FlashcardMainViewModel>(
-    //   builder: ((context, viewModel, child) {
-    //     return viewModel.loaded
-    //         ? Scaffold(
-    //             appBar: AppBar(
-    //               title: Text(viewModel.nameSet),
-    //             ),
-    //             body: Padding(
-    //               padding: const EdgeInsets.symmetric(horizontal: 10),
-    //               child: Column(
-    //                 crossAxisAlignment: CrossAxisAlignment.start,
-    //                 children: [
-    //                   viewModel.currentUser.uid != viewModel.flashCardSet.owner
-    //                       ? AuthorWidget(
-    //                           nickname: viewModel.currentUser.nickname,
-    //                           add: () => {}
-    //                           // Navigator.push(
-    //                           //   context,
-    //                           //   MaterialPageRoute(
-    //                           //     builder: (context) => ChangeNotifierProvider(
-    //                           //       create: (context) => FlashcardViewModel(
-    //                           //           context,
-    //                           //           flashcard:
-    //                           //               viewModel.flashCardSet.flashcard,
-    //                           //           copy: true),
-    //                           //       child: const CreateFlashcardPageWrapper(),
-    //                           // ),
-    //                           // ),
-    //                           // ),
-    //                           )
-    //                       : Container(),
-    //                   Expanded(
-    //                     child: DefaultTabController(
-    //                       length: 2,
-    //                       child: Column(
-    //                         children: [
-    //                           Container(
-    //                             color: Colors.amber,
-    //                             child: TabBar(
-    //                               tabs: [
-    //                                 Tab(
-    //                                   text: AppLocalizations.of(context)!
-    //                                       .learnedWord,
-    //                                 ),
-    //                                 Tab(
-    //                                   text: AppLocalizations.of(context)!
-    //                                       .unknowWord,
-    //                                 ),
-    //                               ],
-    //                               indicatorSize: TabBarIndicatorSize.tab,
-    //                             ),
-    //                           ),
-    //                           Expanded(
-    //                             child: TabBarView(
-    //                               physics: const NeverScrollableScrollPhysics(),
-    //                               children: [
-    //                                 viewModel.allKnowWords.isNotEmpty
-    //                                     ? SwiperTinder(
-    //                                         words: viewModel.allKnowWords,
-    //                                         language: viewModel.language)
-    //                                     : const SwiperEmpty(),
-    //                                 viewModel.allUnknowWords.isNotEmpty
-    //                                     ? SwiperTinder(
-    //                                         words: viewModel.allUnknowWords,
-    //                                         language: viewModel.language)
-    //                                     : const SwiperEmpty(),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                         ],
-    //                       ),
-    //                     ),
-    //                   ),
-    //                   Expanded(
-    //                     child: ListView(
-    //                       physics: const AlwaysScrollableScrollPhysics(),
-    //                       children: [
-    //                         GoToLearn(
-    //                           iconData: Icons.copy_rounded,
-    //                           text: AppLocalizations.of(context)!.flashcards,
-    //                           learnMode: () async {
-    //                             await viewModel.copyFlashcardSetToLearn();
-    //                             Navigator.push(
-    //                               context,
-    //                               MaterialPageRoute(
-    //                                 builder: (context) =>
-    //                                     ChangeNotifierProvider(
-    //                                   create: (context) =>
-    //                                       FlashcardLearnViewModel(
-    //                                           flashcardId: viewModel.flascardId,
-    //                                           context: context),
-    //                                   child: const FlashcardLearn(),
-    //                                 ),
-    //                               ),
-    //                             );
-    //                           },
-    //                         ),
-    //                         const SizedBox(
-    //                           height: 10,
-    //                         ),
-    //                         GoToLearn(
-    //                           iconData: Icons.ballot_outlined,
-    //                           text: AppLocalizations.of(context)!.test,
-    //                           learnMode: () async {
-    //                             await viewModel.copyFlashcardSetToLearn();
-    //                             Navigator.push(
-    //                               context,
-    //                               MaterialPageRoute(
-    //                                 builder: (context) =>
-    //                                     ChangeNotifierProvider(
-    //                                   create: (context) =>
-    //                                       FlashcardTestViewModel(
-    //                                           flashcardId: viewModel.flascardId,
-    //                                           context: context),
-    //                                   child: const FlashcardExam(),
-    //                                 ),
-    //                               ),
-    //                             );
-    //                           },
-    //                         ),
-    //                         const SizedBox(
-    //                           height: 10,
-    //                         ),
-    //                         GoToLearn(
-    //                           iconData: Icons.spellcheck_outlined,
-    //                           text: AppLocalizations.of(context)!.spelling,
-    //                           learnMode: () async {
-    //                             await viewModel.copyFlashcardSetToLearn();
-    //                             Navigator.push(
-    //                               context,
-    //                               MaterialPageRoute(
-    //                                 builder: (context) =>
-    //                                     ChangeNotifierProvider(
-    //                                   create: (context) =>
-    //                                       FlashcardSpellingViewModel(
-    //                                           flashcardId:
-    //                                               viewModel.flascardId),
-    //                                   child: const FlashcardSpelling(),
-    //                                 ),
-    //                               ),
-    //                             );
-    //                           },
-    //                         )
-    //                       ],
-    //                     ),
-    //                   )
-    //                 ],
-    //               ),
-    //             ),
-    //           )
-    //         : const LoadingWidget();
-    //   }),
-    // );
   }
 }

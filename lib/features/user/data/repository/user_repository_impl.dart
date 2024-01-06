@@ -134,4 +134,61 @@ class UserRepositoryImpl implements UserRepository {
       return const Left(Failure.user());
     }
   }
+
+  @override
+  Future<Either<Failure, User>> getUser({required String uid}) async {
+    try {
+      final result = await firestore
+          .collection(FirebaseCollection.users.name)
+          .doc(uid)
+          .get();
+      return Right(User.fromJson(result.data()!));
+    } catch (e) {
+      return const Left(Failure.user());
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> deleteToLearn({
+    required String flashcardSetId,
+    required User user,
+  }) async {
+    try {
+      final newUser = user.copyWith(
+          toLearn: user.toLearn
+              .where((element) => element.flashcardId != flashcardSetId)
+              .toList());
+      await firestore
+          .collection(FirebaseCollection.users.name)
+          .doc(user.uid)
+          .update(newUser.toJson());
+      return Right(newUser);
+    } catch (e) {
+      return const Left(Failure.user());
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> updateToLearn({
+    required String uid,
+    required ToLearn toLearn,
+    required User user,
+  }) async {
+    try {
+      final toLearns = [...user.toLearn];
+      final index = toLearns
+          .indexWhere((element) => element.flashcardId == toLearn.flashcardId);
+      toLearns[index] = toLearn;
+      final newUser = user.copyWith(toLearn: toLearns);
+      await firestore
+          .collection(FirebaseCollection.users.name)
+          .doc(uid)
+          .update({
+        'toLearn': newUser.toLearn.map((e) => e.toJson()).toList(),
+      });
+      return Right(newUser);
+    } catch (e) {
+      return const Left(Failure.user());
+    }
+  }
 }

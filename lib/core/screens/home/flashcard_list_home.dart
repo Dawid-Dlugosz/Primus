@@ -42,7 +42,6 @@ class FlashcardListHome extends StatelessWidget {
             child: Text(AppLocalizations.of(context)!.showMore),
           ),
         ),
-        Text(AppLocalizations.of(context)!.toStudy),
       ],
     );
   }

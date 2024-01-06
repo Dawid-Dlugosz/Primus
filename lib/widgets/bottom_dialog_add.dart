@@ -7,9 +7,6 @@ import 'package:primus/core/widgets/bottom_dialog_item.dart';
 import '../features/create_flashcard/data/repository/create_flash_card_repository_impl.dart';
 import '../features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
 import '../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
-import '../screen/create_unit.dart';
-import '../view_models/create_unit_view_model.dart';
-import 'package:provider/provider.dart';
 
 class BottomDialogAdd extends StatefulWidget {
   const BottomDialogAdd({super.key});
@@ -47,23 +44,6 @@ class _BottomDialogAddState extends State<BottomDialogAdd> {
             child: BottomDialogItem(
               iconData: Icons.copy_rounded,
               text: AppLocalizations.of(context)!.createFlashcards,
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider(
-                    create: (context) => CreateUnitViewModel(context),
-                    child: CreateUnit(),
-                  ),
-                ),
-              );
-            },
-            child: BottomDialogItem(
-              iconData: Icons.folder_copy,
-              text: AppLocalizations.of(context)!.createUnit,
             ),
           ),
         ],

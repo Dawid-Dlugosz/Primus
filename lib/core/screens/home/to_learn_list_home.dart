@@ -15,7 +15,7 @@ class ToLearnListHome extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalizations.of(context)!.sets),
+        Text(AppLocalizations.of(context)!.toStudy),
         ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -33,7 +33,9 @@ class ToLearnListHome extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AllToLearn(),
+                  builder: (context) => AllToLearn(
+                    toLearns: toLearns,
+                  ),
                 ),
               );
             },

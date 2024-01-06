@@ -97,6 +97,7 @@ class _HomePageState extends State<HomePage> {
               if (state == null) {
                 return const SizedBox();
               }
+
               if (state.toLearn.isNotEmpty) {
                 final newToLearn = [...state.toLearn];
                 newToLearn.sort((a, b) => a.timeStamp.compareTo(b.timeStamp));
