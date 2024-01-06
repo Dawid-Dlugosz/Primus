@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:primus/features/create_flashcard/domain/entity/word.dart';
+import 'package:primus/features/user/domain/entity/learn_method.dart';
 import 'package:primus/features/user/domain/entity/to_learn.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 
