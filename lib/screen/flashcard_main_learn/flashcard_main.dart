@@ -5,6 +5,7 @@ import 'package:primus/features/author_name/data/repository/author_name_reposito
 import 'package:primus/features/author_name/presentation/author_name/author_name_cubit.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/learn_method/presentation/cubit/flashcard/flashcard_learn_cubit.dart';
+import 'package:primus/features/learn_method/presentation/cubit/single_choice_test/single_choice_test_cubit.dart';
 import 'package:primus/features/learn_method/presentation/cubit/spelling/spelling_cubit.dart';
 import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 import 'package:primus/screen/flashcard_main_learn/flashcard_learn.dart';
@@ -14,6 +15,7 @@ import '../../features/author_name/presentation/widgets/author_widget.dart';
 import '../../widgets/go_to_learn.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../flashcard_spelling.dart';
+import '../test/flashcard_exam.dart';
 import 'flashcard_vocabulary.dart';
 
 class FlashCardMain extends StatelessWidget {
@@ -121,18 +123,19 @@ class FlashCardMain extends StatelessWidget {
                             text: AppLocalizations.of(context)!.test,
                             learnMode: () async {
                               checkIsContain(context);
-                              // await viewModel.copyFlashcardSetToLearn();
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => ChangeNotifierProvider(
-                              //       create: (context) => FlashcardTestViewModel(
-                              //           flashcardId: viewModel.flascardId,
-                              //           context: context),
-                              //       child: const FlashcardExam(),
-                              //     ),
-                              //   ),
-                              // );
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => SingleChoiceTestCubit(
+                                      flashcardSetId: flashcardSet.flashCard.id,
+                                      user: context.read<UserCubit>(),
+                                    )..initial(),
+                                    child: const FlashcardExam(),
+                                  ),
+                                ),
+                              );
                             },
                           ),
                           const SizedBox(

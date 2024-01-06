@@ -164,5 +164,6 @@
     "secondChoice": "2. Przejdź do następnego kurus",
     "clearProgress": "Czy na pewno chcesz cofnąć postęp?",
     "itsAllWords": "To już wszystkie słowka, czy chcesz uczyć się jeszcze raz",
-    "learnAgain": "Ucz się jeszcze raz"
+    "learnAgain": "Ucz się jeszcze raz",
+    "learnMethodTest": "Tryb nauki: Test"
 }

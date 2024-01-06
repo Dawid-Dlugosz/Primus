@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import '../../model/test_word.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:primus/features/learn_method/presentation/cubit/single_choice_test/single_choice_test_cubit.dart';
+
+import '../../features/learn_method/domain/entities/test_word.dart';
 
 class TestItem extends StatelessWidget {
-  const TestItem(
-      {required this.definition,
-      required this.testWord,
-      required this.setAnswer,
-      Key? key})
-      : super(key: key);
+  const TestItem({
+    required this.definition,
+    required this.testWord,
+    required this.index,
+    super.key,
+  });
   final String definition;
-  final Function(String answer) setAnswer;
   final TestWord testWord;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => setAnswer(definition),
+      onTap: () => context.read<SingleChoiceTestCubit>().setAnswer(
+            index: index,
+            answer: definition,
+          ),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(

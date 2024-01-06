@@ -1,16 +1,37 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import '../../model/test_word.dart';
+
+import '../../features/learn_method/domain/entities/test_word.dart';
 import 'test_item.dart';
-import '../../view_models/flashcard_test_view_model.dart';
 
-class TestCard extends StatelessWidget {
-  const TestCard({required this.answer, required this.viewModel, Key? key})
-      : super(key: key);
+class TestCard extends StatefulWidget {
+  const TestCard({
+    required this.testWords,
+    super.key,
+  });
 
-  final TestWord answer;
-  final FlashcardTestViewModel viewModel;
+  final List<TestWord> testWords;
+
+  @override
+  State<TestCard> createState() => _TestCardState();
+}
+
+class _TestCardState extends State<TestCard> {
+  int wordIndex = 0;
+
+  void decrement() {
+    setState(() {
+      wordIndex = wordIndex - 1;
+    });
+  }
+
+  void increment() {
+    setState(() {
+      wordIndex = wordIndex + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -21,18 +42,20 @@ class TestCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                viewModel.wordIndex != 0
+                wordIndex != 0
                     ? IconButton(
                         icon: const Icon(Icons.arrow_back),
-                        onPressed: viewModel.decWordIndex)
+                        onPressed: decrement,
+                      )
                     : Container(),
-                Text('Słowo: ${answer.word.word}'),
-                viewModel.wordIndex != viewModel.testWords.length - 1
+                Text('Słowo: ${widget.testWords[wordIndex].word.word}'),
+                wordIndex != widget.testWords.length - 1
                     ? Transform.rotate(
                         angle: pi,
                         child: IconButton(
-                            icon: const Icon(Icons.arrow_back),
-                            onPressed: viewModel.incWordIndex),
+                          icon: const Icon(Icons.arrow_back),
+                          onPressed: increment,
+                        ),
                       )
                     : Container()
               ],
@@ -42,21 +65,25 @@ class TestCard extends StatelessWidget {
               child: ListView(
                 children: [
                   TestItem(
-                      definition: answer.answerA,
-                      setAnswer: viewModel.setAnswer,
-                      testWord: answer),
+                    definition: widget.testWords[wordIndex].answerA,
+                    index: wordIndex,
+                    testWord: widget.testWords[wordIndex],
+                  ),
                   TestItem(
-                      definition: answer.answerB,
-                      setAnswer: viewModel.setAnswer,
-                      testWord: answer),
+                    definition: widget.testWords[wordIndex].answerB,
+                    index: wordIndex,
+                    testWord: widget.testWords[wordIndex],
+                  ),
                   TestItem(
-                      definition: answer.answerC,
-                      setAnswer: viewModel.setAnswer,
-                      testWord: answer),
+                    definition: widget.testWords[wordIndex].answerC,
+                    index: wordIndex,
+                    testWord: widget.testWords[wordIndex],
+                  ),
                   TestItem(
-                      definition: answer.answerD,
-                      setAnswer: viewModel.setAnswer,
-                      testWord: answer),
+                    definition: widget.testWords[wordIndex].answerD,
+                    index: wordIndex,
+                    testWord: widget.testWords[wordIndex],
+                  ),
                 ],
               ),
             ),
