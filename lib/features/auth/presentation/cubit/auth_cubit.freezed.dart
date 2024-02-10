@@ -20,6 +20,7 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authorized,
+    required TResult Function(User user) created,
     required TResult Function() notAuthorized,
     required TResult Function() loading,
     required TResult Function(String errorCode) error,
@@ -29,6 +30,7 @@ mixin _$AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authorized,
+    TResult? Function(User user)? created,
     TResult? Function()? notAuthorized,
     TResult? Function()? loading,
     TResult? Function(String errorCode)? error,
@@ -38,6 +40,7 @@ mixin _$AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authorized,
+    TResult Function(User user)? created,
     TResult Function()? notAuthorized,
     TResult Function()? loading,
     TResult Function(String errorCode)? error,
@@ -48,6 +51,7 @@ mixin _$AuthState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authorized value) authorized,
+    required TResult Function(_Created value) created,
     required TResult Function(_NotAuthorized value) notAuthorized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
@@ -57,6 +61,7 @@ mixin _$AuthState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Authorized value)? authorized,
+    TResult? Function(_Created value)? created,
     TResult? Function(_NotAuthorized value)? notAuthorized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
@@ -66,6 +71,7 @@ mixin _$AuthState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Authorized value)? authorized,
+    TResult Function(_Created value)? created,
     TResult Function(_NotAuthorized value)? notAuthorized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
@@ -137,6 +143,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authorized,
+    required TResult Function(User user) created,
     required TResult Function() notAuthorized,
     required TResult Function() loading,
     required TResult Function(String errorCode) error,
@@ -149,6 +156,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authorized,
+    TResult? Function(User user)? created,
     TResult? Function()? notAuthorized,
     TResult? Function()? loading,
     TResult? Function(String errorCode)? error,
@@ -161,6 +169,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authorized,
+    TResult Function(User user)? created,
     TResult Function()? notAuthorized,
     TResult Function()? loading,
     TResult Function(String errorCode)? error,
@@ -177,6 +186,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authorized value) authorized,
+    required TResult Function(_Created value) created,
     required TResult Function(_NotAuthorized value) notAuthorized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
@@ -189,6 +199,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Authorized value)? authorized,
+    TResult? Function(_Created value)? created,
     TResult? Function(_NotAuthorized value)? notAuthorized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
@@ -201,6 +212,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Authorized value)? authorized,
+    TResult Function(_Created value)? created,
     TResult Function(_NotAuthorized value)? notAuthorized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
@@ -291,6 +303,7 @@ class _$AuthorizedImpl with DiagnosticableTreeMixin implements _Authorized {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authorized,
+    required TResult Function(User user) created,
     required TResult Function() notAuthorized,
     required TResult Function() loading,
     required TResult Function(String errorCode) error,
@@ -303,6 +316,7 @@ class _$AuthorizedImpl with DiagnosticableTreeMixin implements _Authorized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authorized,
+    TResult? Function(User user)? created,
     TResult? Function()? notAuthorized,
     TResult? Function()? loading,
     TResult? Function(String errorCode)? error,
@@ -315,6 +329,7 @@ class _$AuthorizedImpl with DiagnosticableTreeMixin implements _Authorized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authorized,
+    TResult Function(User user)? created,
     TResult Function()? notAuthorized,
     TResult Function()? loading,
     TResult Function(String errorCode)? error,
@@ -331,6 +346,7 @@ class _$AuthorizedImpl with DiagnosticableTreeMixin implements _Authorized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authorized value) authorized,
+    required TResult Function(_Created value) created,
     required TResult Function(_NotAuthorized value) notAuthorized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
@@ -343,6 +359,7 @@ class _$AuthorizedImpl with DiagnosticableTreeMixin implements _Authorized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Authorized value)? authorized,
+    TResult? Function(_Created value)? created,
     TResult? Function(_NotAuthorized value)? notAuthorized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
@@ -355,6 +372,7 @@ class _$AuthorizedImpl with DiagnosticableTreeMixin implements _Authorized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Authorized value)? authorized,
+    TResult Function(_Created value)? created,
     TResult Function(_NotAuthorized value)? notAuthorized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
@@ -373,6 +391,171 @@ abstract class _Authorized implements AuthState {
   User get user;
   @JsonKey(ignore: true)
   _$$AuthorizedImplCopyWith<_$AuthorizedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreatedImplCopyWith<$Res> {
+  factory _$$CreatedImplCopyWith(
+          _$CreatedImpl value, $Res Function(_$CreatedImpl) then) =
+      __$$CreatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({User user});
+}
+
+/// @nodoc
+class __$$CreatedImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$CreatedImpl>
+    implements _$$CreatedImplCopyWith<$Res> {
+  __$$CreatedImplCopyWithImpl(
+      _$CreatedImpl _value, $Res Function(_$CreatedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$CreatedImpl(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreatedImpl with DiagnosticableTreeMixin implements _Created {
+  const _$CreatedImpl({required this.user});
+
+  @override
+  final User user;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthState.created(user: $user)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthState.created'))
+      ..add(DiagnosticsProperty('user', user));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreatedImpl &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreatedImplCopyWith<_$CreatedImpl> get copyWith =>
+      __$$CreatedImplCopyWithImpl<_$CreatedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(User user) authorized,
+    required TResult Function(User user) created,
+    required TResult Function() notAuthorized,
+    required TResult Function() loading,
+    required TResult Function(String errorCode) error,
+  }) {
+    return created(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(User user)? authorized,
+    TResult? Function(User user)? created,
+    TResult? Function()? notAuthorized,
+    TResult? Function()? loading,
+    TResult? Function(String errorCode)? error,
+  }) {
+    return created?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(User user)? authorized,
+    TResult Function(User user)? created,
+    TResult Function()? notAuthorized,
+    TResult Function()? loading,
+    TResult Function(String errorCode)? error,
+    required TResult orElse(),
+  }) {
+    if (created != null) {
+      return created(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Authorized value) authorized,
+    required TResult Function(_Created value) created,
+    required TResult Function(_NotAuthorized value) notAuthorized,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+  }) {
+    return created(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Authorized value)? authorized,
+    TResult? Function(_Created value)? created,
+    TResult? Function(_NotAuthorized value)? notAuthorized,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+  }) {
+    return created?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Authorized value)? authorized,
+    TResult Function(_Created value)? created,
+    TResult Function(_NotAuthorized value)? notAuthorized,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (created != null) {
+      return created(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Created implements AuthState {
+  const factory _Created({required final User user}) = _$CreatedImpl;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$$CreatedImplCopyWith<_$CreatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -424,6 +607,7 @@ class _$NotAuthorizedImpl
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authorized,
+    required TResult Function(User user) created,
     required TResult Function() notAuthorized,
     required TResult Function() loading,
     required TResult Function(String errorCode) error,
@@ -436,6 +620,7 @@ class _$NotAuthorizedImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authorized,
+    TResult? Function(User user)? created,
     TResult? Function()? notAuthorized,
     TResult? Function()? loading,
     TResult? Function(String errorCode)? error,
@@ -448,6 +633,7 @@ class _$NotAuthorizedImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authorized,
+    TResult Function(User user)? created,
     TResult Function()? notAuthorized,
     TResult Function()? loading,
     TResult Function(String errorCode)? error,
@@ -464,6 +650,7 @@ class _$NotAuthorizedImpl
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authorized value) authorized,
+    required TResult Function(_Created value) created,
     required TResult Function(_NotAuthorized value) notAuthorized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
@@ -476,6 +663,7 @@ class _$NotAuthorizedImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Authorized value)? authorized,
+    TResult? Function(_Created value)? created,
     TResult? Function(_NotAuthorized value)? notAuthorized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
@@ -488,6 +676,7 @@ class _$NotAuthorizedImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Authorized value)? authorized,
+    TResult Function(_Created value)? created,
     TResult Function(_NotAuthorized value)? notAuthorized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
@@ -550,6 +739,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authorized,
+    required TResult Function(User user) created,
     required TResult Function() notAuthorized,
     required TResult Function() loading,
     required TResult Function(String errorCode) error,
@@ -562,6 +752,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authorized,
+    TResult? Function(User user)? created,
     TResult? Function()? notAuthorized,
     TResult? Function()? loading,
     TResult? Function(String errorCode)? error,
@@ -574,6 +765,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authorized,
+    TResult Function(User user)? created,
     TResult Function()? notAuthorized,
     TResult Function()? loading,
     TResult Function(String errorCode)? error,
@@ -590,6 +782,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authorized value) authorized,
+    required TResult Function(_Created value) created,
     required TResult Function(_NotAuthorized value) notAuthorized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
@@ -602,6 +795,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Authorized value)? authorized,
+    TResult? Function(_Created value)? created,
     TResult? Function(_NotAuthorized value)? notAuthorized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
@@ -614,6 +808,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Authorized value)? authorized,
+    TResult Function(_Created value)? created,
     TResult Function(_NotAuthorized value)? notAuthorized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
@@ -705,6 +900,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authorized,
+    required TResult Function(User user) created,
     required TResult Function() notAuthorized,
     required TResult Function() loading,
     required TResult Function(String errorCode) error,
@@ -717,6 +913,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authorized,
+    TResult? Function(User user)? created,
     TResult? Function()? notAuthorized,
     TResult? Function()? loading,
     TResult? Function(String errorCode)? error,
@@ -729,6 +926,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authorized,
+    TResult Function(User user)? created,
     TResult Function()? notAuthorized,
     TResult Function()? loading,
     TResult Function(String errorCode)? error,
@@ -745,6 +943,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Authorized value) authorized,
+    required TResult Function(_Created value) created,
     required TResult Function(_NotAuthorized value) notAuthorized,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
@@ -757,6 +956,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Authorized value)? authorized,
+    TResult? Function(_Created value)? created,
     TResult? Function(_NotAuthorized value)? notAuthorized,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
@@ -769,6 +969,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Authorized value)? authorized,
+    TResult Function(_Created value)? created,
     TResult Function(_NotAuthorized value)? notAuthorized,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,

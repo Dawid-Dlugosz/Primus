@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/features/author_name/data/repository/author_name_repository_impl.dart';
@@ -39,6 +40,7 @@ class FlashCardMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('adsdsaas ${FirebaseAuth.instance.currentUser}');
     return Scaffold(
       appBar: AppBar(
         title: Text(flashcardSet.flashCard.nameSet),

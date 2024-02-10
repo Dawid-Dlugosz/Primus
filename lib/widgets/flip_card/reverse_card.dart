@@ -17,51 +17,54 @@ class ReverseCard extends StatelessWidget {
   final String language;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Transform(
-        alignment: Alignment.center,
-        transform: Matrix4.identity()..rotateY(pi),
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  AppLocalizations.of(context)!.definition,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+    return InkWell(
+      onTap: () => flip(),
+      child: Card(
+        child: Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.identity()..rotateY(pi),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    AppLocalizations.of(context)!.definition,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                icon: const FaIcon(
-                  FontAwesomeIcons.rotate,
-                  size: 20,
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: const FaIcon(
+                    FontAwesomeIcons.rotate,
+                    size: 20,
+                  ),
+                  onPressed: () {
+                    flip();
+                  },
                 ),
-                onPressed: () {
-                  flip();
-                },
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(5, 40, 5, 40),
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  wordDefinition,
-                  style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5, 40, 5, 40),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    wordDefinition,
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

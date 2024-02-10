@@ -15,7 +15,7 @@ class UserCubit extends Cubit<User?> {
   void getuser({required String uid, required String nickname}) async {
     final failureOrUser = await repository.getUser(uid: uid);
     failureOrUser.fold(
-      (failure) => createUser(nickname: nickname, uid: uid),
+      (failure) => {},
       (user) => emit(user),
     );
   }
