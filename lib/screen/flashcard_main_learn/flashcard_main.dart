@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/features/author_name/data/repository/author_name_repository_impl.dart';
@@ -33,7 +34,42 @@ class FlashCardMain extends StatelessWidget {
             flashcardSet: flashcardSet,
           );
         },
-      );
+      ).then((value) {
+        if (value as bool) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BlocProvider(
+                create: (context) => FlashcardLearnCubit(
+                  user: context.read<UserCubit>(),
+                  language: flashcardSet.flashCard.languageSet,
+                  flashcardSetId: flashcardSet.flashCard.id,
+                )..initial(),
+                child: const FlashcardLearn(),
+              ),
+            ),
+          );
+        }
+      });
+    } else {
+      if (!context
+          .read<UserCubit>()
+          .hasCopyFlashcard(flashcardSetId: flashcardSet.flashCard.id)) {
+        context.read<UserCubit>().copyFlashcard(flashcardSet: flashcardSet);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (context) => FlashcardLearnCubit(
+                user: context.read<UserCubit>(),
+                language: flashcardSet.flashCard.languageSet,
+                flashcardSetId: flashcardSet.flashCard.id,
+              )..initial(),
+              child: const FlashcardLearn(),
+            ),
+          ),
+        );
+      }
     }
   }
 
@@ -89,30 +125,6 @@ class FlashCardMain extends StatelessWidget {
                             text: AppLocalizations.of(context)!.flashcards,
                             learnMode: () async {
                               checkIsContain(context);
-
-                              // await viewModel.copyFlashcardSetToLearn();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => FlashcardLearnCubit(
-                                      user: context.read<UserCubit>(),
-                                      language:
-                                          flashcardSet.flashCard.languageSet,
-                                      flashcardSetId: flashcardSet.flashCard.id,
-                                    )..initial(),
-                                    child: const FlashcardLearn(),
-                                  ),
-                                ),
-                                // MaterialPageRoute(
-                                //   builder: (context) => ChangeNotifierProvider(
-                                //     create: (context) =>
-                                //         FlashcardLearnViewModel(
-                                //             flashcardId: viewModel.flascardId,
-                                //             context: context),
-                                //     child: const FlashcardLearn(),
-                                //   ),
-                              );
                             },
                           ),
                           const SizedBox(
@@ -123,19 +135,6 @@ class FlashCardMain extends StatelessWidget {
                             text: AppLocalizations.of(context)!.test,
                             learnMode: () async {
                               checkIsContain(context);
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => SingleChoiceTestCubit(
-                                      flashcardSetId: flashcardSet.flashCard.id,
-                                      user: context.read<UserCubit>(),
-                                    )..initial(),
-                                    child: const FlashcardExam(),
-                                  ),
-                                ),
-                              );
                             },
                           ),
                           const SizedBox(
@@ -146,19 +145,6 @@ class FlashCardMain extends StatelessWidget {
                             text: AppLocalizations.of(context)!.spelling,
                             learnMode: () async {
                               checkIsContain(context);
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BlocProvider(
-                                          create: (context) => SpellingCubit(
-                                            flashcardSetId:
-                                                flashcardSet.flashCard.id,
-                                            user: context.read<UserCubit>(),
-                                          )..initial(),
-                                          child: const FlashcardSpelling(),
-                                        )),
-                              );
                             },
                           )
                         ],

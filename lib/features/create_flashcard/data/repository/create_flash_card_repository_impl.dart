@@ -85,15 +85,17 @@ class FlashCardRepositoryImpl extends FlashcardRepository {
     }
 
     for (var element in flashcards) {
+      final documentId = (element).split('/')[1];
       final documentSnapshot = await firestore
           .collection(FirebaseCollection.flashcardSet.name)
-          .doc(element)
+          .doc(documentId)
           .get();
+
       final documentData = documentSnapshot.data();
       if (documentData == null) {
         return;
       }
-      final nameSet = documentData['flashcard']['nameSet'];
+      final nameSet = documentData['flashCard']['nameSet'];
 
       if (nameSet == newNameSet) {
         throw FlashCardNameBusy();

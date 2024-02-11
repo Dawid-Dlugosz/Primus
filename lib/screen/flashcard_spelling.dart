@@ -85,8 +85,6 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                                         icon: const Icon(Icons.arrow_back),
                                         onPressed: () {
                                           decrement(value.unknow);
-                                          // viewModel.setEnterWord();
-                                          // viewModel.decWordIndex();
                                         },
                                       )
                                     : Container(),
@@ -101,8 +99,6 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                                           icon: const Icon(Icons.arrow_back),
                                           onPressed: () {
                                             increment(value.unknow);
-                                            // viewModel.setEnterWord();
-                                            // viewModel.incWordIndex();
                                           },
                                         ),
                                       )
@@ -170,7 +166,6 @@ class _FlashcardSpellingState extends State<FlashcardSpelling> {
                                                               .state!
                                                               .uid,
                                                         );
-                                                    // viewModel.markAsKnow();
                                                   },
                                                   child: const Text('Sprawdź'),
                                                 )

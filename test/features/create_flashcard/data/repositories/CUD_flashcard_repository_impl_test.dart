@@ -79,7 +79,7 @@ void main() {
             final doc = collection.doc('test');
             await doc.set(
               {
-                'flashcard': {
+                'flashCard': {
                   'nameSet': 'name',
                 },
               },
@@ -92,7 +92,7 @@ void main() {
             await userDoc.set(
               {
                 'ownFlashcard': [
-                  'test',
+                  'flashCards/test',
                 ]
               },
             );
@@ -149,7 +149,7 @@ void main() {
             final doc = collection.doc('test');
             await doc.set(
               {
-                'flashcard': {
+                'flashCard': {
                   'nameSet': 'name',
                 },
               },
@@ -162,7 +162,7 @@ void main() {
             await userDoc.set(
               {
                 'ownFlashcard': [
-                  'test',
+                  'flashCard/test',
                 ],
               },
             );

@@ -5,11 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/core/screens/home/flashcard_list_home.dart';
 import 'package:primus/core/screens/home/to_learn_list_home.dart';
 import 'package:primus/core/screens/loading_widget.dart';
+import 'package:primus/features/create_flashcard/data/repository/create_flash_card_repository_impl.dart';
+import 'package:primus/features/create_flashcard/presentation/create_flashcard/cud_flashcard_cubit.dart';
+import 'package:primus/features/create_flashcard/presentation/screens/create_flashcard_page.dart';
 import 'package:primus/features/search/data/repository/search_repository_impl.dart';
 import 'package:primus/features/search/presentation/search/search_cubit.dart';
 import 'package:primus/features/user_flashcard/presentation/cubit/cubit/user_flashcard_cubit.dart';
 import 'package:primus/screen/search/search.dart';
-import '../../../../widgets/bottom_dialog_add.dart';
 import '../../../features/user/presentation/cubit/cubit/user_cubit.dart';
 
 class HomePage extends StatefulWidget {
@@ -65,11 +67,19 @@ class _HomePageState extends State<HomePage> {
           FloatingActionButton(
             heroTag: 'add',
             onPressed: () {
-              showModalBottomSheet<void>(
-                context: context,
-                builder: (BuildContext context) {
-                  return const BottomDialogAdd();
-                },
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => BlocProvider(
+                    create: (_) => CUDFlashcardCubit(
+                      flashcardRepository: FlashCardRepositoryImpl(
+                        firestore: FirebaseFirestore.instance,
+                        authUserId: FirebaseAuth.instance.currentUser!.uid,
+                      ),
+                    ),
+                    child: const CreateFlashcardPage(),
+                  ),
+                ),
               );
             },
             child: const Icon(Icons.add),
@@ -82,12 +92,14 @@ class _HomePageState extends State<HomePage> {
           children: [
             BlocBuilder<UserFlashcardCubit, UserFlashcardState>(
               builder: (_, state) {
+                // print('sdasdaasd $state');
                 return state.maybeMap(
                   loaded: (value) {
                     return FlashcardListHome(
                       flashcardsSets: value.flashcardSets,
                     );
                   },
+                  empty: (_) => const SizedBox(),
                   orElse: () => const LoadingWidget(),
                 );
               },

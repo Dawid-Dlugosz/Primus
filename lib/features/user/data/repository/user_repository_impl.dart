@@ -115,15 +115,12 @@ class UserRepositoryImpl implements UserRepository {
 
       newToLearns.add(toLearn);
       final newUser = user.copyWith(toLearn: newToLearns);
-
+      print('dasdasd ${newUser.toJson()}');
       await firestore
           .collection(FirebaseCollection.users.name)
           .doc(user.uid)
-          .update(
-        {
-          'toLearn': newToLearns.map((e) => e.toJson()).toList(),
-        },
-      );
+          .set(newUser.toJson());
+
       return Right(newUser);
     } catch (e, s) {
       logger.f(

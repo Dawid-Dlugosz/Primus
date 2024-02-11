@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:primus/features/auth/presentation/cubit/auth_cubit.dart';
@@ -28,6 +29,12 @@ class _StartPageState extends State<StartPage> {
       body: BlocListener<AuthCubit, AuthState>(
         listener: (_, state) {
           state.maybeMap(
+            created: (value) {
+              context.read<UserCubit>().createUser(
+                    uid: value.user.uid,
+                    nickname: value.user.displayName ?? '',
+                  );
+            },
             authorized: (value) {
               context.read<UserFlashcardCubit>().loadFlashcardSets(
                     uid: value.user.uid,
@@ -47,6 +54,7 @@ class _StartPageState extends State<StartPage> {
           builder: (_, state) {
             return state.maybeMap(
               authorized: (value) => const HomePage(),
+              created: (value) => const HomePage(),
               loading: (_) => const LoadingWidget(),
               orElse: () => const LoginPage(),
             );

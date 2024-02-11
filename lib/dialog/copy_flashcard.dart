@@ -27,7 +27,7 @@ class CopyFlashcard extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pop(context, false);
                     },
                     child: Text(AppLocalizations.of(context)!.no),
                   ),
@@ -41,7 +41,7 @@ class CopyFlashcard extends StatelessWidget {
                       context
                           .read<UserCubit>()
                           .copyFlashcard(flashcardSet: flashcardSet);
-                      Navigator.pop(context);
+                      Navigator.pop(context, true);
                     },
                     child: Text(AppLocalizations.of(context)!.yes),
                   ),

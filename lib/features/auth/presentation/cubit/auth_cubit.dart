@@ -49,6 +49,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logOut() async {
     await authRepo.logOut();
+
     emit(const AuthState.notAuthorized());
   }
 
@@ -74,7 +75,7 @@ class AuthCubit extends Cubit<AuthState> {
     result.fold(
       (l) => emit(AuthState.error(errorCode: l)),
       (r) async {
-        emit(AuthState.authorized(user: r));
+        emit(AuthState.created(user: r));
       },
     );
   }
