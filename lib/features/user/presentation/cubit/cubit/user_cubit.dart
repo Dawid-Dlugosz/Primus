@@ -88,7 +88,9 @@ class UserCubit extends Cubit<User?> {
 
       result.fold(
         (l) => emit(state),
-        (user) => emit(user),
+        (user) {
+          emit(user);
+        },
       );
     }
     emit(state);
@@ -100,6 +102,23 @@ class UserCubit extends Cubit<User?> {
     }
     if (state!.ownFlashcard.contains('flashcardSet/$flashcardSetId')) {
       return true;
+    }
+
+    if (state!.toLearn.isEmpty) {
+      return false;
+    }
+
+    for (var element in state!.toLearn) {
+      if (element.flashcardId == flashcardSetId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool hasCopyFlashcard({required String flashcardSetId}) {
+    if (state == null) {
+      return false;
     }
 
     if (state!.toLearn.isEmpty) {

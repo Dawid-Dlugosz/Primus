@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:primus/features/user/domain/entity/to_learn.dart';
@@ -91,7 +93,7 @@ class SpellingCubit extends Cubit<SpellingState> {
       orElse: () => emit(state),
       loaded: (value) {
         final spellingWord = value.unknow[index];
-        if (spellingWord.word.definition == text) {
+        if (_levenshtein(spellingWord.word.definition, text) < 3) {
           final newList = [...value.unknow];
           final newSpellingWord =
               value.unknow[index].copyWith(enteredWord: text, correct: true);
@@ -144,5 +146,34 @@ class SpellingCubit extends Cubit<SpellingState> {
         initial(toLearnVariable: newToLearn);
       },
     );
+  }
+
+  int _levenshtein(String word, String definition) {
+    if (word == definition) return 0;
+    if (word.isEmpty) return definition.length;
+    if (definition.isEmpty) return word.length;
+
+    List<int> workVector1 = List<int>.filled(definition.length + 1, 0);
+    List<int> workVector2 = workVector1;
+
+    for (int i = 0; i < definition.length + 1; i < i++) {
+      workVector1[i] = i;
+    }
+
+    for (int i = 0; i < word.length; i++) {
+      workVector2[0] = i + 1;
+
+      for (int j = 0; j < definition.length; j++) {
+        int cost = (word[i] == definition[j]) ? 0 : 1;
+        workVector2[j + 1] = min(workVector2[j] + 1,
+            min(workVector1[j + 1] + 1, workVector1[j] + cost));
+      }
+
+      for (int j = 0; j < definition.length + 1; j++) {
+        workVector1[j] = workVector2[j];
+      }
+    }
+
+    return workVector2[definition.length];
   }
 }

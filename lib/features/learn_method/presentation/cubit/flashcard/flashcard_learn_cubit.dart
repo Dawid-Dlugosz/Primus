@@ -21,6 +21,7 @@ class FlashcardLearnCubit extends Cubit<FlashcardLearnState> {
 
   void initial({ToLearn? toLearnVariable}) async {
     emit(const FlashcardLearnState.initial());
+    await Future.delayed(const Duration(milliseconds: 500));
     final toLearn = toLearnVariable ??
         user.state!.toLearn
             .firstWhere((element) => element.flashcardId == flashcardSetId);

@@ -54,6 +54,7 @@ class _StartPageState extends State<StartPage> {
           builder: (_, state) {
             return state.maybeMap(
               authorized: (value) => const HomePage(),
+              created: (value) => const HomePage(),
               loading: (_) => const LoadingWidget(),
               orElse: () => const LoginPage(),
             );
