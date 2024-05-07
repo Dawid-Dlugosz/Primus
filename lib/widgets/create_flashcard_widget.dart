@@ -29,11 +29,11 @@ class CreateFlashcardWidget extends StatelessWidget {
             TextFormField(
               controller: wordController,
               decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.definitionHint,
+                hintText: AppLocalizations.of(context)!.wordHint,
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(context)!.flashcardsNameError;
+                  return AppLocalizations.of(context)!.wordHint;
                 }
                 return null;
               },
@@ -45,7 +45,7 @@ class CreateFlashcardWidget extends StatelessWidget {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(context)!.flashcardsNameError;
+                  return AppLocalizations.of(context)!.definitionHint;
                 }
                 return null;
               },

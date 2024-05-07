@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:primus/model/to_learn.dart';
+import 'package:primus/features/user/domain/entity/to_learn.dart';
 
 part 'custom_user.g.dart';
 part 'custom_user.freezed.dart';

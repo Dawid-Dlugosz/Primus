@@ -2,7 +2,7 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:primus/core/failure.dart';
-import 'package:primus/enum/collection.dart';
+import 'package:primus/core/enum/collection.dart';
 import 'package:primus/features/author_name/data/repository/author_name_repository_impl.dart';
 
 void main() {

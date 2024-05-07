@@ -4,7 +4,7 @@ import 'package:fpdart/fpdart.dart';
 // ignore: depend_on_referenced_packages
 import 'package:logger/logger.dart';
 import 'package:primus/core/failure.dart';
-import 'package:primus/enum/collection.dart';
+import 'package:primus/core/enum/collection.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/user/domain/entity/learn_method.dart';
 import 'package:primus/features/user/domain/entity/to_learn.dart';

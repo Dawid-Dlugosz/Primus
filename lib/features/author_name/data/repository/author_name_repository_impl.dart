@@ -5,7 +5,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:logger/logger.dart';
 
 import 'package:primus/core/failure.dart';
-import 'package:primus/enum/collection.dart';
+import 'package:primus/core/enum/collection.dart';
 
 import '../../domain/repository/author_name_repository.dart';
 

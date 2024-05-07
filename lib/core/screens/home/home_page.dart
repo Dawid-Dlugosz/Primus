@@ -88,38 +88,40 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        child: Column(
-          children: [
-            BlocBuilder<UserFlashcardCubit, UserFlashcardState>(
-              builder: (_, state) {
-                // print('sdasdaasd $state');
-                return state.maybeMap(
-                  loaded: (value) {
-                    return FlashcardListHome(
-                      flashcardsSets: value.flashcardSets,
-                    );
-                  },
-                  empty: (_) => const SizedBox(),
-                  orElse: () => const LoadingWidget(),
-                );
-              },
-            ),
-            Builder(builder: (context) {
-              final state = context.watch<UserCubit>().state;
-              if (state == null) {
-                return const SizedBox();
-              }
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              BlocBuilder<UserFlashcardCubit, UserFlashcardState>(
+                builder: (_, state) {
+                  // print('sdasdaasd $state');
+                  return state.maybeMap(
+                    loaded: (value) {
+                      return FlashcardListHome(
+                        flashcardsSets: value.flashcardSets,
+                      );
+                    },
+                    empty: (_) => const SizedBox(),
+                    orElse: () => const LoadingWidget(),
+                  );
+                },
+              ),
+              Builder(builder: (context) {
+                final state = context.watch<UserCubit>().state;
+                if (state == null) {
+                  return const SizedBox();
+                }
 
-              if (state.toLearn.isNotEmpty) {
-                final newToLearn = [...state.toLearn];
-                newToLearn.sort((a, b) => a.timeStamp.compareTo(b.timeStamp));
-                return ToLearnListHome(
-                  toLearns: newToLearn,
-                );
-              }
-              return const SizedBox();
-            })
-          ],
+                if (state.toLearn.isNotEmpty) {
+                  final newToLearn = [...state.toLearn];
+                  newToLearn.sort((a, b) => a.timeStamp.compareTo(b.timeStamp));
+                  return ToLearnListHome(
+                    toLearns: newToLearn,
+                  );
+                }
+                return const SizedBox();
+              })
+            ],
+          ),
         ),
       ),
     );

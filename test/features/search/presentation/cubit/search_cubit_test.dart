@@ -3,7 +3,7 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:primus/enum/collection.dart';
+import 'package:primus/core/enum/collection.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/search/domain/repository/search_repository.dart';

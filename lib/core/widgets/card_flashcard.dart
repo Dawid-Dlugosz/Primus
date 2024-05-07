@@ -10,7 +10,7 @@ import 'package:primus/features/user/presentation/cubit/cubit/user_cubit.dart';
 import 'package:primus/features/vocabulary/data/repository/vocabulary_repository_impl.dart';
 import 'package:primus/features/vocabulary/presentation/vocabulary/vocabulary_cubit.dart';
 
-import '../../dialog/delete_flashcard.dart';
+import '../dialog/delete_flashcard.dart';
 import '../../features/create_flashcard/domain/entity/flashcard_set.dart';
 import '../../features/create_flashcard/presentation/screens/create_flashcard_page.dart';
 import '../../screen/flashcard_main_learn/flashcard_main.dart';

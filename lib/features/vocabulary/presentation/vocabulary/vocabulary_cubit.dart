@@ -28,9 +28,9 @@ class VocabularyCubit extends Cubit<VocabularyState> {
       (words) {
         try {
           _initSplitWords(user.state!, flashcardSetId, words);
-          user.stream.listen((event) {
-            _initSplitWords(event!, flashcardSetId, words);
-          });
+          // user.stream.listen((event) {
+          //   _initSplitWords(event!, flashcardSetId, words);
+          // });
         } catch (_) {
           emit(
             VocabularyState.loaded(

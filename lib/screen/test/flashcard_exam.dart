@@ -56,7 +56,6 @@ class _FlashcardExamState extends State<FlashcardExam> {
                       context.read<SingleChoiceTestCubit>().clearProgres(),
                 );
               });
-          // return viewModel.testWords.isNotEmpty;
         },
       ),
     );

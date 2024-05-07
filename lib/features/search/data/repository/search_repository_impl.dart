@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/src/either.dart';
 import 'package:primus/core/failure.dart';
-import 'package:primus/enum/collection.dart';
+import 'package:primus/core/enum/collection.dart';
 import 'package:primus/features/search/domain/repository/search_repository.dart';
 import 'package:logger/logger.dart';
 

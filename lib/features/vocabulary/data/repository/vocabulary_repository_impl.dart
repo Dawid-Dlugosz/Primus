@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:logger/logger.dart';
 import 'package:primus/core/failure.dart';
-import 'package:primus/enum/collection.dart';
+import 'package:primus/core/enum/collection.dart';
 import 'package:primus/features/create_flashcard/domain/entity/word.dart';
 import 'package:primus/features/vocabulary/domain/repository/vocabulary_repository.dart';
 

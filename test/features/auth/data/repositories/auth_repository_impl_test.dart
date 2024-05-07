@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:primus/enum/collection.dart';
+import 'package:primus/core/enum/collection.dart';
 import 'package:primus/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:primus/features/auth/domain/repositories/auth_repository.dart';
 import 'package:primus/features/auth/utils/firebase_error.dart';

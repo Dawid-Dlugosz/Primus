@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../../exception/busy_nickname.dart';
+import '../../../../core/exception/busy_nickname.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../utils/firebase_error.dart';
 

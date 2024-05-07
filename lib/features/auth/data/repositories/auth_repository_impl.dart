@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:primus/exception/busy_nickname.dart';
+import 'package:primus/core/exception/busy_nickname.dart';
 import 'package:primus/features/auth/utils/firebase_error.dart';
-import '../../../../enum/collection.dart';
+import '../../../../core/enum/collection.dart';
 import '../../domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

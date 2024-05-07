@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:primus/features/author_name/presentation/author_name/author_name_cubit.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
-import '../../../../dialog/copy_flashcard.dart';
+import '../../../../core/dialog/copy_flashcard.dart';
 
 class AuthorWidget extends StatelessWidget {
   const AuthorWidget({required this.flashcardSet, super.key});

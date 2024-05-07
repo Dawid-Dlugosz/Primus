@@ -153,27 +153,27 @@ class SpellingCubit extends Cubit<SpellingState> {
     if (word.isEmpty) return definition.length;
     if (definition.isEmpty) return word.length;
 
+    List<int> workVector0 = List<int>.filled(definition.length + 1, 0);
     List<int> workVector1 = List<int>.filled(definition.length + 1, 0);
-    List<int> workVector2 = workVector1;
 
     for (int i = 0; i < definition.length + 1; i < i++) {
-      workVector1[i] = i;
+      workVector0[i] = i;
     }
 
     for (int i = 0; i < word.length; i++) {
-      workVector2[0] = i + 1;
+      workVector1[0] = i + 1;
 
       for (int j = 0; j < definition.length; j++) {
         int cost = (word[i] == definition[j]) ? 0 : 1;
-        workVector2[j + 1] = min(workVector2[j] + 1,
-            min(workVector1[j + 1] + 1, workVector1[j] + cost));
+        workVector1[j + 1] = min(workVector1[j] + 1,
+            min(workVector0[j + 1] + 1, workVector0[j] + cost));
       }
 
       for (int j = 0; j < definition.length + 1; j++) {
-        workVector1[j] = workVector2[j];
+        workVector0[j] = workVector1[j];
       }
     }
 
-    return workVector2[definition.length];
+    return workVector1[definition.length];
   }
 }

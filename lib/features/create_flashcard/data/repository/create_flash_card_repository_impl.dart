@@ -4,15 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:primus/core/failure.dart';
-import 'package:primus/exception/too_short.dart';
+import 'package:primus/core/exception/too_short.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/create_flashcard/domain/entity/word.dart';
 import 'package:primus/features/create_flashcard/domain/repository/create_flash_card_repository.dart';
 import 'package:uuid/uuid.dart';
 import 'package:logger/logger.dart';
-import '../../../../enum/collection.dart';
-import '../../../../exception/flashcard_name_busy.dart';
+import '../../../../core/enum/collection.dart';
+import '../../../../core/exception/flashcard_name_busy.dart';
 
 class FlashCardRepositoryImpl extends FlashcardRepository {
   FlashCardRepositoryImpl({

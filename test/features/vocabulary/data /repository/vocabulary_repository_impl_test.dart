@@ -2,9 +2,9 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:primus/core/failure.dart';
-import 'package:primus/enum/collection.dart';
+import 'package:primus/core/enum/collection.dart';
+import 'package:primus/features/create_flashcard/domain/entity/word.dart';
 import 'package:primus/features/vocabulary/data/repository/vocabulary_repository_impl.dart';
-import 'package:primus/model/word.dart';
 
 void main() {
   late VocabularyRepositoryImpl repository;
@@ -18,7 +18,7 @@ void main() {
   );
   const tFlashcardSetId = 'id';
 
-  final tWords = [
+  const tWords = [
     Word(
       word: '1',
       definition: '1d',

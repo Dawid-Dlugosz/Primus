@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:primus/custom_multi_bloc_provider.dart';
 import 'screen/start_page.dart';
-import 'utils/language_provider.dart';
-import 'utils/theme.dart';
+import 'core/utils/language_provider.dart';
+import 'core/utils/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() async {

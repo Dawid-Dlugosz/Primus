@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:primus/features/create_flashcard/domain/entity/flashcard_set.dart';
 import 'package:primus/features/user/domain/entity/to_learn.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../enum/collection.dart';
+import '../enum/collection.dart';
 import '../../features/user/presentation/cubit/cubit/user_cubit.dart';
 import '../../features/vocabulary/data/repository/vocabulary_repository_impl.dart';
 import '../../features/vocabulary/presentation/vocabulary/vocabulary_cubit.dart';

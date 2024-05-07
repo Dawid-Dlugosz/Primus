@@ -100,6 +100,7 @@ class UserCubit extends Cubit<User?> {
     if (state == null) {
       return false;
     }
+
     if (state!.ownFlashcard.contains('flashcardSet/$flashcardSetId')) {
       return true;
     }
