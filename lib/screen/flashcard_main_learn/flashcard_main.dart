@@ -16,7 +16,6 @@ import '../../core/dialog/copy_flashcard.dart';
 import '../../features/author_name/presentation/widgets/author_widget.dart';
 import '../../widgets/go_to_learn.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'flashcard_vocabulary.dart';
 
 class FlashCardMain extends StatelessWidget {
