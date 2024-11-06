@@ -140,7 +140,7 @@ class _SwiperFlashcardState extends State<SwiperFlashcard> {
                 elevation: 10,
                 heroTag: null,
                 onPressed: () {
-                  _controller.swipeLeft();
+                  _controller.swipe(CardSwiperDirection.left);
                   // cardController.swipeLeft();
                   //TODO  SET WORD AS UNKNOW
                 },
@@ -150,7 +150,7 @@ class _SwiperFlashcardState extends State<SwiperFlashcard> {
                 elevation: 10,
                 heroTag: null,
                 onPressed: () {
-                  _controller.swipeRight();
+                  _controller.swipe(CardSwiperDirection.left);
                   // cardController.swipeRight();
                   //TODO  SET WORD AS KNOW
                 },
